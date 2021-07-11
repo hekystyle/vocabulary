@@ -9,6 +9,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { ColumnsType } from "antd/lib/table";
+import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
 
 type ApiResult = Word[];
 
@@ -156,17 +157,21 @@ function ListPage({ items, onDelete }: ListPageProps) {
     {
       title: () => (
         <Button type="primary" onClick={() => history.push("/add")}>
-          Add
+          <PlusOutlined />
         </Button>
       ),
       render: (_, record) => (
         <>
-          <Button onClick={() => history.push("/edit", record)}>Edit</Button>
+          <Button onClick={() => history.push("/edit", record)}>
+            <EditOutlined />
+          </Button>
           <Popconfirm
             title="Are you sure to delete this?"
             onConfirm={() => onDelete && onDelete(record)}
           >
-            <Button>Delete</Button>
+            <Button>
+              <DeleteOutlined />
+            </Button>
           </Popconfirm>
         </>
       ),
