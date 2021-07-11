@@ -21,3 +21,23 @@ export function prepareAnswersSet<T>(tested: T, all: T[]): Answer<T>[] {
   const shufledSet = shuffle(set);
   return shufledSet;
 }
+
+export function sortImmutable<T>(
+  items: T[],
+  comparer?: (a: T, b: T) => number
+): T[] {
+  return [...items].sort(comparer);
+}
+
+export interface AnswersCountable {
+  answersCount: number;
+  correctAnswersCount: number;
+}
+
+export function answersComparer<T extends AnswersCountable>(a: T, b: T) {
+  const scoreA =
+    (a.answersCount + (a.answersCount - a.correctAnswersCount)) * -1;
+  const scoreB =
+    (b.answersCount + (b.answersCount - b.correctAnswersCount)) * -1;
+  return scoreA - scoreB;
+}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Input, Popconfirm, Table } from "antd";
+import { Button, Input, Popconfirm, Table, Tooltip } from "antd";
 import "./App.css";
 import {
   BrowserRouter,
@@ -10,6 +10,13 @@ import {
 } from "react-router-dom";
 import { ColumnsType } from "antd/lib/table";
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  Answer,
+  answersComparer,
+  AnswersCountable,
+  prepareAnswersSet,
+  sortImmutable,
+} from "./utils";
 
 type ApiResult = Word[];
 
@@ -83,7 +90,7 @@ function Definitions(props: DefinitionsProps) {
   );
 }
 
-interface Record {
+interface Record extends AnswersCountable {
   id?: number;
   word: string;
   partOfSpeech: string;
@@ -99,6 +106,8 @@ function RecordPage({ onConfirm }: { onConfirm?: (r: Record) => void }) {
     partOfSpeech: "",
     translation: "",
     definition: "",
+    answersCount: 0,
+    correctAnswersCount: 0,
     ...(state ?? {}),
   });
 
@@ -152,7 +161,19 @@ function ListPage({ items, onDelete }: ListPageProps) {
     {
       title: "Word",
       dataIndex: "word",
-      ellipsis: true,
+      ellipsis: { showTitle: true },
+    },
+    {
+      title: (
+        <Tooltip title="Total answers / Correct answers">
+          Total / Correct
+        </Tooltip>
+      ),
+      render: (_, record) => (
+        <>
+          {record.answersCount} / {record.correctAnswersCount}
+        </>
+      ),
     },
     {
       title: () => (
@@ -179,7 +200,93 @@ function ListPage({ items, onDelete }: ListPageProps) {
   ];
   return (
     <>
+      <Button block type="primary" onClick={() => history.push("/practice")}>
+        Practice
+      </Button>
       <Table columns={columns} dataSource={items} size="middle" rowKey="id" />
+    </>
+  );
+}
+
+interface PracticePageProps {
+  records: Record[];
+  onAnswer?: (a: Answer<Record>) => void;
+}
+
+function PracticePage({ records, onAnswer }: PracticePageProps) {
+  const [state, setState] = useState(() => {
+    const stack = [...records];
+
+    const actualRecord = stack.pop();
+
+    const actualAnswersSet = actualRecord
+      ? prepareAnswersSet(actualRecord, records)
+      : [];
+
+    return { stack, actualRecord, actualAnswersSet };
+  });
+  const [actualAnswer, setAnswer] = useState<Answer<Record>>();
+
+  const handleAnswerClick = (answer: Answer<Record>) => {
+    if (actualAnswer) return;
+    setAnswer(answer);
+    if (onAnswer && state.actualRecord)
+      onAnswer({ isCorrect: answer.isCorrect, entity: state.actualRecord });
+  };
+
+  const handleNextClick = () => {
+    setState((state) => {
+      const stack = [...state.stack];
+
+      const actualRecord = stack.pop();
+
+      const actualAnswersSet = actualRecord
+        ? prepareAnswersSet(actualRecord, records)
+        : [];
+
+      return { stack, actualRecord, actualAnswersSet };
+    });
+    setAnswer(undefined);
+  };
+
+  const history = useHistory();
+  return (
+    <>
+      {state.actualRecord && (
+        <div style={{ textAlign: "center" }}>
+          {state.actualRecord.word} (<i>{state.actualRecord.partOfSpeech}</i>)
+        </div>
+      )}
+      {state.actualAnswersSet.map((answer) => (
+        <button
+          key={answer.entity.id}
+          disabled={Boolean(actualAnswer)}
+          onClick={() => handleAnswerClick(answer)}
+          style={{
+            backgroundColor:
+              answer.isCorrect && actualAnswer
+                ? "green"
+                : !answer.isCorrect && answer === actualAnswer
+                ? "red"
+                : undefined,
+          }}
+        >
+          {answer.entity?.definition}
+        </button>
+      ))}
+
+      {actualAnswer && (
+        <>
+          <div>
+            <hr />
+          </div>
+          <button onClick={handleNextClick}>Next</button>
+        </>
+      )}
+      <div>
+        <hr />
+      </div>
+      <button onClick={() => history.push("/")}>End</button>
     </>
   );
 }
@@ -216,6 +323,23 @@ function App() {
                 const index = items.findIndex((p) => p.id === item.id);
                 const newItems = [...items];
                 newItems[index] = item;
+                setItems(newItems);
+              }}
+            />
+          </Route>
+          <Route path="/practice">
+            <PracticePage
+              records={sortImmutable(items, answersComparer)}
+              onAnswer={({ entity, isCorrect }) => {
+                const index = items.findIndex((p) => p.id === entity.id);
+                const newItems = [...items];
+                const oldRecord = newItems[index];
+                newItems[index] = {
+                  ...oldRecord,
+                  answersCount: oldRecord.answersCount + 1,
+                  correctAnswersCount:
+                    oldRecord.correctAnswersCount + (isCorrect ? 1 : 0),
+                };
                 setItems(newItems);
               }}
             />
