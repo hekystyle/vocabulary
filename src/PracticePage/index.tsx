@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Button } from "../components/Button";
 import { Record } from "../RecordPage";
 import { Answer, prepareAnswersSet } from "../utils";
 
@@ -53,21 +54,20 @@ export function PracticePage({ records, onAnswer }: PracticePageProps) {
         </div>
       )}
       {state.actualAnswersSet.map((answer) => (
-        <button
+        <Button
           key={answer.entity.id}
           disabled={Boolean(actualAnswer)}
           onClick={() => handleAnswerClick(answer)}
-          style={{
-            backgroundColor:
-              answer.isCorrect && actualAnswer
-                ? "green"
-                : !answer.isCorrect && answer === actualAnswer
-                ? "red"
-                : undefined,
-          }}
+          theme={
+            answer.isCorrect && actualAnswer
+              ? "success"
+              : !answer.isCorrect && answer === actualAnswer
+              ? "danger"
+              : "secondary"
+          }
         >
           {answer.entity?.definition}
-        </button>
+        </Button>
       ))}
 
       {actualAnswer && (
@@ -75,13 +75,13 @@ export function PracticePage({ records, onAnswer }: PracticePageProps) {
           <div>
             <hr />
           </div>
-          <button onClick={handleNextClick}>Next</button>
+          <Button onClick={handleNextClick}>Next word</Button>
         </>
       )}
       <div>
         <hr />
       </div>
-      <button onClick={() => history.push("/")}>End</button>
+      <Button onClick={() => history.push("/")}>End practice</Button>
     </>
   );
 }
