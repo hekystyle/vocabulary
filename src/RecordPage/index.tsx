@@ -31,13 +31,21 @@ export function RecordPage({ records, onConfirm }: RecordPageProps) {
   });
 
   const history = useHistory();
+
+  const navigateRoot = () => history.push("/");
+
   const handleConfirm = () => {
     onConfirm && onConfirm(entry);
-    history.push("/");
+    navigateRoot();
   };
+
+  const handleCancel = () => navigateRoot();
 
   return (
     <>
+      <Button type="primary" danger onClick={handleCancel}>
+        Cancel
+      </Button>
       <Button type="primary" onClick={handleConfirm}>
         Confirm
       </Button>
