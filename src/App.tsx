@@ -17,21 +17,7 @@ import {
   prepareAnswersSet,
   sortImmutable,
 } from "./utils";
-
-type ApiResult = Word[];
-
-interface Word {
-  meanings: Meaning[];
-}
-
-interface Meaning {
-  partOfSpeech: string;
-  definitions: Definition[];
-}
-
-interface Definition {
-  definition: string;
-}
+import { ApiResult, Word } from "./types";
 
 interface DefinitionsProps {
   word: string;
