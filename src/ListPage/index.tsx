@@ -54,8 +54,8 @@ export function ListPage({ items, onDelete }: ListPageProps) {
   ];
   return (
     <>
-      <Button block type="primary" onClick={() => history.push("/practice")}>
-        Practice
+      <Button type="primary" onClick={() => history.push("/practice")}>
+        Practice definitions
       </Button>
       <Table columns={columns} dataSource={items} size="middle" rowKey="id" />
     </>
