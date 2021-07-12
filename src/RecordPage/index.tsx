@@ -1,6 +1,6 @@
 import { Button, Input } from "antd";
 import { useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { DefinitionsList } from "../DefinitionsList";
 import { AnswersCountable } from "../utils";
 
@@ -13,11 +13,12 @@ export interface Record extends AnswersCountable {
 }
 
 export interface RecordPageProps {
+  records: Record[];
   onConfirm?: (r: Record) => void;
 }
 
-export function RecordPage({ onConfirm }: RecordPageProps) {
-  const { state } = useLocation<Record | undefined>();
+export function RecordPage({ records, onConfirm }: RecordPageProps) {
+  const { id } = useParams<{ id?: string }>();
 
   const [entry, setEntry] = useState<Record>({
     word: "",
@@ -26,7 +27,7 @@ export function RecordPage({ onConfirm }: RecordPageProps) {
     definition: "",
     answersCount: 0,
     correctAnswersCount: 0,
-    ...(state ?? {}),
+    ...(id ? records.find((p) => p.id === parseInt(id)) ?? {} : {}),
   });
 
   const history = useHistory();

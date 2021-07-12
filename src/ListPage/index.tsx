@@ -37,7 +37,7 @@ export function ListPage({ items, onDelete }: ListPageProps) {
       ),
       render: (_, record) => (
         <>
-          <Button onClick={() => history.push("/edit", record)}>
+          <Button onClick={() => history.push(`/edit/${record.id}`)}>
             <EditOutlined />
           </Button>
           <Popconfirm

@@ -52,10 +52,10 @@ export function App() {
       <HashRouter>
         <Switch>
           <Route path="/add">
-            <RecordPage onConfirm={handleAddRecord} />
+            <RecordPage records={items} onConfirm={handleAddRecord} />
           </Route>
-          <Route path="/edit">
-            <RecordPage onConfirm={handleEditRecord} />
+          <Route path="/edit/:id">
+            <RecordPage records={items} onConfirm={handleEditRecord} />
           </Route>
           <Route path="/practice">
             <PracticePage
