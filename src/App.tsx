@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Input, Popconfirm, Table, Tooltip } from "antd";
 import "./App.css";
 import {
-  BrowserRouter,
+  HashRouter,
   Route,
   Switch,
   useHistory,
@@ -308,7 +308,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <Switch>
           <Route path="/add">
             <RecordPage
@@ -353,7 +353,7 @@ function App() {
             />
           </Route>
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
