@@ -2,16 +2,16 @@ import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Popconfirm, Tooltip } from "antd";
 import Table, { ColumnsType } from "antd/lib/table";
 import { useHistory } from "react-router-dom";
-import { Record } from "../RecordPage";
+import { DictionaryEntry } from "../RecordPage";
 
 export interface ListPageProps {
-  items: Record[];
-  onDelete?: (r: Record) => void;
+  items: DictionaryEntry[];
+  onDelete?: (r: DictionaryEntry) => void;
 }
 
 export function ListPage({ items, onDelete }: ListPageProps) {
   const history = useHistory();
-  const columns: ColumnsType<Record> = [
+  const columns: ColumnsType<DictionaryEntry> = [
     {
       title: "Word",
       dataIndex: "word",

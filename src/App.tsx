@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import { Answer } from "./utils";
-import { Record, RecordPage } from "./RecordPage";
+import { DictionaryEntry, RecordPage } from "./RecordPage";
 import { ListPage } from "./ListPage";
 import { PracticePage } from "./PracticePage";
 
 const VOCABULARY_KEY = "vocabulary";
 
 export function App() {
-  const [items, setItems] = useState<Record[]>([]);
+  const [items, setItems] = useState<DictionaryEntry[]>([]);
 
   useEffect(() => {
     const json = localStorage.getItem(VOCABULARY_KEY);
@@ -21,21 +21,21 @@ export function App() {
     localStorage.setItem(VOCABULARY_KEY, JSON.stringify(items));
   }, [items]);
 
-  const handleAddRecord = (item: Record) =>
+  const handleAddRecord = (item: DictionaryEntry) =>
     setItems([{ id: Date.now(), ...item }, ...items]);
 
-  const handleEditRecord = (item: Record) => {
+  const handleEditRecord = (item: DictionaryEntry) => {
     const index = items.findIndex((p) => p.id === item.id);
     const newItems = [...items];
     newItems[index] = item;
     setItems(newItems);
   };
 
-  const handleDeleteRecord = (item: Record) => {
+  const handleDeleteRecord = (item: DictionaryEntry) => {
     setItems(items.filter((p) => p.id !== item.id));
   };
 
-  const handleAnswer = ({ isCorrect, entity }: Answer<Record>) => {
+  const handleAnswer = ({ isCorrect, entity }: Answer<DictionaryEntry>) => {
     const index = items.findIndex((p) => p.id === entity.id);
     const newItems = [...items];
     const oldRecord = newItems[index];

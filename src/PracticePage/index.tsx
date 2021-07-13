@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from "../components/Button";
-import { Record } from "../RecordPage";
+import { DictionaryEntry } from "../RecordPage";
 import {
   Answer,
   answersComparer,
@@ -11,8 +11,8 @@ import {
 } from "../utils";
 
 export interface PracticePageProps {
-  records: Record[];
-  onAnswer?: (a: Answer<Record>) => void;
+  records: DictionaryEntry[];
+  onAnswer?: (a: Answer<DictionaryEntry>) => void;
 }
 
 export function PracticePage({ records, onAnswer }: PracticePageProps) {
@@ -27,9 +27,9 @@ export function PracticePage({ records, onAnswer }: PracticePageProps) {
 
     return { stack, actualRecord, actualAnswersSet };
   });
-  const [actualAnswer, setAnswer] = useState<Answer<Record>>();
+  const [actualAnswer, setAnswer] = useState<Answer<DictionaryEntry>>();
 
-  const handleAnswerClick = (answer: Answer<Record>) => {
+  const handleAnswerClick = (answer: Answer<DictionaryEntry>) => {
     if (actualAnswer) return;
     setAnswer(answer);
     if (onAnswer && state.actualRecord)

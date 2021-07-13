@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { DefinitionsList } from "../DefinitionsList";
 import { AnswersCountable, Definable } from "../utils";
 
-export interface Record extends AnswersCountable, Definable {
+export interface DictionaryEntry extends AnswersCountable, Definable {
   id?: number;
   word: string;
   partOfSpeech: string;
@@ -12,14 +12,14 @@ export interface Record extends AnswersCountable, Definable {
 }
 
 export interface RecordPageProps {
-  records: Record[];
-  onConfirm?: (r: Record) => void;
+  records: DictionaryEntry[];
+  onConfirm?: (r: DictionaryEntry) => void;
 }
 
 export function RecordPage({ records, onConfirm }: RecordPageProps) {
   const { id } = useParams<{ id?: string }>();
 
-  const [entry, setEntry] = useState<Record>({
+  const [entry, setEntry] = useState<DictionaryEntry>({
     word: "",
     partOfSpeech: "",
     translation: "",
