@@ -2,14 +2,13 @@ import { Button, Input } from "antd";
 import { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { DefinitionsList } from "../DefinitionsList";
-import { AnswersCountable } from "../utils";
+import { AnswersCountable, Definable } from "../utils";
 
-export interface Record extends AnswersCountable {
+export interface Record extends AnswersCountable, Definable {
   id?: number;
   word: string;
   partOfSpeech: string;
   translation: string;
-  definition: string;
 }
 
 export interface RecordPageProps {
