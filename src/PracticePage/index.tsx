@@ -2,7 +2,13 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from "../components/Button";
 import { Record } from "../RecordPage";
-import { Answer, hasDefinition, prepareAnswersSet } from "../utils";
+import {
+  Answer,
+  answersComparer,
+  hasDefinition,
+  prepareAnswersSet,
+  sortImmutable,
+} from "../utils";
 
 export interface PracticePageProps {
   records: Record[];
@@ -11,7 +17,7 @@ export interface PracticePageProps {
 
 export function PracticePage({ records, onAnswer }: PracticePageProps) {
   const [state, setState] = useState(() => {
-    const stack = records.filter(hasDefinition);
+    const stack = sortImmutable(records.filter(hasDefinition), answersComparer);
 
     const actualRecord = stack.pop();
 

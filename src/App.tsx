@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { HashRouter, Route, Switch } from "react-router-dom";
-import { Answer, answersComparer, sortImmutable } from "./utils";
+import { Answer } from "./utils";
 import { Record, RecordPage } from "./RecordPage";
 import { ListPage } from "./ListPage";
 import { PracticePage } from "./PracticePage";
@@ -58,10 +58,7 @@ export function App() {
             <RecordPage records={items} onConfirm={handleEditRecord} />
           </Route>
           <Route path="/practice">
-            <PracticePage
-              records={sortImmutable(items, answersComparer)}
-              onAnswer={handleAnswer}
-            />
+            <PracticePage records={items} onAnswer={handleAnswer} />
           </Route>
           <Route path="/">
             <ListPage items={items} onDelete={handleDeleteRecord} />
