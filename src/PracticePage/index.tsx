@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from "../components/Button";
 import { Record } from "../RecordPage";
-import { Answer, prepareAnswersSet } from "../utils";
+import { Answer, hasDefinition, prepareAnswersSet } from "../utils";
 
 export interface PracticePageProps {
   records: Record[];
@@ -11,7 +11,7 @@ export interface PracticePageProps {
 
 export function PracticePage({ records, onAnswer }: PracticePageProps) {
   const [state, setState] = useState(() => {
-    const stack = [...records];
+    const stack = records.filter(hasDefinition);
 
     const actualRecord = stack.pop();
 

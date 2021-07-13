@@ -41,3 +41,10 @@ export function answersComparer<T extends AnswersCountable>(a: T, b: T) {
     (b.answersCount + (b.answersCount - b.correctAnswersCount)) * -1;
   return scoreA - scoreB;
 }
+
+export interface Definable {
+  definition: string;
+}
+
+export const hasDefinition = (definable: Definable) =>
+  definable.definition !== "";
