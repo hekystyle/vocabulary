@@ -1,0 +1,9 @@
+.ButtonsGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.AnswerButton:disabled {
+    opacity: 1;
+}

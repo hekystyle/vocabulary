@@ -9,6 +9,7 @@ import {
   prepareAnswersSet,
   sortImmutable,
 } from "../utils";
+import "./index.css";
 
 export interface PracticePageProps {
   records: DictionaryEntry[];
@@ -59,22 +60,25 @@ export function PracticePage({ records, onAnswer }: PracticePageProps) {
           {state.actualRecord.word} (<i>{state.actualRecord.partOfSpeech}</i>)
         </div>
       )}
-      {state.actualAnswersSet.map((answer) => (
-        <Button
-          key={answer.entity.id}
-          disabled={Boolean(actualAnswer)}
-          onClick={() => handleAnswerClick(answer)}
-          theme={
-            answer.isCorrect && actualAnswer
-              ? "success"
-              : !answer.isCorrect && answer === actualAnswer
-              ? "danger"
-              : "secondary"
-          }
-        >
-          {answer.entity?.definition}
-        </Button>
-      ))}
+      <div className="ButtonsGrid">
+        {state.actualAnswersSet.map((answer) => (
+          <Button
+            key={answer.entity.id}
+            className="AnswerButton"
+            disabled={Boolean(actualAnswer)}
+            onClick={() => handleAnswerClick(answer)}
+            theme={
+              answer.isCorrect && actualAnswer
+                ? "success"
+                : !answer.isCorrect && answer === actualAnswer
+                ? "danger"
+                : "secondary"
+            }
+          >
+            {answer.entity?.definition}
+          </Button>
+        ))}
+      </div>
 
       {actualAnswer && (
         <>
