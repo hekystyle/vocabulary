@@ -24,7 +24,7 @@ export function Button({ theme, children, className, ...rest }: ButtonProps) {
   return (
     <button
       {...rest}
-      className={`btn-${theme ?? "primary"} ${className ?? ""}`}
+      className={`btn btn-${theme ?? "primary"} ${className ?? ""}`}
     >
       {children}
     </button>
