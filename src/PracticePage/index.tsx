@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from "../components/Button";
 import { DictionaryEntry } from "../RecordPage";
@@ -17,13 +17,18 @@ export interface PracticePageProps {
 }
 
 export function PracticePage({ records, onAnswer }: PracticePageProps) {
+  const filteredRecords = useMemo(
+    () => records.filter(hasDefinition),
+    [records]
+  );
+
   const [state, setState] = useState(() => {
-    const stack = sortImmutable(records.filter(hasDefinition), answersComparer);
+    const stack = sortImmutable(filteredRecords, answersComparer);
 
     const actualRecord = stack.pop();
 
     const actualAnswersSet = actualRecord
-      ? prepareAnswersSet(actualRecord, records)
+      ? prepareAnswersSet(actualRecord, filteredRecords)
       : [];
 
     return { stack, actualRecord, actualAnswersSet };
@@ -44,7 +49,7 @@ export function PracticePage({ records, onAnswer }: PracticePageProps) {
       const actualRecord = stack.pop();
 
       const actualAnswersSet = actualRecord
-        ? prepareAnswersSet(actualRecord, records)
+        ? prepareAnswersSet(actualRecord, filteredRecords)
         : [];
 
       return { stack, actualRecord, actualAnswersSet };
