@@ -34,12 +34,17 @@ export interface AnswersCountable {
   correctAnswersCount: number;
 }
 
+export function computeAnswersScore<T extends AnswersCountable>({
+  answersCount,
+  correctAnswersCount,
+}: T): number {
+  return answersCount + correctAnswersCount;
+}
+
 export function answersComparer<T extends AnswersCountable>(a: T, b: T) {
-  const scoreA =
-    (a.answersCount + (a.answersCount - a.correctAnswersCount)) * -1;
-  const scoreB =
-    (b.answersCount + (b.answersCount - b.correctAnswersCount)) * -1;
-  return scoreA - scoreB;
+  const [scoreA, scoreB] = [a, b].map(computeAnswersScore);
+
+  return scoreB - scoreA;
 }
 
 export interface Definable {

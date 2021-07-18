@@ -1,4 +1,10 @@
-import { Definable, shuffle, sortImmutable, hasDefinition } from "./utils";
+import {
+  Definable,
+  shuffle,
+  sortImmutable,
+  hasDefinition,
+  computeAnswersScore,
+} from "./utils";
 
 describe("shuffle", () => {
   it("should be immutable", () => {
@@ -16,9 +22,29 @@ describe("sortImmutable", () => {
   });
 });
 
-test.todo('prepareAnswersSet()');
+test.todo("prepareAnswersSet()");
 
-test.todo('answersComparer()');
+describe("computeAnswersScore", () => {
+  it.each([
+    [4, 2, 2],
+    [3, 2, 1],
+    [2, 2, 0],
+    [0, 0, 0],
+  ])(
+    "should return %p for %p total answers count and %p correct answers count",
+    (expected, total, correct) => {
+      const actual = computeAnswersScore({
+        answersCount: total,
+        correctAnswersCount: correct,
+      });
+      expect(actual).toBe(expected);
+    }
+  );
+});
+
+describe("answersComparer", () => {
+  it.todo('should prefer answers with less score');
+});
 
 describe("hasDefinition", () => {
   it.each([
