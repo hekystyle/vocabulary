@@ -1,11 +1,10 @@
 import { Definable, shuffle, sortImmutable, hasDefinition } from "./utils";
 
 describe("shuffle", () => {
-  const getDummy = () => [1, 2, 3, 4];
   it("should be immutable", () => {
-    const dummy = getDummy();
-    const actual = shuffle(dummy);
-    expect(actual).not.toBe(dummy);
+    const array: never[] = [];
+    const actual = shuffle(array);
+    expect(actual).not.toBe(array);
   });
 });
 
