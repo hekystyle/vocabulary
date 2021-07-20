@@ -4,6 +4,8 @@ import {
   sortImmutable,
   hasDefinition,
   computeAnswersScore,
+  AnswersCountable,
+  answersComparer,
 } from "./utils";
 
 describe("shuffle", () => {
@@ -43,7 +45,12 @@ describe("computeAnswersScore", () => {
 });
 
 describe("answersComparer", () => {
-  it.todo('should prefer answers with less score');
+  it("should prefer less score", () => {
+    const a: AnswersCountable = { answersCount: 5, correctAnswersCount: 0 };
+    const b: AnswersCountable = { answersCount: 3, correctAnswersCount: 0 };
+    const actual = answersComparer(a, b);
+    expect(actual).toBeLessThanOrEqual(-1);
+  });
 });
 
 describe("hasDefinition", () => {
