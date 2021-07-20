@@ -1,15 +1,39 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from "../components/Button";
 import { DictionaryEntry } from "../RecordPage";
 import {
   Answer,
   answersComparer,
+  Definable,
   hasDefinition,
+  hasTranslation,
   prepareAnswersSet,
   sortImmutable,
+  Translateable,
 } from "../utils";
 import "./index.css";
+
+export enum Knowledge {
+  translation,
+  definition,
+}
+
+const FILTERS = {
+  [Knowledge.definition]: hasDefinition,
+  [Knowledge.translation]: hasTranslation,
+};
+
+const SELECTORS = {
+  [Knowledge.definition]: (d: Definable) => d.definition,
+  [Knowledge.translation]: (t: Translateable) => t.translation,
+};
+
+interface Progress {
+  stack: DictionaryEntry[];
+  actualRecord?: DictionaryEntry;
+  actualAnswersSet: Answer<DictionaryEntry>[];
+}
 
 export interface PracticePageProps {
   records: DictionaryEntry[];
@@ -17,12 +41,19 @@ export interface PracticePageProps {
 }
 
 export function PracticePage({ records, onAnswer }: PracticePageProps) {
+  const [knowledge, setKnowledge] = useState<Knowledge>();
+
   const filteredRecords = useMemo(
-    () => records.filter(hasDefinition),
-    [records]
+    () =>
+      knowledge === undefined ? undefined : records.filter(FILTERS[knowledge]),
+    [records, knowledge]
   );
 
-  const [state, setState] = useState(() => {
+  const [progress, setProgress] = useState<Progress>();
+  useEffect(() => {
+    if (progress) return;
+    if (!filteredRecords) return;
+
     const stack = sortImmutable(filteredRecords, answersComparer);
 
     const actualRecord = stack.pop();
@@ -31,25 +62,25 @@ export function PracticePage({ records, onAnswer }: PracticePageProps) {
       ? prepareAnswersSet(actualRecord, filteredRecords)
       : [];
 
-    return { stack, actualRecord, actualAnswersSet };
-  });
+    setProgress({ stack, actualRecord, actualAnswersSet });
+  }, [filteredRecords, progress]);
+
   const [actualAnswer, setAnswer] = useState<Answer<DictionaryEntry>>();
 
   const handleAnswerClick = (answer: Answer<DictionaryEntry>) => {
-    if (actualAnswer) return;
     setAnswer(answer);
-    if (onAnswer && state.actualRecord)
-      onAnswer({ isCorrect: answer.isCorrect, entity: state.actualRecord });
+    if (onAnswer && progress?.actualRecord)
+      onAnswer({ isCorrect: answer.isCorrect, entity: progress.actualRecord });
   };
 
   const handleNextClick = () => {
-    setState((state) => {
-      const stack = [...state.stack];
+    setProgress((state) => {
+      const stack = [...(state?.stack ?? [])];
 
       const actualRecord = stack.pop();
 
       const actualAnswersSet = actualRecord
-        ? prepareAnswersSet(actualRecord, filteredRecords)
+        ? prepareAnswersSet(actualRecord, filteredRecords ?? [])
         : [];
 
       return { stack, actualRecord, actualAnswersSet };
@@ -58,15 +89,28 @@ export function PracticePage({ records, onAnswer }: PracticePageProps) {
   };
 
   const history = useHistory();
+
+  if (knowledge === undefined)
+    return (
+      <>
+        {[Knowledge.definition, Knowledge.translation].map((knowledge) => (
+          <Button key={knowledge} onClick={() => setKnowledge(knowledge)}>
+            {Knowledge[knowledge]}
+          </Button>
+        ))}
+      </>
+    );
+
   return (
     <>
-      {state.actualRecord && (
+      {progress?.actualRecord && (
         <div style={{ textAlign: "center" }}>
-          {state.actualRecord.word} (<i>{state.actualRecord.partOfSpeech}</i>)
+          {progress.actualRecord.word} (
+          <i>{progress.actualRecord.partOfSpeech}</i>)
         </div>
       )}
       <div className="ButtonsGrid">
-        {state.actualAnswersSet.map((answer) => (
+        {progress?.actualAnswersSet.map((answer) => (
           <Button
             key={answer.entity.id}
             className="AnswerButton"
@@ -80,7 +124,7 @@ export function PracticePage({ records, onAnswer }: PracticePageProps) {
                 : "secondary"
             }
           >
-            {answer.entity?.definition}
+            {SELECTORS[knowledge](answer.entity)}
           </Button>
         ))}
       </div>

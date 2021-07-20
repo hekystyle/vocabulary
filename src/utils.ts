@@ -53,3 +53,10 @@ export interface Definable {
 
 export const hasDefinition = (definable: Definable) =>
   definable.definition !== "";
+
+export interface Translateable {
+  translation: string;
+}
+
+export const hasTranslation = (translateable: Translateable) =>
+  translateable.translation !== "";
