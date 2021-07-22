@@ -70,7 +70,12 @@ export function RecordPage({ records, onConfirm }: RecordPageProps) {
       />
       <DefinitionsList
         word={entry.word}
-        onDefinitionClick={(value) => setEntry({ ...entry, ...value })}
+        onPartOfSpeechClick={(partOfSpeech) =>
+          setEntry((entry) => ({ ...entry, partOfSpeech }))
+        }
+        onDefinitionClick={(values) =>
+          setEntry((entry) => ({ ...entry, ...values }))
+        }
       />
     </>
   );

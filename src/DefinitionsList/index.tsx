@@ -3,14 +3,15 @@ import { ApiResult, Word } from "../types";
 
 export interface DefinitionsListProps {
   word: string;
-  onDefinitionClick?: (value: {
+  onPartOfSpeechClick?: (partOfSpeech: string) => void;
+  onDefinitionClick?: (values: {
     partOfSpeech: string;
     definition: string;
   }) => void;
 }
 
 export function DefinitionsList(props: DefinitionsListProps) {
-  const { word, onDefinitionClick } = props;
+  const { word, onPartOfSpeechClick, onDefinitionClick } = props;
   const [entry, setEntry] = useState<Word | undefined>();
 
   useEffect(() => {
@@ -35,7 +36,13 @@ export function DefinitionsList(props: DefinitionsListProps) {
     <ul>
       {entry?.meanings.map((meaning, i) => (
         <li key={i}>
-          {meaning.partOfSpeech}
+          <div
+            onClick={() =>
+              onPartOfSpeechClick && onPartOfSpeechClick(meaning.partOfSpeech)
+            }
+          >
+            {meaning.partOfSpeech}
+          </div>
           <ul>
             {meaning.definitions.map((definition, j) => (
               <li
