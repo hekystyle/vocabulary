@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from "../components/Button";
 import { DictionaryEntry } from "../RecordPage";
@@ -29,31 +29,66 @@ const SELECTORS = {
   [Knowledge.translation]: (t: Translateable) => t.translation,
 };
 
+type OnAnswerHandler = (a: Answer<DictionaryEntry>) => void;
+export interface PracticePageProps {
+  records: DictionaryEntry[];
+  onAnswer?: OnAnswerHandler;
+}
+
+export function PracticePage(props: PracticePageProps) {
+  const [knowledge, setKnowledge] = useState<Knowledge>();
+
+  const history = useHistory();
+  return (
+    <>
+      {knowledge === undefined ? (
+        <KnowledgeSelection onSelect={setKnowledge} />
+      ) : (
+        <PracticeSession knowledge={knowledge} {...props} />
+      )}
+      <div>
+        <hr />
+      </div>
+      <Button onClick={() => history.push("/")}>End practice</Button>
+    </>
+  );
+}
+
+interface KnowledgeSelectionProps {
+  onSelect?: (k: Knowledge) => void;
+}
+
+const KnowledgeSelection: FC<KnowledgeSelectionProps> = ({ onSelect }) => (
+  <div className="ButtonsGrid">
+    {[Knowledge.definition, Knowledge.translation].map((knowledge) => (
+      <Button key={knowledge} onClick={() => onSelect && onSelect(knowledge)}>
+        {Knowledge[knowledge]}
+      </Button>
+    ))}
+  </div>
+);
+
+interface PracticeSessionProps extends PracticePageProps {
+  knowledge: Knowledge;
+}
+
 interface Progress {
   stack: DictionaryEntry[];
   actualRecord?: DictionaryEntry;
   actualAnswersSet: Answer<DictionaryEntry>[];
 }
 
-export interface PracticePageProps {
-  records: DictionaryEntry[];
-  onAnswer?: (a: Answer<DictionaryEntry>) => void;
-}
-
-export function PracticePage({ records, onAnswer }: PracticePageProps) {
-  const [knowledge, setKnowledge] = useState<Knowledge>();
-
+const PracticeSession: FC<PracticeSessionProps> = ({
+  records,
+  knowledge,
+  onAnswer,
+}) => {
   const filteredRecords = useMemo(
-    () =>
-      knowledge === undefined ? undefined : records.filter(FILTERS[knowledge]),
+    () => records.filter(FILTERS[knowledge]),
     [records, knowledge]
   );
 
-  const [progress, setProgress] = useState<Progress>();
-  useEffect(() => {
-    if (progress) return;
-    if (!filteredRecords) return;
-
+  const [progress, setProgress] = useState<Progress>(() => {
     const stack = sortImmutable(filteredRecords, answersComparer);
 
     const actualRecord = stack.pop();
@@ -62,8 +97,8 @@ export function PracticePage({ records, onAnswer }: PracticePageProps) {
       ? prepareAnswersSet(actualRecord, filteredRecords)
       : [];
 
-    setProgress({ stack, actualRecord, actualAnswersSet });
-  }, [filteredRecords, progress]);
+    return { stack, actualRecord, actualAnswersSet };
+  });
 
   const [actualAnswer, setAnswer] = useState<Answer<DictionaryEntry>>();
 
@@ -87,19 +122,6 @@ export function PracticePage({ records, onAnswer }: PracticePageProps) {
     });
     setAnswer(undefined);
   };
-
-  const history = useHistory();
-
-  if (knowledge === undefined)
-    return (
-      <>
-        {[Knowledge.definition, Knowledge.translation].map((knowledge) => (
-          <Button key={knowledge} onClick={() => setKnowledge(knowledge)}>
-            {Knowledge[knowledge]}
-          </Button>
-        ))}
-      </>
-    );
 
   return (
     <>
@@ -128,7 +150,6 @@ export function PracticePage({ records, onAnswer }: PracticePageProps) {
           </Button>
         ))}
       </div>
-
       {actualAnswer && (
         <>
           <div>
@@ -137,10 +158,6 @@ export function PracticePage({ records, onAnswer }: PracticePageProps) {
           <Button onClick={handleNextClick}>Next word</Button>
         </>
       )}
-      <div>
-        <hr />
-      </div>
-      <Button onClick={() => history.push("/")}>End practice</Button>
     </>
   );
-}
+};
