@@ -1,12 +1,20 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import { HashRouter, Route, Switch } from "react-router-dom";
+import styled from "styled-components";
 import { Answer } from "./utils";
 import { DictionaryEntry, RecordPage } from "./RecordPage";
 import { ListPage } from "./ListPage";
 import { PracticePage } from "./PracticePage";
 
 const VOCABULARY_KEY = "vocabulary";
+
+const StyledApp = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  color: white;
+`;
 
 export function App() {
   const [items, setItems] = useState<DictionaryEntry[]>([]);
@@ -48,7 +56,7 @@ export function App() {
   };
 
   return (
-    <div className="App">
+    <StyledApp className="bg-dark">
       <HashRouter>
         <Switch>
           <Route path="/add">
@@ -65,6 +73,6 @@ export function App() {
           </Route>
         </Switch>
       </HashRouter>
-    </div>
+    </StyledApp>
   );
 }
