@@ -1,5 +1,6 @@
 import { FC, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 import { Button } from "../components/Button";
 import { DictionaryEntry } from "../RecordPage";
 import {
@@ -13,6 +14,12 @@ import {
   Translateable,
 } from "../utils";
 import "./index.css";
+
+const ButtonsGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
 
 export enum Knowledge {
   translation,
@@ -59,13 +66,13 @@ interface KnowledgeSelectionProps {
 }
 
 const KnowledgeSelection: FC<KnowledgeSelectionProps> = ({ onSelect }) => (
-  <div className="ButtonsGrid">
+  <ButtonsGrid>
     {[Knowledge.definition, Knowledge.translation].map((knowledge) => (
       <Button key={knowledge} onClick={() => onSelect && onSelect(knowledge)}>
         {Knowledge[knowledge]}
       </Button>
     ))}
-  </div>
+  </ButtonsGrid>
 );
 
 interface PracticeSessionProps extends PracticePageProps {
@@ -131,7 +138,7 @@ const PracticeSession: FC<PracticeSessionProps> = ({
           <i>{progress.actualRecord.partOfSpeech}</i>)
         </div>
       )}
-      <div className="ButtonsGrid">
+      <ButtonsGrid>
         {progress?.actualAnswersSet.map((answer) => (
           <Button
             key={answer.entity.id}
@@ -149,7 +156,7 @@ const PracticeSession: FC<PracticeSessionProps> = ({
             {SELECTORS[knowledge](answer.entity)}
           </Button>
         ))}
-      </div>
+      </ButtonsGrid>
       {actualAnswer && (
         <>
           <div>
