@@ -13,7 +13,6 @@ import {
   sortImmutable,
   Translateable,
 } from "../utils";
-import "./index.css";
 
 const ButtonsGrid = styled.div`
   display: flex;
@@ -142,7 +141,6 @@ const PracticeSession: FC<PracticeSessionProps> = ({
         {progress?.actualAnswersSet.map((answer) => (
           <Button
             key={answer.entity.id}
-            className="AnswerButton"
             disabled={Boolean(actualAnswer)}
             onClick={() => handleAnswerClick(answer)}
             theme={
