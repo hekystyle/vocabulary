@@ -1,16 +1,17 @@
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Popconfirm, Tooltip } from "antd";
 import Table, { ColumnsType } from "antd/lib/table";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { DictionaryEntry } from "../RecordPage";
+import { AppState, dictionarySlice } from "../reducer";
+import { sortImmutable } from "../utils";
 
-export interface ListPageProps {
-  items: DictionaryEntry[];
-  onDelete?: (r: DictionaryEntry) => void;
-}
+export interface ListPageProps {}
 
-export function ListPage({ items, onDelete }: ListPageProps) {
+export function ListPage(props: ListPageProps) {
   const history = useHistory();
+  const dispatch = useDispatch();
   const columns: ColumnsType<DictionaryEntry> = [
     {
       title: "Word",
@@ -42,7 +43,9 @@ export function ListPage({ items, onDelete }: ListPageProps) {
           </Button>
           <Popconfirm
             title="Are you sure to delete this?"
-            onConfirm={() => onDelete && onDelete(record)}
+            onConfirm={() => {
+              dispatch(dictionarySlice.actions.delete(record));
+            }}
           >
             <Button>
               <DeleteOutlined />
@@ -52,6 +55,9 @@ export function ListPage({ items, onDelete }: ListPageProps) {
       ),
     },
   ];
+  const items = useSelector<AppState, DictionaryEntry[]>((s) =>
+    sortImmutable(s, (a, b) => (b.id ?? 0) - (a.id ?? 0))
+  );
   return (
     <>
       <Button type="primary" onClick={() => history.push("/practice")}>

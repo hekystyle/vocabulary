@@ -1,8 +1,10 @@
 import { FC, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../components/Button";
 import { DictionaryEntry } from "../RecordPage";
+import { AppState, dictionarySlice } from "../reducer";
 import {
   Answer,
   answersComparer,
@@ -35,11 +37,7 @@ const SELECTORS = {
   [Knowledge.translation]: (t: Translateable) => t.translation,
 };
 
-type OnAnswerHandler = (a: Answer<DictionaryEntry>) => void;
-export interface PracticePageProps {
-  records: DictionaryEntry[];
-  onAnswer?: OnAnswerHandler;
-}
+export interface PracticePageProps {}
 
 export function PracticePage(props: PracticePageProps) {
   const [knowledge, setKnowledge] = useState<Knowledge>();
@@ -84,11 +82,9 @@ interface Progress {
   actualAnswersSet: Answer<DictionaryEntry>[];
 }
 
-const PracticeSession: FC<PracticeSessionProps> = ({
-  records,
-  knowledge,
-  onAnswer,
-}) => {
+const PracticeSession: FC<PracticeSessionProps> = ({ knowledge }) => {
+  const records = useSelector<AppState, DictionaryEntry[]>((s) => s);
+
   const filteredRecords = useMemo(
     () => records.filter(FILTERS[knowledge]),
     [records, knowledge]
@@ -108,10 +104,16 @@ const PracticeSession: FC<PracticeSessionProps> = ({
 
   const [actualAnswer, setAnswer] = useState<Answer<DictionaryEntry>>();
 
+  const dispatch = useDispatch();
   const handleAnswerClick = (answer: Answer<DictionaryEntry>) => {
     setAnswer(answer);
-    if (onAnswer && progress?.actualRecord)
-      onAnswer({ isCorrect: answer.isCorrect, entity: progress.actualRecord });
+    if (progress?.actualRecord)
+      dispatch(
+        dictionarySlice.actions.answer({
+          isCorrect: answer.isCorrect,
+          entity: progress.actualRecord,
+        })
+      );
   };
 
   const handleNextClick = () => {

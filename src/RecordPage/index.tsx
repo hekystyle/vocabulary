@@ -1,7 +1,9 @@
 import { Button, Input } from "antd";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { DefinitionsList } from "../DefinitionsList";
+import { AppState, dictionarySlice } from "../reducer";
 import { AnswersCountable, Definable } from "../utils";
 
 export interface DictionaryEntry extends AnswersCountable, Definable {
@@ -11,13 +13,14 @@ export interface DictionaryEntry extends AnswersCountable, Definable {
   translation: string;
 }
 
-export interface RecordPageProps {
-  records: DictionaryEntry[];
-  onConfirm?: (r: DictionaryEntry) => void;
-}
+export interface RecordPageProps {}
 
-export function RecordPage({ records, onConfirm }: RecordPageProps) {
+export function RecordPage(props: RecordPageProps) {
   const { id } = useParams<{ id?: string }>();
+
+  const editedEntry = useSelector<AppState, DictionaryEntry | undefined>((s) =>
+    id ? s.find((p) => p.id === parseInt(id)) : undefined
+  );
 
   const [entry, setEntry] = useState<DictionaryEntry>({
     word: "",
@@ -26,15 +29,20 @@ export function RecordPage({ records, onConfirm }: RecordPageProps) {
     definition: "",
     answersCount: 0,
     correctAnswersCount: 0,
-    ...(id ? records.find((p) => p.id === parseInt(id)) ?? {} : {}),
+    ...(editedEntry ?? {}),
   });
 
   const history = useHistory();
 
   const navigateRoot = () => history.push("/");
 
+  const dispatch = useDispatch();
   const handleConfirm = () => {
-    onConfirm && onConfirm(entry);
+    dispatch(
+      id
+        ? dictionarySlice.actions.update(entry)
+        : dictionarySlice.actions.create(entry)
+    );
     navigateRoot();
   };
 
