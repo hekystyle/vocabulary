@@ -1,4 +1,4 @@
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import { RecordPage } from "./RecordPage";
 import { ListPage } from "./ListPage";
@@ -17,18 +17,16 @@ export function App() {
     <StyledApp className="bg-dark">
       <HashRouter>
         <Switch>
-          <Route path="/add">
-            <RecordPage />
-          </Route>
-          <Route path="/edit/:id">
+          <Route path="/record/:id?">
             <RecordPage />
           </Route>
           <Route path="/practice">
             <PracticePage />
           </Route>
-          <Route path="/">
+          <Route path="/list">
             <ListPage />
           </Route>
+          <Redirect to="/list" />
         </Switch>
       </HashRouter>
     </StyledApp>

@@ -32,13 +32,13 @@ export function ListPage(props: ListPageProps) {
     },
     {
       title: () => (
-        <Button type="primary" onClick={() => history.push("/add")}>
+        <Button type="primary" onClick={() => history.push("/record")}>
           <PlusOutlined />
         </Button>
       ),
       render: (_, record) => (
         <>
-          <Button onClick={() => history.push(`/edit/${record.id}`)}>
+          <Button onClick={() => history.push(`/record/${record.id}`)}>
             <EditOutlined />
           </Button>
           <Popconfirm
