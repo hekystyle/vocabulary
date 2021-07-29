@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Button } from "../components/Button";
 import { DictionaryEntry } from "../RecordPage";
 import { AppState, dictionarySlice } from "../reducer";
+import { StyledAnswerButton } from "./AnswerButton";
 import {
   Answer,
   answersComparer,
@@ -141,7 +142,7 @@ const PracticeSession: FC<PracticeSessionProps> = ({ knowledge }) => {
       )}
       <ButtonsGrid>
         {progress?.actualAnswersSet.map((answer) => (
-          <Button
+          <StyledAnswerButton
             key={answer.entity.id}
             disabled={Boolean(actualAnswer)}
             onClick={() => handleAnswerClick(answer)}
@@ -154,7 +155,7 @@ const PracticeSession: FC<PracticeSessionProps> = ({ knowledge }) => {
             }
           >
             {SELECTORS[knowledge](answer.entity)}
-          </Button>
+          </StyledAnswerButton>
         ))}
       </ButtonsGrid>
       {actualAnswer && (
