@@ -3,21 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../components/Button";
+import { Card } from "../components/Card";
+import { CardBody } from "../components/CardBody";
 import { DictionaryEntry } from "../RecordPage";
 import { AppState, dictionarySlice } from "../reducer";
-import { StyledAnswerButton } from "./AnswerButton";
 import {
-  Answer,
   answersComparer,
   Definable,
   hasDefinition,
   hasTranslation,
-  prepareAnswersSet,
   sortImmutable,
   Translateable,
 } from "../utils";
 
-const ButtonsGrid = styled.div`
+const Layout = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -45,17 +45,14 @@ export function PracticePage(props: PracticePageProps) {
 
   const history = useHistory();
   return (
-    <>
+    <Layout>
       {knowledge === undefined ? (
         <KnowledgeSelection onSelect={setKnowledge} />
       ) : (
         <PracticeSession knowledge={knowledge} {...props} />
       )}
-      <div>
-        <hr />
-      </div>
       <Button onClick={() => history.push("/")}>End practice</Button>
-    </>
+    </Layout>
   );
 }
 
@@ -64,13 +61,13 @@ interface KnowledgeSelectionProps {
 }
 
 const KnowledgeSelection: FC<KnowledgeSelectionProps> = ({ onSelect }) => (
-  <ButtonsGrid>
+  <>
     {[Knowledge.definition, Knowledge.translation].map((knowledge) => (
       <Button key={knowledge} onClick={() => onSelect && onSelect(knowledge)}>
         {Knowledge[knowledge]}
       </Button>
     ))}
-  </ButtonsGrid>
+  </>
 );
 
 interface PracticeSessionProps extends PracticePageProps {
@@ -80,7 +77,6 @@ interface PracticeSessionProps extends PracticePageProps {
 interface Progress {
   stack: DictionaryEntry[];
   actualRecord?: DictionaryEntry;
-  actualAnswersSet: Answer<DictionaryEntry>[];
 }
 
 const PracticeSession: FC<PracticeSessionProps> = ({ knowledge }) => {
@@ -96,74 +92,58 @@ const PracticeSession: FC<PracticeSessionProps> = ({ knowledge }) => {
 
     const actualRecord = stack.pop();
 
-    const actualAnswersSet = actualRecord
-      ? prepareAnswersSet(actualRecord, filteredRecords)
-      : [];
-
-    return { stack, actualRecord, actualAnswersSet };
+    return { stack, actualRecord };
   });
 
-  const [actualAnswer, setAnswer] = useState<Answer<DictionaryEntry>>();
+  const [isAnswerRevealed, setIsAnswerRevealed] = useState(false);
+
+  const handleRevealAnswer = () => setIsAnswerRevealed(true);
 
   const dispatch = useDispatch();
-  const handleAnswerClick = (answer: Answer<DictionaryEntry>) => {
-    setAnswer(answer);
+  const handleAnswerButtonClick = (isCorrect: boolean) => {
     if (progress?.actualRecord)
       dispatch(
         dictionarySlice.actions.answer({
-          isCorrect: answer.isCorrect,
+          isCorrect,
           entity: progress.actualRecord,
         })
       );
-  };
-
-  const handleNextClick = () => {
+    setIsAnswerRevealed(false);
     setProgress((state) => {
       const stack = [...(state?.stack ?? [])];
 
       const actualRecord = stack.pop();
 
-      const actualAnswersSet = actualRecord
-        ? prepareAnswersSet(actualRecord, filteredRecords ?? [])
-        : [];
-
-      return { stack, actualRecord, actualAnswersSet };
+      return { stack, actualRecord };
     });
-    setAnswer(undefined);
   };
 
+  if (!progress.actualRecord) return null;
   return (
     <>
-      {progress?.actualRecord && (
-        <div style={{ textAlign: "center" }}>
-          {progress.actualRecord.word} (
-          <i>{progress.actualRecord.partOfSpeech}</i>)
-        </div>
-      )}
-      <ButtonsGrid>
-        {progress?.actualAnswersSet.map((answer) => (
-          <StyledAnswerButton
-            key={answer.entity.id}
-            disabled={Boolean(actualAnswer)}
-            onClick={() => handleAnswerClick(answer)}
-            theme={
-              answer.isCorrect && actualAnswer
-                ? "success"
-                : !answer.isCorrect && answer === actualAnswer
-                ? "danger"
-                : "secondary"
-            }
-          >
-            {SELECTORS[knowledge](answer.entity)}
-          </StyledAnswerButton>
-        ))}
-      </ButtonsGrid>
-      {actualAnswer && (
-        <>
+      <Card>
+        <CardBody className="text-center">
+          <div>{SELECTORS[knowledge](progress.actualRecord)}</div>
           <div>
-            <hr />
+            (<i>{progress.actualRecord.partOfSpeech}</i>)
           </div>
-          <Button onClick={handleNextClick}>Next word</Button>
+        </CardBody>
+      </Card>
+      <Card>
+        <CardBody className="text-center">
+          {isAnswerRevealed ? progress.actualRecord.word : "?"}
+        </CardBody>
+      </Card>
+      {!isAnswerRevealed ? (
+        <Button onClick={handleRevealAnswer}>Reveal answer</Button>
+      ) : (
+        <>
+          <Button theme="success" onClick={() => handleAnswerButtonClick(true)}>
+            Correct
+          </Button>
+          <Button theme="danger" onClick={() => handleAnswerButtonClick(false)}>
+            Incorrect
+          </Button>
         </>
       )}
     </>

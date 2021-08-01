@@ -5,11 +5,10 @@ import { ListPage } from "./ListPage";
 import { PracticePage } from "./PracticePage";
 
 const StyledApp = styled.div`
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
-  color: white;
 `;
 
 export function App() {
