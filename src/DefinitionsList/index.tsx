@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 import { ApiResult, Word } from "../types";
+
+const StyledUl = styled.ul`
+  color: white;
+`;
 
 export interface DefinitionsListProps {
   word: string;
@@ -33,7 +38,7 @@ export function DefinitionsList(props: DefinitionsListProps) {
   }, [word]);
 
   return (
-    <ul>
+    <StyledUl>
       {entry?.meanings.map((meaning, i) => (
         <li key={i}>
           <div
@@ -61,6 +66,6 @@ export function DefinitionsList(props: DefinitionsListProps) {
           </ul>
         </li>
       ))}
-    </ul>
+    </StyledUl>
   );
 }
