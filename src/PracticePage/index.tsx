@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { CardBody } from "../components/CardBody";
-import { DictionaryEntry } from "../RecordPage";
+import { DictionaryEntry } from "../types/DictionaryEntry";
 import { AppState, dictionarySlice } from "../reducer";
 import {
   answersComparer,

@@ -3,7 +3,7 @@ import { Button, Popconfirm, Tooltip } from "antd";
 import Table, { ColumnsType } from "antd/lib/table";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { DictionaryEntry } from "../../RecordPage";
+import { DictionaryEntry } from "../../types/DictionaryEntry";
 import { AppState, dictionarySlice } from "../../reducer";
 import { sortImmutable } from "../../utils";
 

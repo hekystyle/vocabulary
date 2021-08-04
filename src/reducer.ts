@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { DictionaryEntry } from "./RecordPage";
+import { DictionaryEntry } from "./types/DictionaryEntry";
 import { Answer } from "./utils";
 
 export type AppState = DictionaryEntry[];

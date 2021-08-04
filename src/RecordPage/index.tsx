@@ -4,14 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { DefinitionsList } from "../DefinitionsList";
 import { AppState, dictionarySlice } from "../reducer";
-import { AnswersCountable, Definable } from "../utils";
-
-export interface DictionaryEntry extends AnswersCountable, Definable {
-  id?: number;
-  word: string;
-  partOfSpeech: string;
-  translation: string;
-}
+import { DictionaryEntry } from "../types/DictionaryEntry";
 
 export interface RecordPageProps {}
 
