@@ -87,10 +87,10 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
       ) : (
         <>
           <Button theme="success" onClick={() => handleAnswerButtonClick(true)}>
-            Correct
+            I was correct
           </Button>
           <Button theme="danger" onClick={() => handleAnswerButtonClick(false)}>
-            Incorrect
+            I was incorrect
           </Button>
         </>
       )}
