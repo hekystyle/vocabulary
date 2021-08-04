@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from "react";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Button } from "components/Button";
@@ -27,12 +27,10 @@ interface Progress {
 export const PracticeSession: FC<PracticeSessionProps> = () => {
   const records = useSelector<AppState, DictionaryEntry[]>((s) => s);
 
-  const filteredRecords = useMemo(
-    () => records.filter((p) => hasTranslation(p) || hasDefinition(p)),
-    [records]
-  );
-
   const [progress, setProgress] = useState<Progress>(() => {
+    const filteredRecords = records.filter(
+      (p) => hasTranslation(p) || hasDefinition(p)
+    );
     const stack = sortImmutable(filteredRecords, answersComparer);
 
     const actualRecord = stack.pop();
