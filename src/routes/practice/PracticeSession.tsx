@@ -1,29 +1,35 @@
 import { FC, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
 import { Button } from "components/Button";
 import { Card } from "components/Card";
 import { CardBody } from "components/CardBody";
 import { DictionaryEntry } from "types/DictionaryEntry";
 import { AppState, dictionarySlice } from "reducer";
-import { answersComparer, sortImmutable } from "utils";
-import { FILTERS, Knowledge, SELECTORS } from "./constants";
-import { PracticePageProps } from "./Page";
+import {
+  answersComparer,
+  hasDefinition,
+  hasTranslation,
+  sortImmutable,
+} from "utils";
 
-interface PracticeSessionProps extends PracticePageProps {
-  knowledge: Knowledge;
-}
+const OverflowableCardBody = styled(CardBody)`
+  overflow: auto;
+`;
+
+interface PracticeSessionProps {}
 
 interface Progress {
   stack: DictionaryEntry[];
   actualRecord?: DictionaryEntry;
 }
 
-export const PracticeSession: FC<PracticeSessionProps> = ({ knowledge }) => {
+export const PracticeSession: FC<PracticeSessionProps> = () => {
   const records = useSelector<AppState, DictionaryEntry[]>((s) => s);
 
   const filteredRecords = useMemo(
-    () => records.filter(FILTERS[knowledge]),
-    [records, knowledge]
+    () => records.filter((p) => hasTranslation(p) || hasDefinition(p)),
+    [records]
   );
 
   const [progress, setProgress] = useState<Progress>(() => {
@@ -62,11 +68,16 @@ export const PracticeSession: FC<PracticeSessionProps> = ({ knowledge }) => {
     <>
       <Card>
         <CardBody className="text-center">
-          <div>{SELECTORS[knowledge](progress.actualRecord)}</div>
+          <div>{progress.actualRecord.translation}</div>
           <div>
             (<i>{progress.actualRecord.partOfSpeech}</i>)
           </div>
         </CardBody>
+      </Card>
+      <Card>
+        <OverflowableCardBody className="text-center">
+          {progress.actualRecord.definition}
+        </OverflowableCardBody>
       </Card>
       <Card>
         <CardBody className="text-center">
