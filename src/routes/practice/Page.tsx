@@ -1,20 +1,10 @@
-import { FC, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "components/Button";
-import { Card } from "components/Card";
-import { CardBody } from "components/CardBody";
-import { DictionaryEntry } from "types/DictionaryEntry";
-import { AppState, dictionarySlice } from "reducer";
-import {
-  answersComparer,
-  Definable,
-  hasDefinition,
-  hasTranslation,
-  sortImmutable,
-  Translateable,
-} from "utils";
+import { Knowledge } from "./constants";
+import { KnowledgeSelection } from "./KnowledgeSelection";
+import { PracticeSession } from "./PracticeSession";
 
 const Layout = styled.div`
   height: 100%;
@@ -22,21 +12,6 @@ const Layout = styled.div`
   flex-direction: column;
   gap: 1rem;
 `;
-
-export enum Knowledge {
-  translation,
-  definition,
-}
-
-const FILTERS = {
-  [Knowledge.definition]: hasDefinition,
-  [Knowledge.translation]: hasTranslation,
-};
-
-const SELECTORS = {
-  [Knowledge.definition]: (d: Definable) => d.definition,
-  [Knowledge.translation]: (t: Translateable) => t.translation,
-};
 
 export interface PracticePageProps {}
 
@@ -56,96 +31,3 @@ export function PracticePage(props: PracticePageProps) {
   );
 }
 
-interface KnowledgeSelectionProps {
-  onSelect?: (k: Knowledge) => void;
-}
-
-const KnowledgeSelection: FC<KnowledgeSelectionProps> = ({ onSelect }) => (
-  <>
-    {[Knowledge.definition, Knowledge.translation].map((knowledge) => (
-      <Button key={knowledge} onClick={() => onSelect && onSelect(knowledge)}>
-        {Knowledge[knowledge]}
-      </Button>
-    ))}
-  </>
-);
-
-interface PracticeSessionProps extends PracticePageProps {
-  knowledge: Knowledge;
-}
-
-interface Progress {
-  stack: DictionaryEntry[];
-  actualRecord?: DictionaryEntry;
-}
-
-const PracticeSession: FC<PracticeSessionProps> = ({ knowledge }) => {
-  const records = useSelector<AppState, DictionaryEntry[]>((s) => s);
-
-  const filteredRecords = useMemo(
-    () => records.filter(FILTERS[knowledge]),
-    [records, knowledge]
-  );
-
-  const [progress, setProgress] = useState<Progress>(() => {
-    const stack = sortImmutable(filteredRecords, answersComparer);
-
-    const actualRecord = stack.pop();
-
-    return { stack, actualRecord };
-  });
-
-  const [isAnswerRevealed, setIsAnswerRevealed] = useState(false);
-
-  const handleRevealAnswer = () => setIsAnswerRevealed(true);
-
-  const dispatch = useDispatch();
-  const handleAnswerButtonClick = (isCorrect: boolean) => {
-    if (progress?.actualRecord)
-      dispatch(
-        dictionarySlice.actions.answer({
-          isCorrect,
-          entity: progress.actualRecord,
-        })
-      );
-    setIsAnswerRevealed(false);
-    setProgress((state) => {
-      const stack = [...(state?.stack ?? [])];
-
-      const actualRecord = stack.pop();
-
-      return { stack, actualRecord };
-    });
-  };
-
-  if (!progress.actualRecord) return null;
-  return (
-    <>
-      <Card>
-        <CardBody className="text-center">
-          <div>{SELECTORS[knowledge](progress.actualRecord)}</div>
-          <div>
-            (<i>{progress.actualRecord.partOfSpeech}</i>)
-          </div>
-        </CardBody>
-      </Card>
-      <Card>
-        <CardBody className="text-center">
-          {isAnswerRevealed ? progress.actualRecord.word : "?"}
-        </CardBody>
-      </Card>
-      {!isAnswerRevealed ? (
-        <Button onClick={handleRevealAnswer}>Reveal answer</Button>
-      ) : (
-        <>
-          <Button theme="success" onClick={() => handleAnswerButtonClick(true)}>
-            Correct
-          </Button>
-          <Button theme="danger" onClick={() => handleAnswerButtonClick(false)}>
-            Incorrect
-          </Button>
-        </>
-      )}
-    </>
-  );
-};
