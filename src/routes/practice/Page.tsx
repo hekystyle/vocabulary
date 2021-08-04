@@ -2,11 +2,11 @@ import { FC, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { Button } from "../components/Button";
-import { Card } from "../components/Card";
-import { CardBody } from "../components/CardBody";
-import { DictionaryEntry } from "../types/DictionaryEntry";
-import { AppState, dictionarySlice } from "../reducer";
+import { Button } from "components/Button";
+import { Card } from "components/Card";
+import { CardBody } from "components/CardBody";
+import { DictionaryEntry } from "types/DictionaryEntry";
+import { AppState, dictionarySlice } from "reducer";
 import {
   answersComparer,
   Definable,
@@ -14,7 +14,7 @@ import {
   hasTranslation,
   sortImmutable,
   Translateable,
-} from "../utils";
+} from "utils";
 
 const Layout = styled.div`
   height: 100%;

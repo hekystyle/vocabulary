@@ -2,7 +2,7 @@ import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import { RecordRouter } from "routes/record/Router";
 import ListRouter from "./routes/list";
-import { PracticePage } from "./PracticePage";
+import { PracticeRouter } from "routes/practice/Router";
 
 const StyledApp = styled.div`
   height: 100vh;
@@ -17,9 +17,7 @@ export function App() {
       <HashRouter>
         <Switch>
           <Route path="/record" component={RecordRouter} />
-          <Route path="/practice">
-            <PracticePage />
-          </Route>
+          <Route path="/practice" component={PracticeRouter} />
           <Route path="/list" component={ListRouter} />
           <Redirect to="/list" />
         </Switch>
