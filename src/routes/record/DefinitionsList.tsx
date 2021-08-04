@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { ApiResult, Word } from "../types";
+import { ApiResult, Word } from "types";
 
 const StyledUl = styled.ul`
   color: white;

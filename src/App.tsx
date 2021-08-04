@@ -1,6 +1,6 @@
 import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
-import { RecordPage } from "./RecordPage";
+import { RecordRouter } from "routes/record/Router";
 import ListRouter from "./routes/list";
 import { PracticePage } from "./PracticePage";
 
@@ -16,9 +16,7 @@ export function App() {
     <StyledApp className="bg-dark">
       <HashRouter>
         <Switch>
-          <Route path="/record/:id?">
-            <RecordPage />
-          </Route>
+          <Route path="/record" component={RecordRouter} />
           <Route path="/practice">
             <PracticePage />
           </Route>

@@ -2,9 +2,9 @@ import { Button, Input } from "antd";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { DefinitionsList } from "../DefinitionsList";
-import { AppState, dictionarySlice } from "../reducer";
-import { DictionaryEntry } from "../types/DictionaryEntry";
+import { DefinitionsList } from "./DefinitionsList";
+import { AppState, dictionarySlice } from "reducer";
+import { DictionaryEntry } from "types/DictionaryEntry";
 
 export interface RecordPageProps {}
 
