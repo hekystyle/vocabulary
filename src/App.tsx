@@ -1,7 +1,7 @@
 import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import { RecordPage } from "./RecordPage";
-import { ListPage } from "./ListPage";
+import ListRouter from "./routes/list";
 import { PracticePage } from "./PracticePage";
 
 const StyledApp = styled.div`
@@ -22,9 +22,7 @@ export function App() {
           <Route path="/practice">
             <PracticePage />
           </Route>
-          <Route path="/list">
-            <ListPage />
-          </Route>
+          <Route path="/list" component={ListRouter} />
           <Redirect to="/list" />
         </Switch>
       </HashRouter>
