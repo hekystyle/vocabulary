@@ -43,12 +43,6 @@ export function RecordPage(props: RecordPageProps) {
 
   return (
     <>
-      <Button type="primary" danger onClick={handleCancel}>
-        Cancel
-      </Button>
-      <Button type="primary" onClick={handleConfirm}>
-        Confirm
-      </Button>
       <Input
         placeholder="Word"
         value={entry.word}
@@ -69,6 +63,12 @@ export function RecordPage(props: RecordPageProps) {
         value={entry.definition}
         onChange={(e) => setEntry({ ...entry, definition: e.target.value })}
       />
+      <Button type="primary" onClick={handleConfirm}>
+        Confirm
+      </Button>
+      <Button type="primary" danger onClick={handleCancel}>
+        Cancel
+      </Button>
       <DefinitionsList
         word={entry.word}
         onPartOfSpeechClick={(partOfSpeech) =>
