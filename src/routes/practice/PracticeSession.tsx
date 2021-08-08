@@ -1,16 +1,17 @@
 import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { groupWith } from "ramda";
 import { Button } from "components/Button";
 import { Card } from "components/Card";
 import { CardBody } from "components/CardBody";
 import { DictionaryEntry } from "types/DictionaryEntry";
 import { AppState, dictionarySlice } from "reducer";
 import {
-  answersComparer,
+  computeAnswersScore,
   hasDefinition,
   hasTranslation,
-  sortImmutable,
+  shuffle,
 } from "utils";
 
 const OverflowableCardBody = styled(CardBody)`
@@ -31,7 +32,13 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
     const filteredRecords = records.filter(
       (p) => hasTranslation(p) || hasDefinition(p)
     );
-    const stack = sortImmutable(filteredRecords, answersComparer);
+
+    const stack = groupWith(
+      (a, b) => computeAnswersScore(a) === computeAnswersScore(b),
+      filteredRecords
+    )
+      .map((list) => shuffle(list))
+      .reduce((prev, curr) => [...prev, ...curr], []);
 
     const actualRecord = stack.pop();
 
