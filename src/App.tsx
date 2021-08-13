@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { RecordRouter } from "routes/record/Router";
 import ListRouter from "./routes/list";
 import { PracticeRouter } from "routes/practice/Router";
+import { NavBar } from "NavBar";
 
 const StyledApp = styled.div`
   height: 100vh;
@@ -15,6 +16,7 @@ export function App() {
   return (
     <StyledApp className="bg-dark">
       <HashRouter>
+        <NavBar />
         <Switch>
           <Route path="/record" component={RecordRouter} />
           <Route path="/practice" component={PracticeRouter} />

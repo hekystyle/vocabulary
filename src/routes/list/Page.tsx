@@ -60,9 +60,6 @@ export function ListPage(props: ListPageProps) {
   );
   return (
     <>
-      <Button type="primary" onClick={() => history.push("/practice")}>
-        Practice
-      </Button>
       <Table columns={columns} dataSource={items} size="middle" rowKey="id" />
     </>
   );
