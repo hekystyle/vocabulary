@@ -14,8 +14,8 @@ const StyledApp = styled.div`
 
 export function App() {
   return (
-    <StyledApp className="bg-dark">
-      <HashRouter>
+    <HashRouter>
+      <StyledApp className="bg-dark">
         <NavBar />
         <Switch>
           <Route path="/record" component={RecordRouter} />
@@ -23,7 +23,7 @@ export function App() {
           <Route path="/list" component={ListRouter} />
           <Redirect to="/list" />
         </Switch>
-      </HashRouter>
-    </StyledApp>
+      </StyledApp>
+    </HashRouter>
   );
 }
