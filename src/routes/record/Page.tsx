@@ -49,7 +49,7 @@ export function RecordPage(props: RecordPageProps) {
         onChange={(e) => setEntry({ ...entry, word: e.target.value })}
       />
       <Input
-        placeholder="Pard ot speech"
+        placeholder="Part ot speech"
         value={entry.partOfSpeech}
         onChange={(e) => setEntry({ ...entry, partOfSpeech: e.target.value })}
       />
