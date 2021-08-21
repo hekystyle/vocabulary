@@ -15,7 +15,7 @@ const OverflowableCardBody = styled(CardBody)`
 interface PracticeSessionProps {}
 
 export const PracticeSession: FC<PracticeSessionProps> = () => {
-  const records = useSelector<AppState, DictionaryEntry[]>((s) => s);
+  const records = useSelector<AppState, DictionaryEntry[]>((s) => s.dictionary);
 
   const { selected, next } = useSession(records);
 

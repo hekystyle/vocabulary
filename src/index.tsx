@@ -7,17 +7,17 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./index.css";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import { dictionarySlice } from "./reducer";
+import { rootReducer } from "./reducer";
 import { loadState, persistState } from "persistence";
 
 const store = configureStore({
-  reducer: dictionarySlice.reducer,
-  preloadedState: loadState(),
+  reducer: rootReducer,
+  preloadedState: { dictionary: loadState() },
 });
 
 store.subscribe(() => {
   const state = store.getState();
-  persistState(state);
+  persistState(state.dictionary);
 });
 
 ReactDOM.render(

@@ -56,7 +56,7 @@ export function ListPage(props: ListPageProps) {
     },
   ];
   const items = useSelector<AppState, DictionaryEntry[]>((s) =>
-    sortImmutable(s, (a, b) => (b.id ?? 0) - (a.id ?? 0))
+    sortImmutable(s.dictionary, (a, b) => (b.id ?? 0) - (a.id ?? 0))
   );
   return (
     <>

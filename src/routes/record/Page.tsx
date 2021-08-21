@@ -12,7 +12,7 @@ export function RecordPage(props: RecordPageProps) {
   const { id } = useParams<{ id?: string }>();
 
   const editedEntry = useSelector<AppState, DictionaryEntry | undefined>((s) =>
-    id ? s.find((p) => p.id === parseInt(id)) : undefined
+    id ? s.dictionary.find((p) => p.id === parseInt(id)) : undefined
   );
 
   const [entry, setEntry] = useState<DictionaryEntry>({

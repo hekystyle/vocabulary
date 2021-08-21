@@ -1,10 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { combineReducers, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DictionaryEntry } from "./types/DictionaryEntry";
 import { Answer } from "./utils";
 
-export type AppState = DictionaryEntry[];
-
-const initialState: AppState = [];
+const initialState: DictionaryEntry[] = [];
 
 export const dictionarySlice = createSlice({
   name: "dictionary",
@@ -41,3 +39,9 @@ export const dictionarySlice = createSlice({
     },
   },
 });
+
+export const rootReducer = combineReducers({
+  dictionary: dictionarySlice.reducer,
+});
+
+export type AppState = ReturnType<typeof rootReducer>;
