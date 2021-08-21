@@ -17,9 +17,11 @@ interface PracticeSessionProps {}
 export const PracticeSession: FC<PracticeSessionProps> = () => {
   const records = useSelector<AppState, DictionaryEntry[]>((s) => s);
 
-  const { actualRecord, next } = useSession(records);
+  const { selected, next } = useSession(records);
 
   const [isAnswerRevealed, setIsAnswerRevealed] = useState(false);
+
+  const actualRecord = records.find((r) => r.id === selected);
 
   const handleRevealAnswer = () => setIsAnswerRevealed(true);
 

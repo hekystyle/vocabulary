@@ -9,37 +9,45 @@ import {
 } from "utils";
 
 interface Session {
-  stack: DictionaryEntry[];
-  actualRecord?: DictionaryEntry;
+  stack: number[];
+  selected: number | undefined;
 }
 
 export const useSession = (records: DictionaryEntry[]) => {
-  const [{ actualRecord }, setProgress] = useState<Session>(() => {
+  const [{ selected }, setProgress] = useState<Session>(() => {
     const filteredRecords = records.filter(
       (p) => hasTranslation(p) || hasDefinition(p)
     );
 
-    const stack = groupWith(
-      (a, b) => computeAnswersScore(a) === computeAnswersScore(b),
-      filteredRecords
-    )
+    const computedRecords = filteredRecords.map((r) => ({
+      id: r.id,
+      score: computeAnswersScore(r),
+    }));
+
+    const stack = groupWith((a, b) => a.score === b.score, computedRecords)
       .map((list) => shuffle(list))
-      .reduce((prev, curr) => [...prev, ...curr], []);
+      .reduce<number[]>(
+        (acc, current) => [
+          ...acc,
+          ...current.map((p) => p.id ?? -1).filter((id) => id !== -1),
+        ],
+        []
+      );
 
-    const actualRecord = stack.pop();
+    const currentID = stack.pop();
 
-    return { stack, actualRecord };
+    return { stack, selected: currentID };
   });
 
   return {
-    actualRecord,
+    selected,
     next: () =>
       setProgress((state) => {
         const stack = [...(state?.stack ?? [])];
 
         const actualRecord = stack.pop();
 
-        return { stack, actualRecord };
+        return { stack, selected: actualRecord };
       }),
   };
 };
