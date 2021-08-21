@@ -41,6 +41,13 @@ export function computeAnswersAbsoluteScore<T extends AnswersCountable>({
   return answersCount + correctAnswersCount;
 }
 
+export function computeAnswersRelativeScore<T extends AnswersCountable>({
+  answersCount,
+  correctAnswersCount,
+}: T): number {
+  return Math.floor((100 / answersCount) * correctAnswersCount);
+}
+
 export function answersComparer<T extends AnswersCountable>(a: T, b: T) {
   const [scoreA, scoreB] = [a, b].map(computeAnswersAbsoluteScore);
 
