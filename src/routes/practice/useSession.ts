@@ -6,7 +6,7 @@ import {
   hasDefinition,
   hasTranslation,
   shuffle,
-} from "utils";
+} from "utils/utils";
 
 interface Session {
   stack: number[];

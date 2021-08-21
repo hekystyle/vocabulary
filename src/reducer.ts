@@ -1,6 +1,6 @@
 import { combineReducers, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DictionaryEntry } from "./types/DictionaryEntry";
-import { Answer } from "./utils";
+import { Answer } from "./utils/utils";
 
 const initialState: DictionaryEntry[] = [];
 

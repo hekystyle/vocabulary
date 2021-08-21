@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { DictionaryEntry } from "../../types/DictionaryEntry";
 import { AppState, dictionarySlice } from "../../reducer";
-import { sortImmutable } from "../../utils";
+import { sortImmutable } from "../../utils/utils";
 
 export interface ListPageProps {}
 

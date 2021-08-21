@@ -1,4 +1,4 @@
-import { AnswersCountable, Definable } from "../utils";
+import { AnswersCountable, Definable } from "../utils/utils";
 
 export interface DictionaryEntry extends AnswersCountable, Definable {
   id?: number;

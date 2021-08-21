@@ -1,4 +1,4 @@
-import { Definable, hasDefinition, hasTranslation, Translateable } from "utils";
+import { Definable, hasDefinition, hasTranslation, Translateable } from "utils/utils";
 
 export enum Knowledge {
   translation,
