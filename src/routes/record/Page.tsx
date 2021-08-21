@@ -41,27 +41,30 @@ export function RecordPage(props: RecordPageProps) {
 
   const handleCancel = () => navigateRoot();
 
+  const handleChange = (values: Partial<DictionaryEntry>) =>
+    setEntry((entry) => ({ ...entry, ...values }));
+
   return (
     <>
       <Input
         placeholder="Word"
         value={entry.word}
-        onChange={(e) => setEntry({ ...entry, word: e.target.value })}
+        onChange={(e) => handleChange({ word: e.target.value })}
       />
       <Input
         placeholder="Part ot speech"
         value={entry.partOfSpeech}
-        onChange={(e) => setEntry({ ...entry, partOfSpeech: e.target.value })}
+        onChange={(e) => handleChange({ partOfSpeech: e.target.value })}
       />
       <Input
         placeholder="Translation"
         value={entry.translation}
-        onChange={(e) => setEntry({ ...entry, translation: e.target.value })}
+        onChange={(e) => handleChange({ translation: e.target.value })}
       />
       <Input.TextArea
         placeholder="Definition"
         value={entry.definition}
-        onChange={(e) => setEntry({ ...entry, definition: e.target.value })}
+        onChange={(e) => handleChange({ definition: e.target.value })}
       />
       <Button type="primary" onClick={handleConfirm}>
         Confirm
@@ -71,12 +74,8 @@ export function RecordPage(props: RecordPageProps) {
       </Button>
       <DefinitionsList
         word={entry.word}
-        onPartOfSpeechClick={(partOfSpeech) =>
-          setEntry((entry) => ({ ...entry, partOfSpeech }))
-        }
-        onDefinitionClick={(values) =>
-          setEntry((entry) => ({ ...entry, ...values }))
-        }
+        onPartOfSpeechClick={(partOfSpeech) => handleChange({ partOfSpeech })}
+        onDefinitionClick={(values) => handleChange(values)}
       />
     </>
   );
