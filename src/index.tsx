@@ -8,18 +8,16 @@ import "./index.css";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { dictionarySlice } from "./reducer";
-
-const VOCABULARY_KEY = "vocabulary";
-
-const json = localStorage.getItem(VOCABULARY_KEY);
+import { loadState, persistState } from "persistence";
 
 const store = configureStore({
   reducer: dictionarySlice.reducer,
-  preloadedState: json ? JSON.parse(json) : undefined,
+  preloadedState: loadState(),
 });
 
 store.subscribe(() => {
-  localStorage.setItem(VOCABULARY_KEY, JSON.stringify(store.getState()));
+  const state = store.getState();
+  persistState(state);
 });
 
 ReactDOM.render(
