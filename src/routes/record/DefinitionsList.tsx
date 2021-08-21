@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { DictionaryApi } from "services/dictionaryApi";
 import styled from "styled-components";
-import { ApiResult, Word } from "types";
+import { Word } from "types";
 
 const StyledUl = styled.ul`
   color: white;
@@ -24,17 +25,15 @@ export function DefinitionsList(props: DefinitionsListProps) {
       setEntry(undefined);
       return;
     }
-    const controller = new AbortController();
-    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_US/${word}`, {
-      signal: controller.signal,
-    })
-      .then((response) => response.json())
-      .then((result: ApiResult) => {
+    const api = new DictionaryApi();
+    api
+      .word(word)
+      .then((result) => {
         setEntry(result[0]);
       })
       .catch((reason) => console.error(reason));
 
-    return () => controller.abort();
+    return () => api.abort();
   }, [word]);
 
   return (
