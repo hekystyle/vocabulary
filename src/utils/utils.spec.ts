@@ -3,7 +3,7 @@ import {
   shuffle,
   sortImmutable,
   hasDefinition,
-  computeAnswersScore,
+  computeAnswersAbsoluteScore,
   AnswersCountable,
   answersComparer,
 } from "./utils";
@@ -35,7 +35,7 @@ describe("computeAnswersScore", () => {
   ])(
     "should return %p for %p total answers count and %p correct answers count",
     (expected, total, correct) => {
-      const actual = computeAnswersScore({
+      const actual = computeAnswersAbsoluteScore({
         answersCount: total,
         correctAnswersCount: correct,
       });

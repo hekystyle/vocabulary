@@ -2,7 +2,7 @@ import { groupWith } from "ramda";
 import { useState } from "react";
 import { DictionaryEntry } from "types/DictionaryEntry";
 import {
-  computeAnswersScore,
+  computeAnswersAbsoluteScore,
   hasDefinition,
   hasTranslation,
   shuffle,
@@ -22,7 +22,7 @@ export const useSession = (records: DictionaryEntry[]) => {
     const computedRecords = filteredRecords
       .map((r) => ({
         id: r.id,
-        score: computeAnswersScore(r),
+        score: computeAnswersAbsoluteScore(r),
       }))
       .sort((a, b) => b.score - a.score);
 

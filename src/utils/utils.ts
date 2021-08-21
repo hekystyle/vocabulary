@@ -34,7 +34,7 @@ export interface AnswersCountable {
   correctAnswersCount: number;
 }
 
-export function computeAnswersScore<T extends AnswersCountable>({
+export function computeAnswersAbsoluteScore<T extends AnswersCountable>({
   answersCount,
   correctAnswersCount,
 }: T): number {
@@ -42,7 +42,7 @@ export function computeAnswersScore<T extends AnswersCountable>({
 }
 
 export function answersComparer<T extends AnswersCountable>(a: T, b: T) {
-  const [scoreA, scoreB] = [a, b].map(computeAnswersScore);
+  const [scoreA, scoreB] = [a, b].map(computeAnswersAbsoluteScore);
 
   return scoreB - scoreA;
 }
