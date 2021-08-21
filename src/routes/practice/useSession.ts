@@ -19,10 +19,12 @@ export const useSession = (records: DictionaryEntry[]) => {
       (p) => hasTranslation(p) || hasDefinition(p)
     );
 
-    const computedRecords = filteredRecords.map((r) => ({
-      id: r.id,
-      score: computeAnswersScore(r),
-    }));
+    const computedRecords = filteredRecords
+      .map((r) => ({
+        id: r.id,
+        score: computeAnswersScore(r),
+      }))
+      .sort((a, b) => b.score - a.score);
 
     const stack = groupWith((a, b) => a.score === b.score, computedRecords)
       .map((list) => shuffle(list))
