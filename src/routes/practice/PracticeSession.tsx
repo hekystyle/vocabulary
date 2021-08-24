@@ -7,18 +7,34 @@ import { CardBody } from "components/CardBody";
 import { DictionaryEntry } from "types/DictionaryEntry";
 import { AppState, dictionarySlice } from "reducer";
 import { useSession } from "./useSession";
-import { computeAnswersRelativeScore } from "utils/utils";
+import {
+  computeAnswersAbsoluteScore,
+  computeAnswersRelativeScore,
+} from "utils/utils";
+import { Config, ScoreAlgorithm } from "./Configuration";
 
 const OverflowableCardBody = styled(CardBody)`
   overflow: auto;
 `;
 
-interface PracticeSessionProps {}
+const SCORE_ALGO_MAP = {
+  [ScoreAlgorithm.relative]: computeAnswersRelativeScore,
+  [ScoreAlgorithm.absolute]: computeAnswersAbsoluteScore,
+};
 
-export const PracticeSession: FC<PracticeSessionProps> = () => {
+interface PracticeSessionProps {
+  config: Config;
+}
+
+export const PracticeSession: FC<PracticeSessionProps> = ({
+  config: { scoreAlgorithm },
+}) => {
   const records = useSelector<AppState, DictionaryEntry[]>((s) => s.dictionary);
 
-  const { selected, next } = useSession(records, computeAnswersRelativeScore);
+  const { selected, next } = useSession(
+    records,
+    SCORE_ALGO_MAP[scoreAlgorithm]
+  );
 
   const [isAnswerRevealed, setIsAnswerRevealed] = useState(false);
 
