@@ -1,19 +1,18 @@
 import { groupWith } from "ramda";
 import { useState } from "react";
+import { AnswersScoreComputer } from "types/AnswersScoreComputer";
 import { DictionaryEntry } from "types/DictionaryEntry";
-import {
-  computeAnswersRelativeScore,
-  hasDefinition,
-  hasTranslation,
-  shuffle,
-} from "utils/utils";
+import { hasDefinition, hasTranslation, shuffle } from "utils/utils";
 
 interface Session {
   stack: number[];
   selected: number | undefined;
 }
 
-export const useSession = (records: DictionaryEntry[]) => {
+export const useSession = (
+  records: DictionaryEntry[],
+  computeScore: AnswersScoreComputer
+) => {
   const [{ selected }, setProgress] = useState<Session>(() => {
     const filteredRecords = records.filter(
       (p) => hasTranslation(p) || hasDefinition(p)
@@ -22,7 +21,7 @@ export const useSession = (records: DictionaryEntry[]) => {
     const computedRecords = filteredRecords
       .map((r) => ({
         id: r.id,
-        score: computeAnswersRelativeScore(r),
+        score: computeScore(r),
       }))
       .sort((a, b) => b.score - a.score);
 

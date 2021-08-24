@@ -7,6 +7,7 @@ import { CardBody } from "components/CardBody";
 import { DictionaryEntry } from "types/DictionaryEntry";
 import { AppState, dictionarySlice } from "reducer";
 import { useSession } from "./useSession";
+import { computeAnswersRelativeScore } from "utils/utils";
 
 const OverflowableCardBody = styled(CardBody)`
   overflow: auto;
@@ -17,7 +18,7 @@ interface PracticeSessionProps {}
 export const PracticeSession: FC<PracticeSessionProps> = () => {
   const records = useSelector<AppState, DictionaryEntry[]>((s) => s.dictionary);
 
-  const { selected, next } = useSession(records);
+  const { selected, next } = useSession(records, computeAnswersRelativeScore);
 
   const [isAnswerRevealed, setIsAnswerRevealed] = useState(false);
 
