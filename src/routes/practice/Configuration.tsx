@@ -1,4 +1,4 @@
-import { Select } from "antd";
+import { Select, Switch } from "antd";
 import { Button } from "components/Button";
 import { FC, useState } from "react";
 
@@ -9,6 +9,7 @@ export enum ScoreAlgorithm {
 
 export interface Config {
   scoreAlgorithm: ScoreAlgorithm;
+  speakAfterReveal: boolean;
 }
 
 export interface ConfigurationProps {
@@ -19,9 +20,14 @@ export const Configuration: FC<ConfigurationProps> = ({ onConfirm }) => {
   const [algorithm, setAlgorithm] = useState<ScoreAlgorithm>(
     ScoreAlgorithm.relative
   );
+  const [speakAfterReveal, setSpeakAfterReveal] = useState(false);
 
   const handleConfirm = () =>
-    onConfirm && onConfirm({ scoreAlgorithm: algorithm });
+    onConfirm &&
+    onConfirm({
+      scoreAlgorithm: algorithm,
+      speakAfterReveal: speakAfterReveal,
+    });
 
   return (
     <>
@@ -32,6 +38,12 @@ export const Configuration: FC<ConfigurationProps> = ({ onConfirm }) => {
           { value: ScoreAlgorithm.absolute, label: "absolute" },
         ]}
         onSelect={(_, option) => setAlgorithm(option.value)}
+      />
+      <Switch
+        checked={speakAfterReveal}
+        checkedChildren={"Speak after reveal"}
+        unCheckedChildren={"Speak after reveal"}
+        onChange={(checked) => setSpeakAfterReveal(checked)}
       />
       <Button onClick={handleConfirm}>Start session</Button>
     </>

@@ -12,6 +12,7 @@ import {
   computeAnswersRelativeScore,
 } from "utils/utils";
 import { Config, ScoreAlgorithm } from "./Configuration";
+import { useSpeech } from "./useSpeech";
 
 const OverflowableCardBody = styled(CardBody)`
   overflow: auto;
@@ -27,7 +28,7 @@ interface PracticeSessionProps {
 }
 
 export const PracticeSession: FC<PracticeSessionProps> = ({
-  config: { scoreAlgorithm },
+  config: { scoreAlgorithm, speakAfterReveal },
 }) => {
   const records = useSelector<AppState, DictionaryEntry[]>((s) => s.dictionary);
 
@@ -40,7 +41,12 @@ export const PracticeSession: FC<PracticeSessionProps> = ({
 
   const actualRecord = records.find((r) => r.id === selected);
 
-  const handleRevealAnswer = () => setIsAnswerRevealed(true);
+  const { speak } = useSpeech();
+
+  const handleRevealAnswer = () => {
+    setIsAnswerRevealed(true);
+    if (actualRecord && speakAfterReveal) speak(actualRecord?.word);
+  };
 
   const dispatch = useDispatch();
   const handleAnswerButtonClick = (isCorrect: boolean) => {
