@@ -11,6 +11,8 @@
     "static/js/3.8e0a285c.chunk.js": "./static/js/3.8e0a285c.chunk.js",
     "static/js/3.8e0a285c.chunk.js.map": "./static/js/3.8e0a285c.chunk.js.map",
     "index.html": "./index.html",
+    "service-worker.js": "./service-worker.js",
+    "service-worker.js.map": "./service-worker.js.map",
     "static/css/2.d6c0dc5a.chunk.css.map": "./static/css/2.d6c0dc5a.chunk.css.map",
     "static/css/main.6dea0f05.chunk.css.map": "./static/css/main.6dea0f05.chunk.css.map",
     "static/js/2.1121d271.chunk.js.LICENSE.txt": "./static/js/2.1121d271.chunk.js.LICENSE.txt"
