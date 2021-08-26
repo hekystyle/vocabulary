@@ -9,7 +9,7 @@ export enum ScoreAlgorithm {
 
 export interface Config {
   scoreAlgorithm: ScoreAlgorithm;
-  speakAfterReveal: boolean;
+  playAfterReveal: boolean;
 }
 
 export interface ConfigurationProps {
@@ -20,13 +20,13 @@ export const Configuration: FC<ConfigurationProps> = ({ onConfirm }) => {
   const [algorithm, setAlgorithm] = useState<ScoreAlgorithm>(
     ScoreAlgorithm.relative
   );
-  const [speakAfterReveal, setSpeakAfterReveal] = useState(false);
+  const [playAfterReveal, setPlayAfterReveal] = useState(false);
 
   const handleConfirm = () =>
     onConfirm &&
     onConfirm({
       scoreAlgorithm: algorithm,
-      speakAfterReveal: speakAfterReveal,
+      playAfterReveal: playAfterReveal,
     });
 
   return (
@@ -40,10 +40,10 @@ export const Configuration: FC<ConfigurationProps> = ({ onConfirm }) => {
         onSelect={(_, option) => setAlgorithm(option.value)}
       />
       <Switch
-        checked={speakAfterReveal}
-        checkedChildren={"Speak after reveal"}
-        unCheckedChildren={"Speak after reveal"}
-        onChange={(checked) => setSpeakAfterReveal(checked)}
+        checked={playAfterReveal}
+        checkedChildren={"Play word after reveal"}
+        unCheckedChildren={"Play word after reveal"}
+        onChange={(checked) => setPlayAfterReveal(checked)}
       />
       <Button onClick={handleConfirm}>Start session</Button>
     </>

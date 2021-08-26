@@ -7,6 +7,7 @@ export const useSpeech = () => {
 
   return {
     speak: (text: string) => {
+      synthesis.cancel();
       const u = new SpeechSynthesisUtterance(text);
       synthesis.speak(u);
     },

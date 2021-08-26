@@ -18,6 +18,13 @@ const OverflowableCardBody = styled(CardBody)`
   overflow: auto;
 `;
 
+const Row = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+`;
+
 const SCORE_ALGO_MAP = {
   [ScoreAlgorithm.relative]: computeAnswersRelativeScore,
   [ScoreAlgorithm.absolute]: computeAnswersAbsoluteScore,
@@ -28,7 +35,7 @@ interface PracticeSessionProps {
 }
 
 export const PracticeSession: FC<PracticeSessionProps> = ({
-  config: { scoreAlgorithm, speakAfterReveal },
+  config: { scoreAlgorithm, playAfterReveal },
 }) => {
   const records = useSelector<AppState, DictionaryEntry[]>((s) => s.dictionary);
 
@@ -45,7 +52,7 @@ export const PracticeSession: FC<PracticeSessionProps> = ({
 
   const handleRevealAnswer = () => {
     setIsAnswerRevealed(true);
-    if (actualRecord && speakAfterReveal) speak(actualRecord?.word);
+    if (actualRecord && playAfterReveal) speak(actualRecord.word);
   };
 
   const dispatch = useDispatch();
@@ -79,7 +86,16 @@ export const PracticeSession: FC<PracticeSessionProps> = ({
       </Card>
       <Card>
         <CardBody className="text-center">
-          {isAnswerRevealed ? actualRecord.word : "?"}
+          {isAnswerRevealed ? (
+            <Row>
+              {actualRecord.word}
+              <Button onClick={() => speak(actualRecord.word)}>
+                Play it again
+              </Button>
+            </Row>
+          ) : (
+            "?"
+          )}
         </CardBody>
       </Card>
       {!isAnswerRevealed ? (
