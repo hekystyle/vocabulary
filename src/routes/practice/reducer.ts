@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { combineReducers, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { groupWith } from "ramda";
 import { DictionaryEntry } from "types/DictionaryEntry";
 import {
@@ -88,13 +88,9 @@ export const sessionSlice = createSlice({
       isRevealed: true,
     }),
     next: (state) => {
-      const { stack } = state;
-      stack.pop();
-      return {
-        ...state,
-        stack,
-        isRevealed: false,
-      };
+      state.stack.pop();
+      state.isRevealed = false;
+      return state;
     },
     close: () => ({
       config: undefined,
@@ -103,4 +99,8 @@ export const sessionSlice = createSlice({
       isRevealed: false,
     }),
   },
+});
+
+export const practiceReducer = combineReducers({
+  session: sessionSlice.reducer,
 });

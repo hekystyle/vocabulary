@@ -1,4 +1,5 @@
 import { combineReducers, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { practiceReducer } from "routes/practice/reducer";
 import { DictionaryEntry } from "./types/DictionaryEntry";
 import { Answer } from "./utils/utils";
 
@@ -42,6 +43,7 @@ export const dictionarySlice = createSlice({
 
 export const rootReducer = combineReducers({
   dictionary: dictionarySlice.reducer,
+  practice: practiceReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
