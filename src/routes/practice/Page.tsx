@@ -1,9 +1,10 @@
-import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { Button } from "components/Button";
 import { PracticeSession } from "./PracticeSession";
-import { useState } from "react";
-import { Config, Configuration } from "./Configuration";
+import { Configuration } from "./Configuration";
+import { useTypedSelector } from "hooks/useTypedSelector";
+import { useDispatch } from "react-redux";
+import { Button } from "components/Button";
+import { sessionSlice } from "./reducer";
 
 const Layout = styled.div`
   height: 100%;
@@ -15,16 +16,18 @@ const Layout = styled.div`
 export interface PracticePageProps {}
 
 export function PracticePage(props: PracticePageProps) {
-  const [config, setConfig] = useState<Config>();
-  const history = useHistory();
+  const isActive = useTypedSelector((s) => s.practice.session.isActive);
+
+  const dispatch = useDispatch();
+
+  const handleEndSessionButtonClick = () => {
+    dispatch(sessionSlice.actions.close());
+  };
+
   return (
     <Layout>
-      {config ? (
-        <PracticeSession config={config} />
-      ) : (
-        <Configuration onConfirm={setConfig} />
-      )}
-      <Button onClick={() => history.push("/")}>End practice</Button>
+      {isActive ? <PracticeSession /> : <Configuration />}
+      <Button onClick={handleEndSessionButtonClick}>End session</Button>
     </Layout>
   );
 }

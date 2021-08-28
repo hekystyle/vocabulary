@@ -1,51 +1,48 @@
 import { Select, Switch } from "antd";
 import { Button } from "components/Button";
+import { useTypedSelector } from "hooks/useTypedSelector";
 import { FC, useState } from "react";
+import { useDispatch } from "react-redux";
+import { DictionaryEntry } from "types/DictionaryEntry";
+import { Config, ScoreAlgorithm, sessionSlice } from "./reducer";
 
-export enum ScoreAlgorithm {
-  relative,
-  absolute,
-}
+export interface ConfigurationProps {}
 
-export interface Config {
-  scoreAlgorithm: ScoreAlgorithm;
-  playAfterReveal: boolean;
-}
+export const Configuration: FC<ConfigurationProps> = () => {
+  const [config, setConfig] = useState<Config>({
+    scoreAlgorithm: ScoreAlgorithm.relative,
+    playAfterReveal: false,
+  });
 
-export interface ConfigurationProps {
-  onConfirm?: (config: Config) => void;
-}
+  const dispatch = useDispatch();
 
-export const Configuration: FC<ConfigurationProps> = ({ onConfirm }) => {
-  const [algorithm, setAlgorithm] = useState<ScoreAlgorithm>(
-    ScoreAlgorithm.relative
-  );
-  const [playAfterReveal, setPlayAfterReveal] = useState(false);
+  const terms = useTypedSelector<DictionaryEntry[]>((s) => s.dictionary);
 
-  const handleConfirm = () =>
-    onConfirm &&
-    onConfirm({
-      scoreAlgorithm: algorithm,
-      playAfterReveal: playAfterReveal,
-    });
+  const handleStartSessionButtonClick = () => {
+    dispatch(sessionSlice.actions.start(config, terms));
+  };
 
+  const update = (config: Partial<Config>) =>
+    setConfig((c) => ({ ...c, ...config }));
+
+  const { scoreAlgorithm, playAfterReveal } = config;
   return (
     <>
       <Select
-        value={algorithm}
+        value={scoreAlgorithm}
         options={[
           { value: ScoreAlgorithm.relative, label: "relative" },
           { value: ScoreAlgorithm.absolute, label: "absolute" },
         ]}
-        onSelect={(_, option) => setAlgorithm(option.value)}
+        onSelect={(_, option) => update({ scoreAlgorithm: option.value })}
       />
       <Switch
         checked={playAfterReveal}
         checkedChildren={"Play word after reveal"}
         unCheckedChildren={"Play word after reveal"}
-        onChange={(checked) => setPlayAfterReveal(checked)}
+        onChange={(checked) => update({ playAfterReveal: checked })}
       />
-      <Button onClick={handleConfirm}>Start session</Button>
+      <Button onClick={handleStartSessionButtonClick}>Start session</Button>
     </>
   );
 };

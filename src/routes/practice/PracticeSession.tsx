@@ -1,18 +1,14 @@
-import { FC, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Button } from "components/Button";
 import { Card } from "components/Card";
 import { CardBody } from "components/CardBody";
-import { DictionaryEntry } from "types/DictionaryEntry";
-import { AppState, dictionarySlice } from "reducer";
-import { useSession } from "./useSession";
-import {
-  computeAnswersAbsoluteScore,
-  computeAnswersRelativeScore,
-} from "utils/utils";
-import { Config, ScoreAlgorithm } from "./Configuration";
+import { dictionarySlice } from "reducer";
 import { useSpeech } from "./useSpeech";
+import { useTypedSelector } from "hooks/useTypedSelector";
+import { last } from "ramda";
+import { sessionSlice } from "./reducer";
 
 const OverflowableCardBody = styled(CardBody)`
   overflow: auto;
@@ -25,37 +21,29 @@ const Row = styled.div`
   gap: 1rem;
 `;
 
-const SCORE_ALGO_MAP = {
-  [ScoreAlgorithm.relative]: computeAnswersRelativeScore,
-  [ScoreAlgorithm.absolute]: computeAnswersAbsoluteScore,
-};
+interface PracticeSessionProps {}
 
-interface PracticeSessionProps {
-  config: Config;
-}
-
-export const PracticeSession: FC<PracticeSessionProps> = ({
-  config: { scoreAlgorithm, playAfterReveal },
-}) => {
-  const records = useSelector<AppState, DictionaryEntry[]>((s) => s.dictionary);
-
-  const { selected, next } = useSession(
-    records,
-    SCORE_ALGO_MAP[scoreAlgorithm]
+export const PracticeSession: FC<PracticeSessionProps> = () => {
+  const isAnswerRevealed = useTypedSelector(
+    (s) => s.practice.session.isRevealed
   );
 
-  const [isAnswerRevealed, setIsAnswerRevealed] = useState(false);
-
-  const actualRecord = records.find((r) => r.id === selected);
+  const actualRecord = useTypedSelector((s) =>
+    s.dictionary.find((r) => r.id === last(s.practice.session.stack))
+  );
 
   const { speak } = useSpeech();
 
+  const playAfterReveal = useTypedSelector(
+    (s) => s.practice.session.config?.playAfterReveal
+  );
+  const dispatch = useDispatch();
+
   const handleRevealAnswer = () => {
-    setIsAnswerRevealed(true);
+    dispatch(sessionSlice.actions.reveal());
     if (actualRecord && playAfterReveal) speak(actualRecord.word);
   };
 
-  const dispatch = useDispatch();
   const handleAnswerButtonClick = (isCorrect: boolean) => {
     if (actualRecord)
       dispatch(
@@ -64,8 +52,7 @@ export const PracticeSession: FC<PracticeSessionProps> = ({
           entity: actualRecord,
         })
       );
-    setIsAnswerRevealed(false);
-    next();
+    dispatch(sessionSlice.actions.next());
   };
 
   if (!actualRecord) return null;
