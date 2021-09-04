@@ -33,7 +33,7 @@ export const NavBar: FC<{}> = () => {
                 key={idx}
                 href="#"
                 active={path === pathname}
-                onSelect={() => history.push(path)}
+                onClick={() => history.push(path)}
               >
                 {title}
               </Nav.Link>
