@@ -3,13 +3,6 @@ export interface Answer<T> {
   entity: T;
 }
 
-export function sortImmutable<T>(
-  items: T[],
-  comparer?: (a: T, b: T) => number
-): T[] {
-  return [...items].sort(comparer);
-}
-
 export interface AnswersCountable {
   answersCount: number;
   correctAnswersCount: number;

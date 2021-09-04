@@ -1,19 +1,10 @@
 import {
   Definable,
-  sortImmutable,
   hasDefinition,
   computeAnswersAbsoluteScore,
   AnswersCountable,
   answersComparer,
 } from "./utils";
-
-describe("sortImmutable", () => {
-  it("should be immutable", () => {
-    const array: never[] = [];
-    const actual = sortImmutable(array);
-    expect(actual).not.toBe(array);
-  });
-});
 
 test.todo("prepareAnswersSet()");
 
