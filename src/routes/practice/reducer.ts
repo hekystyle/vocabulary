@@ -1,12 +1,12 @@
 import { combineReducers, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { groupWith } from "ramda";
 import { DictionaryEntry } from "types/DictionaryEntry";
+import { shuffle } from "utils/shuffle";
 import {
   computeAnswersAbsoluteScore,
   computeAnswersRelativeScore,
   hasDefinition,
   hasTranslation,
-  shuffle,
 } from "utils/utils";
 
 export enum ScoreAlgorithm {
