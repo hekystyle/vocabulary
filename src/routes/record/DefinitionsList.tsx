@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { DictionaryApi } from "services/dictionaryApi";
+import { DictionaryApi, Word } from "services/dictionaryApi";
 import styled from "styled-components";
-import { Word } from "types";
 
 const StyledUl = styled.ul`
   color: white;

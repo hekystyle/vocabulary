@@ -1,4 +1,15 @@
-import { ApiResult } from "types";
+export interface Word {
+  meanings: Meaning[];
+}
+
+export interface Meaning {
+  partOfSpeech: string;
+  definitions: Definition[];
+}
+
+export interface Definition {
+  definition: string;
+}
 
 export class DictionaryApi {
   private controller = new AbortController();
@@ -7,7 +18,7 @@ export class DictionaryApi {
     this.controller.abort();
   }
 
-  public async word(word: string): Promise<ApiResult> {
+  public async word(word: string): Promise<Word[]> {
     const response = await fetch(
       `https://api.dictionaryapi.dev/api/v2/entries/en_US/${word}`,
       {
