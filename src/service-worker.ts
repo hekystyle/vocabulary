@@ -1,10 +1,10 @@
+import { precacheAndRoute } from "workbox-precaching";
+
 declare global {
   interface Window {
-    __WB_MANIFEST: unknown;
+    __WB_MANIFEST: string[];
   }
 }
 
-// eslint-disable-next-line
-self.__WB_MANIFEST;
-
-export {};
+// eslint-disable-next-line no-restricted-globals
+precacheAndRoute(self.__WB_MANIFEST);
