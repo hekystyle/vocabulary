@@ -69,10 +69,7 @@ export const sessionSlice = createSlice({
         const stack = groupWith((a, b) => a.score === b.score, computedRecords)
           .map((list) => shuffle(list))
           .reduce<number[]>(
-            (acc, current) => [
-              ...acc,
-              ...current.map((p) => p.id ?? -1).filter((id) => id !== -1),
-            ],
+            (stack, terms) => [...stack, ...terms.map((p) => p.id)],
             []
           );
         return {

@@ -16,6 +16,7 @@ export function RecordPage(props: RecordPageProps) {
   );
 
   const [entry, setEntry] = useState<DictionaryEntry>({
+    id: 0,
     word: "",
     partOfSpeech: "",
     translation: "",

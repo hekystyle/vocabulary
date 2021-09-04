@@ -15,8 +15,8 @@ export const dictionarySlice = createSlice({
       prepare: (entry: DictionaryEntry) => {
         return {
           payload: {
-            id: Date.now(),
             ...entry,
+            id: Date.now(),
           },
         };
       },
