@@ -6,8 +6,6 @@ import {
   answersComparer,
 } from "./utils";
 
-test.todo("prepareAnswersSet()");
-
 describe("computeAnswersScore", () => {
   it.each([
     [4, 2, 2],
