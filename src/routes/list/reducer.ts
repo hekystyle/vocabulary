@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { combineReducers, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DictionaryEntry } from "types/DictionaryEntry";
 import { Answer } from "utils/utils";
 
@@ -38,4 +38,25 @@ export const dictionarySlice = createSlice({
       }
     },
   },
+});
+
+export interface TableState {
+  page: number;
+}
+
+export const tableSlice = createSlice({
+  name: "records/table",
+  initialState: {
+    page: 1,
+  } as TableState,
+  reducers: {
+    update: (state, { payload }: PayloadAction<Partial<TableState>>) => ({
+      ...state,
+      ...payload,
+    }),
+  },
+});
+
+export const recordsReducer = combineReducers({
+  table: tableSlice.reducer,
 });

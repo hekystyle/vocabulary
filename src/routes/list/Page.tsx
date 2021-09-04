@@ -6,7 +6,8 @@ import { useHistory } from "react-router-dom";
 import { sort } from "ramda";
 import { DictionaryEntry } from "../../types/DictionaryEntry";
 import { AppState } from "reducer";
-import { dictionarySlice } from "./reducer";
+import { dictionarySlice, tableSlice } from "./reducer";
+import { useTypedSelector } from "hooks/useTypedSelector";
 
 export interface ListPageProps {}
 
@@ -59,9 +60,19 @@ export function ListPage(props: ListPageProps) {
   const items = useSelector<AppState, DictionaryEntry[]>((s) =>
     sort((a, b) => (b.id ?? 0) - (a.id ?? 0), s.dictionary)
   );
+  const page = useTypedSelector((s) => s.records.table.page);
   return (
     <>
-      <Table columns={columns} dataSource={items} size="middle" rowKey="id" />
+      <Table
+        columns={columns}
+        dataSource={items}
+        size="middle"
+        rowKey="id"
+        pagination={{
+          defaultCurrent: page,
+          onChange: (page) => tableSlice.actions.update({ page }),
+        }}
+      />
     </>
   );
 }
