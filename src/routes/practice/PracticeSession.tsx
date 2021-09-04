@@ -55,6 +55,10 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
     dispatch(sessionSlice.actions.next());
   };
 
+  const handleEndSessionButtonClick = () => {
+    dispatch(sessionSlice.actions.close());
+  };
+
   if (!actualRecord) return null;
   return (
     <>
@@ -97,6 +101,7 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
           </Button>
         </>
       )}
+      <Button onClick={handleEndSessionButtonClick}>End session</Button>
     </>
   );
 };
