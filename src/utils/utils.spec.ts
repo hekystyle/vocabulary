@@ -2,8 +2,6 @@ import {
   Definable,
   hasDefinition,
   computeAnswersAbsoluteScore,
-  AnswersCountable,
-  answersComparer,
 } from "./utils";
 
 describe("computeAnswersScore", () => {
@@ -22,15 +20,6 @@ describe("computeAnswersScore", () => {
       expect(actual).toBe(expected);
     }
   );
-});
-
-describe("answersComparer", () => {
-  it("should prefer less score", () => {
-    const a: AnswersCountable = { answersCount: 5, correctAnswersCount: 0 };
-    const b: AnswersCountable = { answersCount: 3, correctAnswersCount: 0 };
-    const actual = answersComparer(a, b);
-    expect(actual).toBeLessThanOrEqual(-1);
-  });
 });
 
 describe("hasDefinition", () => {

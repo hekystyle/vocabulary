@@ -22,12 +22,6 @@ export function computeAnswersRelativeScore<T extends AnswersCountable>({
   return Math.floor((100 / answersCount) * correctAnswersCount);
 }
 
-export function answersComparer<T extends AnswersCountable>(a: T, b: T) {
-  const [scoreA, scoreB] = [a, b].map(computeAnswersAbsoluteScore);
-
-  return scoreB - scoreA;
-}
-
 export interface Definable {
   definition: string;
 }
