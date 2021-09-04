@@ -1,20 +1,11 @@
 import {
   Definable,
-  shuffle,
   sortImmutable,
   hasDefinition,
   computeAnswersAbsoluteScore,
   AnswersCountable,
   answersComparer,
 } from "./utils";
-
-describe("shuffle", () => {
-  it("should be immutable", () => {
-    const array: never[] = [];
-    const actual = shuffle(array);
-    expect(actual).not.toBe(array);
-  });
-});
 
 describe("sortImmutable", () => {
   it("should be immutable", () => {
