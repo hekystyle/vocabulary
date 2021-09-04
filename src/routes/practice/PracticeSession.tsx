@@ -4,11 +4,11 @@ import styled from "styled-components";
 import { Button } from "components/Button";
 import { Card } from "components/Card";
 import { CardBody } from "components/CardBody";
-import { dictionarySlice } from "reducer";
 import { useSpeech } from "./useSpeech";
 import { useTypedSelector } from "hooks/useTypedSelector";
 import { last } from "ramda";
 import { sessionSlice } from "./reducer";
+import { dictionarySlice } from "routes/list/reducer";
 
 const OverflowableCardBody = styled(CardBody)`
   overflow: auto;

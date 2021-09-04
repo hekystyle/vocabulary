@@ -3,8 +3,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { DefinitionsList } from "./DefinitionsList";
-import { AppState, dictionarySlice } from "reducer";
+import { AppState } from "reducer";
 import { DictionaryEntry } from "types/DictionaryEntry";
+import { dictionarySlice } from "routes/list/reducer";
 
 export interface RecordPageProps {}
 
