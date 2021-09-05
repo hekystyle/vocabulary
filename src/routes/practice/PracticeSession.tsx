@@ -59,46 +59,55 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
     dispatch(sessionSlice.actions.close());
   };
 
-  if (!actualRecord) return null;
   return (
     <>
-      <Card>
-        <CardBody className="text-center">
-          <div>{actualRecord.translation}</div>
-          <div>
-            (<i>{actualRecord.partOfSpeech}</i>)
-          </div>
-        </CardBody>
-      </Card>
-      <Card>
-        <OverflowableCardBody className="text-center">
-          {actualRecord.definition}
-        </OverflowableCardBody>
-      </Card>
-      <Card>
-        <CardBody className="text-center">
-          {isAnswerRevealed ? (
-            <Row>
-              {actualRecord.word}
-              <Button onClick={() => speak(actualRecord.word)}>
-                Play it again
-              </Button>
-            </Row>
-          ) : (
-            "?"
-          )}
-        </CardBody>
-      </Card>
-      {!isAnswerRevealed ? (
-        <Button onClick={handleRevealAnswer}>Reveal answer</Button>
-      ) : (
+      {actualRecord && (
         <>
-          <Button theme="success" onClick={() => handleAnswerButtonClick(true)}>
-            I was correct
-          </Button>
-          <Button theme="danger" onClick={() => handleAnswerButtonClick(false)}>
-            I was incorrect
-          </Button>
+          <Card>
+            <CardBody className="text-center">
+              <div>{actualRecord.translation}</div>
+              <div>
+                (<i>{actualRecord.partOfSpeech}</i>)
+              </div>
+            </CardBody>
+          </Card>
+          <Card>
+            <OverflowableCardBody className="text-center">
+              {actualRecord.definition}
+            </OverflowableCardBody>
+          </Card>
+          <Card>
+            <CardBody className="text-center">
+              {isAnswerRevealed ? (
+                <Row>
+                  {actualRecord.word}
+                  <Button onClick={() => speak(actualRecord.word)}>
+                    Play it again
+                  </Button>
+                </Row>
+              ) : (
+                "?"
+              )}
+            </CardBody>
+          </Card>
+          {!isAnswerRevealed ? (
+            <Button onClick={handleRevealAnswer}>Reveal answer</Button>
+          ) : (
+            <>
+              <Button
+                theme="success"
+                onClick={() => handleAnswerButtonClick(true)}
+              >
+                I was correct
+              </Button>
+              <Button
+                theme="danger"
+                onClick={() => handleAnswerButtonClick(false)}
+              >
+                I was incorrect
+              </Button>
+            </>
+          )}
         </>
       )}
       <Button onClick={handleEndSessionButtonClick}>End session</Button>
