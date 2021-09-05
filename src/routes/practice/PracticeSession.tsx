@@ -9,6 +9,7 @@ import { useTypedSelector } from "hooks/useTypedSelector";
 import { last } from "ramda";
 import { sessionSlice } from "./reducer";
 import { dictionarySlice } from "routes/list/reducer";
+import { useHistory } from "react-router";
 
 const OverflowableCardBody = styled(CardBody)`
   overflow: auto;
@@ -57,6 +58,11 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
 
   const handleEndSessionButtonClick = () => {
     dispatch(sessionSlice.actions.close());
+  };
+
+  const history = useHistory();
+  const handleEditButtonClick = () => {
+    history.push(`record/${actualRecord?.id}`);
   };
 
   return (
@@ -108,6 +114,7 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
               </Button>
             </>
           )}
+          <Button onClick={handleEditButtonClick}>Edit current term</Button>
         </>
       )}
       <Button onClick={handleEndSessionButtonClick}>End session</Button>
