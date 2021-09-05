@@ -70,7 +70,7 @@ export function ListPage(props: ListPageProps) {
         rowKey="id"
         pagination={{
           defaultCurrent: page,
-          onChange: (page) => tableSlice.actions.update({ page }),
+          onChange: (page) => dispatch(tableSlice.actions.update({ page })),
         }}
       />
     </>
