@@ -9,6 +9,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { rootReducer } from "./reducer";
 import { loadState, persistState } from "persistence";
+import { HashRouter } from "react-router-dom";
 
 const store = configureStore({
   reducer: rootReducer,
@@ -23,7 +24,9 @@ store.subscribe(() => {
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <HashRouter>
+        <App />
+      </HashRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

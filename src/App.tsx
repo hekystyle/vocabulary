@@ -1,4 +1,4 @@
-import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import { RecordRouter } from "routes/record/Router";
 import ListRouter from "./routes/list";
@@ -19,18 +19,16 @@ const StyledContent = styled.div`
 
 export function App() {
   return (
-    <HashRouter>
-      <StyledApp className="bg-dark">
-        <NavBar />
-        <StyledContent>
-          <Switch>
-            <Route path="/record" component={RecordRouter} />
-            <Route path="/practice" component={PracticeRouter} />
-            <Route path="/list" component={ListRouter} />
-            <Redirect to="/list" />
-          </Switch>
-        </StyledContent>
-      </StyledApp>
-    </HashRouter>
+    <StyledApp className="bg-dark">
+      <NavBar />
+      <StyledContent>
+        <Switch>
+          <Route path="/record" component={RecordRouter} />
+          <Route path="/practice" component={PracticeRouter} />
+          <Route path="/list" component={ListRouter} />
+          <Redirect to="/list" />
+        </Switch>
+      </StyledContent>
+    </StyledApp>
   );
 }
