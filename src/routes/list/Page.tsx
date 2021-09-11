@@ -9,6 +9,7 @@ import { AppState } from "reducer";
 import { dictionarySlice, tableSlice } from "./reducer";
 import { useTypedSelector } from "hooks/useTypedSelector";
 import { Table } from "components/Table";
+import { selectAll } from "./adapters";
 
 export interface ListPageProps {}
 
@@ -47,7 +48,7 @@ export function ListPage(props: ListPageProps) {
           <Popconfirm
             title="Are you sure to delete this?"
             onConfirm={() => {
-              dispatch(dictionarySlice.actions.delete(record));
+              dispatch(dictionarySlice.actions.removeOne(record.id));
             }}
           >
             <Button>
@@ -59,7 +60,7 @@ export function ListPage(props: ListPageProps) {
     },
   ];
   const items = useSelector<AppState, Term[]>((s) =>
-    sort((a, b) => (b.id ?? 0) - (a.id ?? 0), s.dictionary)
+    sort((a, b) => (b.id ?? 0) - (a.id ?? 0), selectAll(s))
   );
   const page = useTypedSelector((s) => s.records.table.page);
   return (

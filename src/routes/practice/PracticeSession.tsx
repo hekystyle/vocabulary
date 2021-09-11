@@ -10,6 +10,7 @@ import { last } from "ramda";
 import { sessionSlice } from "./reducer";
 import { dictionarySlice } from "routes/list/reducer";
 import { useHistory } from "react-router";
+import { selectById } from "routes/list/adapters";
 
 const OverflowableCardBody = styled(CardBody)`
   overflow: auto;
@@ -29,9 +30,10 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
     (s) => s.practice.session.isRevealed
   );
 
-  const actualRecord = useTypedSelector((s) =>
-    s.dictionary.find((r) => r.id === last(s.practice.session.stack))
-  );
+  const actualRecord = useTypedSelector((s) => {
+    const termId = last(s.practice.session.stack);
+    return termId ? selectById(s, termId) : undefined;
+  });
 
   const { speak } = useSpeech();
 

@@ -10,15 +10,21 @@ import { Provider } from "react-redux";
 import { rootReducer } from "./reducer";
 import { loadState, persistState } from "persistence";
 import { HashRouter } from "react-router-dom";
+import { termAdapter } from "routes/list/adapters";
 
 const store = configureStore({
   reducer: rootReducer,
-  preloadedState: { dictionary: loadState() },
+  preloadedState: {
+    dictionary: termAdapter.setMany(
+      termAdapter.getInitialState(),
+      loadState() ?? []
+    ),
+  },
 });
 
 store.subscribe(() => {
   const state = store.getState();
-  persistState(state.dictionary);
+  persistState(termAdapter.getSelectors().selectAll(state.dictionary));
 });
 
 ReactDOM.render(

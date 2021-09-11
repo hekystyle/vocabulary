@@ -3,6 +3,7 @@ import { Button } from "components/Button";
 import { useTypedSelector } from "hooks/useTypedSelector";
 import { FC, useState } from "react";
 import { useDispatch } from "react-redux";
+import { selectAll } from "routes/list/adapters";
 import { Term } from "types/Term";
 import { Config, ScoreAlgorithm, sessionSlice } from "./reducer";
 
@@ -16,7 +17,7 @@ export const Configuration: FC<ConfigurationProps> = () => {
 
   const dispatch = useDispatch();
 
-  const terms = useTypedSelector<Term[]>((s) => s.dictionary);
+  const terms = useTypedSelector<Term[]>(selectAll);
 
   const handleStartSessionButtonClick = () => {
     dispatch(sessionSlice.actions.start(config, terms));

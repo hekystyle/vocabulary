@@ -6,6 +6,7 @@ import { DefinitionsList } from "./DefinitionsList";
 import { AppState } from "reducer";
 import { Term } from "types/Term";
 import { dictionarySlice } from "routes/list/reducer";
+import { selectById } from "routes/list/adapters";
 
 export interface RecordPageProps {}
 
@@ -13,7 +14,7 @@ export function RecordPage(props: RecordPageProps) {
   const { id } = useParams<{ id?: string }>();
 
   const editedEntry = useSelector<AppState, Term | undefined>((s) =>
-    id ? s.dictionary.find((p) => p.id === parseInt(id)) : undefined
+    id ? selectById(s, parseInt(id)) : undefined
   );
 
   const [entry, setEntry] = useState<Term>({
@@ -35,8 +36,8 @@ export function RecordPage(props: RecordPageProps) {
   const handleConfirm = () => {
     dispatch(
       id
-        ? dictionarySlice.actions.update(entry)
-        : dictionarySlice.actions.create(entry)
+        ? dictionarySlice.actions.updateOne({ id: entry.id, changes: entry })
+        : dictionarySlice.actions.addOne(entry)
     );
     navigateRoot();
   };
