@@ -1,17 +1,17 @@
 import { combineReducers, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { DictionaryEntry } from "types/DictionaryEntry";
+import { Term } from "types/Term";
 import { Answer } from "utils/utils";
 
-const initialState: DictionaryEntry[] = [];
+const initialState: Term[] = [];
 
 export const dictionarySlice = createSlice({
   name: "dictionary",
   initialState,
   reducers: {
     create: {
-      reducer: (state, action: PayloadAction<DictionaryEntry>) =>
+      reducer: (state, action: PayloadAction<Term>) =>
         state.concat(action.payload),
-      prepare: (entry: DictionaryEntry) => {
+      prepare: (entry: Term) => {
         return {
           payload: {
             ...entry,
@@ -20,16 +20,16 @@ export const dictionarySlice = createSlice({
         };
       },
     },
-    update: (state, action: PayloadAction<DictionaryEntry>) => {
+    update: (state, action: PayloadAction<Term>) => {
       const i = state.findIndex((p) => p.id === action.payload.id);
       if (i > -1) state[i] = action.payload;
       return state;
     },
-    delete: (state, action: PayloadAction<DictionaryEntry>) =>
+    delete: (state, action: PayloadAction<Term>) =>
       state.filter((p) => p.id !== action.payload.id),
     answer: (
       state,
-      { payload: { entity, isCorrect } }: PayloadAction<Answer<DictionaryEntry>>
+      { payload: { entity, isCorrect } }: PayloadAction<Answer<Term>>
     ) => {
       const record = state.find((p) => p.id === entity.id);
       if (record) {

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { DefinitionsList } from "./DefinitionsList";
 import { AppState } from "reducer";
-import { DictionaryEntry } from "types/DictionaryEntry";
+import { Term } from "types/Term";
 import { dictionarySlice } from "routes/list/reducer";
 
 export interface RecordPageProps {}
@@ -12,11 +12,11 @@ export interface RecordPageProps {}
 export function RecordPage(props: RecordPageProps) {
   const { id } = useParams<{ id?: string }>();
 
-  const editedEntry = useSelector<AppState, DictionaryEntry | undefined>((s) =>
+  const editedEntry = useSelector<AppState, Term | undefined>((s) =>
     id ? s.dictionary.find((p) => p.id === parseInt(id)) : undefined
   );
 
-  const [entry, setEntry] = useState<DictionaryEntry>({
+  const [entry, setEntry] = useState<Term>({
     id: 0,
     word: "",
     partOfSpeech: "",
@@ -43,7 +43,7 @@ export function RecordPage(props: RecordPageProps) {
 
   const handleCancel = () => navigateRoot();
 
-  const handleChange = (values: Partial<DictionaryEntry>) =>
+  const handleChange = (values: Partial<Term>) =>
     setEntry((entry) => ({ ...entry, ...values }));
 
   return (

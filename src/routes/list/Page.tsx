@@ -4,7 +4,7 @@ import { ColumnsType } from "antd/lib/table";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { sort } from "ramda";
-import { DictionaryEntry } from "../../types/DictionaryEntry";
+import { Term } from "../../types/Term";
 import { AppState } from "reducer";
 import { dictionarySlice, tableSlice } from "./reducer";
 import { useTypedSelector } from "hooks/useTypedSelector";
@@ -15,7 +15,7 @@ export interface ListPageProps {}
 export function ListPage(props: ListPageProps) {
   const history = useHistory();
   const dispatch = useDispatch();
-  const columns: ColumnsType<DictionaryEntry> = [
+  const columns: ColumnsType<Term> = [
     {
       title: "Word",
       dataIndex: "word",
@@ -58,7 +58,7 @@ export function ListPage(props: ListPageProps) {
       ),
     },
   ];
-  const items = useSelector<AppState, DictionaryEntry[]>((s) =>
+  const items = useSelector<AppState, Term[]>((s) =>
     sort((a, b) => (b.id ?? 0) - (a.id ?? 0), s.dictionary)
   );
   const page = useTypedSelector((s) => s.records.table.page);

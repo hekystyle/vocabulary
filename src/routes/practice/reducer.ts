@@ -1,6 +1,6 @@
 import { combineReducers, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { groupWith } from "ramda";
-import { DictionaryEntry } from "types/DictionaryEntry";
+import { Term } from "types/Term";
 import { shuffle } from "utils/shuffle";
 import {
   computeAnswersAbsoluteScore,
@@ -54,7 +54,7 @@ export const sessionSlice = createSlice({
         stack,
         isRevealed: false,
       }),
-      prepare: (config: Config, terms: DictionaryEntry[]) => {
+      prepare: (config: Config, terms: Term[]) => {
         const filteredTerms = terms.filter(
           (p) => hasTranslation(p) || hasDefinition(p)
         );
