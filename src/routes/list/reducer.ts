@@ -1,7 +1,11 @@
 import { combineReducers, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Term } from "types/Term";
-import { Answer } from "utils/utils";
 import { termAdapter } from "./adapters";
+
+export interface Answer<T> {
+  isCorrect: boolean;
+  entity: T;
+}
 
 const initialState = termAdapter.getInitialState();
 

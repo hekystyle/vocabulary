@@ -1,8 +1,3 @@
-export interface Answer<T> {
-  isCorrect: boolean;
-  entity: T;
-}
-
 export interface AnswersCountable {
   answersCount: number;
   correctAnswersCount: number;
