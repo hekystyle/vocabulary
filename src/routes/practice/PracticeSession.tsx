@@ -103,13 +103,13 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
           ) : (
             <>
               <Button
-                theme="success"
+                variant="success"
                 onClick={() => handleAnswerButtonClick(true)}
               >
                 I was correct
               </Button>
               <Button
-                theme="danger"
+                variant="danger"
                 onClick={() => handleAnswerButtonClick(false)}
               >
                 I was incorrect
