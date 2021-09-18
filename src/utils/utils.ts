@@ -3,17 +3,17 @@ export interface AnswersCountable {
   correctAnswersCount: number;
 }
 
-export function computeAnswersAbsoluteScore<T extends AnswersCountable>({
+export function computeAnswersAbsoluteScore({
   answersCount,
   correctAnswersCount,
-}: T): number {
+}: AnswersCountable): number {
   return answersCount + correctAnswersCount;
 }
 
-export function computeAnswersRelativeScore<T extends AnswersCountable>({
+export function computeAnswersRelativeScore({
   answersCount,
   correctAnswersCount,
-}: T): number {
+}: AnswersCountable): number {
   return Math.floor((100 / answersCount) * correctAnswersCount);
 }
 
