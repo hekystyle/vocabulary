@@ -1,4 +1,4 @@
-import { Button, Input } from "antd";
+import { Button, Input, AutoComplete } from "antd";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -7,6 +7,11 @@ import { AppState } from "reducer";
 import { Term } from "types/Term";
 import { dictionarySlice } from "routes/list/reducer";
 import { selectById } from "routes/list/adapters";
+import { useTypedSelector } from "hooks/useTypedSelector";
+import {
+  selectTermOptions,
+  selectUniqPartOfSpeechOptions,
+} from "./selectors";
 
 export interface RecordPageProps {}
 
@@ -47,17 +52,33 @@ export function RecordPage(props: RecordPageProps) {
   const handleChange = (values: Partial<Term>) =>
     setEntry((entry) => ({ ...entry, ...values }));
 
+  const termOptions = useTypedSelector(selectTermOptions);
+  const uniqPartOfSpeechOptions = useTypedSelector(
+    selectUniqPartOfSpeechOptions
+  );
   return (
     <>
-      <Input
+      <AutoComplete
+        allowClear
         placeholder="Word"
         value={entry.word}
-        onChange={(e) => handleChange({ word: e.target.value })}
+        options={termOptions}
+        filterOption={(inputValue, option) =>
+          typeof option?.value === "string" &&
+          option.value.startsWith(inputValue)
+        }
+        onChange={(value) => handleChange({ word: value ?? "" })}
+        onSelect={(value) => handleChange({ word: value })}
+        style={{ width: "100%" }}
       />
-      <Input
+      <AutoComplete
+        allowClear
         placeholder="Part ot speech"
         value={entry.partOfSpeech}
-        onChange={(e) => handleChange({ partOfSpeech: e.target.value })}
+        options={uniqPartOfSpeechOptions}
+        onChange={(value) => handleChange({ partOfSpeech: value ?? "" })}
+        onSelect={(value) => handleChange({ partOfSpeech: value })}
+        style={{ width: "100%" }}
       />
       <Input
         placeholder="Translation"
