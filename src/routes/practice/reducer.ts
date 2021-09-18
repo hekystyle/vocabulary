@@ -1,13 +1,11 @@
 import { combineReducers, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { groupWith } from "ramda";
 import { Term } from "types/Term";
+import { hasDefinition } from "utils/hasDefinition";
+import { hasTranslation } from "utils/hasTranslation";
 import { shuffle } from "utils/shuffle";
-import {
-  computeAnswersAbsoluteScore,
-  computeAnswersRelativeScore,
-  hasDefinition,
-  hasTranslation,
-} from "utils/utils";
+import { computeAnswersAbsoluteScore } from "utils/computeAnswersAbsoluteScore";
+import { computeAnswersRelativeScore } from "utils/computeAnswersRelativeScore";
 
 export enum ScoreAlgorithm {
   relative,
