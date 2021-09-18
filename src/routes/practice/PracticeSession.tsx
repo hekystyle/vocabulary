@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Button } from "components/Button";
 import { Card } from "components/Card";
-import { CardBody } from "components/CardBody";
 import { useSpeech } from "./useSpeech";
 import { useTypedSelector } from "hooks/useTypedSelector";
 import { last } from "ramda";
@@ -12,7 +11,7 @@ import { dictionarySlice } from "routes/list/reducer";
 import { useHistory } from "react-router";
 import { selectById } from "routes/list/adapters";
 
-const OverflowableCardBody = styled(CardBody)`
+const OverflowableCardBody = styled(Card.Body)`
   overflow: auto;
 `;
 
@@ -72,12 +71,12 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
       {actualRecord && (
         <>
           <Card>
-            <CardBody className="text-center">
+            <Card.Body className="text-center">
               <div>{actualRecord.translation}</div>
               <div>
                 (<i>{actualRecord.partOfSpeech}</i>)
               </div>
-            </CardBody>
+            </Card.Body>
           </Card>
           <Card>
             <OverflowableCardBody className="text-center">
@@ -85,7 +84,7 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
             </OverflowableCardBody>
           </Card>
           <Card>
-            <CardBody className="text-center">
+            <Card.Body className="text-center">
               {isAnswerRevealed ? (
                 <Row>
                   {actualRecord.word}
@@ -96,7 +95,7 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
               ) : (
                 "?"
               )}
-            </CardBody>
+            </Card.Body>
           </Card>
           {!isAnswerRevealed ? (
             <Button onClick={handleRevealAnswer}>Reveal answer</Button>
