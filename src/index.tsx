@@ -42,3 +42,14 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+if ("serviceWorker" in navigator) {
+  // Use the window load event to keep the page load performant
+  window.addEventListener(
+    "load",
+    () => {
+      navigator.serviceWorker.register("./service-worker.js");
+    },
+    { once: true, passive: true }
+  );
+}
