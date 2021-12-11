@@ -60,7 +60,10 @@ export const sessionSlice = createSlice({
         const computedRecords = filteredTerms
           .map((r) => ({
             id: r.id,
-            score: SCORE_ALGO_MAP[config.scoreAlgorithm](r),
+            score:
+              r.answersCount >= 10
+                ? SCORE_ALGO_MAP[config.scoreAlgorithm](r)
+                : 0,
           }))
           .sort((a, b) => b.score - a.score);
 
