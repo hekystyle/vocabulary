@@ -68,7 +68,7 @@ export function RecordPage(props: RecordPageProps) {
           option.value.startsWith(inputValue)
         }
         onChange={(value) => handleChange({ word: value ?? "" })}
-        onSelect={(value) => handleChange({ word: value })}
+        onSelect={(value: string) => handleChange({ word: value })}
         style={{ width: "100%" }}
       />
       <AutoComplete
@@ -77,7 +77,7 @@ export function RecordPage(props: RecordPageProps) {
         value={entry.partOfSpeech}
         options={uniqPartOfSpeechOptions}
         onChange={(value) => handleChange({ partOfSpeech: value ?? "" })}
-        onSelect={(value) => handleChange({ partOfSpeech: value })}
+        onSelect={(value: string) => handleChange({ partOfSpeech: value })}
         style={{ width: "100%" }}
       />
       <Input

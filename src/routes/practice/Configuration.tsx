@@ -35,7 +35,7 @@ export const Configuration: FC<ConfigurationProps> = () => {
           { value: ScoreAlgorithm.relative, label: "relative" },
           { value: ScoreAlgorithm.absolute, label: "absolute" },
         ]}
-        onSelect={(_, option) => update({ scoreAlgorithm: option.value })}
+        onSelect={(_: unknown, option: { value: ScoreAlgorithm }) => update({ scoreAlgorithm: option.value })}
       />
       <Switch
         checked={playAfterReveal}
