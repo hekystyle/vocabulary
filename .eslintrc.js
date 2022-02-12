@@ -1,11 +1,7 @@
 module.exports = {
-  plugins: ['jest'],
-  extends: ['george-lint/typescript', 'plugin:jest/all'],
+  extends: ['george-lint/typescript'],
   parserOptions: {
     project: ['./tsconfig.json'],
-  },
-  env: {
-    'jest/globals': true,
   },
   settings: {
     jest: {
@@ -13,7 +9,17 @@ module.exports = {
       version: require('jest/package.json').version,
     },
   },
-  rules: {
-    'jest/require-top-level-describe': 'off',
-  },
+  overrides: [
+    {
+      files: ['**/*.spec.ts'],
+      extends: ['plugin:jest/all'],
+      plugins: ['jest'],
+      env: {
+        'jest/globals': true,
+      },
+      rules: {
+        'jest/require-top-level-describe': 'off',
+      },
+    },
+  ],
 };
