@@ -2,5 +2,4 @@ export interface Definable {
   definition: string;
 }
 
-export const hasDefinition = (definable: Definable) =>
-  definable.definition !== "";
+export const hasDefinition = (definable: Definable): boolean => definable.definition !== '';

@@ -1,9 +1,10 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import styled from "styled-components";
-import { RecordRouter } from "routes/record/Router";
-import ListRouter from "./routes/list";
-import { PracticeRouter } from "routes/practice/Router";
-import { NavBar } from "NavBar";
+import { Navigate, Route, Routes } from 'react-router-dom';
+import styled from 'styled-components';
+import { RecordRouter } from 'routes/record/Router';
+import { PracticeRouter } from 'routes/practice/Router';
+import { NavBar } from 'NavBar';
+import { VFC } from 'react';
+import ListRouter from './routes/list';
 
 const StyledApp = styled.div`
   height: 100vh;
@@ -17,18 +18,16 @@ const StyledContent = styled.div`
   overflow: auto;
 `;
 
-export function App() {
-  return (
-    <StyledApp className='bg-dark'>
-      <NavBar />
-      <StyledContent>
-        <Routes>
-          <Route path='record/*' element={<RecordRouter />} />
-          <Route path='practice/*' element={<PracticeRouter />} />
-          <Route path='list/*' element={<ListRouter />} />
-          <Route path='*' element={<Navigate to='/list' />} />
-        </Routes>
-      </StyledContent>
-    </StyledApp>
-  );
-}
+export const App: VFC = () => (
+  <StyledApp className="bg-dark">
+    <NavBar />
+    <StyledContent>
+      <Routes>
+        <Route element={<RecordRouter />} path="record/*" />
+        <Route element={<PracticeRouter />} path="practice/*" />
+        <Route element={<ListRouter />} path="list/*" />
+        <Route element={<Navigate to="/list" />} path="*" />
+      </Routes>
+    </StyledContent>
+  </StyledApp>
+);

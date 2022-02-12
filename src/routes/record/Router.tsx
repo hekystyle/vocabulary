@@ -1,11 +1,11 @@
-import { VFC } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { RecordPage } from "./Page";
+import { VFC } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { RecordPage } from './Page';
 
 export const RecordRouter: VFC = () => (
   <Routes>
-    <Route path=':id' element={<RecordPage />} />
-    <Route path='' element={<RecordPage />} />
-    <Route path='*' element={<Navigate to='.' />} />
+    <Route element={<RecordPage />} path=":id" />
+    <Route element={<RecordPage />} path="" />
+    <Route element={<Navigate to="." />} path="*" />
   </Routes>
 );

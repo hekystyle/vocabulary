@@ -10,6 +10,7 @@
     "lib": [
       "dom",
       "dom.iterable",
+      "webworker",
       "esnext"
     ],
     "allowJs": true,
@@ -27,6 +28,6 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src", ".eslintrc.js"
   ]
 }

@@ -1,33 +1,26 @@
-import { Button, Input, AutoComplete } from "antd";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { DefinitionsList } from "./DefinitionsList";
-import { AppState } from "reducer";
-import { Term } from "types/Term";
-import { dictionarySlice } from "routes/list/reducer";
-import { selectById } from "routes/list/adapters";
-import { useTypedSelector } from "hooks/useTypedSelector";
-import {
-  selectTermOptions,
-  selectUniqPartOfSpeechOptions,
-} from "./selectors";
+import { Button, Input, AutoComplete } from 'antd';
+import { useState, VFC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { AppState } from 'reducer';
+import { Term } from 'types/Term';
+import { dictionarySlice } from 'routes/list/reducer';
+import { selectById } from 'routes/list/adapters';
+import { useTypedSelector } from 'hooks/useTypedSelector';
+import { DefinitionsList } from './DefinitionsList';
+import { selectTermOptions, selectUniqPartOfSpeechOptions } from './selectors';
 
-export interface RecordPageProps {}
-
-export function RecordPage(props: RecordPageProps) {
+export const RecordPage: VFC = () => {
   const { id } = useParams<{ id?: string }>();
 
-  const editedEntry = useSelector<AppState, Term | undefined>((s) =>
-    id ? selectById(s, parseInt(id)) : undefined
-  );
+  const editedEntry = useSelector<AppState, Term | undefined>(s => (id ? selectById(s, parseInt(id)) : undefined));
 
   const [entry, setEntry] = useState<Term>({
     id: 0,
-    word: "",
-    partOfSpeech: "",
-    translation: "",
-    definition: "",
+    word: '',
+    partOfSpeech: '',
+    translation: '',
+    definition: '',
     answersCount: 0,
     correctAnswersCount: 0,
     ...(editedEntry ?? {}),
@@ -40,67 +33,59 @@ export function RecordPage(props: RecordPageProps) {
   const dispatch = useDispatch();
   const handleConfirm = () => {
     dispatch(
-      id
-        ? dictionarySlice.actions.updateOne({ id: entry.id, changes: entry })
-        : dictionarySlice.actions.addOne(entry)
+      id ? dictionarySlice.actions.updateOne({ id: entry.id, changes: entry }) : dictionarySlice.actions.addOne(entry),
     );
     navigateRoot();
   };
 
   const handleCancel = () => navigateRoot();
 
-  const handleChange = (values: Partial<Term>) =>
-    setEntry((entry) => ({ ...entry, ...values }));
+  const handleChange = (values: Partial<Term>) => setEntry(prevEntry => ({ ...prevEntry, ...values }));
 
   const termOptions = useTypedSelector(selectTermOptions);
-  const uniqPartOfSpeechOptions = useTypedSelector(
-    selectUniqPartOfSpeechOptions
-  );
+  const uniqPartOfSpeechOptions = useTypedSelector(selectUniqPartOfSpeechOptions);
   return (
     <>
       <AutoComplete
         allowClear
-        placeholder="Word"
-        value={entry.word}
+        filterOption={(inputValue, option) => typeof option?.value === 'string' && option.value.startsWith(inputValue)}
         options={termOptions}
-        filterOption={(inputValue, option) =>
-          typeof option?.value === "string" &&
-          option.value.startsWith(inputValue)
-        }
-        onChange={(value) => handleChange({ word: value ?? "" })}
+        placeholder="Word"
+        style={{ width: '100%' }}
+        value={entry.word}
+        onChange={value => handleChange({ word: value ?? '' })}
         onSelect={(value: string) => handleChange({ word: value })}
-        style={{ width: "100%" }}
       />
       <AutoComplete
         allowClear
-        placeholder="Part ot speech"
-        value={entry.partOfSpeech}
         options={uniqPartOfSpeechOptions}
-        onChange={(value) => handleChange({ partOfSpeech: value ?? "" })}
+        placeholder="Part ot speech"
+        style={{ width: '100%' }}
+        value={entry.partOfSpeech}
+        onChange={value => handleChange({ partOfSpeech: value ?? '' })}
         onSelect={(value: string) => handleChange({ partOfSpeech: value })}
-        style={{ width: "100%" }}
       />
       <Input
         placeholder="Translation"
         value={entry.translation}
-        onChange={(e) => handleChange({ translation: e.target.value })}
+        onChange={e => handleChange({ translation: e.target.value })}
       />
       <Input.TextArea
         placeholder="Definition"
         value={entry.definition}
-        onChange={(e) => handleChange({ definition: e.target.value })}
+        onChange={e => handleChange({ definition: e.target.value })}
       />
       <Button type="primary" onClick={handleConfirm}>
         Confirm
       </Button>
-      <Button type="primary" danger onClick={handleCancel}>
+      <Button danger type="primary" onClick={handleCancel}>
         Cancel
       </Button>
       <DefinitionsList
         word={entry.word}
-        onPartOfSpeechClick={(partOfSpeech) => handleChange({ partOfSpeech })}
-        onDefinitionClick={(values) => handleChange(values)}
+        onDefinitionClick={values => handleChange(values)}
+        onPartOfSpeechClick={partOfSpeech => handleChange({ partOfSpeech })}
       />
     </>
   );
-}
+};

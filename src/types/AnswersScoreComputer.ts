@@ -1,5 +1,3 @@
-import { AnswersCountable } from "utils/types";
+import { AnswersCountable } from 'utils/types';
 
-export type AnswersScoreComputer = <T extends AnswersCountable>(
-  item: T
-) => number;
+export type AnswersScoreComputer = <T extends AnswersCountable>(item: T) => number;
