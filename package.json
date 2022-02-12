@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "eslint-config-george-lint": "^1.0.8",
+    "eslint-plugin-jest": "^26.1.0",
     "gh-pages": "^3.2.3",
     "typescript-styled-plugin": "^0.18.0"
   },

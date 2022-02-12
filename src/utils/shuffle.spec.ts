@@ -1,6 +1,7 @@
 import { shuffle } from './shuffle';
 
-it('should be immutable', () => {
+test('should be immutable', () => {
+  expect.hasAssertions();
   const array: never[] = [];
   const actual = shuffle(array);
   expect(actual).not.toBe(array);
