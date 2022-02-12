@@ -1,6 +1,10 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-export const useSpeech = () => {
+export interface SpeachShape {
+  speak: (text: string) => void;
+}
+
+export const useSpeech = (): SpeachShape => {
   const synthesis = window.speechSynthesis;
 
   useEffect(() => () => synthesis.cancel(), [synthesis]);

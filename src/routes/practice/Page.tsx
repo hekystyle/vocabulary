@@ -1,7 +1,8 @@
-import styled from "styled-components";
-import { PracticeSession } from "./PracticeSession";
-import { Configuration } from "./Configuration";
-import { useTypedSelector } from "hooks/useTypedSelector";
+import styled from 'styled-components';
+import { useTypedSelector } from 'hooks/useTypedSelector';
+import { VFC } from 'react';
+import { PracticeSession } from './PracticeSession';
+import { Configuration } from './Configuration';
 
 const Layout = styled.div`
   height: 100%;
@@ -10,10 +11,8 @@ const Layout = styled.div`
   gap: 1rem;
 `;
 
-export interface PracticePageProps {}
-
-export function PracticePage(props: PracticePageProps) {
-  const isActive = useTypedSelector((s) => s.practice.session.isActive);
+export const PracticePage: VFC = () => {
+  const isActive = useTypedSelector(s => s.practice.session.isActive);
 
   return <Layout>{isActive ? <PracticeSession /> : <Configuration />}</Layout>;
-}
+};

@@ -1,1 +1,1 @@
-export { Card } from "react-bootstrap";
+export { Card } from 'react-bootstrap';

@@ -1,11 +1,11 @@
-import { combineReducers, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { groupWith } from "ramda";
-import { Term } from "types/Term";
-import { hasDefinition } from "utils/hasDefinition";
-import { hasTranslation } from "utils/hasTranslation";
-import { shuffle } from "utils/shuffle";
-import { computeAnswersAbsoluteScore } from "utils/computeAnswersAbsoluteScore";
-import { computeAnswersRelativeScore } from "utils/computeAnswersRelativeScore";
+import { combineReducers, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { groupWith } from 'ramda';
+import { Term } from 'types/Term';
+import { hasDefinition } from 'utils/hasDefinition';
+import { hasTranslation } from 'utils/hasTranslation';
+import { shuffle } from 'utils/shuffle';
+import { computeAnswersAbsoluteScore } from 'utils/computeAnswersAbsoluteScore';
+import { computeAnswersRelativeScore } from 'utils/computeAnswersRelativeScore';
 
 export enum ScoreAlgorithm {
   relative,
@@ -37,42 +37,29 @@ const initialState: SessionState = {
 };
 
 export const sessionSlice = createSlice({
-  name: "practice/session",
+  name: 'practice/session',
   initialState,
   reducers: {
     start: {
-      reducer: (
-        state,
-        {
-          payload: { stack, config },
-        }: PayloadAction<{ stack: number[]; config: Config }>
-      ) => ({
+      reducer: (state, { payload: { stack, config } }: PayloadAction<{ stack: number[]; config: Config }>) => ({
         config,
         isActive: true,
         stack,
         isRevealed: false,
       }),
       prepare: (config: Config, terms: Term[]) => {
-        const filteredTerms = terms.filter(
-          (p) => hasTranslation(p) || hasDefinition(p)
-        );
+        const filteredTerms = terms.filter(p => hasTranslation(p) || hasDefinition(p));
 
         const computedRecords = filteredTerms
-          .map((r) => ({
+          .map(r => ({
             id: r.id,
-            score:
-              r.answersCount >= 10
-                ? SCORE_ALGO_MAP[config.scoreAlgorithm](r)
-                : 0,
+            score: r.answersCount >= 10 ? SCORE_ALGO_MAP[config.scoreAlgorithm](r) : 0,
           }))
           .sort((a, b) => b.score - a.score);
 
         const stack = groupWith((a, b) => a.score === b.score, computedRecords)
-          .map((list) => shuffle(list))
-          .reduce<number[]>(
-            (stack, terms) => [...stack, ...terms.map((p) => p.id)],
-            []
-          );
+          .map(list => shuffle(list))
+          .reduce<number[]>((currentStack, newTerms) => [...currentStack, ...newTerms.map(p => p.id)], []);
         return {
           payload: {
             config,
@@ -81,11 +68,11 @@ export const sessionSlice = createSlice({
         };
       },
     },
-    reveal: (state) => ({
+    reveal: state => ({
       ...state,
       isRevealed: true,
     }),
-    next: (state) => {
+    next: state => {
       state.stack.pop();
       state.isRevealed = false;
       return state;

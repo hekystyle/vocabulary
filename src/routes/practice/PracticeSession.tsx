@@ -1,15 +1,15 @@
-import { FC } from "react";
-import { useDispatch } from "react-redux";
-import styled from "styled-components";
-import { Button } from "components/Button";
-import { Card } from "components/Card";
-import { useSpeech } from "./useSpeech";
-import { useTypedSelector } from "hooks/useTypedSelector";
-import { last } from "ramda";
-import { sessionSlice } from "./reducer";
-import { dictionarySlice } from "routes/list/reducer";
-import { useNavigate } from "react-router";
-import { selectById } from "routes/list/adapters";
+import { VFC } from 'react';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import { Button } from 'components/Button';
+import { Card } from 'components/Card';
+import { useTypedSelector } from 'hooks/useTypedSelector';
+import { last } from 'ramda';
+import { dictionarySlice } from 'routes/list/reducer';
+import { useNavigate } from 'react-router-dom';
+import { selectById } from 'routes/list/adapters';
+import { sessionSlice } from './reducer';
+import { useSpeech } from './useSpeech';
 
 const OverflowableCardBody = styled(Card.Body)`
   overflow: auto;
@@ -22,23 +22,17 @@ const Row = styled.div`
   gap: 1rem;
 `;
 
-interface PracticeSessionProps {}
+export const PracticeSession: VFC = () => {
+  const isAnswerRevealed = useTypedSelector(s => s.practice.session.isRevealed);
 
-export const PracticeSession: FC<PracticeSessionProps> = () => {
-  const isAnswerRevealed = useTypedSelector(
-    (s) => s.practice.session.isRevealed
-  );
-
-  const actualRecord = useTypedSelector((s) => {
+  const actualRecord = useTypedSelector(s => {
     const termId = last(s.practice.session.stack);
     return termId ? selectById(s, termId) : undefined;
   });
 
   const { speak } = useSpeech();
 
-  const playAfterReveal = useTypedSelector(
-    (s) => s.practice.session.config?.playAfterReveal
-  );
+  const playAfterReveal = useTypedSelector(s => s.practice.session.config?.playAfterReveal);
   const dispatch = useDispatch();
 
   const handleRevealAnswer = () => {
@@ -52,7 +46,7 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
         dictionarySlice.actions.answer({
           isCorrect,
           entity: actualRecord,
-        })
+        }),
       );
     dispatch(sessionSlice.actions.next());
   };
@@ -63,7 +57,7 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
 
   const navigate = useNavigate();
   const handleEditButtonClick = () => {
-    navigate(`/record/${actualRecord?.id}`);
+    if (actualRecord) navigate(`/record/${actualRecord.id}`);
   };
 
   return (
@@ -79,21 +73,17 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
             </Card.Body>
           </Card>
           <Card>
-            <OverflowableCardBody className="text-center">
-              {actualRecord.definition}
-            </OverflowableCardBody>
+            <OverflowableCardBody className="text-center">{actualRecord.definition}</OverflowableCardBody>
           </Card>
           <Card>
             <Card.Body className="text-center">
               {isAnswerRevealed ? (
                 <Row>
                   {actualRecord.word}
-                  <Button onClick={() => speak(actualRecord.word)}>
-                    Play it again
-                  </Button>
+                  <Button onClick={() => speak(actualRecord.word)}>Play it again</Button>
                 </Row>
               ) : (
-                "?"
+                '?'
               )}
             </Card.Body>
           </Card>
@@ -101,16 +91,10 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
             <Button onClick={handleRevealAnswer}>Reveal answer</Button>
           ) : (
             <>
-              <Button
-                variant="success"
-                onClick={() => handleAnswerButtonClick(true)}
-              >
+              <Button variant="success" onClick={() => handleAnswerButtonClick(true)}>
                 I was correct
               </Button>
-              <Button
-                variant="danger"
-                onClick={() => handleAnswerButtonClick(false)}
-              >
+              <Button variant="danger" onClick={() => handleAnswerButtonClick(false)}>
                 I was incorrect
               </Button>
             </>

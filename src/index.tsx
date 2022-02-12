@@ -1,24 +1,21 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { App } from "./App";
-import reportWebVitals from "./reportWebVitals";
-import "antd/dist/antd.css";
-import "bootstrap/dist/css/bootstrap.css";
-import "./index.css";
-import { configureStore } from "@reduxjs/toolkit";
-import { Provider } from "react-redux";
-import { rootReducer } from "./reducer";
-import { loadState, persistState } from "persistence";
-import { HashRouter } from "react-router-dom";
-import { termAdapter } from "routes/list/adapters";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import 'antd/dist/antd.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import './index.css';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import { loadState, persistState } from 'persistence';
+import { HashRouter } from 'react-router-dom';
+import { termAdapter } from 'routes/list/adapters';
+import { rootReducer } from './reducer';
+import reportWebVitals from './reportWebVitals';
+import { App } from './App';
 
 const store = configureStore({
   reducer: rootReducer,
   preloadedState: {
-    dictionary: termAdapter.setMany(
-      termAdapter.getInitialState(),
-      loadState() ?? []
-    ),
+    dictionary: termAdapter.setMany(termAdapter.getInitialState(), loadState() ?? []),
   },
 });
 
@@ -35,7 +32,7 @@ ReactDOM.render(
       </HashRouter>
     </Provider>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function
@@ -43,13 +40,13 @@ ReactDOM.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
-if ("serviceWorker" in navigator) {
+if ('serviceWorker' in navigator) {
   // Use the window load event to keep the page load performant
   window.addEventListener(
-    "load",
+    'load',
     () => {
-      navigator.serviceWorker.register("./service-worker.js");
+      navigator.serviceWorker.register('./service-worker.js');
     },
-    { once: true, passive: true }
+    { once: true, passive: true },
   );
 }

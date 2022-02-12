@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { DictionaryApi, Word } from "services/dictionaryApi";
-import styled from "styled-components";
+import { useEffect, useState, VFC } from 'react';
+import { DictionaryApi, Word } from 'services/dictionaryApi';
+import styled from 'styled-components';
 
 const StyledUl = styled.ul`
   color: white;
@@ -9,56 +9,62 @@ const StyledUl = styled.ul`
 export interface DefinitionsListProps {
   word: string;
   onPartOfSpeechClick?: (partOfSpeech: string) => void;
-  onDefinitionClick?: (values: {
-    partOfSpeech: string;
-    definition: string;
-  }) => void;
+  onDefinitionClick?: (values: { partOfSpeech: string; definition: string }) => void;
 }
 
-export function DefinitionsList(props: DefinitionsListProps) {
+export const DefinitionsList: VFC<DefinitionsListProps> = props => {
   const { word, onPartOfSpeechClick, onDefinitionClick } = props;
   const [entry, setEntry] = useState<Word | undefined>();
 
   useEffect(() => {
-    if (word === "") {
+    if (word === '') {
       setEntry(undefined);
-      return;
+      return () => {};
     }
     const api = new DictionaryApi();
     api
       .word(word)
-      .then((result) => {
+      .then(result => {
         setEntry(result[0]);
       })
-      .catch((reason) => console.error(reason));
+      .catch(reason => console.error(reason));
 
     return () => api.abort();
   }, [word]);
 
   return (
     <StyledUl>
-      {entry?.meanings.map((meaning, i) => (
-        <li key={i}>
+      {entry?.meanings.map(meaning => (
+        <li key={meaning.partOfSpeech}>
           <div
-            onClick={() =>
-              onPartOfSpeechClick && onPartOfSpeechClick(meaning.partOfSpeech)
-            }
+            role="button"
+            tabIndex={0}
+            onClick={() => onPartOfSpeechClick?.(meaning.partOfSpeech)}
+            onKeyPress={() => onPartOfSpeechClick?.(meaning.partOfSpeech)}
           >
             {meaning.partOfSpeech}
           </div>
           <ul>
-            {meaning.definitions.map((definition, j) => (
-              <li
-                key={j}
-                onClick={() =>
-                  onDefinitionClick &&
-                  onDefinitionClick({
-                    partOfSpeech: meaning.partOfSpeech,
-                    definition: definition.definition,
-                  })
-                }
-              >
-                {definition.definition}
+            {meaning.definitions.map(definition => (
+              <li key={definition.definition}>
+                <div
+                  role="button"
+                  tabIndex={0}
+                  onClick={() =>
+                    onDefinitionClick?.({
+                      partOfSpeech: meaning.partOfSpeech,
+                      definition: definition.definition,
+                    })
+                  }
+                  onKeyPress={() =>
+                    onDefinitionClick?.({
+                      partOfSpeech: meaning.partOfSpeech,
+                      definition: definition.definition,
+                    })
+                  }
+                >
+                  {definition.definition}
+                </div>
               </li>
             ))}
           </ul>
@@ -66,4 +72,4 @@ export function DefinitionsList(props: DefinitionsListProps) {
       ))}
     </StyledUl>
   );
-}
+};
