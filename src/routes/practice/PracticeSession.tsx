@@ -8,7 +8,7 @@ import { useTypedSelector } from "hooks/useTypedSelector";
 import { last } from "ramda";
 import { sessionSlice } from "./reducer";
 import { dictionarySlice } from "routes/list/reducer";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { selectById } from "routes/list/adapters";
 
 const OverflowableCardBody = styled(Card.Body)`
@@ -61,9 +61,9 @@ export const PracticeSession: FC<PracticeSessionProps> = () => {
     dispatch(sessionSlice.actions.close());
   };
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const handleEditButtonClick = () => {
-    history.push(`record/${actualRecord?.id}`);
+    navigate(`/record/${actualRecord?.id}`);
   };
 
   return (

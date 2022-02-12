@@ -1,17 +1,11 @@
-import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
+import { VFC } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { RecordPage } from "./Page";
 
-export function RecordRouter() {
-  const { path } = useRouteMatch();
-
-  return (
-    <Switch>
-      <Route path={`${path}/:id?`}>
-        <RecordPage />
-      </Route>
-      <Route>
-        <Redirect to={`${path}`} />
-      </Route>
-    </Switch>
-  );
-}
+export const RecordRouter: VFC = () => (
+  <Routes>
+    <Route path=':id' element={<RecordPage />} />
+    <Route path='' element={<RecordPage />} />
+    <Route path='*' element={<Navigate to='.' />} />
+  </Routes>
+);

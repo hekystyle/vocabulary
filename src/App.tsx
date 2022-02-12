@@ -1,4 +1,4 @@
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import { RecordRouter } from "routes/record/Router";
 import ListRouter from "./routes/list";
@@ -19,23 +19,15 @@ const StyledContent = styled.div`
 
 export function App() {
   return (
-    <StyledApp className="bg-dark">
+    <StyledApp className='bg-dark'>
       <NavBar />
       <StyledContent>
-        <Switch>
-          <Route path="/record">
-            <RecordRouter />
-          </Route>
-          <Route path="/practice">
-            <PracticeRouter />
-          </Route>
-          <Route path="/list">
-            <ListRouter />
-          </Route>
-          <Route>
-            <Redirect to="/list" />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path='record/*' element={<RecordRouter />} />
+          <Route path='practice/*' element={<PracticeRouter />} />
+          <Route path='list/*' element={<ListRouter />} />
+          <Route path='*' element={<Navigate to='/list' />} />
+        </Routes>
       </StyledContent>
     </StyledApp>
   );

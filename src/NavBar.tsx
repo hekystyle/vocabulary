@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 
 interface NavLink {
@@ -19,7 +19,7 @@ const navItems: NavLink[] = [
 ];
 
 export const NavBar: FC<{}> = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { pathname } = useLocation();
   return (
@@ -33,7 +33,7 @@ export const NavBar: FC<{}> = () => {
                 key={idx}
                 href="#"
                 active={path === pathname}
-                onClick={() => history.push(path)}
+                onClick={() => navigate(path)}
               >
                 {title}
               </Nav.Link>

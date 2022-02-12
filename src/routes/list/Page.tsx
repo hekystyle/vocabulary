@@ -2,7 +2,7 @@ import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Popconfirm, Tooltip } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { sort } from "ramda";
 import { Term } from "../../types/Term";
 import { AppState } from "reducer";
@@ -14,7 +14,7 @@ import { selectAll } from "./adapters";
 export interface ListPageProps {}
 
 export function ListPage(props: ListPageProps) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const columns: ColumnsType<Term> = [
     {
@@ -36,13 +36,13 @@ export function ListPage(props: ListPageProps) {
     },
     {
       title: () => (
-        <Button type="primary" onClick={() => history.push("/record")}>
+        <Button type="primary" onClick={() => navigate("/record")}>
           <PlusOutlined />
         </Button>
       ),
       render: (_, record) => (
         <>
-          <Button onClick={() => history.push(`/record/${record.id}`)}>
+          <Button onClick={() => navigate(`/record/${record.id}`)}>
             <EditOutlined />
           </Button>
           <Popconfirm
