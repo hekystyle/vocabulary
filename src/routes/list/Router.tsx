@@ -6,7 +6,9 @@ export function ListRouter() {
 
   return (
     <Switch>
-      <Route path={`${path}`} component={ListPage} />
+      <Route path={`${path}`}>
+        <ListPage />
+      </Route>
     </Switch>
   );
 }

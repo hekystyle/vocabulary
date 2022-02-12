@@ -23,10 +23,18 @@ export function App() {
       <NavBar />
       <StyledContent>
         <Switch>
-          <Route path="/record" component={RecordRouter} />
-          <Route path="/practice" component={PracticeRouter} />
-          <Route path="/list" component={ListRouter} />
-          <Redirect to="/list" />
+          <Route path="/record">
+            <RecordRouter />
+          </Route>
+          <Route path="/practice">
+            <PracticeRouter />
+          </Route>
+          <Route path="/list">
+            <ListRouter />
+          </Route>
+          <Route>
+            <Redirect to="/list" />
+          </Route>
         </Switch>
       </StyledContent>
     </StyledApp>

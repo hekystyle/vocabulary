@@ -6,8 +6,12 @@ export function RecordRouter() {
 
   return (
     <Switch>
-      <Route path={`${path}/:id?`} component={RecordPage} />
-      <Redirect to={`${path}`} />
+      <Route path={`${path}/:id?`}>
+        <RecordPage />
+      </Route>
+      <Route>
+        <Redirect to={`${path}`} />
+      </Route>
     </Switch>
   );
 }

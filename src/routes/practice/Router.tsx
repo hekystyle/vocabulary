@@ -6,8 +6,12 @@ export function PracticeRouter() {
 
   return (
     <Switch>
-      <Route path={`${path}`} exact component={PracticePage} />
-      <Redirect to={path} />
+      <Route path={`${path}`} exact>
+        <PracticePage />
+      </Route>
+      <Route>
+        <Redirect to={path} />
+      </Route>
     </Switch>
   );
 }
