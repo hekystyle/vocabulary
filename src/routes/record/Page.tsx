@@ -1,7 +1,7 @@
 import { Button, Input, AutoComplete } from "antd";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { DefinitionsList } from "./DefinitionsList";
 import { AppState } from "reducer";
 import { Term } from "types/Term";
@@ -33,9 +33,9 @@ export function RecordPage(props: RecordPageProps) {
     ...(editedEntry ?? {}),
   });
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  const navigateRoot = () => history.push("/");
+  const navigateRoot = () => navigate('/');
 
   const dispatch = useDispatch();
   const handleConfirm = () => {
