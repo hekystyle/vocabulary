@@ -6,8 +6,9 @@ import { Card } from 'components/Card';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import { last } from 'ramda';
 import { dictionarySlice } from 'routes/list/reducer';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { selectById } from 'routes/list/adapters';
+import { RETURN_URL_FIELD } from 'routes/record/constants';
 import { sessionSlice } from './reducer';
 import { useSpeech } from './useSpeech';
 
@@ -34,6 +35,8 @@ export const PracticeSession: VFC = () => {
 
   const playAfterReveal = useTypedSelector(s => s.practice.session.config?.playAfterReveal);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handleRevealAnswer = () => {
     dispatch(sessionSlice.actions.reveal());
@@ -55,9 +58,13 @@ export const PracticeSession: VFC = () => {
     dispatch(sessionSlice.actions.close());
   };
 
-  const navigate = useNavigate();
   const handleEditButtonClick = () => {
-    if (actualRecord) navigate(`/record/${actualRecord.id}`);
+    if (actualRecord)
+      navigate(`/record/${actualRecord.id}`, {
+        state: {
+          [RETURN_URL_FIELD]: pathname,
+        },
+      });
   };
 
   return (
