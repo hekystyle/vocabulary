@@ -1,14 +1,16 @@
 import { Button, Input, AutoComplete } from 'antd';
 import { useState, VFC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { AppState } from 'reducer';
 import { Term } from 'types/Term';
 import { dictionarySlice } from 'routes/list/reducer';
 import { selectById } from 'routes/list/adapters';
 import { useTypedSelector } from 'hooks/useTypedSelector';
+import { isObject } from 'utils/isObject';
 import { DefinitionsList } from './DefinitionsList';
 import { selectTermOptions, selectUniqPartOfSpeechOptions } from './selectors';
+import { hasReturnUrlField } from './utils/hasReturnUrlField';
 
 export const RecordPage: VFC = () => {
   const { id } = useParams<{ id?: string }>();
@@ -26,19 +28,25 @@ export const RecordPage: VFC = () => {
     ...(editedEntry ?? {}),
   });
 
+  const { state } = useLocation();
   const navigate = useNavigate();
 
-  const navigateRoot = () => navigate('/');
+  const navigateBack = () => {
+    if (isObject(state) && hasReturnUrlField(state)) {
+      navigate(state.returnUrl);
+    } else {
+      navigate('/');
+    }
+  };
 
   const dispatch = useDispatch();
   const handleConfirm = () => {
-    dispatch(
-      id ? dictionarySlice.actions.updateOne({ id: entry.id, changes: entry }) : dictionarySlice.actions.addOne(entry),
-    );
-    navigateRoot();
+    const { updateOne, addOne } = dictionarySlice.actions;
+    dispatch(id ? updateOne({ id: entry.id, changes: entry }) : addOne(entry));
+    navigateBack();
   };
 
-  const handleCancel = () => navigateRoot();
+  const handleCancel = () => navigateBack();
 
   const handleChange = (values: Partial<Term>) => setEntry(prevEntry => ({ ...prevEntry, ...values }));
 
