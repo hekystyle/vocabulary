@@ -1,10 +1,10 @@
+import { VFC } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
-import { RecordRouter } from 'routes/record/Router';
-import { PracticeRouter } from 'routes/practice/Router';
-import { NavBar } from 'NavBar';
-import { VFC } from 'react';
-import ListRouter from './routes/list';
+import { NavBar } from 'components/NavBar';
+import { ListRouter } from 'routes/list';
+import { PracticeRouter } from 'routes/practice';
+import { RecordRouter } from 'routes/record';
 
 const StyledApp = styled.div`
   height: 100vh;

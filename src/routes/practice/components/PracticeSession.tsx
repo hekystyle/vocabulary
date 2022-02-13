@@ -9,8 +9,8 @@ import { dictionarySlice } from 'routes/list/reducer';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { selectById } from 'routes/list/adapters';
 import { RETURN_URL_FIELD } from 'routes/record/constants';
-import { sessionSlice } from './reducer';
-import { useSpeech } from './useSpeech';
+import { sessionSlice } from '../reducer';
+import { useSpeech } from '../useSpeech';
 
 const OverflowableCardBody = styled(Card.Body)`
   overflow: auto;
@@ -24,6 +24,11 @@ const Row = styled.div`
 `;
 
 export const PracticeSession: VFC = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const { speak } = useSpeech();
+
   const isAnswerRevealed = useTypedSelector(s => s.practice.session.isRevealed);
 
   const actualRecord = useTypedSelector(s => {
@@ -31,12 +36,7 @@ export const PracticeSession: VFC = () => {
     return termId ? selectById(s, termId) : undefined;
   });
 
-  const { speak } = useSpeech();
-
   const playAfterReveal = useTypedSelector(s => s.practice.session.config?.playAfterReveal);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
 
   const handleRevealAnswer = () => {
     dispatch(sessionSlice.actions.reveal());

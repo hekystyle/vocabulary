@@ -5,15 +5,15 @@ import { useState, VFC } from 'react';
 import { useDispatch } from 'react-redux';
 import { selectAll } from 'routes/list/adapters';
 import { Term } from 'types/Term';
-import { Config, ScoreAlgorithm, sessionSlice } from './reducer';
+import { Config, ScoreAlgorithm, sessionSlice } from '../reducer';
 
 export const Configuration: VFC = () => {
+  const dispatch = useDispatch();
+
   const [config, setConfig] = useState<Config>({
     scoreAlgorithm: ScoreAlgorithm.relative,
     playAfterReveal: false,
   });
-
-  const dispatch = useDispatch();
 
   const terms = useTypedSelector<Term[]>(selectAll);
 

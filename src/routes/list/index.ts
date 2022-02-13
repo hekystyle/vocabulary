@@ -1,3 +1,1 @@
-import { ListRouter } from './Router';
-
-export default ListRouter;
+export { ListRouter } from './Router';

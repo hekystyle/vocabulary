@@ -8,14 +8,19 @@ import { dictionarySlice } from 'routes/list/reducer';
 import { selectById } from 'routes/list/adapters';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import { isObject } from 'utils/isObject';
-import { DefinitionsList } from './DefinitionsList';
+import { DefinitionsList } from './components/DefinitionsList';
 import { selectTermOptions, selectUniqPartOfSpeechOptions } from './selectors';
 import { hasReturnUrlField } from './utils/hasReturnUrlField';
 
 export const RecordPage: VFC = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams<{ id?: string }>();
+  const { state } = useLocation();
 
   const editedEntry = useSelector<AppState, Term | undefined>(s => (id ? selectById(s, parseInt(id)) : undefined));
+  const termOptions = useTypedSelector(selectTermOptions);
+  const uniqPartOfSpeechOptions = useTypedSelector(selectUniqPartOfSpeechOptions);
 
   const [entry, setEntry] = useState<Term>({
     id: 0,
@@ -28,9 +33,6 @@ export const RecordPage: VFC = () => {
     ...(editedEntry ?? {}),
   });
 
-  const { state } = useLocation();
-  const navigate = useNavigate();
-
   const navigateBack = () => {
     if (isObject(state) && hasReturnUrlField(state)) {
       navigate(state.returnUrl);
@@ -39,7 +41,6 @@ export const RecordPage: VFC = () => {
     }
   };
 
-  const dispatch = useDispatch();
   const handleConfirm = () => {
     const { updateOne, addOne } = dictionarySlice.actions;
     dispatch(id ? updateOne({ id: entry.id, changes: entry }) : addOne(entry));
@@ -50,8 +51,6 @@ export const RecordPage: VFC = () => {
 
   const handleChange = (values: Partial<Term>) => setEntry(prevEntry => ({ ...prevEntry, ...values }));
 
-  const termOptions = useTypedSelector(selectTermOptions);
-  const uniqPartOfSpeechOptions = useTypedSelector(selectUniqPartOfSpeechOptions);
   return (
     <>
       <AutoComplete

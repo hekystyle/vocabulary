@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import { VFC } from 'react';
-import { PracticeSession } from './PracticeSession';
-import { Configuration } from './Configuration';
+import { PracticeSession } from './components/PracticeSession';
+import { Configuration } from './components/Configuration';
 
 const Layout = styled.div`
   height: 100%;

@@ -4,18 +4,7 @@ import { Term } from 'types/Term';
 import { hasDefinition } from 'utils/hasDefinition';
 import { hasTranslation } from 'utils/hasTranslation';
 import { shuffle } from 'utils/shuffle';
-import { computeAnswersAbsoluteScore } from 'utils/computeAnswersAbsoluteScore';
-import { computeAnswersRelativeScore } from 'utils/computeAnswersRelativeScore';
-
-export enum ScoreAlgorithm {
-  relative,
-  absolute,
-}
-
-const SCORE_ALGO_MAP = {
-  [ScoreAlgorithm.relative]: computeAnswersRelativeScore,
-  [ScoreAlgorithm.absolute]: computeAnswersAbsoluteScore,
-};
+import { ScoreAlgorithm, SCORE_ALGO_MAP } from './constants';
 
 export interface Config {
   scoreAlgorithm: ScoreAlgorithm;
