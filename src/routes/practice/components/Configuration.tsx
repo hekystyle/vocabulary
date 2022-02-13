@@ -5,7 +5,8 @@ import { useState, VFC } from 'react';
 import { useDispatch } from 'react-redux';
 import { selectAll } from 'routes/list/adapters';
 import { Term } from 'types/Term';
-import { Config, ScoreAlgorithm, sessionSlice } from '../reducer';
+import { ScoreAlgorithm } from '../constants';
+import { Config, sessionSlice } from '../reducer';
 
 export const Configuration: VFC = () => {
   const dispatch = useDispatch();
