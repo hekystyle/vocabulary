@@ -3,6 +3,7 @@ import { useTypedSelector } from 'hooks/useTypedSelector';
 import { VFC } from 'react';
 import { PracticeSession } from './components/PracticeSession';
 import { Configuration } from './components/Configuration';
+import { selectIsActive } from './selectors';
 
 const Layout = styled.div`
   height: 100%;
@@ -12,7 +13,7 @@ const Layout = styled.div`
 `;
 
 export const PracticePage: VFC = () => {
-  const isActive = useTypedSelector(s => s.practice.session.isActive);
+  const isActive = useTypedSelector(selectIsActive);
 
   return <Layout>{isActive ? <PracticeSession /> : <Configuration />}</Layout>;
 };

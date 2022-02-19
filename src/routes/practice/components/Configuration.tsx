@@ -4,7 +4,6 @@ import { useTypedSelector } from 'hooks/useTypedSelector';
 import { useState, VFC } from 'react';
 import { useDispatch } from 'react-redux';
 import { selectAll } from 'routes/list/adapters';
-import { Term } from 'types/Term';
 import { ScoreAlgorithm } from '../constants';
 import { Config, sessionSlice } from '../reducer';
 
@@ -16,7 +15,7 @@ export const Configuration: VFC = () => {
     playAfterReveal: false,
   });
 
-  const terms = useTypedSelector<Term[]>(selectAll);
+  const terms = useTypedSelector(selectAll);
 
   const handleStartSessionButtonClick = () => {
     dispatch(sessionSlice.actions.start(config, terms));

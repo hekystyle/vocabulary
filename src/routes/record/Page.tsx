@@ -1,8 +1,7 @@
 import { Button, Input, AutoComplete } from 'antd';
 import { useState, VFC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { AppState } from 'reducer';
 import { Term } from 'types/Term';
 import { dictionarySlice } from 'routes/list/slices';
 import { selectById } from 'routes/list/adapters';
@@ -18,7 +17,7 @@ export const RecordPage: VFC = () => {
   const { id } = useParams<{ id?: string }>();
   const { state } = useLocation();
 
-  const editedEntry = useSelector<AppState, Term | undefined>(s => (id ? selectById(s, parseInt(id)) : undefined));
+  const editedEntry = useTypedSelector<Term | undefined>(s => (id ? selectById(s, parseInt(id)) : undefined));
   const termOptions = useTypedSelector(selectTermOptions);
   const uniqPartOfSpeechOptions = useTypedSelector(selectUniqPartOfSpeechOptions);
 

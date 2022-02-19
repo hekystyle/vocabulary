@@ -1,16 +1,15 @@
 import { Tooltip } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import { useDispatch, useSelector } from 'react-redux';
-import { sort } from 'ramda';
-import { AppState } from 'reducer';
+import { useDispatch } from 'react-redux';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import { Table } from 'components/Table';
 import { useMemo, VFC } from 'react';
 import { tableSlice } from '../slices';
 import { Term } from '../../../types/Term';
-import { selectAll } from '../adapters';
 import { AddButton } from './table/AddButton';
 import { Actions } from './table/Actions';
+import { selectCurrentPage } from '../selectors';
+import { selectAll } from '../adapters';
 
 const getColumns = (): ColumnsType<Term> => [
   {
@@ -38,8 +37,8 @@ const getColumns = (): ColumnsType<Term> => [
 export const ListTable: VFC = () => {
   const dispatch = useDispatch();
   const columns = useMemo(() => getColumns(), []);
-  const items = useSelector<AppState, Term[]>(s => sort((a, b) => (b.id ?? 0) - (a.id ?? 0), selectAll(s)));
-  const currentPage = useTypedSelector(s => s.records.table.page);
+  const items = useTypedSelector(selectAll);
+  const currentPage = useTypedSelector(selectCurrentPage);
   return (
     <Table
       columns={columns}
