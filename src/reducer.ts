@@ -1,5 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import { dictionarySlice, recordsReducer } from 'routes/list/reducer';
+import { dictionarySlice, recordsReducer } from 'routes/list/slices';
 import { practiceReducer } from 'routes/practice/reducer';
 
 export const rootReducer = combineReducers({

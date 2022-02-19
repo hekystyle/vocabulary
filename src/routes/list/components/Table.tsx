@@ -6,7 +6,7 @@ import { AppState } from 'reducer';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import { Table } from 'components/Table';
 import { useMemo, VFC } from 'react';
-import { tableSlice } from '../reducer';
+import { tableSlice } from '../slices';
 import { Term } from '../../../types/Term';
 import { selectAll } from '../adapters';
 import { AddButton } from './table/AddButton';

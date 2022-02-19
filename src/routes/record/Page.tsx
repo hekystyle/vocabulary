@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { AppState } from 'reducer';
 import { Term } from 'types/Term';
-import { dictionarySlice } from 'routes/list/reducer';
+import { dictionarySlice } from 'routes/list/slices';
 import { selectById } from 'routes/list/adapters';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import { isObject } from 'utils/isObject';

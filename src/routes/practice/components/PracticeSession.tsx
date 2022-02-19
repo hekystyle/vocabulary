@@ -5,7 +5,7 @@ import { Button } from 'components/Button';
 import { Card } from 'components/Card';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import { last } from 'ramda';
-import { dictionarySlice } from 'routes/list/reducer';
+import { dictionarySlice } from 'routes/list/slices';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { selectById } from 'routes/list/adapters';
 import { RETURN_URL_FIELD } from 'routes/record/constants';
