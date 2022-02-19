@@ -1,4 +1,4 @@
-import { combineReducers, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { Term } from 'types/Term';
 import { termAdapter } from './adapters';
 
@@ -49,8 +49,4 @@ export const tableSlice = createSlice({
       ...payload,
     }),
   },
-});
-
-export const recordsReducer = combineReducers({
-  table: tableSlice.reducer,
 });
