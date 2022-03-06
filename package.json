@@ -15,7 +15,7 @@
     "react-router-dom": "6.2.1",
     "styled-components": "5.3.3",
     "web-vitals": "1.1.2",
-    "workbox-precaching": "6.4.2"
+    "workbox-precaching": "6.5.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "5.16.2",
