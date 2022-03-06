@@ -26,7 +26,7 @@
     "@types/ramda": "0.28.0",
     "@types/react": "17.0.39",
     "@types/react-dom": "17.0.13",
-    "@types/styled-components": "5.1.22",
+    "@types/styled-components": "5.1.24",
     "eslint-config-george-lint": "1.0.8",
     "eslint-plugin-jest": "26.1.1",
     "gh-pages": "3.2.3",
