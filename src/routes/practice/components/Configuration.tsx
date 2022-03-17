@@ -13,6 +13,7 @@ export const Configuration: VFC = () => {
   const [config, setConfig] = useState<Config>({
     scoreAlgorithm: ScoreAlgorithm.relative,
     playAfterReveal: false,
+    ignoreScoreOfNewTerms: false,
   });
 
   const terms = useTypedSelector(selectAll);
@@ -21,9 +22,9 @@ export const Configuration: VFC = () => {
     dispatch(sessionSlice.actions.start(config, terms));
   };
 
-  const update = (newConfig: Partial<Config>) => setConfig(c => ({ ...c, ...newConfig }));
+  const update = (newConfig: Partial<Config>) => setConfig(prevConfig => ({ ...prevConfig, ...newConfig }));
 
-  const { scoreAlgorithm, playAfterReveal } = config;
+  const { scoreAlgorithm, playAfterReveal, ignoreScoreOfNewTerms } = config;
   return (
     <>
       <Select
@@ -39,6 +40,12 @@ export const Configuration: VFC = () => {
         checkedChildren="Play word after reveal"
         unCheckedChildren="Play word after reveal"
         onChange={checked => update({ playAfterReveal: checked })}
+      />
+      <Switch
+        checked={ignoreScoreOfNewTerms}
+        checkedChildren="Score will ignore for new terms"
+        unCheckedChildren="Score won't ignore for new terms"
+        onChange={checked => update({ ignoreScoreOfNewTerms: checked })}
       />
       <Button onClick={handleStartSessionButtonClick}>Start session</Button>
     </>

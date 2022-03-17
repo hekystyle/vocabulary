@@ -9,6 +9,7 @@ import { ScoreAlgorithm, SCORE_ALGO_MAP } from './constants';
 export interface Config {
   scoreAlgorithm: ScoreAlgorithm;
   playAfterReveal: boolean;
+  ignoreScoreOfNewTerms: boolean;
 }
 
 export interface SessionState {
@@ -37,12 +38,13 @@ export const sessionSlice = createSlice({
         isRevealed: false,
       }),
       prepare: (config: Config, terms: Term[]) => {
+        const { ignoreScoreOfNewTerms, scoreAlgorithm } = config;
         const filteredTerms = terms.filter(p => hasTranslation(p) || hasDefinition(p));
 
         const computedRecords = filteredTerms
-          .map(r => ({
-            id: r.id,
-            score: r.answersCount >= 10 ? SCORE_ALGO_MAP[config.scoreAlgorithm](r) : 0,
+          .map(term => ({
+            id: term.id,
+            score: ignoreScoreOfNewTerms && term.answersCount < 10 ? 0 : SCORE_ALGO_MAP[scoreAlgorithm](term),
           }))
           .sort((a, b) => b.score - a.score);
 
