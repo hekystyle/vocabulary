@@ -5,32 +5,25 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import { loadState, persistState } from 'persistence';
 import { HashRouter } from 'react-router-dom';
-import { termAdapter } from 'routes/list/adapters';
+import { DataMigration } from 'containers/DataMigration';
 import { rootReducer } from './reducer';
 import reportWebVitals from './reportWebVitals';
 import { App } from './App';
 
 const store = configureStore({
   reducer: rootReducer,
-  preloadedState: {
-    dictionary: termAdapter.setMany(termAdapter.getInitialState(), loadState() ?? []),
-  },
-});
-
-store.subscribe(() => {
-  const state = store.getState();
-  persistState(termAdapter.getSelectors().selectAll(state.dictionary));
 });
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <HashRouter>
-        <App />
-      </HashRouter>
-    </Provider>
+    <DataMigration>
+      <Provider store={store}>
+        <HashRouter>
+          <App />
+        </HashRouter>
+      </Provider>
+    </DataMigration>
   </React.StrictMode>,
   document.getElementById('root'),
 );

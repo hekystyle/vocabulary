@@ -1,9 +1,10 @@
+import { useRequest } from 'ahooks';
 import { Select, Switch } from 'antd';
 import { Button } from 'components/Button';
-import { useTypedSelector } from 'hooks/useTypedSelector';
+import { SpinnerBox } from 'components/SpinnerBox';
 import { useState, VFC } from 'react';
 import { useDispatch } from 'react-redux';
-import { selectAll } from 'routes/list/adapters';
+import { prepareSessionQueue } from '../api/prepareSessionQueue';
 import { ScoreAlgorithm } from '../constants';
 import { Config, sessionSlice } from '../reducer';
 
@@ -16,13 +17,20 @@ export const Configuration: VFC = () => {
     ignoreScoreOfNewTerms: false,
   });
 
-  const terms = useTypedSelector(selectAll);
+  const { loading, runAsync: runPrepareSessionQueue } = useRequest(prepareSessionQueue, { manual: true });
 
-  const handleStartSessionButtonClick = () => {
-    dispatch(sessionSlice.actions.start(config, terms));
+  const handleStartSessionButtonClick = async () => {
+    try {
+      const queue = await runPrepareSessionQueue(config);
+      dispatch(sessionSlice.actions.start({ config, queue }));
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const update = (newConfig: Partial<Config>) => setConfig(prevConfig => ({ ...prevConfig, ...newConfig }));
+
+  if (loading) return <SpinnerBox>Preparing practice session queue ...</SpinnerBox>;
 
   const { scoreAlgorithm, playAfterReveal, ignoreScoreOfNewTerms } = config;
   return (

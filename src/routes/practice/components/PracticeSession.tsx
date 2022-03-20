@@ -4,12 +4,14 @@ import styled from 'styled-components';
 import { Button } from 'components/Button';
 import { Card } from 'components/Card';
 import { useTypedSelector } from 'hooks/useTypedSelector';
-import { dictionarySlice } from 'routes/list/slices';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { RETURN_URL_FIELD } from 'routes/record/constants';
-import { sessionSlice } from '../reducer';
+import { getTerm } from 'routes/record/api/getTerm';
+import { useRequest } from 'ahooks';
 import { useSpeech } from '../useSpeech';
-import { selectActualRecord, selectIsAnswerRevealed, selectPlayAfterReveal } from '../selectors';
+import { selectLastQueueId, selectIsAnswerRevealed, selectPlayAfterReveal } from '../selectors';
+import { sessionSlice } from '../reducer';
+import { increaseTermAnswers } from '../api/increaseTermAnswers';
 
 const OverflowableCardBody = styled(Card.Body)`
   overflow: auto;
@@ -27,23 +29,22 @@ export const PracticeSession: VFC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { speak } = useSpeech();
-  const actualRecord = useTypedSelector(selectActualRecord);
+  const actualRecordId = useTypedSelector(selectLastQueueId);
   const isAnswerRevealed = useTypedSelector(selectIsAnswerRevealed);
   const playAfterReveal = useTypedSelector(selectPlayAfterReveal);
+
+  const { data: actualRecord } = useRequest(getTerm, { defaultParams: [actualRecordId] });
+
+  const { runAsync: increaseAnswersCount } = useRequest(increaseTermAnswers, { manual: true });
 
   const handleRevealAnswer = () => {
     dispatch(sessionSlice.actions.reveal());
     if (actualRecord && playAfterReveal) speak(actualRecord.word);
   };
 
-  const handleAnswerButtonClick = (isCorrect: boolean) => {
-    if (actualRecord)
-      dispatch(
-        dictionarySlice.actions.answer({
-          isCorrect,
-          entity: actualRecord,
-        }),
-      );
+  const handleAnswerButtonClick = async (isCorrect: boolean) => {
+    if (actualRecord?.id === undefined) return;
+    await increaseAnswersCount(actualRecord.id, isCorrect);
     dispatch(sessionSlice.actions.next());
   };
 
@@ -52,7 +53,7 @@ export const PracticeSession: VFC = () => {
   };
 
   const handleEditButtonClick = () => {
-    if (actualRecord)
+    if (actualRecord?.id)
       navigate(`/record/${actualRecord.id}`, {
         state: {
           [RETURN_URL_FIELD]: pathname,
