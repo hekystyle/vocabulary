@@ -33,7 +33,9 @@ export const PracticeSession: VFC = () => {
   const isAnswerRevealed = useTypedSelector(selectIsAnswerRevealed);
   const playAfterReveal = useTypedSelector(selectPlayAfterReveal);
 
-  const { data: actualRecord } = useRequest(getTerm, { defaultParams: [actualRecordId] });
+  const { data: actualRecord } = useRequest(() => getTerm(actualRecordId), {
+    refreshDeps: [actualRecordId],
+  });
 
   const { runAsync: increaseAnswersCount } = useRequest(increaseTermAnswers, { manual: true });
 

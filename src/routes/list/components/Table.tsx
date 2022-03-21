@@ -48,8 +48,8 @@ export const ListTable: VFC = () => {
     data,
     loading,
     refresh: refreshTerms,
-  } = useRequest(getTerms, {
-    defaultParams: [{ pageSize: PAGE_SIZE, page: currentPage }],
+  } = useRequest(() => getTerms({ pageSize: PAGE_SIZE, page: currentPage }), {
+    refreshDeps: [PAGE_SIZE, currentPage],
   });
 
   const { loading: deleting, runAsync: deleteAsync } = useRequest(deleteTerm, { manual: true });

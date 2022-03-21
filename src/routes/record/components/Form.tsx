@@ -24,8 +24,8 @@ export const Form: VFC<FormProps> = ({ term, onCancel, onSubmit }) => {
   });
 
   const { data: partOfSpeechOptions } = useRequest(getUniquePartOfSpeechOptions);
-  const { data: wordsOptions } = useRequest(getTermWordsOptions, {
-    defaultParams: [entry.word],
+  const { data: wordsOptions } = useRequest(() => getTermWordsOptions(entry.word), {
+    refreshDeps: [entry.word],
   });
 
   const handleChange = (values: Partial<Term>) => setEntry(prevEntry => ({ ...prevEntry, ...values }));

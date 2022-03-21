@@ -18,8 +18,8 @@ export const RecordPage: VFC = () => {
     loading,
     error,
     data: term,
-  } = useRequest(getTerm, {
-    defaultParams: [serializedId ? parseInt(serializedId) : undefined],
+  } = useRequest(async () => (serializedId ? getTerm(parseInt(serializedId)) : undefined), {
+    refreshDeps: [serializedId],
   });
 
   const { loading: creating, runAsync: create } = useRequest(createTerm, { manual: true });
@@ -46,6 +46,6 @@ export const RecordPage: VFC = () => {
 
   if (loading || creating || updating) return <SpinnerBox />;
   if (error) return <p>Error: {error.message}</p>;
-  if (term === undefined) return <p>Term not found by ID: {serializedId}</p>;
+  if (serializedId && term === undefined) return <p>Term not found by ID: {serializedId}</p>;
   return <Form term={term} onCancel={handleCancel} onSubmit={handleSubmit} />;
 };
