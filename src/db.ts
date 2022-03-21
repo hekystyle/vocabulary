@@ -9,7 +9,13 @@ class AppDb extends Dexie {
   constructor() {
     super('Vocabulary');
     this.version(1).stores({
-      terms: '++id', // Primary key and indexed props
+      terms: '++id', // [primary key, ...indexed props]
+    });
+    this.version(2).stores({
+      terms: '++id, createdAt',
+    });
+    this.version(3).stores({
+      terms: '++id, word, createdAt',
     });
     this.terms.hook('creating', (_, term) => {
       term.createdAt = new Date();
