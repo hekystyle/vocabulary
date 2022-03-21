@@ -24,9 +24,7 @@ export const prepareSessionQueue = async ({
 
   computed.sort((a, b) => b.score - a.score);
 
-  const queue = groupWith((a, b) => a.score === b.score, computed)
+  return groupWith((a, b) => a.score === b.score, computed)
     .map(list => shuffle(list))
-    .reduce<(undefined | number)[]>((currentStack, newTerms) => [...currentStack, ...newTerms.map(p => p.id)], []);
-
-  return queue;
+    .reduce<(undefined | number)[]>((queue, newTerms) => [...queue, ...newTerms.map(p => p.id)], []);
 };
