@@ -25,7 +25,7 @@ jobs:
           cache: "yarn"
 
       - name: Restore node_modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
@@ -44,7 +44,7 @@ jobs:
           cache: "yarn"
 
       - name: Restore node_modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
@@ -52,7 +52,7 @@ jobs:
       - run: yarn run build
 
       - name: Cache build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: build
           key: build-${{ github.sha }}
@@ -69,7 +69,7 @@ jobs:
           cache: "yarn"
 
       - name: Restore node_modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
@@ -88,13 +88,13 @@ jobs:
           node-version: 14.x
 
       - name: Restore node_modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
       - name: Restore build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: build
           key: build-${{ github.sha }}
