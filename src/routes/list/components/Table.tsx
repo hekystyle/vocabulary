@@ -3,15 +3,18 @@ import { ColumnsType } from 'antd/lib/table';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import { Table } from 'components/Table';
-import { useMemo, VFC } from 'react';
+import { useCallback, useMemo, VFC } from 'react';
+import { useRequest } from 'ahooks';
+import { SpinnerBox } from 'components/SpinnerBox';
 import { tableSlice } from '../slices';
 import { Term } from '../../../types/Term';
 import { AddButton } from './table/AddButton';
-import { Actions } from './table/Actions';
+import { Actions, ActionsProps } from './table/Actions';
 import { selectCurrentPage } from '../selectors';
-import { selectAll } from '../adapters';
+import { getTerms } from '../api/getTerms';
+import { deleteTerm } from '../api/deleteTerm';
 
-const getColumns = (): ColumnsType<Term> => [
+const getColumns = ({ onDelete }: Pick<ActionsProps, 'onDelete'>): ColumnsType<Term> => [
   {
     key: 'word',
     title: 'Word',
@@ -30,20 +33,54 @@ const getColumns = (): ColumnsType<Term> => [
   {
     key: 'actions',
     title: () => <AddButton />,
-    render: (_, record) => <Actions record={record} />,
+    render: (_, record) => <Actions record={record} onDelete={onDelete} />,
   },
 ];
 
+const PAGE_SIZE = 20 as const;
+
 export const ListTable: VFC = () => {
   const dispatch = useDispatch();
-  const columns = useMemo(() => getColumns(), []);
-  const items = useTypedSelector(selectAll);
   const currentPage = useTypedSelector(selectCurrentPage);
+
+  const {
+    error,
+    data,
+    loading,
+    refresh: refreshTerms,
+  } = useRequest(() => getTerms({ pageSize: PAGE_SIZE, page: currentPage }), {
+    refreshDeps: [PAGE_SIZE, currentPage],
+  });
+
+  const { loading: deleting, runAsync: deleteAsync } = useRequest(deleteTerm, { manual: true });
+
+  const handleDelete: ActionsProps['onDelete'] = useCallback(
+    async term => {
+      if (term.id === undefined) return;
+      try {
+        await deleteAsync(term.id);
+        refreshTerms();
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    [deleteAsync, refreshTerms],
+  );
+
+  const columns = useMemo(() => getColumns({ onDelete: handleDelete }), [handleDelete]);
+
+  if (loading || deleting) return <SpinnerBox />;
+
+  if (error) return <p>Error: {error.message}</p>;
+
+  const { terms, total } = data ?? {};
   return (
     <Table
       columns={columns}
-      dataSource={items}
+      dataSource={terms}
       pagination={{
+        total,
+        pageSize: PAGE_SIZE,
         defaultCurrent: currentPage,
         onChange: page => dispatch(tableSlice.actions.update({ page })),
       }}

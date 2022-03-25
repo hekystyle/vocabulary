@@ -6,7 +6,7 @@
         "name": "typescript-styled-plugin"
       }
     ],
-    "target": "es5",
+    "target": "esnext",
     "lib": [
       "dom",
       "dom.iterable",

@@ -1,10 +1,10 @@
 import { isObject } from 'utils/isObject';
-import { Term } from './Term';
+import { TermV1 } from './Term';
 
-export function isTerm(val: unknown): val is Term {
+export function isTermV1(val: unknown): val is TermV1 {
   if (!isObject(val)) return false;
 
-  const term = val as Record<keyof Term, unknown>;
+  const term = val as Record<keyof TermV1, unknown>;
 
   return (
     typeof term.id === 'number' &&
