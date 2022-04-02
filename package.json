@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "4.7.0",
-    "@reduxjs/toolkit": "1.8.0",
+    "@reduxjs/toolkit": "1.8.1",
     "ahooks": "3.3.0",
     "antd": "4.19.4",
     "bootstrap": "5.1.3",
