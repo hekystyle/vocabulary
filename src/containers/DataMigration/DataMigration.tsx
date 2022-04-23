@@ -1,25 +1,13 @@
-import { db } from 'db';
-import { loadState, VOCABULARY_KEY } from 'persistence';
 import { FC, useEffect, useState } from 'react';
 import { SpinnerBox } from 'components/SpinnerBox';
 import styled from 'styled-components';
+import * as v20220319144900 from './migrations/20220319144900';
 
-type Migration = () => Promise<void>;
+export type Migration = () => Promise<void>;
 type MigrationsMap = Record<'20220319144900', Migration>;
 
 const MIGRATIONS: Readonly<MigrationsMap> = {
-  '20220319144900': async () => {
-    const terms = loadState();
-    if (terms === undefined) return;
-    for (const term of terms) {
-      await db.terms.add({
-        ...term,
-        id: undefined,
-        createdAt: new Date(term.id),
-      });
-    }
-    localStorage.removeItem(VOCABULARY_KEY);
-  },
+  '20220319144900': v20220319144900.up,
 };
 
 async function migrate() {
@@ -33,7 +21,7 @@ const useMigration = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    migrate().then(() => setLoading(false));
+    migrate().finally(() => setLoading(false));
   });
 
   return {
