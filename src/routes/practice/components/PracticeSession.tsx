@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Button } from 'components/Button';
@@ -24,7 +24,7 @@ const Row = styled.div`
   gap: 1rem;
 `;
 
-export const PracticeSession: VFC = () => {
+export const PracticeSession: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { pathname } = useLocation();

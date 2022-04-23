@@ -1,4 +1,4 @@
-import { useEffect, useState, VFC } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { DictionaryApi, Word } from 'services/dictionaryApi';
 import styled from 'styled-components';
 
@@ -12,7 +12,7 @@ export interface DefinitionsListProps {
   onDefinitionClick?: (values: { partOfSpeech: string; definition: string }) => void;
 }
 
-export const DefinitionsList: VFC<DefinitionsListProps> = props => {
+export const DefinitionsList: FC<DefinitionsListProps> = props => {
   const { word, onPartOfSpeechClick, onDefinitionClick } = props;
   const [entry, setEntry] = useState<Word | undefined>();
 

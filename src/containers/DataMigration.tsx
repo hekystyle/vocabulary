@@ -48,7 +48,7 @@ const StyledLayout = styled.div`
   justify-content: center;
 `;
 
-export const DataMigration: FC = ({ children }) => {
+export const DataMigration: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { loading } = useMigration();
 
   return loading ? (

@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import React, { FC } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 
@@ -18,7 +18,7 @@ const navItems: NavLink[] = [
   },
 ];
 
-export const NavBar: VFC = () => {
+export const NavBar: FC = () => {
   const navigate = useNavigate();
 
   const { pathname } = useLocation();

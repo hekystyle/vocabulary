@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 import { Table as AntdTable, TableProps } from 'antd';
 
@@ -11,5 +11,5 @@ const StyledTable = styled(AntdTable)<TableProps<any>>`
 `;
 
 export function Table<T>(props: TableProps<T>): JSX.Element {
-  return <StyledTable<VFC<TableProps<T>>> {...props} />;
+  return <StyledTable<FC<TableProps<T>>> {...props} />;
 }

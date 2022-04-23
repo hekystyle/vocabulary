@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
@@ -15,8 +15,11 @@ const store = configureStore({
   reducer: rootReducer,
 });
 
-ReactDOM.render(
-  <React.StrictMode>
+const container = document.getElementById('root');
+if (container === null) throw new Error('Root element not found');
+const root = createRoot(container);
+root.render(
+  <StrictMode>
     <DataMigration>
       <Provider store={store}>
         <HashRouter>
@@ -24,8 +27,7 @@ ReactDOM.render(
         </HashRouter>
       </Provider>
     </DataMigration>
-  </React.StrictMode>,
-  document.getElementById('root'),
+  </StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { ListTable } from './components/Table';
 
-export const ListPage: VFC = () => <ListTable />;
+export const ListPage: FC = () => <ListTable />;

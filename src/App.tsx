@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import { NavBar } from 'components/NavBar';
@@ -18,7 +18,7 @@ const StyledContent = styled.div`
   overflow: auto;
 `;
 
-export const App: VFC = () => (
+export const App: FC = () => (
   <StyledApp className="bg-dark">
     <NavBar />
     <StyledContent>

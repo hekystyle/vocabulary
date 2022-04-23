@@ -1,4 +1,4 @@
-import { useState, VFC } from 'react';
+import { useState, FC } from 'react';
 import { Button, Input, AutoComplete } from 'antd';
 import { Term } from 'types/Term';
 import { useRequest } from 'ahooks';
@@ -12,7 +12,7 @@ export interface FormProps {
   onCancel: () => void;
 }
 
-export const Form: VFC<FormProps> = ({ term, onCancel, onSubmit }) => {
+export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
   const [entry, setEntry] = useState<Term>({
     word: '',
     partOfSpeech: '',
