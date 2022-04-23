@@ -2,13 +2,13 @@ import { useRequest } from 'ahooks';
 import { Select, Switch } from 'antd';
 import { Button } from 'components/Button';
 import { SpinnerBox } from 'components/SpinnerBox';
-import { useState, VFC } from 'react';
+import { useState, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { prepareSessionQueue } from '../api/prepareSessionQueue';
 import { ScoreAlgorithm } from '../constants';
 import { Config, sessionSlice } from '../reducer';
 
-export const Configuration: VFC = () => {
+export const Configuration: FC = () => {
   const dispatch = useDispatch();
 
   const [config, setConfig] = useState<Config>({

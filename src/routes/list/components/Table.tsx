@@ -3,7 +3,7 @@ import { ColumnsType } from 'antd/lib/table';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import { Table } from 'components/Table';
-import { useCallback, useMemo, VFC } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { useRequest } from 'ahooks';
 import { SpinnerBox } from 'components/SpinnerBox';
 import { tableSlice } from '../slices';
@@ -39,7 +39,7 @@ const getColumns = ({ onDelete }: Pick<ActionsProps, 'onDelete'>): ColumnsType<T
 
 const PAGE_SIZE = 20 as const;
 
-export const ListTable: VFC = () => {
+export const ListTable: FC = () => {
   const dispatch = useDispatch();
   const currentPage = useTypedSelector(selectCurrentPage);
 

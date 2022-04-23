@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { isObject } from 'utils/isObject';
 import { useRequest } from 'ahooks';
@@ -9,7 +9,7 @@ import { getTerm } from './api/getTerm';
 import { createTerm } from './api/createTerm';
 import { updateTerm } from './api/updateTerm';
 
-export const RecordPage: VFC = () => {
+export const RecordPage: FC = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const { id: serializedId } = useParams<{ id?: string }>();

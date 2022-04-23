@@ -1,8 +1,8 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { RecordPage } from './Page';
 
-export const RecordRouter: VFC = () => (
+export const RecordRouter: FC = () => (
   <Routes>
     <Route element={<RecordPage />} path=":id" />
     <Route element={<RecordPage />} path="" />

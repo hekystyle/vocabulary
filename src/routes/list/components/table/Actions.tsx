@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, Popconfirm } from 'antd';
@@ -9,7 +9,7 @@ export interface ActionsProps {
   onDelete: (term: Term) => void;
 }
 
-export const Actions: VFC<ActionsProps> = ({ record, onDelete }) => {
+export const Actions: FC<ActionsProps> = ({ record, onDelete }) => {
   const navigate = useNavigate();
 
   return (
