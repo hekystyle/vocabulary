@@ -27,7 +27,7 @@
     "@types/node": "16.11.33",
     "@types/ramda": "0.28.12",
     "@types/react": "18.0.9",
-    "@types/react-dom": "18.0.3",
+    "@types/react-dom": "18.0.5",
     "@types/styled-components": "5.1.24",
     "eslint-config-george-lint": "1.0.8",
     "eslint-plugin-jest": "26.2.2",
