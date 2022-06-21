@@ -21,7 +21,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: lts/*
           cache: "yarn"
 
       - name: Restore node_modules
@@ -40,7 +40,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: lts/*
           cache: "yarn"
 
       - name: Restore node_modules
@@ -65,7 +65,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: lts/*
           cache: "yarn"
 
       - name: Restore node_modules
@@ -85,7 +85,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: lts/*
 
       - name: Restore node_modules
         uses: actions/cache@v3
