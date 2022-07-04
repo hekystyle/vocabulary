@@ -1,4 +1,4 @@
-import { db } from 'db';
+import { AppDb } from 'db';
 import { isArrayOf } from 'utils/isArrayOf';
 import { TermV1 } from 'types/Term';
 import { isTermV1 } from 'types/isTerm';
@@ -16,7 +16,7 @@ function loadState(): TermV1[] | undefined {
   return isArrayOf(value, isTermV1) ? value : undefined;
 }
 
-export const up: Migration = async () => {
+export const up: Migration = async (db: AppDb) => {
   const terms = loadState();
   if (terms === undefined) return;
   for (const term of terms) {
