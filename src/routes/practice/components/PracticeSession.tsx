@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { RETURN_URL_FIELD } from 'routes/record/constants';
 import { getTerm } from 'routes/record/api/getTerm';
 import { useRequest } from 'ahooks';
+import { useServices } from 'services/di';
 import { useSpeech } from '../useSpeech';
 import { selectLastQueueId, selectIsAnswerRevealed, selectPlayAfterReveal } from '../selectors';
 import { sessionSlice } from '../reducer';
@@ -29,15 +30,16 @@ export const PracticeSession: FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { speak } = useSpeech();
+  const { db } = useServices();
   const actualRecordId = useTypedSelector(selectLastQueueId);
   const isAnswerRevealed = useTypedSelector(selectIsAnswerRevealed);
   const playAfterReveal = useTypedSelector(selectPlayAfterReveal);
 
-  const { data: actualRecord } = useRequest(() => getTerm(actualRecordId), {
+  const { data: actualRecord } = useRequest(() => getTerm(db)(actualRecordId), {
     refreshDeps: [actualRecordId],
   });
 
-  const { runAsync: increaseAnswersCount } = useRequest(increaseTermAnswers, { manual: true });
+  const { runAsync: increaseAnswersCount } = useRequest(increaseTermAnswers(db), { manual: true });
 
   const handleRevealAnswer = () => {
     dispatch(sessionSlice.actions.reveal());

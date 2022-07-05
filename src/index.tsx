@@ -7,6 +7,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import { DataMigration } from 'containers/DataMigration';
+import { SERVICES, ServicesProvider } from 'services/di';
 import { rootReducer } from './reducer';
 import reportWebVitals from './reportWebVitals';
 import { App } from './App';
@@ -20,13 +21,15 @@ if (container === null) throw new Error('Root element not found');
 const root = createRoot(container);
 root.render(
   <StrictMode>
-    <DataMigration>
-      <Provider store={store}>
-        <HashRouter>
-          <App />
-        </HashRouter>
-      </Provider>
-    </DataMigration>
+    <ServicesProvider services={SERVICES}>
+      <DataMigration>
+        <Provider store={store}>
+          <HashRouter>
+            <App />
+          </HashRouter>
+        </Provider>
+      </DataMigration>
+    </ServicesProvider>
   </StrictMode>,
 );
 

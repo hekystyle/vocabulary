@@ -6,6 +6,7 @@ import { Table } from 'components/Table';
 import { FC, useCallback, useMemo } from 'react';
 import { useRequest } from 'ahooks';
 import { SpinnerBox } from 'components/SpinnerBox';
+import { useServices } from 'services/di';
 import { tableSlice } from '../slices';
 import { Term } from '../../../types/Term';
 import { AddButton } from './table/AddButton';
@@ -42,17 +43,18 @@ const PAGE_SIZE = 20 as const;
 export const ListTable: FC = () => {
   const dispatch = useDispatch();
   const currentPage = useTypedSelector(selectCurrentPage);
+  const { db } = useServices();
 
   const {
     error,
     data,
     loading,
     refresh: refreshTerms,
-  } = useRequest(() => getTerms({ pageSize: PAGE_SIZE, page: currentPage }), {
+  } = useRequest(() => getTerms(db)({ pageSize: PAGE_SIZE, page: currentPage }), {
     refreshDeps: [PAGE_SIZE, currentPage],
   });
 
-  const { loading: deleting, runAsync: deleteAsync } = useRequest(deleteTerm, { manual: true });
+  const { loading: deleting, runAsync: deleteAsync } = useRequest(deleteTerm(db), { manual: true });
 
   const handleDelete: ActionsProps['onDelete'] = useCallback(
     async term => {

@@ -2,6 +2,7 @@ import { useState, FC } from 'react';
 import { Button, Input, AutoComplete } from 'antd';
 import { Term } from 'types/Term';
 import { useRequest } from 'ahooks';
+import { useServices } from 'services/di';
 import { DefinitionsList } from './DefinitionsList';
 import { getUniquePartOfSpeechOptions } from '../api/getUniquePartsOfSpeech';
 import { getTermWordsOptions } from '../api/getTermWords';
@@ -13,6 +14,8 @@ export interface FormProps {
 }
 
 export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
+  const { db } = useServices();
+
   const [entry, setEntry] = useState<Term>({
     word: '',
     partOfSpeech: '',
@@ -23,8 +26,8 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
     ...(term ?? {}),
   });
 
-  const { data: partOfSpeechOptions } = useRequest(getUniquePartOfSpeechOptions);
-  const { data: wordsOptions } = useRequest(() => getTermWordsOptions(entry.word), {
+  const { data: partOfSpeechOptions } = useRequest(getUniquePartOfSpeechOptions(db));
+  const { data: wordsOptions } = useRequest(() => getTermWordsOptions(db)(entry.word), {
     refreshDeps: [entry.word],
   });
 

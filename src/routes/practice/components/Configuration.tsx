@@ -4,12 +4,14 @@ import { Button } from 'components/Button';
 import { SpinnerBox } from 'components/SpinnerBox';
 import { useState, FC } from 'react';
 import { useDispatch } from 'react-redux';
+import { useServices } from 'services/di';
 import { prepareSessionQueue } from '../api/prepareSessionQueue';
 import { ScoreAlgorithm } from '../constants';
 import { Config, sessionSlice } from '../reducer';
 
 export const Configuration: FC = () => {
   const dispatch = useDispatch();
+  const { db } = useServices();
 
   const [config, setConfig] = useState<Config>({
     scoreAlgorithm: ScoreAlgorithm.relative,
@@ -17,7 +19,7 @@ export const Configuration: FC = () => {
     ignoreScoreOfNewTerms: false,
   });
 
-  const { loading, runAsync: runPrepareSessionQueue } = useRequest(prepareSessionQueue, { manual: true });
+  const { loading, runAsync: runPrepareSessionQueue } = useRequest(prepareSessionQueue(db), { manual: true });
 
   const handleStartSessionButtonClick = async () => {
     try {

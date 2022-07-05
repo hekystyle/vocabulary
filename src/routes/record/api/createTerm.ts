@@ -1,7 +1,9 @@
-import { db } from 'db';
+import { AppDb } from 'db';
 import { Term } from 'types/Term';
 
-export const createTerm = async (term: Term): Promise<undefined | Term> => {
-  const key = await db.terms.add(term);
-  return await db.terms.get(key);
-};
+export const createTerm =
+  (db: AppDb) =>
+  async (term: Term): Promise<undefined | Term> => {
+    const key = await db.terms.add(term);
+    return await db.terms.get(key);
+  };

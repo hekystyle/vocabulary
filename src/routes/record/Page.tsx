@@ -3,6 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { isObject } from 'utils/isObject';
 import { useRequest } from 'ahooks';
 import { SpinnerBox } from 'components/SpinnerBox';
+import { useServices } from 'services/di';
 import { hasReturnUrlField } from './utils/hasReturnUrlField';
 import { Form, FormProps } from './components/Form';
 import { getTerm } from './api/getTerm';
@@ -12,18 +13,19 @@ import { updateTerm } from './api/updateTerm';
 export const RecordPage: FC = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
+  const { db } = useServices();
   const { id: serializedId } = useParams<{ id?: string }>();
 
   const {
     loading,
     error,
     data: term,
-  } = useRequest(async () => (serializedId ? getTerm(parseInt(serializedId)) : undefined), {
+  } = useRequest(async () => (serializedId ? getTerm(db)(parseInt(serializedId)) : undefined), {
     refreshDeps: [serializedId],
   });
 
-  const { loading: creating, runAsync: create } = useRequest(createTerm, { manual: true });
-  const { loading: updating, runAsync: update } = useRequest(updateTerm, { manual: true });
+  const { loading: creating, runAsync: create } = useRequest(createTerm(db), { manual: true });
+  const { loading: updating, runAsync: update } = useRequest(updateTerm(db), { manual: true });
 
   const navigateBack = () => {
     if (isObject(state) && hasReturnUrlField(state)) {
