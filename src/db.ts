@@ -1,7 +1,7 @@
 import Dexie, { Table } from 'dexie';
 import { Term } from 'types/Term';
 
-class AppDb extends Dexie {
+export class AppDb extends Dexie {
   // 'friends' is added by dexie when declaring the stores()
   // We just tell the typing system this is the case
   terms!: Table<Term, number>;
@@ -22,5 +22,3 @@ class AppDb extends Dexie {
     });
   }
 }
-
-export const db = new AppDb();

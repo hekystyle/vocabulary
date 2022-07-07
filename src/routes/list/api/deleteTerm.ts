@@ -1,5 +1,7 @@
-import { db } from 'db';
+import { AppDb } from 'db';
 
-export const deleteTerm = async (id: number): Promise<void> => {
-  await db.terms.delete(id);
-};
+export const deleteTerm =
+  (db: AppDb) =>
+  async (id: number): Promise<void> => {
+    await db.terms.delete(id);
+  };
