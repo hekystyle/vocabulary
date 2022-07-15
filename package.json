@@ -22,7 +22,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.3.0",
-    "@testing-library/user-event": "14.2.1",
+    "@testing-library/user-event": "14.2.5",
     "@types/jest": "27.5.2",
     "@types/node": "16.11.43",
     "@types/ramda": "0.28.15",
