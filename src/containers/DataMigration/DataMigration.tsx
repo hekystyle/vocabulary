@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { SpinnerBox } from 'components/SpinnerBox';
 import styled from 'styled-components';
-import { AppDb } from 'db';
+import { AppDb } from 'services/db';
 import { useServices } from 'services/di';
 import * as v20220319144900 from './migrations/20220319144900';
 

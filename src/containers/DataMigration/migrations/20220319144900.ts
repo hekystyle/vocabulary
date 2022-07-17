@@ -1,4 +1,4 @@
-import { AppDb } from 'db';
+import { AppDb } from 'services/db';
 import { isArrayOf } from 'utils/isArrayOf';
 import { TermV1 } from 'types/Term';
 import { isTermV1 } from 'types/isTerm';

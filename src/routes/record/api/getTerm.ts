@@ -1,4 +1,4 @@
-import { AppDb } from 'db';
+import { AppDb } from 'services/db';
 import { Term } from 'types/Term';
 
 export const getTerm =

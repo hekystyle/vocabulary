@@ -13,7 +13,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { QUERY_CLIENT } from 'services/query';
 import { rootReducer } from './reducer';
 import reportWebVitals from './reportWebVitals';
-import { App } from './App';
+import { App } from './containers/App';
 
 const store = configureStore({
   reducer: rootReducer,

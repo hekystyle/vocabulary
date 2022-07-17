@@ -1,5 +1,5 @@
 import { DefaultOptionType } from 'antd/lib/select';
-import { AppDb } from 'db';
+import { AppDb } from 'services/db';
 import { options } from '../utils/options';
 
 export const getTermWords =

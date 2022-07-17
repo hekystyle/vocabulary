@@ -1,4 +1,4 @@
-import { AppDb } from 'db';
+import { AppDb } from 'services/db';
 import { createContext, createElement, FC, PropsWithChildren, useContext } from 'react';
 
 export type Services = Readonly<{

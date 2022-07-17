@@ -1,4 +1,4 @@
-import { AppDb } from 'db';
+import { AppDb } from 'services/db';
 
 export const deleteTerm =
   (db: AppDb) =>
