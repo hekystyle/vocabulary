@@ -9,10 +9,11 @@ import { RETURN_URL_FIELD } from 'routes/record/constants';
 import { getTerm } from 'routes/record/api/getTerm';
 import { useRequest } from 'ahooks';
 import { useServices } from 'services/di';
+import { useMutation } from 'react-query';
 import { useSpeech } from '../useSpeech';
 import { selectLastQueueId, selectIsAnswerRevealed, selectPlayAfterReveal } from '../selectors';
 import { sessionSlice } from '../reducer';
-import { increaseTermAnswers } from '../api/increaseTermAnswers';
+import { updateTermAnswers } from '../api/updateTermAnswers';
 
 const OverflowableCardBody = styled(Card.Body)`
   overflow: auto;
@@ -39,7 +40,7 @@ export const PracticeSession: FC = () => {
     refreshDeps: [actualRecordId],
   });
 
-  const { runAsync: increaseAnswersCount } = useRequest(increaseTermAnswers(db), { manual: true });
+  const { mutateAsync: updateTermAnswersAsync } = useMutation(updateTermAnswers(db));
 
   const handleRevealAnswer = () => {
     dispatch(sessionSlice.actions.reveal());
@@ -48,7 +49,7 @@ export const PracticeSession: FC = () => {
 
   const handleAnswerButtonClick = async (isCorrect: boolean) => {
     if (actualRecord?.id === undefined) return;
-    await increaseAnswersCount(actualRecord.id, isCorrect);
+    await updateTermAnswersAsync({ id: actualRecord.id, increaseCorrect: isCorrect });
     dispatch(sessionSlice.actions.next());
   };
 
