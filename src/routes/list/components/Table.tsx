@@ -1,19 +1,21 @@
 import { Tooltip } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import { useDispatch } from 'react-redux';
-import { useTypedSelector } from 'hooks/useTypedSelector';
 import { Table } from 'components/Table';
 import { FC, useCallback, useMemo } from 'react';
 import { useRequest } from 'ahooks';
 import { SpinnerBox } from 'components/SpinnerBox';
 import { useServices } from 'services/di';
-import { tableSlice } from '../slices';
+import { atom, useRecoilState } from 'recoil';
 import { Term } from '../../../types/Term';
 import { AddButton } from './table/AddButton';
 import { Actions, ActionsProps } from './table/Actions';
-import { selectCurrentPage } from '../selectors';
 import { getTerms } from '../api/getTerms';
 import { deleteTerm } from '../api/deleteTerm';
+
+const pageState = atom({
+  key: 'terms/list/page',
+  default: 1,
+});
 
 const getColumns = ({ onDelete }: Pick<ActionsProps, 'onDelete'>): ColumnsType<Term> => [
   {
@@ -41,9 +43,8 @@ const getColumns = ({ onDelete }: Pick<ActionsProps, 'onDelete'>): ColumnsType<T
 const PAGE_SIZE = 20 as const;
 
 export const ListTable: FC = () => {
-  const dispatch = useDispatch();
-  const currentPage = useTypedSelector(selectCurrentPage);
   const { db } = useServices();
+  const [currentPage, setCurrentPage] = useRecoilState(pageState);
 
   const {
     error,
@@ -84,7 +85,7 @@ export const ListTable: FC = () => {
         total,
         pageSize: PAGE_SIZE,
         defaultCurrent: currentPage,
-        onChange: page => dispatch(tableSlice.actions.update({ page })),
+        onChange: page => setCurrentPage(page),
       }}
       rowKey="id"
       size="middle"

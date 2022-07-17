@@ -1,8 +1,8 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
 import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
@@ -11,6 +11,7 @@ import { SERVICES, ServicesProvider } from 'services/di';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { QUERY_CLIENT } from 'services/query';
+import { RecoilRoot } from 'recoil';
 import { rootReducer } from './reducer';
 import reportWebVitals from './reportWebVitals';
 import { App } from './containers/App';
@@ -24,18 +25,20 @@ if (container === null) throw new Error('Root element not found');
 const root = createRoot(container);
 root.render(
   <StrictMode>
-    <QueryClientProvider client={QUERY_CLIENT}>
-      <ServicesProvider services={SERVICES}>
-        <DataMigration>
-          <Provider store={store}>
-            <HashRouter>
-              <App />
-            </HashRouter>
-          </Provider>
-        </DataMigration>
-      </ServicesProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={QUERY_CLIENT}>
+        <ServicesProvider services={SERVICES}>
+          <DataMigration>
+            <Provider store={store}>
+              <HashRouter>
+                <App />
+              </HashRouter>
+            </Provider>
+          </DataMigration>
+        </ServicesProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </RecoilRoot>
   </StrictMode>,
 );
 
