@@ -1,12 +1,16 @@
 import { AppDb } from 'services/db';
 import { createContext, createElement, FC, PropsWithChildren, useContext } from 'react';
+import { ITermsApiClient, TermsApiClient } from './terms';
 
 export type Services = Readonly<{
   db: AppDb;
+  termsApiClient: ITermsApiClient;
 }>;
 
+const DB = new AppDb();
 export const SERVICES: Services = {
-  db: new AppDb(),
+  db: DB,
+  termsApiClient: new TermsApiClient(DB),
 };
 
 const ServicesContext = createContext<Services | undefined>(undefined);

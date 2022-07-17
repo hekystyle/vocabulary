@@ -6,7 +6,6 @@ import { Card } from 'components/Card';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { RETURN_URL_FIELD } from 'routes/record/constants';
-import { getTerm } from 'routes/record/api/getTerm';
 import { useRequest } from 'ahooks';
 import { useServices } from 'services/di';
 import { useMutation } from 'react-query';
@@ -31,12 +30,12 @@ export const PracticeSession: FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { speak } = useSpeech();
-  const { db } = useServices();
+  const { db, termsApiClient } = useServices();
   const actualRecordId = useTypedSelector(selectLastQueueId);
   const isAnswerRevealed = useTypedSelector(selectIsAnswerRevealed);
   const playAfterReveal = useTypedSelector(selectPlayAfterReveal);
 
-  const { data: actualRecord } = useRequest(() => getTerm(db)(actualRecordId), {
+  const { data: actualRecord } = useRequest(() => termsApiClient.getOne({ id: actualRecordId }), {
     refreshDeps: [actualRecordId],
   });
 

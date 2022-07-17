@@ -6,21 +6,20 @@ import { SpinnerBox } from 'components/SpinnerBox';
 import { useServices } from 'services/di';
 import { hasReturnUrlField } from './utils/hasReturnUrlField';
 import { Form, FormProps } from './components/Form';
-import { getTerm } from './api/getTerm';
 import { createTerm } from './api/createTerm';
 import { updateTerm } from './api/updateTerm';
 
 export const RecordPage: FC = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const { db } = useServices();
+  const { db, termsApiClient } = useServices();
   const { id: serializedId } = useParams<{ id?: string }>();
 
   const {
     loading,
     error,
     data: term,
-  } = useRequest(async () => (serializedId ? getTerm(db)(parseInt(serializedId)) : undefined), {
+  } = useRequest(async () => (serializedId ? termsApiClient.getOne({ id: parseInt(serializedId) }) : undefined), {
     refreshDeps: [serializedId],
   });
 
