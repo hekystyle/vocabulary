@@ -1,6 +1,8 @@
-import { useEffect, useState, FC } from 'react';
+import { FC } from 'react';
+import { useQuery } from 'react-query';
 import { DictionaryApi, Word } from 'services/dictionaryApi';
 import styled from 'styled-components';
+import { QUERY_KEYS } from 'utils/queryKeys';
 
 const StyledUl = styled.ul`
   color: white;
@@ -14,23 +16,18 @@ export interface DefinitionsListProps {
 
 export const DefinitionsList: FC<DefinitionsListProps> = props => {
   const { word, onPartOfSpeechClick, onDefinitionClick } = props;
-  const [entry, setEntry] = useState<Word | undefined>();
 
-  useEffect(() => {
-    if (word === '') {
-      setEntry(undefined);
-      return () => {};
-    }
-    const api = new DictionaryApi();
-    api
-      .word(word)
-      .then(result => {
-        setEntry(result[0]);
-      })
-      .catch(reason => console.error(reason));
-
-    return () => api.abort();
-  }, [word]);
+  const { data: entry } = useQuery(
+    QUERY_KEYS.dictionary.word(word),
+    async ({ signal }): Promise<Word | undefined> => {
+      const result = await DictionaryApi.word(word, { signal });
+      return result[0];
+    },
+    {
+      onError: error => console.error(error),
+      enabled: word !== '',
+    },
+  );
 
   return (
     <StyledUl>

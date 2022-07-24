@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { isObject } from 'utils/isObject';
-import { useRequest } from 'ahooks';
 import { SpinnerBox } from 'components/SpinnerBox';
 import { useServices } from 'services/di';
+import { useMutation, useQuery } from 'react-query';
+import { QUERY_KEYS } from 'utils/queryKeys';
 import { hasReturnUrlField } from './utils/hasReturnUrlField';
 import { Form, FormProps } from './components/Form';
 import { getTerm } from './api/getTerm';
@@ -15,17 +16,22 @@ export const RecordPage: FC = () => {
   const { state } = useLocation();
   const { db } = useServices();
   const { id: serializedId } = useParams<{ id?: string }>();
+  const id = serializedId ? parseInt(serializedId, 10) : -1;
 
   const {
-    loading,
+    isFetching: loading,
     error,
     data: term,
-  } = useRequest(async () => (serializedId ? getTerm(db)(parseInt(serializedId)) : undefined), {
-    refreshDeps: [serializedId],
+  } = useQuery(QUERY_KEYS.terms.id(id), async () => getTerm(db)(id), {
+    enabled: !Number.isNaN(id) && id > 0,
   });
 
-  const { loading: creating, runAsync: create } = useRequest(createTerm(db), { manual: true });
-  const { loading: updating, runAsync: update } = useRequest(updateTerm(db), { manual: true });
+  const { isLoading: creating, mutateAsync: create } = useMutation(createTerm(db), {
+    onError: e => console.error(e),
+  });
+  const { isLoading: updating, mutateAsync: update } = useMutation(updateTerm(db), {
+    onError: e => console.error(e),
+  });
 
   const navigateBack = () => {
     if (isObject(state) && hasReturnUrlField(state)) {
@@ -47,7 +53,7 @@ export const RecordPage: FC = () => {
   const handleCancel = () => navigateBack();
 
   if (loading || creating || updating) return <SpinnerBox />;
-  if (error) return <p>Error: {error.message}</p>;
+  if (error) return <p>Error: {error instanceof Error ? error.message : 'Unknown'}</p>;
   if (serializedId && term === undefined) return <p>Term not found by ID: {serializedId}</p>;
   return <Form term={term} onCancel={handleCancel} onSubmit={handleSubmit} />;
 };

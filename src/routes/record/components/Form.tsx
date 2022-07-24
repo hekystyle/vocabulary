@@ -1,8 +1,9 @@
 import { useState, FC } from 'react';
 import { Button, Input, AutoComplete } from 'antd';
 import { Term } from 'types/Term';
-import { useRequest } from 'ahooks';
 import { useServices } from 'services/di';
+import { useQuery } from 'react-query';
+import { QUERY_KEYS } from 'utils/queryKeys';
 import { DefinitionsList } from './DefinitionsList';
 import { getUniquePartOfSpeechOptions } from '../api/getUniquePartsOfSpeech';
 import { getTermWordsOptions } from '../api/getTermWords';
@@ -26,10 +27,16 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
     ...(term ?? {}),
   });
 
-  const { data: partOfSpeechOptions } = useRequest(getUniquePartOfSpeechOptions(db));
-  const { data: wordsOptions } = useRequest(() => getTermWordsOptions(db)(entry.word), {
-    refreshDeps: [entry.word],
+  const { data: partOfSpeechOptions } = useQuery(QUERY_KEYS.terms.key, getUniquePartOfSpeechOptions(db), {
+    onError: e => console.error(e),
   });
+  const { data: wordsOptions } = useQuery(
+    QUERY_KEYS.terms.filter({ word: entry.word }),
+    () => getTermWordsOptions(db)(entry.word),
+    {
+      onError: e => console.error(e),
+    },
+  );
 
   const handleChange = (values: Partial<Term>) => setEntry(prevEntry => ({ ...prevEntry, ...values }));
 

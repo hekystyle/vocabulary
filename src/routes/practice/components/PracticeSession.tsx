@@ -7,8 +7,10 @@ import { useTypedSelector } from 'hooks/useTypedSelector';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { RETURN_URL_FIELD } from 'routes/record/constants';
 import { getTerm } from 'routes/record/api/getTerm';
-import { useRequest } from 'ahooks';
 import { useServices } from 'services/di';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { QUERY_KEYS } from 'utils/queryKeys';
+import { Term } from 'types/Term';
 import { useSpeech } from '../useSpeech';
 import { selectLastQueueId, selectIsAnswerRevealed, selectPlayAfterReveal } from '../selectors';
 import { sessionSlice } from '../reducer';
@@ -31,15 +33,22 @@ export const PracticeSession: FC = () => {
   const { pathname } = useLocation();
   const { speak } = useSpeech();
   const { db } = useServices();
+  const queryClient = useQueryClient();
   const actualRecordId = useTypedSelector(selectLastQueueId);
   const isAnswerRevealed = useTypedSelector(selectIsAnswerRevealed);
   const playAfterReveal = useTypedSelector(selectPlayAfterReveal);
 
-  const { data: actualRecord } = useRequest(() => getTerm(db)(actualRecordId), {
-    refreshDeps: [actualRecordId],
+  const { data: actualRecord } = useQuery(QUERY_KEYS.terms.id(actualRecordId), () => getTerm(db)(actualRecordId), {
+    onError: e => console.error(e),
   });
 
-  const { runAsync: increaseAnswersCount } = useRequest(increaseTermAnswers(db), { manual: true });
+  const { mutateAsync: increaseAnswersCount } = useMutation(
+    async ({ id, isCorrect }: { id: Exclude<Term['id'], undefined>; isCorrect: boolean }) =>
+      increaseTermAnswers(db)(id, isCorrect),
+    {
+      onSuccess: (_, { id }) => queryClient.invalidateQueries(QUERY_KEYS.terms.id(id)),
+    },
+  );
 
   const handleRevealAnswer = () => {
     dispatch(sessionSlice.actions.reveal());
@@ -48,7 +57,7 @@ export const PracticeSession: FC = () => {
 
   const handleAnswerButtonClick = async (isCorrect: boolean) => {
     if (actualRecord?.id === undefined) return;
-    await increaseAnswersCount(actualRecord.id, isCorrect);
+    await increaseAnswersCount({ id: actualRecord.id, isCorrect });
     dispatch(sessionSlice.actions.next());
   };
 

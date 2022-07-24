@@ -4,9 +4,10 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import { Table } from 'components/Table';
 import { FC, useCallback, useMemo } from 'react';
-import { useRequest } from 'ahooks';
 import { SpinnerBox } from 'components/SpinnerBox';
 import { useServices } from 'services/di';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { QUERY_KEYS } from 'utils/queryKeys';
 import { tableSlice } from '../slices';
 import { Term } from '../../../types/Term';
 import { AddButton } from './table/AddButton';
@@ -44,36 +45,41 @@ export const ListTable: FC = () => {
   const dispatch = useDispatch();
   const currentPage = useTypedSelector(selectCurrentPage);
   const { db } = useServices();
+  const queryClient = useQueryClient();
 
   const {
     error,
     data,
-    loading,
-    refresh: refreshTerms,
-  } = useRequest(() => getTerms(db)({ pageSize: PAGE_SIZE, page: currentPage }), {
-    refreshDeps: [PAGE_SIZE, currentPage],
-  });
+    isFetching: loading,
+  } = useQuery(
+    QUERY_KEYS.terms.filter({ pageSize: PAGE_SIZE, page: currentPage }),
+    () => getTerms(db)({ pageSize: PAGE_SIZE, page: currentPage }),
+    {
+      onError: e => console.error(e),
+    },
+  );
 
-  const { loading: deleting, runAsync: deleteAsync } = useRequest(deleteTerm(db), { manual: true });
+  const { isLoading: deleting, mutateAsync: deleteAsync } = useMutation(deleteTerm(db), {
+    onSuccess: () => queryClient.invalidateQueries(QUERY_KEYS.terms.key),
+  });
 
   const handleDelete: ActionsProps['onDelete'] = useCallback(
     async term => {
       if (term.id === undefined) return;
       try {
         await deleteAsync(term.id);
-        refreshTerms();
       } catch (e) {
         console.error(e);
       }
     },
-    [deleteAsync, refreshTerms],
+    [deleteAsync],
   );
 
   const columns = useMemo(() => getColumns({ onDelete: handleDelete }), [handleDelete]);
 
   if (loading || deleting) return <SpinnerBox />;
 
-  if (error) return <p>Error: {error.message}</p>;
+  if (error) return <p>Error: {error instanceof Error ? error.message : 'Unknown'}</p>;
 
   const { terms, total } = data ?? {};
   return (

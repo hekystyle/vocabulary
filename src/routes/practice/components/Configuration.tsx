@@ -1,8 +1,8 @@
-import { useRequest } from 'ahooks';
 import { Select, Switch } from 'antd';
 import { Button } from 'components/Button';
 import { SpinnerBox } from 'components/SpinnerBox';
 import { useState, FC } from 'react';
+import { useMutation } from 'react-query';
 import { useDispatch } from 'react-redux';
 import { useServices } from 'services/di';
 import { prepareSessionQueue } from '../api/prepareSessionQueue';
@@ -19,7 +19,9 @@ export const Configuration: FC = () => {
     ignoreScoreOfNewTerms: false,
   });
 
-  const { loading, runAsync: runPrepareSessionQueue } = useRequest(prepareSessionQueue(db), { manual: true });
+  const { isLoading: loading, mutateAsync: runPrepareSessionQueue } = useMutation(prepareSessionQueue(db), {
+    onError: e => console.error(e),
+  });
 
   const handleStartSessionButtonClick = async () => {
     try {
