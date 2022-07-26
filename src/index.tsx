@@ -8,6 +8,9 @@ import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import { DataMigration } from 'containers/DataMigration';
 import { SERVICES, ServicesProvider } from 'services/di';
+import { QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { QUERY_CLIENT } from 'services/query';
 import { rootReducer } from './reducer';
 import reportWebVitals from './reportWebVitals';
 import { App } from './App';
@@ -21,15 +24,18 @@ if (container === null) throw new Error('Root element not found');
 const root = createRoot(container);
 root.render(
   <StrictMode>
-    <ServicesProvider services={SERVICES}>
-      <DataMigration>
-        <Provider store={store}>
-          <HashRouter>
-            <App />
-          </HashRouter>
-        </Provider>
-      </DataMigration>
-    </ServicesProvider>
+    <QueryClientProvider client={QUERY_CLIENT}>
+      <ServicesProvider services={SERVICES}>
+        <DataMigration>
+          <Provider store={store}>
+            <HashRouter>
+              <App />
+            </HashRouter>
+          </Provider>
+        </DataMigration>
+      </ServicesProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   </StrictMode>,
 );
 

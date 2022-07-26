@@ -5,7 +5,7 @@ module.exports = {
   },
   settings: {
     jest: {
-      // eslint-disable-next-line import/no-extraneous-dependencies,  global-require, @typescript-eslint/no-var-requires
+      // eslint-disable-next-line import/no-extraneous-dependencies, global-require, @typescript-eslint/no-var-requires
       version: require('jest/package.json').version,
     },
   },
