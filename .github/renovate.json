@@ -4,6 +4,7 @@
     "config:base"
   ],
   "rebaseWhen": "conflicted",
+  "labels": ["dependencies"],
   "assigneesFromCodeOwners": true,
   "reviewersFromCodeOwners": true,
   "major": {
