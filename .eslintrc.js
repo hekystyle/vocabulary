@@ -11,6 +11,12 @@ module.exports = {
   },
   overrides: [
     {
+      files: ['setupTests.ts'],
+      rules: {
+        'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+      },
+    },
+    {
       files: ['**/*.spec.ts'],
       extends: ['plugin:jest/all'],
       plugins: ['jest'],
