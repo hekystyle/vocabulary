@@ -30,7 +30,7 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --immutable
 
   build:
     needs: [deps]
