@@ -33,7 +33,7 @@
     "@types/react-dom": "18.0.6",
     "@types/styled-components": "5.1.24",
     "eslint-config-george-lint": "1.0.8",
-    "eslint-plugin-jest": "26.8.2",
+    "eslint-plugin-jest": "26.9.0",
     "gh-pages": "4.0.0",
     "react-scripts": "5.0.1",
     "typescript": "4.7.4",
