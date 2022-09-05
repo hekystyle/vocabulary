@@ -18,6 +18,7 @@ export class AppDb extends Dexie {
       terms: '++id, word, createdAt',
     });
     this.terms.hook('creating', (_, term) => {
+      // eslint-disable-next-line no-param-reassign
       term.createdAt = new Date();
     });
   }

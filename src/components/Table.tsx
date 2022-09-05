@@ -10,6 +10,8 @@ const StyledTable = styled(AntdTable)<TableProps<any>>`
   }
 `;
 
+// eslint-disable-next-line react/function-component-definition
 export function Table<T>(props: TableProps<T>): JSX.Element {
+  // eslint-disable-next-line react/jsx-props-no-spreading
   return <StyledTable<FC<TableProps<T>>> {...props} />;
 }
