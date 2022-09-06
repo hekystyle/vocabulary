@@ -2,6 +2,7 @@
   "name": "vocabulary",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "yarn@3.2.3",
   "dependencies": {
     "@ant-design/icons": "4.7.0",
     "@reduxjs/toolkit": "1.8.5",
