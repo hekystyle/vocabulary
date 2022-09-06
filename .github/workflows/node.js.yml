@@ -57,8 +57,27 @@ jobs:
           path: build
           key: build-${{ github.sha }}
 
+  lint:
+    needs: [deps]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+          cache: "yarn"
+
+      - name: Restore node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+
+      - run: yarn run lint
+
   test:
-    needs: [deps, build]
+    needs: [deps, build, lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

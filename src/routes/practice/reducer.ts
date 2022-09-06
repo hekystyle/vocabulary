@@ -38,6 +38,7 @@ export const sessionSlice = createSlice({
     }),
     next: state => {
       state.stack.pop();
+      // eslint-disable-next-line no-param-reassign
       state.isRevealed = false;
       return state;
     },
