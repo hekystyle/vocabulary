@@ -7,7 +7,7 @@
     "@ant-design/icons": "4.7.0",
     "@reduxjs/toolkit": "1.8.5",
     "antd": "4.23.0",
-    "bootstrap": "5.2.0",
+    "bootstrap": "5.2.1",
     "class-transformer": "0.5.1",
     "class-validator": "0.13.2",
     "dexie": "3.2.2",
