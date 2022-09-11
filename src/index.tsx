@@ -7,7 +7,7 @@ import './index.css';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
-import { DataMigration } from 'containers/DataMigration';
+import { DataMigration, migrate } from 'containers/DataMigration';
 import { SERVICES, ServicesProvider } from 'services/di';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -19,6 +19,11 @@ import { App } from './App';
 const store = configureStore({
   reducer: rootReducer,
 });
+
+QUERY_CLIENT.executeMutation({
+  mutationKey: migrate.queryKey,
+  mutationFn: () => migrate(SERVICES.db),
+}).catch(console.error);
 
 const container = document.getElementById('root');
 if (container === null) throw new Error('Root element not found');
