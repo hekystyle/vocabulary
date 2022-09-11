@@ -55,10 +55,12 @@ export const PracticeSession: FC = () => {
     if (actualRecord && playAfterReveal) speak(actualRecord.word);
   };
 
-  const handleAnswerButtonClick = async (isCorrect: boolean) => {
+  const handleAnswerButtonClick = (isCorrect: boolean) => {
     if (actualRecord?.id === undefined) return;
-    await increaseAnswersCount({ id: actualRecord.id, isCorrect });
-    dispatch(sessionSlice.actions.next());
+    increaseAnswersCount({ id: actualRecord.id, isCorrect }).then(
+      () => dispatch(sessionSlice.actions.next()),
+      e => console.error(e),
+    );
   };
 
   const handleEndSessionButtonClick = () => {

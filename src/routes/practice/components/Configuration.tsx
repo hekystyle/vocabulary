@@ -1,4 +1,4 @@
-import { Select, Switch } from 'antd';
+import { ButtonProps, Select, Switch } from 'antd';
 import { Button } from 'components/Button';
 import { SpinnerBox } from 'components/SpinnerBox';
 import { useState, FC } from 'react';
@@ -23,13 +23,10 @@ export const Configuration: FC = () => {
     onError: e => console.error(e),
   });
 
-  const handleStartSessionButtonClick = async () => {
-    try {
-      const queue = await runPrepareSessionQueue(config);
-      dispatch(sessionSlice.actions.start({ config, queue }));
-    } catch (e) {
-      console.error(e);
-    }
+  const handleStartSessionButtonClick: ButtonProps['onClick'] = () => {
+    runPrepareSessionQueue(config)
+      .then(queue => dispatch(sessionSlice.actions.start({ config, queue })))
+      .catch(e => console.error(e));
   };
 
   const update = (newConfig: Partial<Config>) => setConfig(prevConfig => ({ ...prevConfig, ...newConfig }));

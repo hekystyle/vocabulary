@@ -24,6 +24,7 @@ export const RecordPage: FC = () => {
     data: term,
   } = useQuery(QUERY_KEYS.terms.id(id), async () => getTerm(db)(id), {
     enabled: !Number.isNaN(id) && id > 0,
+    onError: e => console.error(e),
   });
 
   const { isLoading: creating, mutateAsync: create } = useMutation(createTerm(db), {
@@ -41,13 +42,8 @@ export const RecordPage: FC = () => {
     }
   };
 
-  const handleSubmit: FormProps['onSubmit'] = async values => {
-    try {
-      await (values.id ? update(values) : create(values));
-      navigateBack();
-    } catch (e) {
-      console.error(e);
-    }
+  const handleSubmit: FormProps['onSubmit'] = values => {
+    (values.id ? update(values) : create(values)).then(navigateBack).catch(e => console.error(e));
   };
 
   const handleCancel = () => navigateBack();
