@@ -2,9 +2,11 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'airbnb',
-    'airbnb-typescript',
     'airbnb/hooks',
     'plugin:react/jsx-runtime',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'airbnb-typescript',
     'plugin:prettier/recommended',
   ],
   parserOptions: {
