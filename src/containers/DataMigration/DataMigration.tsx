@@ -13,8 +13,7 @@ const MIGRATIONS: Readonly<MigrationsMap> = {
 };
 
 export async function migrate(db: AppDb) {
-  for (const key of Object.keys(MIGRATIONS)) {
-    const migration = MIGRATIONS[key as keyof typeof MIGRATIONS];
+  for (const migration of Object.values(MIGRATIONS)) {
     await migration(db);
   }
 }
