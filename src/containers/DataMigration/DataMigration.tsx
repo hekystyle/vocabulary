@@ -17,7 +17,7 @@ export async function migrate(db: AppDb) {
     await migration(db);
   }
 }
-migrate.queryKey = ['mutation'] as const;
+migrate.queryKey = ['migrate-data'] as const;
 
 const StyledLayout = styled.div`
   height: 100%;
