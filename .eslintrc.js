@@ -24,6 +24,7 @@ module.exports = {
     'no-await-in-loop': 'off',
     'import/prefer-default-export': 'off',
     '@typescript-eslint/return-await': ['off', 'in-try-catch'],
+    'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
     'react/require-default-props': 'off',
     'react/function-component-definition': [
       'error',
