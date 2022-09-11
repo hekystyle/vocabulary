@@ -1,5 +1,4 @@
 import { AppDb } from 'db';
-import { isArrayOf } from 'utils/isArrayOf';
 import { TermV1 } from 'types/Term';
 import { isTermV1 } from 'types/isTerm';
 import type { Migration } from '../DataMigration';
@@ -13,7 +12,7 @@ function loadState(): TermV1[] | undefined {
 
   const value: unknown = JSON.parse(json);
 
-  return isArrayOf(value, isTermV1) ? value : undefined;
+  return Array.isArray(value) && value.every(isTermV1) ? value : undefined;
 }
 
 export const up: Migration = async (db: AppDb) => {
