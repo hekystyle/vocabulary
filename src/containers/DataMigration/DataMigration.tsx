@@ -47,7 +47,6 @@ export const DataMigration: FC<{ children: React.ReactNode }> = ({ children }) =
       <SpinnerBox>Upgrading ...</SpinnerBox>
     </StyledLayout>
   ) : (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>{children}</>
   );
 };
