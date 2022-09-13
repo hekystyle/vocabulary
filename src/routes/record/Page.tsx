@@ -7,30 +7,27 @@ import { useMutation, useQuery } from 'react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
 import { hasReturnUrlField } from './utils/hasReturnUrlField';
 import { Form, FormProps } from './components/Form';
-import { getTerm } from './api/getTerm';
-import { createTerm } from './api/createTerm';
-import { updateTerm } from './api/updateTerm';
 
 export const RecordPage: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { db } = useServices();
+  const { termsRepository } = useServices();
   const { id: serializedId } = useParams<{ id?: string }>();
-  const id = serializedId ? parseInt(serializedId, 10) : -1;
+  const id = serializedId ? parseInt(serializedId, 10) : NaN;
 
   const {
     isFetching: loading,
     error,
     data: term,
-  } = useQuery(QUERY_KEYS.terms.id(id), async () => getTerm(db)(id), {
-    enabled: !Number.isNaN(id) && id > 0,
+  } = useQuery(QUERY_KEYS.terms.id(id), async () => termsRepository.getById(id), {
+    enabled: !Number.isNaN(id),
     onError: e => console.error(e),
   });
 
-  const { isLoading: creating, mutateAsync: create } = useMutation(createTerm(db), {
+  const { isLoading: creating, mutateAsync: create } = useMutation(termsRepository.create.bind(termsRepository), {
     onError: e => console.error(e),
   });
-  const { isLoading: updating, mutateAsync: update } = useMutation(updateTerm(db), {
+  const { isLoading: updating, mutateAsync: update } = useMutation(termsRepository.update.bind(termsRepository), {
     onError: e => console.error(e),
   });
 

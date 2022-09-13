@@ -6,11 +6,11 @@ import { Card } from 'components/Card';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { RETURN_URL_FIELD } from 'routes/record/constants';
-import { getTerm } from 'routes/record/api/getTerm';
 import { useServices } from 'services/di';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
 import { Term } from 'types/Term';
+import { isNil } from 'ramda';
 import { useSpeech } from '../useSpeech';
 import { selectLastQueueId, selectIsAnswerRevealed, selectPlayAfterReveal } from '../selectors';
 import { sessionSlice } from '../reducer';
@@ -32,15 +32,20 @@ export const PracticeSession: FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { speak } = useSpeech();
-  const { db } = useServices();
+  const { db, termsRepository } = useServices();
   const queryClient = useQueryClient();
   const actualRecordId = useTypedSelector(selectLastQueueId);
   const isAnswerRevealed = useTypedSelector(selectIsAnswerRevealed);
   const playAfterReveal = useTypedSelector(selectPlayAfterReveal);
 
-  const { data: actualRecord } = useQuery(QUERY_KEYS.terms.id(actualRecordId), () => getTerm(db)(actualRecordId), {
-    onError: e => console.error(e),
-  });
+  const { data: actualRecord } = useQuery(
+    QUERY_KEYS.terms.id(actualRecordId),
+    () => (!isNil(actualRecordId) ? termsRepository.getById(actualRecordId) : undefined),
+    {
+      enabled: !isNil(actualRecordId),
+      onError: e => console.error(e),
+    },
+  );
 
   const { mutateAsync: increaseAnswersCount } = useMutation(
     async ({ id, isCorrect }: { id: Exclude<Term['id'], undefined>; isCorrect: boolean }) =>
