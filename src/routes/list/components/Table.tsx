@@ -60,7 +60,7 @@ export const ListTable: FC = () => {
   );
 
   const { isLoading: deleting, mutateAsync: deleteAsync } = useMutation(deleteTerm(db), {
-    onSuccess: () => queryClient.invalidateQueries(QUERY_KEYS.terms.key),
+    onSuccess: () => queryClient.invalidateQueries(QUERY_KEYS.terms.all()),
   });
 
   const handleDelete: ActionsProps['onDelete'] = useCallback(

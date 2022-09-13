@@ -27,7 +27,7 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
     ...(term ?? {}),
   });
 
-  const { data: partOfSpeechOptions } = useQuery(QUERY_KEYS.terms.key, getUniquePartOfSpeechOptions(db), {
+  const { data: partOfSpeechOptions } = useQuery(QUERY_KEYS.terms.all(), getUniquePartOfSpeechOptions(db), {
     onError: e => console.error(e),
   });
   const { data: wordsOptions } = useQuery(
