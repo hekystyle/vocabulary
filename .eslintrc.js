@@ -43,7 +43,7 @@ module.exports = {
     },
     {
       files: ['**/*.spec.ts'],
-      extends: ['plugin:jest/all'],
+      extends: ['plugin:jest/recommended'],
       plugins: ['jest'],
       env: {
         'jest/globals': true,
