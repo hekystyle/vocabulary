@@ -13,7 +13,7 @@ import { updateTerm } from './api/updateTerm';
 
 export const RecordPage: FC = () => {
   const navigate = useNavigate();
-  const { state } = useLocation();
+  const location = useLocation();
   const { db } = useServices();
   const { id: serializedId } = useParams<{ id?: string }>();
   const id = serializedId ? parseInt(serializedId, 10) : -1;
@@ -35,8 +35,8 @@ export const RecordPage: FC = () => {
   });
 
   const navigateBack = () => {
-    if (isObject(state) && hasReturnUrlField(state)) {
-      navigate(state.returnUrl);
+    if (isObject(location.state) && hasReturnUrlField(location.state)) {
+      navigate(location.state.returnUrl);
     } else {
       navigate('/');
     }
