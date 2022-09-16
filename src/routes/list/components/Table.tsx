@@ -64,7 +64,7 @@ export const ListTable: FC = () => {
   const handleDelete: ActionsProps['onDelete'] = useCallback(
     term => {
       if (term.id === undefined) return;
-      deleteAsync(term.id).catch(e => console.error(e));
+      deleteAsync(term.id).catch(console.error);
     },
     [deleteAsync],
   );

@@ -26,7 +26,7 @@ export const Configuration: FC = () => {
   const handleStartSessionButtonClick: ButtonProps['onClick'] = () => {
     runPrepareSessionQueue(config)
       .then(queue => dispatch(sessionSlice.actions.start({ config, queue })))
-      .catch(e => console.error(e));
+      .catch(console.error);
   };
 
   const update = (newConfig: Partial<Config>) => setConfig(prevConfig => ({ ...prevConfig, ...newConfig }));

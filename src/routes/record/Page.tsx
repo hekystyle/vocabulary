@@ -40,7 +40,7 @@ export const RecordPage: FC = () => {
   };
 
   const handleSubmit: FormProps['onSubmit'] = values => {
-    (values.id ? update(values) : create(values)).then(navigateBack).catch(e => console.error(e));
+    (values.id ? update(values) : create(values)).then(navigateBack).catch(console.error);
   };
 
   const handleCancel = () => navigateBack();
