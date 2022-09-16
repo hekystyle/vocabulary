@@ -22,6 +22,7 @@ module.exports = {
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-restricted-syntax': 'off',
     'no-await-in-loop': 'off',
+    'arrow-body-style': 'error',
     'import/prefer-default-export': 'off',
     '@typescript-eslint/return-await': ['off', 'in-try-catch'],
     'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
