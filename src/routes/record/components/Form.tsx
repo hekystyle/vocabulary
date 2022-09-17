@@ -1,12 +1,11 @@
-import { useState, FC } from 'react';
+import { useState, FC, useMemo } from 'react';
 import { Button, Input, AutoComplete } from 'antd';
 import { Term } from 'types/Term';
 import { useServices } from 'services/di';
 import { useQuery } from 'react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
 import { DefinitionsList } from './DefinitionsList';
-import { getUniquePartOfSpeechOptions } from '../api/getUniquePartsOfSpeech';
-import { getTermWordsOptions } from '../api/getTermWords';
+import { options } from '../utils/options';
 
 export interface FormProps {
   term?: Term;
@@ -15,7 +14,7 @@ export interface FormProps {
 }
 
 export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
-  const { db } = useServices();
+  const { termsRepository } = useServices();
 
   const [entry, setEntry] = useState<Term>({
     word: '',
@@ -27,16 +26,19 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
     ...(term ?? {}),
   });
 
-  const { data: partOfSpeechOptions } = useQuery(QUERY_KEYS.terms.key, getUniquePartOfSpeechOptions(db), {
+  const { data: partsOfSpeech } = useQuery(QUERY_KEYS.terms.all(), () => termsRepository.getUniquePartsOfSpeech(), {
     onError: e => console.error(e),
   });
-  const { data: wordsOptions } = useQuery(
+  const partOfSpeechOptions = useMemo(() => options(partsOfSpeech ?? []), [partsOfSpeech]);
+
+  const { data: words } = useQuery(
     QUERY_KEYS.terms.filter({ word: entry.word }),
-    () => getTermWordsOptions(db)(entry.word),
+    () => termsRepository.getWords(entry.word),
     {
       onError: e => console.error(e),
     },
   );
+  const wordsOptions = useMemo(() => options(words ?? []), [words]);
 
   const handleChange = (values: Partial<Term>) => setEntry(prevEntry => ({ ...prevEntry, ...values }));
 

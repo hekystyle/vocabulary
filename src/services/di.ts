@@ -1,12 +1,16 @@
 import { AppDb } from 'db';
 import { createContext, createElement, FC, PropsWithChildren, useContext } from 'react';
+import { IndexedDbTermsRepository, ITermsRepository } from './terms';
 
 export type Services = Readonly<{
   db: AppDb;
+  termsRepository: ITermsRepository;
 }>;
 
+const db = new AppDb();
 export const SERVICES: Services = {
-  db: new AppDb(),
+  db,
+  termsRepository: new IndexedDbTermsRepository(db),
 };
 
 const ServicesContext = createContext<Services | undefined>(undefined);

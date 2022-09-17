@@ -5,7 +5,7 @@ import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import { configureStore } from '@reduxjs/toolkit';
-import { Provider } from 'react-redux';
+import { Provider as ReduxProvider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import { DataMigration, migrate } from 'containers/DataMigration';
 import { SERVICES, ServicesProvider } from 'services/di';
@@ -33,11 +33,11 @@ root.render(
     <QueryClientProvider client={QUERY_CLIENT}>
       <ServicesProvider services={SERVICES}>
         <DataMigration>
-          <Provider store={store}>
+          <ReduxProvider store={store}>
             <HashRouter>
               <App />
             </HashRouter>
-          </Provider>
+          </ReduxProvider>
         </DataMigration>
       </ServicesProvider>
       <ReactQueryDevtools initialIsOpen={false} />
@@ -55,7 +55,7 @@ if ('serviceWorker' in navigator) {
   window.addEventListener(
     'load',
     () => {
-      navigator.serviceWorker.register('./service-worker.js').catch(e => console.error(e));
+      navigator.serviceWorker.register('./service-worker.js').catch(console.error);
     },
     { once: true, passive: true },
   );

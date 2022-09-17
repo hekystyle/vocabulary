@@ -13,8 +13,6 @@ import { Term } from '../../../types/Term';
 import { AddButton } from './table/AddButton';
 import { Actions, ActionsProps } from './table/Actions';
 import { selectCurrentPage } from '../selectors';
-import { getTerms } from '../api/getTerms';
-import { deleteTerm } from '../api/deleteTerm';
 
 const getColumns = ({ onDelete }: Pick<ActionsProps, 'onDelete'>): ColumnsType<Term> => [
   {
@@ -44,7 +42,7 @@ const PAGE_SIZE = 20 as const;
 export const ListTable: FC = () => {
   const dispatch = useDispatch();
   const currentPage = useTypedSelector(selectCurrentPage);
-  const { db } = useServices();
+  const { termsRepository } = useServices();
   const queryClient = useQueryClient();
 
   const {
@@ -53,20 +51,20 @@ export const ListTable: FC = () => {
     isFetching: loading,
   } = useQuery(
     QUERY_KEYS.terms.filter({ pageSize: PAGE_SIZE, page: currentPage }),
-    () => getTerms(db)({ pageSize: PAGE_SIZE, page: currentPage }),
+    () => termsRepository.get({ pageSize: PAGE_SIZE, page: currentPage }),
     {
       onError: e => console.error(e),
     },
   );
 
-  const { isLoading: deleting, mutateAsync: deleteAsync } = useMutation(deleteTerm(db), {
-    onSuccess: () => queryClient.invalidateQueries(QUERY_KEYS.terms.key),
+  const { isLoading: deleting, mutateAsync: deleteAsync } = useMutation(termsRepository.delete.bind(termsRepository), {
+    onSuccess: () => queryClient.invalidateQueries(QUERY_KEYS.terms.all()),
   });
 
   const handleDelete: ActionsProps['onDelete'] = useCallback(
     term => {
       if (term.id === undefined) return;
-      deleteAsync(term.id).catch(e => console.error(e));
+      deleteAsync(term.id).catch(console.error);
     },
     [deleteAsync],
   );
