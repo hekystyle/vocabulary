@@ -6,7 +6,7 @@ import { Card } from 'components/Card';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { RETURN_URL_FIELD } from 'routes/record/constants';
-import { useServices } from 'services/di';
+import { useServices } from 'containers/Services';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
 import { Term } from 'types/Term';
