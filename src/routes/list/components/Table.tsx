@@ -1,18 +1,15 @@
 import { Tooltip } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import { useDispatch } from 'react-redux';
-import { useTypedSelector } from 'hooks/useTypedSelector';
 import { Table } from 'components/Table';
 import { FC, useCallback, useMemo } from 'react';
 import { SpinnerBox } from 'components/SpinnerBox';
 import { useServices } from 'services/di';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
-import { tableSlice } from '../slices';
+import { useFilter } from 'containers/Filter';
 import { Term } from '../../../types/Term';
 import { AddButton } from './table/AddButton';
 import { Actions, ActionsProps } from './table/Actions';
-import { selectCurrentPage } from '../selectors';
 
 const getColumns = ({ onDelete }: Pick<ActionsProps, 'onDelete'>): ColumnsType<Term> => [
   {
@@ -40,8 +37,10 @@ const getColumns = ({ onDelete }: Pick<ActionsProps, 'onDelete'>): ColumnsType<T
 const PAGE_SIZE = 20 as const;
 
 export const ListTable: FC = () => {
-  const dispatch = useDispatch();
-  const currentPage = useTypedSelector(selectCurrentPage);
+  const {
+    filter: { page: currentPage },
+    update: updateFilter,
+  } = useFilter();
   const { termsRepository } = useServices();
   const queryClient = useQueryClient();
 
@@ -51,7 +50,7 @@ export const ListTable: FC = () => {
     isFetching: loading,
   } = useQuery(
     QUERY_KEYS.terms.filter({ pageSize: PAGE_SIZE, page: currentPage }),
-    () => termsRepository.get({ pageSize: PAGE_SIZE, page: currentPage }),
+    () => termsRepository.get({ pageSize: PAGE_SIZE, page: currentPage ?? 1 }),
     {
       onError: e => console.error(e),
     },
@@ -84,7 +83,7 @@ export const ListTable: FC = () => {
         total,
         pageSize: PAGE_SIZE,
         defaultCurrent: currentPage,
-        onChange: page => dispatch(tableSlice.actions.update({ page })),
+        onChange: page => updateFilter({ page }),
       }}
       rowKey="id"
       size="middle"
