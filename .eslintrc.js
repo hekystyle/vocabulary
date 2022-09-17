@@ -43,15 +43,13 @@ module.exports = {
       },
     },
     {
-      files: ['**/*.spec.ts'],
+      files: ['**/*.spec.ts', '**/*.spec.tsx'],
       extends: ['plugin:jest/recommended', 'plugin:jest/style'],
       plugins: ['jest'],
       env: {
         'jest/globals': true,
       },
-      rules: {
-        'jest/require-top-level-describe': 'off',
-      },
+      rules: {},
     },
   ],
 };

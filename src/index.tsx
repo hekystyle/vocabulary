@@ -12,6 +12,7 @@ import { SERVICES, ServicesProvider } from 'services/di';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { QUERY_CLIENT } from 'services/query';
+import { FilterProvider } from 'containers/Filter';
 import { rootReducer } from './reducer';
 import reportWebVitals from './reportWebVitals';
 import { App } from './App';
@@ -35,7 +36,9 @@ root.render(
         <DataMigration>
           <ReduxProvider store={store}>
             <HashRouter>
-              <App />
+              <FilterProvider>
+                <App />
+              </FilterProvider>
             </HashRouter>
           </ReduxProvider>
         </DataMigration>
