@@ -13,7 +13,7 @@ afterAll(() => {
 
 it('should throw error if not used within provider', () => {
   const run = () => renderHook(useServices);
-  expect(run).toThrow(`useServices must be used within a ${ServicesProvider.name}`);
+  expect(run).toThrow(`${useServices.name} must be used within a ${ServicesProvider.name}`);
 });
 
 it('should be used without throwing error', () => {

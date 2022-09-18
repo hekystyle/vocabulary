@@ -13,7 +13,7 @@ afterAll(() => {
 
 it('should throw error if not used within provider', () => {
   const run = () => renderHook(useFilter);
-  expect(run).toThrow(`${FilterProvider.name} must be used as a parent component`);
+  expect(run).toThrow(`${useFilter.name} must be used within a ${FilterProvider.name}`);
 });
 
 it('should be used without throwing error', () => {
