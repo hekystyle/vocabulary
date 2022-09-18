@@ -5,6 +5,9 @@ import { ServicesProvider } from './Provider';
 
 export const useServices = (): Services => {
   const services = useContext(ServicesContext);
-  if (!services) throw new Error(`useServices must be used within a ${ServicesProvider.name}`);
+  if (!services)
+    throw new Error(`${useServices.displayName} must be used within a ${ServicesProvider.displayName ?? ''}`);
   return services;
 };
+
+useServices.displayName = 'useServices' as const;

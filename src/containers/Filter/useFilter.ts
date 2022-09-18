@@ -5,7 +5,8 @@ import { FilterShape } from './types';
 
 export const useFilter = (): FilterShape => {
   const context = useContext(FilterContext);
-  if (!context)
-    throw new Error(`${FilterProvider.displayName ?? FilterProvider.name} must be used as a parent component`);
+  if (!context) throw new Error(`${useFilter.displayName} must be used within a ${FilterProvider.displayName ?? ''}`);
   return context;
 };
+
+useFilter.displayName = 'useFilter' as const;
