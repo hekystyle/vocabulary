@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react';
+import { act, renderHook } from '@testing-library/react';
 import { HashRouter } from 'react-router-dom';
 import { useFilter } from './useFilter';
 import { FilterProvider } from './Provider';
@@ -17,13 +17,22 @@ it('should throw error if not used within provider', () => {
 });
 
 it('should be used without throwing error', () => {
-  const run = () =>
-    renderHook(useFilter, {
-      wrapper: ({ children }) => (
-        <HashRouter>
-          <FilterProvider>{children}</FilterProvider>,
-        </HashRouter>
-      ),
-    });
-  expect(run).not.toThrow();
+  window.location.hash = '#/?page=2';
+  const { result } = renderHook(useFilter, {
+    wrapper: ({ children }) => (
+      <HashRouter>
+        <FilterProvider>{children}</FilterProvider>,
+      </HashRouter>
+    ),
+  });
+  expect(result.current.filter).toEqual({ page: 2 });
+
+  act(() => result.current.update({ page: 1 }));
+  expect(result.current.filter).toEqual({ page: 1 });
+
+  act(() => result.current.setFields([]));
+  expect(result.current.filter).toEqual({});
+
+  act(() => result.current.setFields(undefined));
+  expect(result.current.filter).toEqual({ page: 1 });
 });
