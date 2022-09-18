@@ -28,3 +28,5 @@ export const FilterProvider: FC<PropsWithChildren> = ({ children }) => {
 
   return <FilterContext.Provider value={shape}>{children}</FilterContext.Provider>;
 };
+
+FilterProvider.displayName = 'FilterProvider';
