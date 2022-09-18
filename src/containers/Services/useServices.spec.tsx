@@ -3,6 +3,14 @@ import { SERVICES } from 'services/di';
 import { ServicesProvider } from './Provider';
 import { useServices } from './useServices';
 
+beforeAll(() => {
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+});
+
+afterAll(() => {
+  jest.restoreAllMocks();
+});
+
 it('should throw error if not used within provider', () => {
   const run = () => renderHook(useServices);
   expect(run).toThrow(`useServices must be used within a ${ServicesProvider.name}`);
