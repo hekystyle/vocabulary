@@ -6,7 +6,7 @@ export type Services = Readonly<{
   termsRepository: ITermsRepository;
 }>;
 
-const db = new AppDb();
+const db = new AppDb('Vocabulary');
 export const SERVICES: Services = {
   db,
   termsRepository: new IndexedDbTermsRepository(db),

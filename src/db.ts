@@ -6,8 +6,8 @@ export class AppDb extends Dexie {
   // We just tell the typing system this is the case
   terms!: Table<Term, number>;
 
-  constructor() {
-    super('Vocabulary');
+  constructor(databaseName: string) {
+    super(databaseName);
     this.version(1).stores({
       terms: '++id', // [primary key, ...indexed props]
     });
