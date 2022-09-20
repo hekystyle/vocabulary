@@ -5,7 +5,7 @@ import { FilterShape } from './types';
 
 export const useFilter = (): FilterShape => {
   const context = useContext(FilterContext);
-  if (!context) throw new Error(`${useFilter.displayName} must be used within a ${FilterProvider.displayName ?? ''}`);
+  if (!context) throw new Error(`${useFilter.displayName} must be used within a ${FilterProvider.displayName}`);
   return context;
 };
 
