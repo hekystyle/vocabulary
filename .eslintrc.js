@@ -25,6 +25,7 @@ module.exports = {
     'arrow-body-style': 'error',
     'import/prefer-default-export': 'off',
     '@typescript-eslint/return-await': ['off', 'in-try-catch'],
+    '@typescript-eslint/restrict-template-expressions': ['error', { allowNullish: true }],
     'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
     'react/require-default-props': 'off',
     'react/function-component-definition': [

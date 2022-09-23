@@ -93,7 +93,10 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
-      - run: yarn run test
+      - run: yarn run test --coverage
+
+      - name: Codecov
+        uses: codecov/codecov-action@v3.1.0
 
   deploy:
     needs: [deps, build, test]

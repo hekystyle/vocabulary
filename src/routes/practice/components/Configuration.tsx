@@ -4,7 +4,7 @@ import { SpinnerBox } from 'components/SpinnerBox';
 import { useState, FC } from 'react';
 import { useMutation } from 'react-query';
 import { useDispatch } from 'react-redux';
-import { useServices } from 'services/di';
+import { useServices } from 'containers/Services';
 import { prepareSessionQueue } from '../api/prepareSessionQueue';
 import { ScoreAlgorithm } from '../constants';
 import { Config, sessionSlice } from '../reducer';

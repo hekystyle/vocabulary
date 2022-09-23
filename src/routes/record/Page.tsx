@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { isObject } from 'utils/isObject';
 import { SpinnerBox } from 'components/SpinnerBox';
-import { useServices } from 'services/di';
+import { useServices } from 'containers/Services';
 import { useMutation, useQuery } from 'react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
 import { hasReturnUrlField } from './utils/hasReturnUrlField';

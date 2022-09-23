@@ -1,23 +1,8 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { SpinnerBox } from 'components/SpinnerBox';
 import styled from 'styled-components';
-import { AppDb } from 'db';
 import { useIsMutating } from 'react-query';
-import * as v20220319144900 from './migrations/20220319144900';
-
-export type Migration = (db: AppDb) => Promise<void>;
-type MigrationsMap = Record<'20220319144900', Migration>;
-
-const MIGRATIONS: Readonly<MigrationsMap> = {
-  '20220319144900': v20220319144900.up,
-};
-
-export async function migrate(db: AppDb) {
-  for (const migration of Object.values(MIGRATIONS)) {
-    await migration(db);
-  }
-}
-migrate.queryKey = ['migrate-data'] as const;
+import { migrate } from './migrate';
 
 const StyledLayout = styled.div`
   height: 100%;
@@ -26,7 +11,7 @@ const StyledLayout = styled.div`
   justify-content: center;
 `;
 
-export const DataMigration: FC<{ children: React.ReactNode }> = ({ children }) => {
+export const DataMigration: FC<PropsWithChildren> = ({ children }) => {
   const loading = useIsMutating(migrate.queryKey);
 
   return loading ? (
