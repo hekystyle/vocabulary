@@ -3,15 +3,15 @@ import { Button } from 'components/Button';
 import { SpinnerBox } from 'components/SpinnerBox';
 import { useState, FC } from 'react';
 import { useMutation } from 'react-query';
-import { useDispatch } from 'react-redux';
 import { useServices } from 'containers/Services';
+import { useSetRecoilState } from 'recoil';
 import { prepareSessionQueue } from '../api/prepareSessionQueue';
-import { isScoreAlgorithm, ScoreAlgorithm } from '../constants';
-import { Config, sessionSlice } from '../reducer';
+import { ScoreAlgorithm } from '../constants';
+import { Config, sessionState } from '../store';
 
 export const Configuration: FC = () => {
-  const dispatch = useDispatch();
   const { db } = useServices();
+  const setSession = useSetRecoilState(sessionState);
 
   const [config, setConfig] = useState<Config>({
     scoreAlgorithm: ScoreAlgorithm.Relative,
@@ -25,7 +25,7 @@ export const Configuration: FC = () => {
 
   const handleStartSessionButtonClick: ButtonProps['onClick'] = () => {
     runPrepareSessionQueue(config)
-      .then(queue => dispatch(sessionSlice.actions.start({ config, queue })))
+      .then(queue => setSession({ config, queue, isActive: true, isRevealed: false }))
       .catch(console.error);
   };
 

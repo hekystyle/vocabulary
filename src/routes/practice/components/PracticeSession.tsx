@@ -1,20 +1,18 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Button } from 'components/Button';
 import { Card } from 'components/Card';
-import { useTypedSelector } from 'hooks/useTypedSelector';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { RETURN_URL_FIELD } from 'routes/record/constants';
 import { useServices } from 'containers/Services';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
 import { Term } from 'types/Term';
-import { isNil } from 'ramda';
+import { isNil, last } from 'ramda';
+import { useRecoilState } from 'recoil';
 import { useSpeech } from '../useSpeech';
-import { selectLastQueueId, selectIsAnswerRevealed, selectPlayAfterReveal } from '../selectors';
-import { sessionSlice } from '../reducer';
 import { increaseTermAnswers } from '../api/increaseTermAnswers';
+import { sessionState } from '../store';
 
 const OverflowableCardBody = styled(Card.Body)`
   overflow: auto;
@@ -28,15 +26,14 @@ const Row = styled.div`
 `;
 
 export const PracticeSession: FC = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { speak } = useSpeech();
   const { db, termsRepository } = useServices();
   const queryClient = useQueryClient();
-  const actualRecordId = useTypedSelector(selectLastQueueId);
-  const isAnswerRevealed = useTypedSelector(selectIsAnswerRevealed);
-  const playAfterReveal = useTypedSelector(selectPlayAfterReveal);
+  const [{ queue, isRevealed: isAnswerRevealed, config }, setSession] = useRecoilState(sessionState);
+  const actualRecordId = last(queue);
+  const playAfterReveal = config?.playAfterReveal ?? false;
 
   const { data: actualRecord } = useQuery(
     QUERY_KEYS.terms.id(actualRecordId),
@@ -56,20 +53,19 @@ export const PracticeSession: FC = () => {
   );
 
   const handleRevealAnswer = () => {
-    dispatch(sessionSlice.actions.reveal());
+    setSession(prevState => ({ ...prevState, isRevealed: true }));
     if (actualRecord && playAfterReveal) speak(actualRecord.word);
   };
 
   const handleAnswerButtonClick = (isCorrect: boolean) => {
     if (actualRecord?.id === undefined) return;
-    increaseAnswersCount({ id: actualRecord.id, isCorrect }).then(
-      () => dispatch(sessionSlice.actions.next()),
-      e => console.error(e),
-    );
+    increaseAnswersCount({ id: actualRecord.id, isCorrect })
+      .then(() => setSession(prevState => ({ ...prevState, queue: prevState.queue.slice(0, -1), isRevealed: false })))
+      .catch(e => console.error(e));
   };
 
   const handleEndSessionButtonClick = () => {
-    dispatch(sessionSlice.actions.close());
+    setSession(prevState => ({ ...prevState, config: undefined, queue: [], isActive: false }));
   };
 
   const handleEditButtonClick = () => {

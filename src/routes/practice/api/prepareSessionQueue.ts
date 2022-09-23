@@ -5,7 +5,7 @@ import { hasDefinition } from 'utils/hasDefinition';
 import { hasTranslation } from 'utils/hasTranslation';
 import { shuffle } from 'utils/shuffle';
 import { SCORE_ALGO_MAP } from '../constants';
-import { Config } from '../reducer';
+import { Config } from '../store';
 
 export const prepareSessionQueue =
   (db: AppDb) =>
