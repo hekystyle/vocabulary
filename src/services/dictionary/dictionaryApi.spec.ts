@@ -1,4 +1,4 @@
-import { DictionaryApi } from 'services/dictionaryApi';
+import * as DictionaryApi from 'services/dictionaryApi';
 
 afterAll(() => {
   jest.restoreAllMocks();
@@ -23,7 +23,7 @@ it('should return words collection', async () => {
       ]),
   } as Response);
 
-  const words = await DictionaryApi.word('hello');
+  const words = await DictionaryApi.fetchWord('hello');
 
   expect(words).toEqual([
     {
@@ -46,5 +46,5 @@ it('should throw error when response is invalid', async () => {
     json: () => Promise.resolve({ message: 'Word not found' }),
   } as Response);
 
-  await expect(DictionaryApi.word('hasaki')).rejects.toThrow('Invalid response, expected array, got object');
+  await expect(DictionaryApi.fetchWord('hasaki')).rejects.toThrow('Invalid response, expected array, got object');
 });

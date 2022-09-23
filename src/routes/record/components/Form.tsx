@@ -52,7 +52,7 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
         placeholder="Word"
         style={{ width: '100%' }}
         value={entry.word}
-        onChange={value => handleChange({ word: value ?? '' })}
+        onChange={value => handleChange({ word: value })}
         onSelect={(value: string) => handleChange({ word: value })}
       />
       <AutoComplete
@@ -61,7 +61,7 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
         placeholder="Part ot speech"
         style={{ width: '100%' }}
         value={entry.partOfSpeech}
-        onChange={value => handleChange({ partOfSpeech: value ?? '' })}
+        onChange={value => handleChange({ partOfSpeech: value })}
         onSelect={(value: string) => handleChange({ partOfSpeech: value })}
       />
       <Input

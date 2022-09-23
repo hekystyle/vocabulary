@@ -9,7 +9,7 @@ test.each([
   [false, {}],
   [
     false,
-    <Partial<TermV1>>{
+    {
       id: NaN,
       answersCount: NaN,
       correctAnswersCount: NaN,
@@ -17,11 +17,11 @@ test.each([
       partOfSpeech: undefined,
       translation: undefined,
       word: undefined,
-    },
+    } as Partial<TermV1>,
   ],
   [
     true,
-    <TermV1>{
+    {
       id: 0,
       answersCount: 0,
       correctAnswersCount: 0,
@@ -29,7 +29,7 @@ test.each([
       partOfSpeech: '',
       translation: '',
       word: '',
-    },
+    } as TermV1,
   ],
 ])('should return %p for %p', (expected, value) => {
   expect.hasAssertions();

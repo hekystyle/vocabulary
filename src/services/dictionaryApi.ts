@@ -41,23 +41,21 @@ export class Word implements IWord {
   meanings: Meaning[] = [];
 }
 
-export class DictionaryApi {
-  public static async word(word: string, { signal }: Pick<RequestInit, 'signal'> = {}): Promise<Word[]> {
-    const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_US/${encodeURIComponent(word)}`, {
-      headers: {
-        Accept: 'application/json',
-      },
-      signal,
-    });
+export const fetchWord = async (word: string, { signal }: Pick<RequestInit, 'signal'> = {}): Promise<Word[]> => {
+  const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_US/${encodeURIComponent(word)}`, {
+    headers: {
+      Accept: 'application/json',
+    },
+    signal,
+  });
 
-    const result: unknown = await response.json();
+  const result: unknown = await response.json();
 
-    if (!Array.isArray(result)) throw new Error(`Invalid response, expected array, got ${typeof result}`);
+  if (!Array.isArray(result)) throw new Error(`Invalid response, expected array, got ${typeof result}`);
 
-    const instances = plainToInstance(Word, result);
+  const instances = plainToInstance(Word, result);
 
-    await Promise.all(instances.map(async i => validateOrReject(i)));
+  await Promise.all(instances.map(async i => validateOrReject(i)));
 
-    return instances;
-  }
-}
+  return instances;
+};
