@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useQuery } from 'react-query';
-import { DictionaryApi, Word } from 'services/dictionaryApi';
+import type { Word } from 'services/dictionaryApi';
+import * as DictionaryApi from 'services/dictionaryApi';
 import styled from 'styled-components';
 import { QUERY_KEYS } from 'utils/queryKeys';
 
@@ -20,7 +21,7 @@ export const DefinitionsList: FC<DefinitionsListProps> = props => {
   const { data: entry } = useQuery(
     QUERY_KEYS.dictionary.word(word),
     async ({ signal }): Promise<Word | undefined> => {
-      const result = await DictionaryApi.word(word, { signal });
+      const result = await DictionaryApi.fetchWord(word, { signal });
       return result[0];
     },
     {

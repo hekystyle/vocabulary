@@ -11,7 +11,7 @@ export interface Config {
 export interface SessionState {
   config: Config | undefined;
   isActive: boolean;
-  stack: Term['id'][];
+  stack: Array<Term['id']>;
   isRevealed: boolean;
 }
 
@@ -26,7 +26,7 @@ export const sessionSlice = createSlice({
   name: 'practice/session',
   initialState,
   reducers: {
-    start: (state, { payload: { queue, config } }: PayloadAction<{ queue: Term['id'][]; config: Config }>) => ({
+    start: (state, { payload: { queue, config } }: PayloadAction<{ queue: Array<Term['id']>; config: Config }>) => ({
       config,
       isActive: true,
       stack: queue,

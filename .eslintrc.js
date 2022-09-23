@@ -6,6 +6,7 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:@typescript-eslint/strict',
     'airbnb-typescript',
     'plugin:prettier/recommended',
   ],
@@ -26,6 +27,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     '@typescript-eslint/return-await': ['off', 'in-try-catch'],
     '@typescript-eslint/restrict-template-expressions': ['error', { allowNullish: true }],
+    '@typescript-eslint/array-type': ['error', { default: 'array-simple', readonly: 'array-simple' }],
     'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
     'react/require-default-props': 'off',
     'react/function-component-definition': [
@@ -53,7 +55,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/*.spec.ts', '**/*.spec.tsx'],
+      files: ['**/*.spec.{ts,tsx}'],
       extends: ['plugin:jest/recommended', 'plugin:jest/style'],
       plugins: ['jest'],
       env: {
