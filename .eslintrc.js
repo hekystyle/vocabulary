@@ -56,12 +56,15 @@ module.exports = {
     },
     {
       files: ['**/*.spec.{ts,tsx}'],
-      extends: ['plugin:jest/recommended', 'plugin:jest/style'],
-      plugins: ['jest'],
+      extends: ['plugin:jest/recommended', 'plugin:jest/style', 'plugin:jest-dom/recommended'],
       env: {
         'jest/globals': true,
       },
       rules: {},
+    },
+    {
+      files: ['**/*.spec.tsx'],
+      extends: ['plugin:testing-library/react'],
     },
   ],
 };
