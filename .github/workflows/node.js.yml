@@ -96,7 +96,7 @@ jobs:
       - run: yarn run test --coverage
 
       - name: Codecov
-        uses: codecov/codecov-action@v3.1.0
+        uses: codecov/codecov-action@v3.1.1
 
   deploy:
     needs: [deps, build, test]
