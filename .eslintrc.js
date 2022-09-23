@@ -46,7 +46,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/*.spec.ts', '**/*.spec.tsx'],
+      files: ['**/*.spec.{ts,tsx}'],
       extends: ['plugin:jest/recommended', 'plugin:jest/style'],
       plugins: ['jest'],
       env: {
