@@ -35,6 +35,15 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+    'react/jsx-sort-props': [
+      'error',
+      {
+        callbacksLast: true,
+        shorthandFirst: true,
+        shorthandLast: false,
+        reservedFirst: true,
+      },
+    ],
   },
   overrides: [
     {
