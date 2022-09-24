@@ -1,4 +1,11 @@
-export interface FilterValues {
+import { SortOrder } from 'antd/lib/table/interface';
+
+export interface Sorting {
+  sortField: string;
+  sortOrder: SortOrder;
+}
+
+export interface FilterValues extends Sorting {
   page: number;
 }
 

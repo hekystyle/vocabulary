@@ -29,7 +29,7 @@ it('should create instance', async () => {
 it('should get terms', async () => {
   await db.terms.bulkAdd([{} as Term, {} as Term]);
 
-  const result = await repository.get({ page: 1, pageSize: 1 });
+  const result = await repository.get({ page: 1, pageSize: 1, sortField: 'word', sortOrder: 'ascend' });
 
   expect(result.terms).toEqual([
     {

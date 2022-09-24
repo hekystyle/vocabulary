@@ -1,9 +1,10 @@
+import { Sorting } from 'containers/Filter';
 import { AppDb } from 'db';
 import { Term } from 'types/Term';
 import { computeSkip, Pagination } from 'utils/computeSkip';
 
 export interface ITermsRepository {
-  get(pagination: Pagination): Promise<{ terms: Term[]; total: number }>;
+  get(filter: Pagination & Sorting): Promise<{ terms: Term[]; total: number }>;
   getById(id: Exclude<Term['id'], undefined>): Promise<Term | undefined>;
   create: (term: Omit<Term, 'id'>) => Promise<Term | undefined>;
   update: (term: Term) => Promise<Term | undefined>;
@@ -16,11 +17,17 @@ export interface ITermsRepository {
 export class IndexedDbTermsRepository implements ITermsRepository {
   constructor(private db: AppDb) {}
 
-  public async get(pagination: Pagination): Promise<{ terms: Term[]; total: number }> {
-    const skip = computeSkip(pagination);
+  public async get(filter: Pagination & Sorting): Promise<{ terms: Term[]; total: number }> {
+    const skip = computeSkip(filter);
+
+    const query = this.db.terms.orderBy(filter.sortField);
+
+    if (filter.sortOrder === 'descend') {
+      query.reverse();
+    }
 
     const [terms, total] = await Promise.all([
-      this.db.terms.orderBy('createdAt').offset(skip).limit(pagination.pageSize).toArray(),
+      query.offset(skip).limit(filter.pageSize).toArray(),
       this.db.terms.count(),
     ]);
 
