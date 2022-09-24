@@ -1,4 +1,4 @@
-import { ButtonProps, Select, Switch } from 'antd';
+import { ButtonProps, Radio, Switch } from 'antd';
 import { Button } from 'components/Button';
 import { SpinnerBox } from 'components/SpinnerBox';
 import { useState, FC } from 'react';
@@ -6,7 +6,7 @@ import { useMutation } from 'react-query';
 import { useDispatch } from 'react-redux';
 import { useServices } from 'containers/Services';
 import { prepareSessionQueue } from '../api/prepareSessionQueue';
-import { ScoreAlgorithm } from '../constants';
+import { isScoreAlgorithm, ScoreAlgorithm } from '../constants';
 import { Config, sessionSlice } from '../reducer';
 
 export const Configuration: FC = () => {
@@ -14,7 +14,7 @@ export const Configuration: FC = () => {
   const { db } = useServices();
 
   const [config, setConfig] = useState<Config>({
-    scoreAlgorithm: ScoreAlgorithm.relative,
+    scoreAlgorithm: ScoreAlgorithm.Relative,
     playAfterReveal: false,
     ignoreScoreOfNewTerms: false,
   });
@@ -36,13 +36,18 @@ export const Configuration: FC = () => {
   const { scoreAlgorithm, playAfterReveal, ignoreScoreOfNewTerms } = config;
   return (
     <>
-      <Select
-        options={[
-          { value: ScoreAlgorithm.relative, label: 'relative' },
-          { value: ScoreAlgorithm.absolute, label: 'absolute' },
-        ]}
+      <Radio.Group
+        buttonStyle="solid"
+        name="scoreAlgorithm"
+        optionType="button"
+        options={Object.values(ScoreAlgorithm).map(value => ({
+          label: value,
+          value,
+          style: { flexGrow: 1, textAlign: 'center' },
+        }))}
+        style={{ display: 'flex' }}
         value={scoreAlgorithm}
-        onSelect={(_: unknown, option: { value: ScoreAlgorithm }) => update({ scoreAlgorithm: option.value })}
+        onChange={({ target: { value } }) => update({ scoreAlgorithm: isScoreAlgorithm(value) ? value : undefined })}
       />
       <Switch
         checked={playAfterReveal}
