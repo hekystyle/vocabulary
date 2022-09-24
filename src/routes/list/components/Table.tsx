@@ -36,6 +36,13 @@ const getColumns = ({
     ),
   },
   {
+    key: 'createdAt',
+    title: 'Created at',
+    sorter: true,
+    sortOrder: sortField === 'createdAt' ? sortOrder : null,
+    render: (_, record) => record.createdAt?.toLocaleDateString(),
+  },
+  {
     key: 'actions',
     align: 'right',
     width: '0',
