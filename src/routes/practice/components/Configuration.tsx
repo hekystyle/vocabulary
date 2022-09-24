@@ -57,8 +57,8 @@ export const Configuration: FC = () => {
       />
       <Switch
         checked={ignoreScoreOfNewTerms}
-        checkedChildren="Score will ignore for new terms"
-        unCheckedChildren="Score won't ignore for new terms"
+        checkedChildren="Ignore score for items with less then 11 answers"
+        unCheckedChildren="Don't ignore score for items with less then 11 answers"
         onChange={checked => update({ ignoreScoreOfNewTerms: checked })}
       />
       <Button onClick={handleStartSessionButtonClick}>Start session</Button>
