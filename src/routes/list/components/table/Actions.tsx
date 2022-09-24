@@ -25,12 +25,8 @@ export const Actions: FC<ActionsProps> = ({ record, onDelete }) => {
 
   return (
     <>
-      <Button onClick={() => navigate(`/record/${record.id ?? ''}`)}>
-        <EditOutlined />
-      </Button>
-      <Button onClick={handleDeleteButtonClick}>
-        <DeleteOutlined />
-      </Button>
+      <Button icon={<EditOutlined />} onClick={() => navigate(`/record/${record.id ?? ''}`)} />
+      <Button icon={<DeleteOutlined />} onClick={handleDeleteButtonClick} />
     </>
   );
 };
