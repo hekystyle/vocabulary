@@ -29,6 +29,8 @@ const getColumns = ({ onDelete }: Pick<ActionsProps, 'onDelete'>): ColumnsType<T
   },
   {
     key: 'actions',
+    align: 'right',
+    width: '0',
     title: () => <AddButton />,
     render: (_, record) => <Actions record={record} onDelete={onDelete} />,
   },
@@ -86,6 +88,7 @@ export const ListTable: FC = () => {
         onChange: page => updateFilter({ page }),
       }}
       rowKey="id"
+      scroll={{ x: true }}
       size="middle"
     />
   );

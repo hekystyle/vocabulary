@@ -1,7 +1,7 @@
 import { FC, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, Modal } from 'antd';
+import { Button, Modal, Space } from 'antd';
 import { Term } from 'types/Term';
 
 export interface ActionsProps {
@@ -24,9 +24,9 @@ export const Actions: FC<ActionsProps> = ({ record, onDelete }) => {
   }, [record, onDelete]);
 
   return (
-    <>
+    <Space>
       <Button icon={<EditOutlined />} onClick={() => navigate(`/record/${record.id ?? ''}`)} />
-      <Button icon={<DeleteOutlined />} onClick={handleDeleteButtonClick} />
-    </>
+      <Button danger icon={<DeleteOutlined />} onClick={handleDeleteButtonClick} />
+    </Space>
   );
 };
