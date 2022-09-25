@@ -8,7 +8,7 @@ import { FilterShape, FilterUpdater, FilterValues } from './types';
 export const FilterProvider: FC<PropsWithChildren> = ({ children }) => {
   const location = useLocation();
   const [filter, setFilter] = useState<Partial<FilterValues>>(getInitialFilter(location.search));
-  const [fields, setFields] = useState<undefined | Array<keyof FilterValues>>();
+  const [fields, setFields] = useState<undefined | ReadonlyArray<keyof FilterValues>>();
 
   const updateFilter: FilterUpdater = useCallback(update => {
     setFilter(prevFilter => mergeDeepRight(prevFilter, update));

@@ -30,7 +30,7 @@ it('should be used without throwing error', () => {
   act(() => result.current.update({ page: 1 }));
   expect(result.current.filter).toEqual({ page: 1 });
 
-  act(() => result.current.setFields([]));
+  act(() => result.current.setFields([] as const));
   expect(result.current.filter).toEqual({});
 
   act(() => result.current.setFields(undefined));
