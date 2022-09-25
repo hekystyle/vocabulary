@@ -29,14 +29,22 @@ it('should create instance', async () => {
 it('should get terms', async () => {
   await db.terms.bulkAdd([{ word: 'a' } as Term, { word: 'b' } as Term]);
 
-  const result = await repository.get({ page: 1, pageSize: 1, sortField: 'word', sortOrder: 'ascend' });
+  const result = await repository.get({ page: 1, pageSize: 2, sortField: 'word', sortOrder: 'descend' });
 
   expect(result.terms).toEqual([
     {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       id: expect.any(Number),
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      word: expect.stringMatching(/a|b/),
+      word: 'b',
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      createdAt: expect.any(Date),
+    },
+    {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      id: expect.any(Number),
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      word: 'a',
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       createdAt: expect.any(Date),
     },
