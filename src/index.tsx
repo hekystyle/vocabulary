@@ -5,8 +5,6 @@ import 'antd/dist/antd.css';
 import 'antd/dist/antd.dark.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-import { configureStore } from '@reduxjs/toolkit';
-import { Provider as ReduxProvider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import { DataMigration, migrate } from 'containers/DataMigration';
 import { SERVICES } from 'services/di';
@@ -15,13 +13,8 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { QUERY_CLIENT } from 'services/query';
 import { FilterProvider } from 'containers/Filter';
 import { ServicesProvider } from 'containers/Services';
-import { rootReducer } from './reducer';
 import reportWebVitals from './reportWebVitals';
 import { App } from './App';
-
-const store = configureStore({
-  reducer: rootReducer,
-});
 
 QUERY_CLIENT.executeMutation({
   mutationKey: migrate.queryKey,
@@ -36,13 +29,11 @@ root.render(
     <QueryClientProvider client={QUERY_CLIENT}>
       <ServicesProvider services={SERVICES}>
         <DataMigration>
-          <ReduxProvider store={store}>
-            <HashRouter>
-              <FilterProvider>
-                <App />
-              </FilterProvider>
-            </HashRouter>
-          </ReduxProvider>
+          <HashRouter>
+            <FilterProvider>
+              <App />
+            </FilterProvider>
+          </HashRouter>
         </DataMigration>
       </ServicesProvider>
       <ReactQueryDevtools initialIsOpen={false} />

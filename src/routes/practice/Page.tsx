@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { useTypedSelector } from 'hooks/useTypedSelector';
 import { FC } from 'react';
+import { useRecoilValue } from 'recoil';
 import { PracticeSession } from './components/PracticeSession';
 import { Configuration } from './components/Configuration';
-import { selectIsActive } from './selectors';
+import { sessionState } from './store';
 
 const Layout = styled.div`
   height: 100%;
@@ -13,7 +13,7 @@ const Layout = styled.div`
 `;
 
 export const PracticePage: FC = () => {
-  const isActive = useTypedSelector(selectIsActive);
+  const { isActive } = useRecoilValue(sessionState);
 
   return <Layout>{isActive ? <PracticeSession /> : <Configuration />}</Layout>;
 };
