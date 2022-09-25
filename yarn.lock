@@ -3120,7 +3120,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/qs@npm:*":
+"@types/qs@npm:*, @types/qs@npm:6.9.7":
   version: 6.9.7
   resolution: "@types/qs@npm:6.9.7"
   checksum: 7fd6f9c25053e9b5bb6bc9f9f76c1d89e6c04f7707a7ba0e44cc01f17ef5284adb82f230f542c2d5557d69407c9a40f0f3515e8319afd14e1e16b5543ac6cdba
@@ -11995,6 +11995,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qs@npm:6.11.0":
+  version: 6.11.0
+  resolution: "qs@npm:6.11.0"
+  dependencies:
+    side-channel: ^1.0.4
+  checksum: 6e1f29dd5385f7488ec74ac7b6c92f4d09a90408882d0c208414a34dd33badc1a621019d4c799a3df15ab9b1d0292f97c1dd71dc7c045e69f81a8064e5af7297
+  languageName: node
+  linkType: hard
+
 "qs@npm:6.9.6":
   version: 6.9.6
   resolution: "qs@npm:6.9.6"
@@ -15078,6 +15087,7 @@ __metadata:
     "@testing-library/user-event": 14.4.3
     "@types/jest": 27.5.2
     "@types/node": 16.11.59
+    "@types/qs": 6.9.7
     "@types/ramda": 0.28.15
     "@types/react": 18.0.20
     "@types/react-dom": 18.0.6
@@ -15105,6 +15115,7 @@ __metadata:
     fake-indexeddb: 4.0.0
     gh-pages: 4.0.0
     prettier: 2.7.1
+    qs: 6.11.0
     ramda: 0.28.0
     react: 18.2.0
     react-bootstrap: 2.5.0
