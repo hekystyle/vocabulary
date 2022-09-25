@@ -27,16 +27,24 @@ const getColumns = ({
     sortOrder: sortField === 'word' ? sortOrder : null,
   },
   {
-    key: 'statistics',
-    title: <Tooltip title="Total answers / Correct answers">Total / Correct</Tooltip>,
-    render: (_, record) => (
-      <>
-        {record.answersCount} / {record.correctAnswersCount}
-      </>
-    ),
+    key: 'answersCount',
+    dataIndex: 'answersCount',
+    title: <Tooltip title="Total answers count">Total</Tooltip>,
+    sorter: true,
+    sortOrder: sortField === 'answersCount' ? sortOrder : null,
+    render: (_, record) => record.answersCount,
+  },
+  {
+    key: 'correctAnswersCount',
+    dataIndex: 'correctAnswersCount',
+    title: <Tooltip title="Correct answers count">Correct</Tooltip>,
+    sorter: true,
+    sortOrder: sortField === 'correctAnswersCount' ? sortOrder : null,
+    render: (_, record) => record.correctAnswersCount,
   },
   {
     key: 'createdAt',
+    dataIndex: 'createdAt',
     title: 'Created at',
     sorter: true,
     sortOrder: sortField === 'createdAt' ? sortOrder : null,
@@ -55,7 +63,7 @@ const PAGE_SIZE = 20 as const;
 
 export const ListTable: FC = () => {
   const {
-    filter: { page: currentPage, sortField = 'createdAt', sortOrder = 'ascend' },
+    filter: { page: currentPage, sortField = 'createdAt', sortOrder = 'descend' },
     update: updateFilter,
   } = useFilter();
   const { termsRepository } = useServices();
@@ -109,10 +117,10 @@ export const ListTable: FC = () => {
       scroll={{ x: true }}
       size="middle"
       onChange={(_, __, sorter) => {
-        const { field: fields, order } = toArray(sorter)[0];
-        const field = toArray(fields)[0];
+        const { field, order } = toArray(sorter)[0];
+
         updateFilter({
-          sortField: typeof field === 'string' ? (field as keyof Term) : undefined,
+          sortField: field?.toString(),
           sortOrder: order ?? 'ascend',
         });
       }}
