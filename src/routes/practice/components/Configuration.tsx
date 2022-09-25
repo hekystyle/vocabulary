@@ -6,7 +6,7 @@ import { useMutation } from 'react-query';
 import { useServices } from 'containers/Services';
 import { useSetRecoilState } from 'recoil';
 import { prepareSessionQueue } from '../api/prepareSessionQueue';
-import { ScoreAlgorithm } from '../constants';
+import { isScoreAlgorithm, ScoreAlgorithm } from '../constants';
 import { Config, sessionState } from '../store';
 
 export const Configuration: FC = () => {
