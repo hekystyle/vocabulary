@@ -1,3 +1,4 @@
+import { stringify } from 'qs';
 import { mergeDeepRight, pick } from 'ramda';
 import { FC, PropsWithChildren, useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -7,8 +8,9 @@ import { FilterShape, FilterUpdater, FilterValues } from './types';
 
 export const FilterProvider: FC<PropsWithChildren> = ({ children }) => {
   const location = useLocation();
+
   const [filter, setFilter] = useState<Partial<FilterValues>>(getInitialFilter(location.search));
-  const [fields, setFields] = useState<undefined | Array<keyof FilterValues>>();
+  const [fields, setFields] = useState<undefined | ReadonlyArray<keyof FilterValues>>();
 
   const updateFilter: FilterUpdater = useCallback(update => {
     setFilter(prevFilter => mergeDeepRight(prevFilter, update));
@@ -23,7 +25,7 @@ export const FilterProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    navigate({ search: new URLSearchParams(pickedFilter as Record<string, string>).toString() }, { replace: true });
+    navigate({ search: stringify(pickedFilter) }, { replace: true });
   }, [pickedFilter, navigate]);
 
   return <FilterContext.Provider value={shape}>{children}</FilterContext.Provider>;
