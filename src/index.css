@@ -15,3 +15,8 @@ code {
 #root {
   height: 100%;
 }
+
+/* Fix Ant Design icons align break caused by _reboot.scss */
+.anticon > svg {
+  vertical-align: unset;
+}

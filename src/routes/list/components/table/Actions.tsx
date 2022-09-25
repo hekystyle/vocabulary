@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, Popconfirm } from 'antd';
+import { Button, Modal, Space } from 'antd';
 import { Term } from 'types/Term';
 
 export interface ActionsProps {
@@ -12,16 +12,21 @@ export interface ActionsProps {
 export const Actions: FC<ActionsProps> = ({ record, onDelete }) => {
   const navigate = useNavigate();
 
+  const handleDeleteButtonClick = useCallback(() => {
+    Modal.confirm({
+      title: (
+        <>
+          Are you sure to delete <b>{record.word}</b>?
+        </>
+      ),
+      onOk: () => onDelete(record),
+    });
+  }, [record, onDelete]);
+
   return (
-    <>
-      <Button onClick={() => navigate(`/record/${record.id ?? ''}`)}>
-        <EditOutlined />
-      </Button>
-      <Popconfirm title="Are you sure to delete this?" onConfirm={() => onDelete(record)}>
-        <Button>
-          <DeleteOutlined />
-        </Button>
-      </Popconfirm>
-    </>
+    <Space>
+      <Button icon={<EditOutlined />} onClick={() => navigate(`/record/${record.id ?? ''}`)} />
+      <Button danger icon={<DeleteOutlined />} onClick={handleDeleteButtonClick} />
+    </Space>
   );
 };
