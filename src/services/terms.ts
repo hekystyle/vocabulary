@@ -1,12 +1,13 @@
 import { Sorting } from 'containers/Filter';
 import { AppDb } from 'db';
+import { StrictOmit } from 'types/StrictOmit';
 import { Term } from 'types/Term';
 import { computeSkip, Pagination } from 'utils/computeSkip';
 
 export interface ITermsRepository {
   get(filter: Pagination & Sorting): Promise<{ terms: Term[]; total: number }>;
   getById(id: Exclude<Term['id'], undefined>): Promise<Term | undefined>;
-  create: (term: Omit<Term, 'id'>) => Promise<Term | undefined>;
+  create: (term: StrictOmit<Term, 'id' | 'createdAt'>) => Promise<Term | undefined>;
   update: (term: Term) => Promise<Term | undefined>;
   delete(id: Exclude<Term['id'], undefined>): Promise<void>;
 

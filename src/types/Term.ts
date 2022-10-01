@@ -10,5 +10,5 @@ export interface TermV1 extends AnswersCountable {
 
 export interface Term extends Omit<TermV1, 'id'> {
   id?: number;
-  createdAt?: Date;
+  readonly createdAt?: Date;
 }
