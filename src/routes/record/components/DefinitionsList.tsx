@@ -31,7 +31,7 @@ export const DefinitionsList: FC<DefinitionsListProps> = props => {
   );
 
   return (
-    <StyledUl>
+    <StyledUl key={word}>
       {entry?.meanings.map(meaning => (
         <li key={meaning.partOfSpeech}>
           <div
