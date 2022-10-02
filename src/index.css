@@ -20,3 +20,7 @@ code {
 .anticon > svg {
   vertical-align: unset;
 }
+
+p {
+  color: white;
+}
