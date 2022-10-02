@@ -13,6 +13,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { QUERY_CLIENT } from 'services/query';
 import { FilterProvider } from 'containers/Filter';
 import { ServicesProvider } from 'containers/Services';
+import { RecoilRoot } from 'recoil';
 import reportWebVitals from './reportWebVitals';
 import { App } from './App';
 
@@ -26,18 +27,20 @@ if (container === null) throw new Error('Root element not found');
 const root = createRoot(container);
 root.render(
   <StrictMode>
-    <QueryClientProvider client={QUERY_CLIENT}>
-      <ServicesProvider services={SERVICES}>
-        <DataMigration>
-          <HashRouter>
-            <FilterProvider>
-              <App />
-            </FilterProvider>
-          </HashRouter>
-        </DataMigration>
-      </ServicesProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={QUERY_CLIENT}>
+        <ServicesProvider services={SERVICES}>
+          <DataMigration>
+            <HashRouter>
+              <FilterProvider>
+                <App />
+              </FilterProvider>
+            </HashRouter>
+          </DataMigration>
+        </ServicesProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </RecoilRoot>
   </StrictMode>,
 );
 
