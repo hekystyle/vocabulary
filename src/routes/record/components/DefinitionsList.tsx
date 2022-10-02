@@ -25,7 +25,7 @@ export const DefinitionsList: FC<DefinitionsListProps> = props => {
       return result[0];
     },
     {
-      onError: error => console.error(error),
+      onError: console.error,
       enabled: word !== '',
     },
   );

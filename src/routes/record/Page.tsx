@@ -21,14 +21,14 @@ export const RecordPage: FC = () => {
     data: term,
   } = useQuery(QUERY_KEYS.terms.id(id), async () => termsRepository.getById(id), {
     enabled: !Number.isNaN(id),
-    onError: e => console.error(e),
+    onError: console.error,
   });
 
   const { isLoading: creating, mutateAsync: create } = useMutation(termsRepository.create.bind(termsRepository), {
-    onError: e => console.error(e),
+    onError: console.error,
   });
   const { isLoading: updating, mutateAsync: update } = useMutation(termsRepository.update.bind(termsRepository), {
-    onError: e => console.error(e),
+    onError: console.error,
   });
 
   const navigateBack = () => {
