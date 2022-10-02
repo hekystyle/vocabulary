@@ -25,8 +25,8 @@ export const FilterProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    navigate({ search: stringify(pickedFilter) }, { replace: true });
-  }, [pickedFilter, navigate]);
+    navigate({ search: stringify(pickedFilter) }, { replace: true, state: location.state as unknown });
+  }, [pickedFilter, navigate, location.state]);
 
   return <FilterContext.Provider value={shape}>{children}</FilterContext.Provider>;
 };
