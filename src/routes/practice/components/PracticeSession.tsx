@@ -10,6 +10,7 @@ import { QUERY_KEYS } from 'utils/queryKeys';
 import { Term } from 'types/Term';
 import { isNil, last } from 'ramda';
 import { useRecoilState } from 'recoil';
+import { SpinnerBox } from 'components/SpinnerBox';
 import { useSpeech } from '../useSpeech';
 import { increaseTermAnswers } from '../api/increaseTermAnswers';
 import { sessionState } from '../store';
@@ -35,7 +36,7 @@ export const PracticeSession: FC = () => {
   const actualRecordId = last(queue);
   const playAfterReveal = config?.playAfterReveal ?? false;
 
-  const { data: actualRecord } = useQuery(
+  const { data: actualRecord, isFetching } = useQuery(
     QUERY_KEYS.terms.id(actualRecordId),
     () => (!isNil(actualRecordId) ? termsRepository.getById(actualRecordId) : undefined),
     {
@@ -44,7 +45,7 @@ export const PracticeSession: FC = () => {
     },
   );
 
-  const { mutateAsync: increaseAnswersCount } = useMutation(
+  const { mutateAsync: increaseAnswersCount, isLoading: isMutating } = useMutation(
     async ({ id, isCorrect }: { id: Exclude<Term['id'], undefined>; isCorrect: boolean }) =>
       increaseTermAnswers(db)(id, isCorrect),
     {
@@ -79,6 +80,8 @@ export const PracticeSession: FC = () => {
 
   return (
     <>
+      {isFetching && <SpinnerBox label="Loading term ..." />}
+      {isMutating && <SpinnerBox label="Updating term answers ..." />}
       {actualRecord && (
         <>
           <Card>
