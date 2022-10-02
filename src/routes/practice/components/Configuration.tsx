@@ -31,7 +31,7 @@ export const Configuration: FC = () => {
 
   const update = (newConfig: Partial<Config>) => setConfig(prevConfig => ({ ...prevConfig, ...newConfig }));
 
-  if (loading) return <SpinnerBox>Preparing practice session queue ...</SpinnerBox>;
+  if (loading) return <SpinnerBox label="Preparing practice session queue ..." />;
 
   const { scoreAlgorithm, playAfterReveal, ignoreScoreOfNewTerms } = config;
   return (

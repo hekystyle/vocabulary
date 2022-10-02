@@ -16,7 +16,7 @@ export const DataMigration: FC<PropsWithChildren> = ({ children }) => {
 
   return loading ? (
     <StyledLayout>
-      <SpinnerBox>Upgrading ...</SpinnerBox>
+      <SpinnerBox label="Upgrading ..." />
     </StyledLayout>
   ) : (
     <>{children}</>

@@ -99,7 +99,7 @@ export const ListTable: FC = () => {
     [handleDelete, sortField, sortOrder],
   );
 
-  if (loading || deleting) return <SpinnerBox>{loading ? 'Loading terms ...' : 'Deleting term ...'}</SpinnerBox>;
+  if (loading || deleting) return <SpinnerBox label={loading ? 'Loading terms ...' : 'Deleting term ...'} />;
 
   if (error) return <p>Error: {error instanceof Error ? error.message : 'Unknown'}</p>;
 

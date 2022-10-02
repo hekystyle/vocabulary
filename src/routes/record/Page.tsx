@@ -45,7 +45,9 @@ export const RecordPage: FC = () => {
 
   const handleCancel = () => navigateBack();
 
-  if (loading || creating || updating) return <SpinnerBox />;
+  if (loading) return <SpinnerBox label="Loading ..." />;
+  if (creating) return <SpinnerBox label="Creating ..." />;
+  if (updating) return <SpinnerBox label="Updating ..." />;
   if (error) return <p>Error: {error instanceof Error ? error.message : 'Unknown'}</p>;
   if (serializedId && term === undefined) return <p>Term not found by ID: {serializedId}</p>;
   return <Form term={term} onCancel={handleCancel} onSubmit={handleSubmit} />;
