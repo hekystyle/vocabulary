@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { precacheAndRoute } from 'workbox-precaching';
 
 declare const self: ServiceWorkerGlobalScope;

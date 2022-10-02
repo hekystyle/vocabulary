@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import 'reflect-metadata';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';

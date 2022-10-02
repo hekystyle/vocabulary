@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { ReportCallback } from 'web-vitals';
 
 const reportWebVitals = (onReport?: ReportCallback): void => {
