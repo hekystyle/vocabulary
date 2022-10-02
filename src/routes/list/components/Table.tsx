@@ -77,7 +77,7 @@ export const ListTable: FC = () => {
     QUERY_KEYS.terms.filter({ pageSize: PAGE_SIZE, page: currentPage, sortField, sortOrder }),
     () => termsRepository.get({ pageSize: PAGE_SIZE, page: currentPage ?? 1, sortField, sortOrder }),
     {
-      onError: console.error,
+      onError: e => console.error(e),
     },
   );
 

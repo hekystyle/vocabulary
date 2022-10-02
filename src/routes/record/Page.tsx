@@ -21,7 +21,7 @@ export const RecordPage: FC = () => {
     data: term,
   } = useQuery(QUERY_KEYS.terms.id(id), async () => termsRepository.getById(id), {
     enabled: !Number.isNaN(id),
-    onError: console.error,
+    onError: e => console.error(e),
   });
 
   const { isLoading: creating, mutateAsync: create } = useMutation(termsRepository.create.bind(termsRepository), {
