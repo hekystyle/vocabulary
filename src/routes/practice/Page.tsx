@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { FC } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
+import { Button } from 'react-bootstrap';
 import { PracticeSession } from './components/PracticeSession';
 import { Configuration } from './components/Configuration';
 import { sessionState } from './store';
@@ -13,7 +14,22 @@ const Layout = styled.div`
 `;
 
 export const PracticePage: FC = () => {
-  const { isActive } = useRecoilValue(sessionState);
+  const [{ isActive }, setSession] = useRecoilState(sessionState);
 
-  return <Layout>{isActive ? <PracticeSession /> : <Configuration />}</Layout>;
+  const handleEndSessionButtonClick = () => {
+    setSession(prevState => ({ ...prevState, config: undefined, queue: [], isActive: false }));
+  };
+
+  return (
+    <Layout>
+      {isActive ? (
+        <>
+          <PracticeSession />
+          <Button onClick={handleEndSessionButtonClick}>End session</Button>
+        </>
+      ) : (
+        <Configuration />
+      )}
+    </Layout>
+  );
 };

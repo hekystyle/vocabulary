@@ -62,11 +62,7 @@ export const PracticeSession: FC = () => {
     if (actualRecord?.id === undefined) return;
     increaseAnswersCount({ id: actualRecord.id, isCorrect })
       .then(() => setSession(prevState => ({ ...prevState, queue: prevState.queue.slice(0, -1), isRevealed: false })))
-      .catch(e => console.error(e));
-  };
-
-  const handleEndSessionButtonClick = () => {
-    setSession(prevState => ({ ...prevState, config: undefined, queue: [], isActive: false }));
+      .catch(console.error);
   };
 
   const handleEditButtonClick = () => {
@@ -78,51 +74,47 @@ export const PracticeSession: FC = () => {
       });
   };
 
+  if (isFetching) return <SpinnerBox label="Loading term ..." />;
+  if (isMutating) return <SpinnerBox label="Updating term answers ..." />;
+  if (!actualRecord) return <p>You&apos;ve finished all the terms!</p>;
   return (
     <>
-      {isFetching && <SpinnerBox label="Loading term ..." />}
-      {isMutating && <SpinnerBox label="Updating term answers ..." />}
-      {actualRecord && (
-        <>
-          <Card>
-            <Card.Body className="text-center">
-              <div>{actualRecord.translation}</div>
-              <div>
-                (<i>{actualRecord.partOfSpeech}</i>)
-              </div>
-            </Card.Body>
-          </Card>
-          <Card>
-            <OverflowableCardBody className="text-center">{actualRecord.definition}</OverflowableCardBody>
-          </Card>
-          <Card>
-            <Card.Body className="text-center">
-              {isAnswerRevealed ? (
-                <Row>
-                  {actualRecord.word}
-                  <Button onClick={() => speak(actualRecord.word)}>Play it again</Button>
-                </Row>
-              ) : (
-                '?'
-              )}
-            </Card.Body>
-          </Card>
-          {!isAnswerRevealed ? (
-            <Button onClick={handleRevealAnswer}>Reveal answer</Button>
+      <Card>
+        <Card.Body className="text-center">
+          <div>{actualRecord.translation}</div>
+          <div>
+            (<i>{actualRecord.partOfSpeech}</i>)
+          </div>
+        </Card.Body>
+      </Card>
+      <Card>
+        <OverflowableCardBody className="text-center">{actualRecord.definition}</OverflowableCardBody>
+      </Card>
+      <Card>
+        <Card.Body className="text-center">
+          {isAnswerRevealed ? (
+            <Row>
+              {actualRecord.word}
+              <Button onClick={() => speak(actualRecord.word)}>Play it again</Button>
+            </Row>
           ) : (
-            <>
-              <Button variant="success" onClick={() => handleAnswerButtonClick(true)}>
-                I was correct
-              </Button>
-              <Button variant="danger" onClick={() => handleAnswerButtonClick(false)}>
-                I was incorrect
-              </Button>
-            </>
+            '?'
           )}
-          <Button onClick={handleEditButtonClick}>Edit current term</Button>
+        </Card.Body>
+      </Card>
+      {!isAnswerRevealed ? (
+        <Button onClick={handleRevealAnswer}>Reveal answer</Button>
+      ) : (
+        <>
+          <Button variant="success" onClick={() => handleAnswerButtonClick(true)}>
+            I was correct
+          </Button>
+          <Button variant="danger" onClick={() => handleAnswerButtonClick(false)}>
+            I was incorrect
+          </Button>
         </>
       )}
-      <Button onClick={handleEndSessionButtonClick}>End session</Button>
+      <Button onClick={handleEditButtonClick}>Edit current term</Button>
     </>
   );
 };
