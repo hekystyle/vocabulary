@@ -77,12 +77,13 @@ export const ListTable: FC = () => {
     QUERY_KEYS.terms.filter({ pageSize: PAGE_SIZE, page: currentPage, sortField, sortOrder }),
     () => termsRepository.get({ pageSize: PAGE_SIZE, page: currentPage ?? 1, sortField, sortOrder }),
     {
-      onError: e => console.error(e),
+      onError: console.error,
     },
   );
 
   const { isLoading: deleting, mutateAsync: deleteAsync } = useMutation(termsRepository.delete.bind(termsRepository), {
     onSuccess: () => queryClient.invalidateQueries(QUERY_KEYS.terms.all()),
+    onError: console.error,
   });
 
   const handleDelete: ActionsProps['onDelete'] = useCallback(
@@ -98,7 +99,7 @@ export const ListTable: FC = () => {
     [handleDelete, sortField, sortOrder],
   );
 
-  if (loading || deleting) return <SpinnerBox />;
+  if (loading || deleting) return <SpinnerBox>{loading ? 'Loading terms ...' : 'Deleting term ...'}</SpinnerBox>;
 
   if (error) return <p>Error: {error instanceof Error ? error.message : 'Unknown'}</p>;
 
