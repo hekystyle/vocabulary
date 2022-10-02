@@ -20,7 +20,7 @@ export const Configuration: FC = () => {
   });
 
   const { isLoading: loading, mutateAsync: runPrepareSessionQueue } = useMutation(prepareSessionQueue(db), {
-    onError: e => console.error(e),
+    onError: console.error,
   });
 
   const handleStartSessionButtonClick: ButtonProps['onClick'] = () => {
@@ -31,7 +31,7 @@ export const Configuration: FC = () => {
 
   const update = (newConfig: Partial<Config>) => setConfig(prevConfig => ({ ...prevConfig, ...newConfig }));
 
-  if (loading) return <SpinnerBox>Preparing practice session queue ...</SpinnerBox>;
+  if (loading) return <SpinnerBox label="Preparing practice session queue ..." />;
 
   const { scoreAlgorithm, playAfterReveal, ignoreScoreOfNewTerms } = config;
   return (

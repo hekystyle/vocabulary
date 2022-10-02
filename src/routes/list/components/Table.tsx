@@ -83,6 +83,7 @@ export const ListTable: FC = () => {
 
   const { isLoading: deleting, mutateAsync: deleteAsync } = useMutation(termsRepository.delete.bind(termsRepository), {
     onSuccess: () => queryClient.invalidateQueries(QUERY_KEYS.terms.all()),
+    onError: console.error,
   });
 
   const handleDelete: ActionsProps['onDelete'] = useCallback(
@@ -98,7 +99,7 @@ export const ListTable: FC = () => {
     [handleDelete, sortField, sortOrder],
   );
 
-  if (loading || deleting) return <SpinnerBox />;
+  if (loading || deleting) return <SpinnerBox label={loading ? 'Loading terms ...' : 'Deleting term ...'} />;
 
   if (error) return <p>Error: {error instanceof Error ? error.message : 'Unknown'}</p>;
 

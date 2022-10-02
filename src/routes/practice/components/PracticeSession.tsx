@@ -10,6 +10,7 @@ import { QUERY_KEYS } from 'utils/queryKeys';
 import { Term } from 'types/Term';
 import { isNil, last } from 'ramda';
 import { useRecoilState } from 'recoil';
+import { SpinnerBox } from 'components/SpinnerBox';
 import { useSpeech } from '../useSpeech';
 import { increaseTermAnswers } from '../api/increaseTermAnswers';
 import { sessionState } from '../store';
@@ -35,16 +36,16 @@ export const PracticeSession: FC = () => {
   const actualRecordId = last(queue);
   const playAfterReveal = config?.playAfterReveal ?? false;
 
-  const { data: actualRecord } = useQuery(
+  const { data: actualRecord, isFetching } = useQuery(
     QUERY_KEYS.terms.id(actualRecordId),
     () => (!isNil(actualRecordId) ? termsRepository.getById(actualRecordId) : undefined),
     {
       enabled: !isNil(actualRecordId),
-      onError: e => console.error(e),
+      onError: console.error,
     },
   );
 
-  const { mutateAsync: increaseAnswersCount } = useMutation(
+  const { mutateAsync: increaseAnswersCount, isLoading: isMutating } = useMutation(
     async ({ id, isCorrect }: { id: Exclude<Term['id'], undefined>; isCorrect: boolean }) =>
       increaseTermAnswers(db)(id, isCorrect),
     {
@@ -61,11 +62,7 @@ export const PracticeSession: FC = () => {
     if (actualRecord?.id === undefined) return;
     increaseAnswersCount({ id: actualRecord.id, isCorrect })
       .then(() => setSession(prevState => ({ ...prevState, queue: prevState.queue.slice(0, -1), isRevealed: false })))
-      .catch(e => console.error(e));
-  };
-
-  const handleEndSessionButtonClick = () => {
-    setSession(prevState => ({ ...prevState, config: undefined, queue: [], isActive: false }));
+      .catch(console.error);
   };
 
   const handleEditButtonClick = () => {
@@ -77,49 +74,47 @@ export const PracticeSession: FC = () => {
       });
   };
 
+  if (isFetching) return <SpinnerBox label="Loading term ..." />;
+  if (isMutating) return <SpinnerBox label="Updating term answers ..." />;
+  if (!actualRecord) return <p>You&apos;ve finished all the terms!</p>;
   return (
     <>
-      {actualRecord && (
-        <>
-          <Card>
-            <Card.Body className="text-center">
-              <div>{actualRecord.translation}</div>
-              <div>
-                (<i>{actualRecord.partOfSpeech}</i>)
-              </div>
-            </Card.Body>
-          </Card>
-          <Card>
-            <OverflowableCardBody className="text-center">{actualRecord.definition}</OverflowableCardBody>
-          </Card>
-          <Card>
-            <Card.Body className="text-center">
-              {isAnswerRevealed ? (
-                <Row>
-                  {actualRecord.word}
-                  <Button onClick={() => speak(actualRecord.word)}>Play it again</Button>
-                </Row>
-              ) : (
-                '?'
-              )}
-            </Card.Body>
-          </Card>
-          {!isAnswerRevealed ? (
-            <Button onClick={handleRevealAnswer}>Reveal answer</Button>
+      <Card>
+        <Card.Body className="text-center">
+          <div>{actualRecord.translation}</div>
+          <div>
+            (<i>{actualRecord.partOfSpeech}</i>)
+          </div>
+        </Card.Body>
+      </Card>
+      <Card>
+        <OverflowableCardBody className="text-center">{actualRecord.definition}</OverflowableCardBody>
+      </Card>
+      <Card>
+        <Card.Body className="text-center">
+          {isAnswerRevealed ? (
+            <Row>
+              {actualRecord.word}
+              <Button onClick={() => speak(actualRecord.word)}>Play it again</Button>
+            </Row>
           ) : (
-            <>
-              <Button variant="success" onClick={() => handleAnswerButtonClick(true)}>
-                I was correct
-              </Button>
-              <Button variant="danger" onClick={() => handleAnswerButtonClick(false)}>
-                I was incorrect
-              </Button>
-            </>
+            '?'
           )}
-          <Button onClick={handleEditButtonClick}>Edit current term</Button>
+        </Card.Body>
+      </Card>
+      {!isAnswerRevealed ? (
+        <Button onClick={handleRevealAnswer}>Reveal answer</Button>
+      ) : (
+        <>
+          <Button variant="success" onClick={() => handleAnswerButtonClick(true)}>
+            I was correct
+          </Button>
+          <Button variant="danger" onClick={() => handleAnswerButtonClick(false)}>
+            I was incorrect
+          </Button>
         </>
       )}
-      <Button onClick={handleEndSessionButtonClick}>End session</Button>
+      <Button onClick={handleEditButtonClick}>Edit current term</Button>
     </>
   );
 };

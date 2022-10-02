@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { Spinner } from 'react-bootstrap';
 
-export const SpinnerBox: FC<{ children?: React.ReactNode }> = ({ children }) => (
+export const SpinnerBox: FC<PropsWithChildren<{ label: string }>> = ({ children, label }) => (
   <div className="d-flex flex-column align-items-center gap-3">
-    <Spinner animation="border" />
-    {children}
+    <Spinner animation="border" aria-label={label} role="status" />
+    {children ?? label}
   </div>
 );

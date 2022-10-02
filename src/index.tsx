@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import 'reflect-metadata';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -5,15 +7,10 @@ import 'antd/dist/antd.css';
 import 'antd/dist/antd.dark.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-import { HashRouter } from 'react-router-dom';
-import { DataMigration, migrate } from 'containers/DataMigration';
+import { migrate } from 'containers/DataMigration';
 import { SERVICES } from 'services/di';
-import { QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 import { QUERY_CLIENT } from 'services/query';
-import { FilterProvider } from 'containers/Filter';
-import { ServicesProvider } from 'containers/Services';
-import { RecoilRoot } from 'recoil';
+import { Providers } from 'Providers';
 import reportWebVitals from './reportWebVitals';
 import { App } from './App';
 
@@ -27,20 +24,9 @@ if (container === null) throw new Error('Root element not found');
 const root = createRoot(container);
 root.render(
   <StrictMode>
-    <RecoilRoot>
-      <QueryClientProvider client={QUERY_CLIENT}>
-        <ServicesProvider services={SERVICES}>
-          <DataMigration>
-            <HashRouter>
-              <FilterProvider>
-                <App />
-              </FilterProvider>
-            </HashRouter>
-          </DataMigration>
-        </ServicesProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </RecoilRoot>
+    <Providers>
+      <App />
+    </Providers>
   </StrictMode>,
 );
 

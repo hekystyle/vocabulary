@@ -27,7 +27,7 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
   });
 
   const { data: partsOfSpeech } = useQuery(QUERY_KEYS.terms.all(), () => termsRepository.getUniquePartsOfSpeech(), {
-    onError: e => console.error(e),
+    onError: console.error,
   });
   const partOfSpeechOptions = useMemo(() => options(partsOfSpeech ?? []), [partsOfSpeech]);
 
@@ -35,7 +35,7 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
     QUERY_KEYS.terms.filter({ word: entry.word }),
     () => termsRepository.getWords(entry.word),
     {
-      onError: e => console.error(e),
+      onError: console.error,
     },
   );
   const wordsOptions = useMemo(() => options(words ?? []), [words]);
@@ -48,6 +48,7 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
     <>
       <AutoComplete
         allowClear
+        aria-label="Word"
         options={wordsOptions}
         placeholder="Word"
         style={{ width: '100%' }}
@@ -57,6 +58,7 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
       />
       <AutoComplete
         allowClear
+        aria-label="Part of speech"
         options={partOfSpeechOptions}
         placeholder="Part ot speech"
         style={{ width: '100%' }}
@@ -65,11 +67,13 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
         onSelect={(value: string) => handleChange({ partOfSpeech: value })}
       />
       <Input
+        aria-label="Translation"
         placeholder="Translation"
         value={entry.translation}
         onChange={e => handleChange({ translation: e.target.value })}
       />
       <Input.TextArea
+        aria-label="Definition"
         placeholder="Definition"
         value={entry.definition}
         onChange={e => handleChange({ definition: e.target.value })}
