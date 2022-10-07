@@ -10,7 +10,7 @@
     "@types/ramda": "0.28.15",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
-    "@types/styled-components": "5.1.24",
+    "@types/styled-components": "5.1.26",
     "antd": "4.23.2",
     "bootstrap": "5.2.1",
     "class-transformer": "0.5.1",
@@ -25,7 +25,7 @@
     "react-router-dom": "6.4.1",
     "recoil": "0.7.5",
     "reflect-metadata": "0.1.13",
-    "styled-components": "5.3.3",
+    "styled-components": "5.3.6",
     "web-vitals": "3.0.2",
     "workbox-precaching": "6.5.4"
   },
