@@ -1,16 +1,22 @@
 # This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '**'
 
 concurrency: 
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
-  deps:
+  install:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -29,7 +35,7 @@ jobs:
       - run: yarn install --immutable
 
   build:
-    needs: [deps]
+    needs: [install]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -54,7 +60,7 @@ jobs:
           key: build-${{ github.sha }}
 
   lint:
-    needs: [deps]
+    needs: [install]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -73,7 +79,7 @@ jobs:
       - run: yarn run lint
 
   test:
-    needs: [deps, build, lint]
+    needs: [install, build, lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -95,7 +101,7 @@ jobs:
         uses: codecov/codecov-action@v3.1.1
 
   deploy:
-    needs: [deps, build, test]
+    needs: [install, build, test]
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     steps:
