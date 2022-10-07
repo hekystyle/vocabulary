@@ -12,7 +12,7 @@
     "@types/react-dom": "18.0.6",
     "@types/styled-components": "5.1.26",
     "antd": "4.23.4",
-    "bootstrap": "5.2.1",
+    "bootstrap": "5.2.2",
     "class-transformer": "0.5.1",
     "class-validator": "0.13.2",
     "dexie": "3.2.2",
