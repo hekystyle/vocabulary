@@ -2458,9 +2458,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@restart/ui@npm:^1.3.1":
-  version: 1.3.1
-  resolution: "@restart/ui@npm:1.3.1"
+"@restart/ui@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "@restart/ui@npm:1.4.1"
   dependencies:
     "@babel/runtime": ^7.18.3
     "@popperjs/core": ^2.11.5
@@ -2474,7 +2474,7 @@ __metadata:
   peerDependencies:
     react: ">=16.14.0"
     react-dom: ">=16.14.0"
-  checksum: 3f81578900475dcee6ebf8d9be5bc5c41d6c57aa1a833f0cc37135e1f4cf14e31e70419e906b4ce2ee837b3cb613f65bfe5715f398e4e053561289ad976cad8e
+  checksum: 099084a923eb71bd56b16bb39fe482bbdd71bb371dd1d715750445b166a368167e7bec0bacc1f84f81a4a9d6d0e67f7805580799500028870b7d304d12b152f6
   languageName: node
   linkType: hard
 
@@ -12814,13 +12814,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-bootstrap@npm:2.5.0":
-  version: 2.5.0
-  resolution: "react-bootstrap@npm:2.5.0"
+"react-bootstrap@npm:2.6.0":
+  version: 2.6.0
+  resolution: "react-bootstrap@npm:2.6.0"
   dependencies:
     "@babel/runtime": ^7.17.2
     "@restart/hooks": ^0.4.6
-    "@restart/ui": ^1.3.1
+    "@restart/ui": ^1.4.1
     "@types/react-transition-group": ^4.4.4
     classnames: ^2.3.1
     dom-helpers: ^5.2.1
@@ -12837,7 +12837,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 7375ae90da1ba26860ad75069aa894a3c8bd452ed21a1332802056f8787c0f92b2c08f5c73cc6a801ebb87eba9245e6c70672286fea52afe3c75e48d9cd03899
+  checksum: 950a2afc4def2c989be74fa4093f94b289da8c73e3bac5a842aac19690730d6ffdb3959b219fc87a01ae006a08bdf636361738d839bae88c24946c0bf001b341
   languageName: node
   linkType: hard
 
@@ -15086,7 +15086,7 @@ __metadata:
     qs: 6.11.0
     ramda: 0.28.0
     react: 18.2.0
-    react-bootstrap: 2.5.0
+    react-bootstrap: 2.6.0
     react-dom: 18.2.0
     react-query: 3.39.2
     react-router-dom: 6.4.3
