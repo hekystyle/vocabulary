@@ -8,7 +8,7 @@
     "@types/node": "16.18.3",
     "@types/qs": "6.9.7",
     "@types/ramda": "0.28.20",
-    "@types/react": "18.0.21",
+    "@types/react": "18.0.25",
     "@types/react-dom": "18.0.6",
     "@types/styled-components": "5.1.26",
     "antd": "4.24.1",
