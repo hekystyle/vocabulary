@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "packageManager": "yarn@3.2.4",
+  "engines": {
+    "node": "^16.0.0"
+  },
   "dependencies": {
     "@ant-design/icons": "4.7.0",
     "@types/node": "16.18.3",
