@@ -4,11 +4,11 @@
   "private": true,
   "packageManager": "yarn@3.2.4",
   "engines": {
-    "node": "^16.0.0"
+    "node": "^18.0.0"
   },
   "dependencies": {
     "@ant-design/icons": "4.7.0",
-    "@types/node": "16.18.3",
+    "@types/node": "18.11.9",
     "@types/qs": "6.9.7",
     "@types/ramda": "0.28.20",
     "@types/react": "18.0.25",
