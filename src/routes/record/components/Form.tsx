@@ -78,12 +78,14 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
         value={entry.definition}
         onChange={e => handleChange({ definition: e.target.value })}
       />
-      <Button type="primary" onClick={handleConfirm}>
-        Confirm
-      </Button>
-      <Button danger type="primary" onClick={onCancel}>
-        Cancel
-      </Button>
+      <Button.Group style={{ display: 'flex' }}>
+        <Button block type="primary" onClick={handleConfirm}>
+          Confirm
+        </Button>
+        <Button block danger type="primary" onClick={onCancel}>
+          Cancel
+        </Button>
+      </Button.Group>
       <DefinitionsList
         word={entry.word}
         onDefinitionClick={values => handleChange(values)}
