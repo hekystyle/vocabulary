@@ -7,7 +7,7 @@
     "node": "^16.0.0"
   },
   "dependencies": {
-    "@ant-design/icons": "4.7.0",
+    "@ant-design/icons": "4.8.0",
     "@types/node": "16.18.3",
     "@types/qs": "6.9.7",
     "@types/ramda": "0.28.20",
