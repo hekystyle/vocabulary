@@ -16,7 +16,7 @@ it('should throw error if not used within provider', () => {
   expect(run).toThrow(`${useFilter.name} must be used within a ${FilterProvider.name}`);
 });
 
-it('should be used without throwing error', () => {
+it('should be used without throwing error', async () => {
   window.location.hash = '#/?page=2';
   const { result } = renderHook(useFilter, {
     wrapper: ({ children }) => (
@@ -27,12 +27,12 @@ it('should be used without throwing error', () => {
   });
   expect(result.current.filter).toEqual({ page: 2 });
 
-  act(() => result.current.update({ page: 1 }));
+  await act(() => result.current.update({ page: 1 }));
   expect(result.current.filter).toEqual({ page: 1 });
 
-  act(() => result.current.setFields([] as const));
+  await act(() => result.current.setFields([] as const));
   expect(result.current.filter).toEqual({});
 
-  act(() => result.current.setFields(undefined));
+  await act(() => result.current.setFields(undefined));
   expect(result.current.filter).toEqual({ page: 1 });
 });
