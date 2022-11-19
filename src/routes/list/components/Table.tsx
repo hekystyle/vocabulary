@@ -1,5 +1,5 @@
 import { Tooltip } from 'antd';
-import { ColumnsType } from 'antd/lib/table';
+import { ColumnsType } from 'antd/es/table';
 import { Table } from 'components/Table';
 import { FC, useCallback, useMemo } from 'react';
 import { SpinnerBox } from 'components/SpinnerBox';
@@ -7,7 +7,7 @@ import { useServices } from 'containers/Services';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
 import { useFilter } from 'containers/Filter';
-import { SortOrder } from 'antd/lib/table/interface';
+import { SortOrder } from 'antd/es/table/interface';
 import { toArray } from 'utils/toArray';
 import { Term } from '../../../types/Term';
 import { AddButton } from './table/AddButton';

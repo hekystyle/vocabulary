@@ -1,4 +1,5 @@
-import { FC, PropsWithChildren, StrictMode } from 'react';
+import { FC, PropsWithChildren } from 'react';
+import { ConfigProvider, theme } from 'antd';
 import { RecoilRoot } from 'recoil';
 import { HashRouter } from 'react-router-dom';
 import { DataMigration } from 'containers/DataMigration';
@@ -10,7 +11,7 @@ import { FilterProvider } from 'containers/Filter';
 import { ServicesProvider } from 'containers/Services';
 
 export const Providers: FC<PropsWithChildren> = ({ children }) => (
-  <StrictMode>
+  <ConfigProvider theme={{ algorithm: [theme.darkAlgorithm] }}>
     <RecoilRoot>
       <QueryClientProvider client={QUERY_CLIENT}>
         <ServicesProvider services={SERVICES}>
@@ -23,5 +24,5 @@ export const Providers: FC<PropsWithChildren> = ({ children }) => (
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </RecoilRoot>
-  </StrictMode>
+  </ConfigProvider>
 );

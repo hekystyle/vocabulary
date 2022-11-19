@@ -3,7 +3,6 @@
 import 'reflect-metadata';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import 'antd/dist/antd.dark.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import { migrate } from 'containers/DataMigration';

@@ -1,4 +1,4 @@
-import { SortOrder } from 'antd/lib/table/interface';
+import { SortOrder } from 'antd/es/table/interface';
 
 export interface Sorting {
   sortField: string;
