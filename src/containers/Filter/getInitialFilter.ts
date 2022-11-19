@@ -1,4 +1,4 @@
-import { SortOrder } from 'antd/lib/table/interface';
+import { SortOrder } from 'antd/es/table/interface';
 import { parse } from 'qs';
 import { evolve, pick } from 'ramda';
 import { FilterValues } from './types';
