@@ -12,7 +12,7 @@
     "@types/qs": "6.9.7",
     "@types/ramda": "0.28.20",
     "@types/react": "18.0.25",
-    "@types/react-dom": "18.0.8",
+    "@types/react-dom": "18.0.9",
     "@types/styled-components": "5.1.26",
     "antd": "5.0.0",
     "bootstrap": "5.2.2",
