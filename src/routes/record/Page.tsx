@@ -35,7 +35,7 @@ export const RecordPage: FC = () => {
     if (isObject(location.state) && hasReturnUrlField(location.state)) {
       navigate(location.state.returnUrl);
     } else {
-      navigate('/');
+      navigate('/list');
     }
   };
 
