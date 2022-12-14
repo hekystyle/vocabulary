@@ -1,11 +1,11 @@
-import { useState, FC, useMemo } from 'react';
-import { Button, Input, AutoComplete } from 'antd';
+import { useState, FC /* useMemo */ } from 'react';
+import { Button, Input /* AutoComplete */ } from 'antd';
 import { Term } from 'types/Term';
-import { useServices } from 'containers/Services';
-import { useQuery } from 'react-query';
-import { QUERY_KEYS } from 'utils/queryKeys';
+// import { useServices } from 'containers/Services';
+// import { useQuery } from 'react-query';
+// import { QUERY_KEYS } from 'utils/queryKeys';
 import { DefinitionsList } from './DefinitionsList';
-import { options } from '../utils/options';
+// import { options } from '../utils/options';
 
 export interface FormProps {
   term?: Term;
@@ -14,7 +14,7 @@ export interface FormProps {
 }
 
 export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
-  const { termsRepository } = useServices();
+  // const { termsRepository } = useServices();
 
   const [entry, setEntry] = useState<Term>({
     word: '',
@@ -26,19 +26,19 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
     ...(term ?? {}),
   });
 
-  const { data: partsOfSpeech } = useQuery(QUERY_KEYS.terms.all(), () => termsRepository.getUniquePartsOfSpeech(), {
-    onError: console.error,
-  });
-  const partOfSpeechOptions = useMemo(() => options(partsOfSpeech ?? []), [partsOfSpeech]);
+  // const { data: partsOfSpeech } = useQuery(QUERY_KEYS.terms.all(), () => termsRepository.getUniquePartsOfSpeech(), {
+  //   onError: console.error,
+  // });
+  // const partOfSpeechOptions = useMemo(() => options(partsOfSpeech ?? []), [partsOfSpeech]);
 
-  const { data: words } = useQuery(
-    QUERY_KEYS.terms.filter({ word: entry.word }),
-    () => termsRepository.getWords(entry.word),
-    {
-      onError: console.error,
-    },
-  );
-  const wordsOptions = useMemo(() => options(words ?? []), [words]);
+  // const { data: words } = useQuery(
+  //   QUERY_KEYS.terms.filter({ word: entry.word }),
+  //   () => termsRepository.getWords(entry.word),
+  //   {
+  //     onError: console.error,
+  //   },
+  // );
+  // const wordsOptions = useMemo(() => options(words ?? []), [words]);
 
   const handleChange = (values: Partial<Term>) => setEntry(prevEntry => ({ ...prevEntry, ...values }));
 
@@ -46,25 +46,25 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
 
   return (
     <>
-      <AutoComplete
+      <Input
         allowClear
         aria-label="Word"
-        options={wordsOptions}
+        // options={wordsOptions}
         placeholder="Word"
         style={{ width: '100%' }}
         value={entry.word}
-        onChange={value => handleChange({ word: value })}
-        onSelect={(value: string) => handleChange({ word: value })}
+        onChange={e => handleChange({ word: e.target.value })}
+        // onSelect={(value: string) => handleChange({ word: value })}
       />
-      <AutoComplete
+      <Input
         allowClear
         aria-label="Part of speech"
-        options={partOfSpeechOptions}
+        // options={partOfSpeechOptions}
         placeholder="Part ot speech"
         style={{ width: '100%' }}
         value={entry.partOfSpeech}
-        onChange={value => handleChange({ partOfSpeech: value })}
-        onSelect={(value: string) => handleChange({ partOfSpeech: value })}
+        onChange={e => handleChange({ partOfSpeech: e.target.value })}
+        // onSelect={(value: string) => handleChange({ partOfSpeech: value })}
       />
       <Input
         aria-label="Translation"
