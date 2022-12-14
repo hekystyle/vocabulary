@@ -17,7 +17,7 @@
     "antd": "5.0.7",
     "bootstrap": "5.2.3",
     "class-transformer": "0.5.1",
-    "class-validator": "0.13.2",
+    "class-validator": "0.14.0",
     "dexie": "3.2.2",
     "qs": "6.11.0",
     "ramda": "0.28.0",
