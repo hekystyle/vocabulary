@@ -1,4 +1,5 @@
 module.exports = {
+  root: true,
   extends: [
     'eslint:recommended',
     'airbnb',
@@ -49,7 +50,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['setupTests.ts'],
+      files: ['setupTests.ts', 'cypress.config.ts', 'cypress/support/commands.ts'],
       rules: {
         'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
       },

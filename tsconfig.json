@@ -28,8 +28,9 @@
     "jsx": "react-jsx",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "types": ["cypress", "@testing-library/cypress"]
   },
   "include": [
-    "src", ".eslintrc.js"
+    "src", "cypress", ".eslintrc.js", "cypress.config.ts"
   ]
 }

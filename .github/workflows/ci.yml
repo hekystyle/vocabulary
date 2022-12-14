@@ -26,10 +26,12 @@ jobs:
           node-version: lts/*
           cache: "yarn"
 
-      - name: Restore node_modules
+      - name: Restore dependencies
         uses: actions/cache@v3
         with:
-          path: node_modules
+          path: |
+            node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
       - run: yarn install --immutable
@@ -48,7 +50,9 @@ jobs:
       - name: Restore node_modules
         uses: actions/cache@v3
         with:
-          path: node_modules
+          path: |
+            node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
       - run: yarn run build
@@ -73,7 +77,9 @@ jobs:
       - name: Restore node_modules
         uses: actions/cache@v3
         with:
-          path: node_modules
+          path: |
+            node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
       - run: yarn run lint
@@ -92,7 +98,9 @@ jobs:
       - name: Restore node_modules
         uses: actions/cache@v3
         with:
-          path: node_modules
+          path: |
+            node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
       - run: yarn run test --coverage
@@ -100,8 +108,36 @@ jobs:
       - name: Codecov
         uses: codecov/codecov-action@v3.1.1
 
+  cypress:
+    needs: [install, build, lint]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Restore dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+
+      - name: Restore build
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: build-${{ github.sha }}
+
+      - name: Cypress run
+        timeout-minutes: 2
+        uses: cypress-io/github-action@v4 # use the explicit version number
+        with:
+          install: false
+          start: yarn start:ci
+          wait-on: 'http://localhost:3000'
+
   deploy:
-    needs: [install, build, test]
+    needs: [install, build, test, cypress]
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     steps:
@@ -114,7 +150,9 @@ jobs:
       - name: Restore node_modules
         uses: actions/cache@v3
         with:
-          path: node_modules
+          path: |
+            node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
       - name: Restore build
