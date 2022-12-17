@@ -7,18 +7,57 @@ before(async () => {
 });
 
 beforeEach(() => {
-  cy.visit('/');
-});
+  cy.visit('/#/seed');
 
-it('test whole app', () => {
+  cy.findByRole('button', { name: /seed/i }).click();
+
+  cy.findByText('seeding...').should('not.exist');
+
+  cy.findByText('success');
+
+  cy.visit('/#/');
+
   cy.findByRole('status').should('not.exist');
 
-  cy.location('hash').should('eq', '#/list');
+  cy.hash().should('eq', '#/list');
+});
+
+// TODO: write tests for navigation
+it.skip('test navigation', () => {});
+
+it('test terms list page', () => {
+  cy.findByRole('cell', { name: 'car' })
+    .parent('tr')
+    .findByRole('button', { name: /delete/i })
+    .click();
+
+  cy.findByText('OK').click();
+
+  cy.findByRole('status').should('not.exist');
+
+  cy.findAllByRole('cell', { name: 'car' }).should('not.exist');
+
+  cy.findByRole('cell', { name: 'computer' })
+    .parent('tr')
+    .findByRole('button', { name: /delete/i })
+    .click();
+
+  cy.findByText('OK').click();
+
+  cy.findByRole('status').should('not.exist');
+
+  cy.findAllByRole('cell', { name: 'computer' }).should('not.exist');
+});
+
+it('test terms creation page', () => {
+  cy.findByRole('status').should('not.exist');
+
+  cy.hash().should('eq', '#/list');
 
   // should create 1st record
   cy.findByRole('button', { name: /add/i }).click();
 
-  cy.location('hash').should('eq', '#/record');
+  cy.hash().should('eq', '#/record');
 
   cy.findByRole('textbox', { name: /word/i }).type('apple').should('have.value', 'apple');
 
@@ -38,14 +77,14 @@ it('test whole app', () => {
 
   cy.findByRole('status').should('not.exist');
 
-  cy.location('hash').should('eq', '#/list');
+  cy.hash().should('eq', '#/list');
 
   cy.findByRole('cell', { name: 'apple' }).should('exist');
 
   // it('should create 2nd record', () => {
   cy.findByRole('button', { name: /add/i }).click();
 
-  cy.location('hash').should('eq', '#/record');
+  cy.hash().should('eq', '#/record');
 
   cy.findByRole('textbox', { name: /word/i }).type('banana');
 
@@ -66,27 +105,27 @@ it('test whole app', () => {
 
   cy.findByRole('status').should('not.exist');
 
-  cy.location('hash').should('eq', '#/list');
+  cy.hash().should('eq', '#/list');
 
   cy.findByRole('cell', { name: 'banana' }).should('exist');
+});
 
-  // it('should edit record', () => {
-  cy.findByRole('cell', { name: 'banana' }).parent('tr').findByRole('button', { name: /edit/i }).click();
+it('test term edit page', () => {
+  cy.findByRole('cell', { name: 'car' }).parent('tr').findByRole('button', { name: /edit/i }).click();
 
   cy.findByRole('status').should('not.exist');
 
-  cy.location('hash').should('match', /^#\/record\/\d+$/);
+  cy.hash().should('match', /^#\/record\/\d+$/);
 
   cy.findByRole('button', { name: /cancel/i }).click();
 
   cy.findByRole('status').should('not.exist');
 
-  cy.location('hash').should('eq', '#/list');
+  cy.hash().should('eq', '#/list');
+});
 
-  // it('should navigate to practice page', () => {
-  cy.findByRole('button', { name: /practice/i }).click();
-
-  cy.location('hash').should('eq', '#/practice');
+it('test practice page', () => {
+  cy.visit('/#/practice');
 
   // it('should start practice session', () => {
   cy.findByRole('button', { name: /start session/i }).click();
@@ -98,13 +137,13 @@ it('test whole app', () => {
 
   cy.findByRole('status').should('not.exist');
 
-  cy.location('hash').should('match', /^#\/record\/\d+$/);
+  cy.hash().should('match', /^#\/record\/\d+$/);
 
   cy.findByRole('button', { name: /cancel/i }).click();
 
   cy.findByRole('status').should('not.exist');
 
-  cy.location('hash').should('eq', '#/practice');
+  cy.hash().should('eq', '#/practice');
 
   // it('should go through practice session', () => {
   cy.findByRole('button', { name: /reveal answer/i }).click();
@@ -119,36 +158,5 @@ it('test whole app', () => {
 
   cy.findByRole('button', { name: /end session/i }).click();
 
-  cy.location('hash').should('eq', '#/practice');
-
-  // it('should navigate to list page', () => {
-  cy.findByRole('button', { name: /list/i }).click();
-
-  cy.findByRole('status').should('not.exist');
-
-  cy.location('hash').should('eq', '#/list');
-
-  // it('should delete 1st term', () => {
-  cy.findByRole('cell', { name: 'apple' })
-    .parent('tr')
-    .findByRole('button', { name: /delete/i })
-    .click();
-
-  cy.findByText('OK').click();
-
-  cy.findByRole('status').should('not.exist');
-
-  cy.findAllByRole('cell', { name: 'apple' }).should('not.exist');
-
-  // it('should delete 2nd term', async () => {
-  cy.findByRole('cell', { name: 'banana' })
-    .parent('tr')
-    .findByRole('button', { name: /delete/i })
-    .click();
-
-  cy.findByText('OK').click();
-
-  cy.findByRole('status').should('not.exist');
-
-  cy.findAllByRole('cell', { name: 'banana' }).should('not.exist');
+  cy.hash().should('eq', '#/practice');
 });
