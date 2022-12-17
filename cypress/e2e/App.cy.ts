@@ -22,10 +22,17 @@ beforeEach(() => {
   cy.hash().should('eq', '#/list');
 });
 
-// TODO: write tests for navigation
-it.skip('test navigation', () => {});
+it('test navigation', () => {
+  cy.findByRole('button', { name: /practice/i }).click();
 
-it('test terms list page', () => {
+  cy.hash().should('eq', '#/practice');
+
+  cy.findByRole('button', { name: /list/i }).click();
+
+  cy.hash().should('eq', '#/list');
+});
+
+it('test terms delete', () => {
   cy.findByRole('cell', { name: 'car' })
     .parent('tr')
     .findByRole('button', { name: /delete/i })
