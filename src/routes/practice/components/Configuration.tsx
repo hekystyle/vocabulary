@@ -20,7 +20,7 @@ export const Configuration: FC = () => {
   });
 
   const { isLoading: loading, mutateAsync: runPrepareSessionQueue } = useMutation(prepareSessionQueue(db), {
-    onError: console.error,
+    onError: e => console.error(e),
   });
 
   const handleStartSessionButtonClick: ButtonProps['onClick'] = () => {

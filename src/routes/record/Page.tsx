@@ -26,11 +26,11 @@ export const RecordPage: FC = () => {
   });
 
   const { isLoading: creating, mutateAsync: create } = useMutation(termsRepository.create.bind(termsRepository), {
-    onError: console.error,
+    onError: e => console.error(e),
   });
 
   const { isLoading: updating, mutateAsync: update } = useMutation(termsRepository.update.bind(termsRepository), {
-    onError: console.error,
+    onError: e => console.error(e),
   });
 
   const navigateBack = () => {
