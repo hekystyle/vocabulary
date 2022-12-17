@@ -3,7 +3,7 @@ import { useServices } from 'containers/Services';
 import { FC } from 'react';
 import { useMutation } from 'react-query';
 
-export const SeedPage: FC = () => {
+const SeedPage: FC = () => {
   const { db } = useServices();
   const { error, mutate, status } = useMutation(
     async () => {
@@ -49,3 +49,6 @@ export const SeedPage: FC = () => {
       return <p>{status}</p>;
   }
 };
+
+// NOTE: default export is required for lazy loading
+export default SeedPage;

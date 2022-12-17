@@ -5,7 +5,7 @@ import { NavBar } from 'components/NavBar';
 import { ListRouter } from 'routes/list';
 import { PracticeRouter } from 'routes/practice';
 import { RecordRouter } from 'routes/record';
-import { SeedPage } from 'routes/seed/Page';
+import { SeedPage } from 'routes/seed/Lazy';
 
 const StyledApp = styled.div`
   height: 100vh;
