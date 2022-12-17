@@ -3,14 +3,28 @@ import { useNavigate } from 'react-router-dom';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, Modal, Space } from 'antd';
 import { Term } from 'types/Term';
+import { useIsMutating, useMutation, useQueryClient } from 'react-query';
+import { useServices } from 'containers/Services';
+import { QUERY_KEYS } from 'utils/queryKeys';
 
 export interface ActionsProps {
   record: Term;
-  onDelete: (term: Term) => void;
 }
 
-export const Actions: FC<ActionsProps> = ({ record, onDelete }) => {
+export const Actions: FC<ActionsProps> = ({ record }) => {
   const navigate = useNavigate();
+  const { termsRepository } = useServices();
+  const queryClient = useQueryClient();
+  const isMutating = useIsMutating(['terms']) > 0;
+
+  const { mutate: deleteTerm } = useMutation(
+    QUERY_KEYS.terms.id(record.id),
+    async () => (record.id ? termsRepository.delete(record.id) : undefined),
+    {
+      onSuccess: () => queryClient.invalidateQueries(QUERY_KEYS.terms.all()),
+      onError: e => console.error(e),
+    },
+  );
 
   const handleDeleteButtonClick = useCallback(() => {
     Modal.confirm({
@@ -19,14 +33,28 @@ export const Actions: FC<ActionsProps> = ({ record, onDelete }) => {
           Are you sure to delete <b>{record.word}</b>?
         </>
       ),
-      onOk: () => onDelete(record),
+      onOk: () => deleteTerm(undefined),
+      okButtonProps: { danger: true },
     });
-  }, [record, onDelete]);
+  }, [deleteTerm, record.word]);
 
   return (
     <Space>
-      <Button aria-label="edit" icon={<EditOutlined />} onClick={() => navigate(`/record/${record.id ?? ''}`)} />
-      <Button danger aria-label="delete" icon={<DeleteOutlined />} onClick={handleDeleteButtonClick} />
+      <Button
+        aria-label="edit"
+        disabled={isMutating}
+        icon={<EditOutlined />}
+        loading={isMutating}
+        onClick={() => record.id && navigate(`/record/${record.id}`)}
+      />
+      <Button
+        danger
+        aria-label="delete"
+        disabled={isMutating}
+        icon={<DeleteOutlined />}
+        loading={isMutating}
+        onClick={handleDeleteButtonClick}
+      />
     </Space>
   );
 };

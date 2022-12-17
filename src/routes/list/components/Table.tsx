@@ -1,23 +1,19 @@
 import { Tooltip } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { Table } from 'components/Table';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { SpinnerBox } from 'components/SpinnerBox';
 import { useServices } from 'containers/Services';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
 import { useFilter } from 'containers/Filter';
 import { SortOrder } from 'antd/es/table/interface';
 import { toArray } from 'utils/toArray';
 import { Term } from '../../../types/Term';
 import { AddButton } from './table/AddButton';
-import { Actions, ActionsProps } from './table/Actions';
+import { Actions } from './table/Actions';
 
-const getColumns = ({
-  sortField,
-  sortOrder,
-  onDelete,
-}: Pick<ActionsProps, 'onDelete'> & { sortField: string; sortOrder: SortOrder }): ColumnsType<Term> => [
+const getColumns = ({ sortField, sortOrder }: { sortField: string; sortOrder: SortOrder }): ColumnsType<Term> => [
   {
     key: 'word',
     title: 'Word',
@@ -55,7 +51,7 @@ const getColumns = ({
     align: 'right',
     width: '0',
     title: () => <AddButton />,
-    render: (_, record) => <Actions record={record} onDelete={onDelete} />,
+    render: (_, record) => <Actions record={record} />,
   },
 ];
 
@@ -67,7 +63,6 @@ export const ListTable: FC = () => {
     update: updateFilter,
   } = useFilter();
   const { termsRepository } = useServices();
-  const queryClient = useQueryClient();
 
   const {
     error,
@@ -81,25 +76,9 @@ export const ListTable: FC = () => {
     },
   );
 
-  const { isLoading: deleting, mutateAsync: deleteAsync } = useMutation(termsRepository.delete.bind(termsRepository), {
-    onSuccess: () => queryClient.invalidateQueries(QUERY_KEYS.terms.all()),
-    onError: console.error,
-  });
+  const columns = useMemo(() => getColumns({ sortOrder, sortField }), [sortField, sortOrder]);
 
-  const handleDelete: ActionsProps['onDelete'] = useCallback(
-    term => {
-      if (term.id === undefined) return;
-      deleteAsync(term.id).catch(console.error);
-    },
-    [deleteAsync],
-  );
-
-  const columns = useMemo(
-    () => getColumns({ sortOrder, sortField, onDelete: handleDelete }),
-    [handleDelete, sortField, sortOrder],
-  );
-
-  if (loading || deleting) return <SpinnerBox label={loading ? 'Loading terms ...' : 'Deleting term ...'} />;
+  if (loading) return <SpinnerBox label="Loading terms ..." />;
 
   if (error) return <p>Error: {error instanceof Error ? error.message : 'Unknown'}</p>;
 
