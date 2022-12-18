@@ -5,18 +5,19 @@ import { StrictOmit } from 'types/StrictOmit';
 import { Term } from 'types/Term';
 import { computeSkip, Pagination } from 'utils/computeSkip';
 
-export interface ITermsRepository {
-  get(filter: Pagination & Sorting): Promise<{ terms: Term[]; total: number }>;
-  getById(id: Exclude<Term['id'], undefined>): Promise<Term | undefined>;
+export interface TermsRepository {
+  get(filter: Pagination & Sorting, signal: AbortSignal | undefined): Promise<{ terms: Term[]; total: number }>;
+  getById(id: Exclude<Term['id'], undefined>, signal: AbortSignal | undefined): Promise<Term | undefined>;
   create: (term: StrictOmit<Term, 'id' | 'createdAt'>) => Promise<Term | undefined>;
   update: (term: Term) => Promise<Term | undefined>;
   delete(id: Exclude<Term['id'], undefined>): Promise<void>;
 
-  getWords(search: string): Promise<string[]>;
-  getUniquePartsOfSpeech(): Promise<string[]>;
+  getWords(search: string, signal: AbortSignal | undefined): Promise<string[]>;
+  getUniquePartsOfSpeech(signal: AbortSignal | undefined): Promise<string[]>;
+  getUniqueTags(search: string, signal: AbortSignal | undefined): Promise<string[]>;
 }
 
-export class IndexedDbTermsRepository implements ITermsRepository {
+export class IndexedDbTermsRepository implements TermsRepository {
   constructor(private db: AppDb) {}
 
   public async get(filter: Pagination & Sorting): Promise<{ terms: Term[]; total: number }> {
@@ -70,10 +71,23 @@ export class IndexedDbTermsRepository implements ITermsRepository {
     await this.db.terms.each(term => set.add(term.partOfSpeech));
     return Array.from(set);
   }
+
+  public async getUniqueTags(search: string): Promise<string[]> {
+    const lowercasedSearch = search.toLowerCase();
+    const set = new Set<string>();
+    await this.db.terms.each(term =>
+      term.tags.forEach(tag => {
+        if (tag.toLowerCase().includes(lowercasedSearch)) {
+          set.add(tag);
+        }
+      }),
+    );
+    return Array.from(set);
+  }
 }
 
-export class DelayedTermsRepository implements ITermsRepository {
-  constructor(private repo: ITermsRepository, public readonly delayMs: number) {}
+export class DelayedTermsRepository implements TermsRepository {
+  constructor(private repo: TermsRepository, public readonly delayMs: number) {}
 
   private async wait() {
     return await new Promise(resolve => {
@@ -81,14 +95,14 @@ export class DelayedTermsRepository implements ITermsRepository {
     });
   }
 
-  async get(filter: Pagination & Sorting): Promise<{ terms: Term[]; total: number }> {
+  async get(filter: Pagination & Sorting, signal: AbortSignal | undefined): Promise<{ terms: Term[]; total: number }> {
     await this.wait();
-    return await this.repo.get(filter);
+    return await this.repo.get(filter, signal);
   }
 
-  async getById(id: Exclude<Term['id'], undefined>): Promise<Term | undefined> {
+  async getById(id: Exclude<Term['id'], undefined>, signal: AbortSignal | undefined): Promise<Term | undefined> {
     await this.wait();
-    return await this.repo.getById(id);
+    return await this.repo.getById(id, signal);
   }
 
   async create(term: Omit<Term, 'id'>): Promise<Term | undefined> {
@@ -106,13 +120,18 @@ export class DelayedTermsRepository implements ITermsRepository {
     return await this.repo.delete(id);
   }
 
-  async getWords(search: string): Promise<string[]> {
+  async getWords(search: string, signal: AbortSignal | undefined): Promise<string[]> {
     await this.wait();
-    return await this.repo.getWords(search);
+    return await this.repo.getWords(search, signal);
   }
 
-  async getUniquePartsOfSpeech(): Promise<string[]> {
+  async getUniquePartsOfSpeech(signal: AbortSignal | undefined): Promise<string[]> {
     await this.wait();
-    return await this.repo.getUniquePartsOfSpeech();
+    return await this.repo.getUniquePartsOfSpeech(signal);
+  }
+
+  async getUniqueTags(search: string, signal: AbortSignal | undefined): Promise<string[]> {
+    await this.wait();
+    return await this.repo.getUniqueTags(search, signal);
   }
 }

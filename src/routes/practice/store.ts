@@ -6,6 +6,7 @@ export interface Config {
   scoreAlgorithm: ScoreAlgorithm;
   playAfterReveal: boolean;
   ignoreScoreOfNewTerms: boolean;
+  tags: string[];
 }
 
 export interface PracticeSession {

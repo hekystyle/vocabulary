@@ -8,7 +8,11 @@ export interface TermV1 extends AnswersCountable {
   definition: string;
 }
 
-export interface Term extends Omit<TermV1, 'id'> {
+export interface TermV2 extends Omit<TermV1, 'id'> {
   id?: number;
   readonly createdAt?: Date;
+}
+
+export interface Term extends TermV2 {
+  tags: string[];
 }

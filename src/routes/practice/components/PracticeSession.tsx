@@ -38,7 +38,7 @@ export const PracticeSession: FC = () => {
 
   const { data: actualRecord, isFetching } = useQuery(
     QUERY_KEYS.terms.id(actualRecordId),
-    () => (!isNil(actualRecordId) ? termsRepository.getById(actualRecordId) : undefined),
+    ({ signal }) => (!isNil(actualRecordId) ? termsRepository.getById(actualRecordId, signal) : undefined),
     {
       enabled: !isNil(actualRecordId),
       onError: e => console.error(e),

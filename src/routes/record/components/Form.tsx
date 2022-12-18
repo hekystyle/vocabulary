@@ -4,16 +4,17 @@ import { Term } from 'types/Term';
 // import { useServices } from 'containers/Services';
 // import { useQuery } from 'react-query';
 // import { QUERY_KEYS } from 'utils/queryKeys';
+import { Tags } from 'components/Tags';
 import { DefinitionsList } from './DefinitionsList';
 // import { options } from '../utils/options';
 
 export interface FormProps {
-  term?: Term;
+  defaultValue?: Term;
   onSubmit: (values: Term) => void;
   onCancel: () => void;
 }
 
-export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
+export const Form: FC<FormProps> = ({ defaultValue: term, onCancel, onSubmit }) => {
   // const { termsRepository } = useServices();
 
   const [entry, setEntry] = useState<Term>({
@@ -23,6 +24,7 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
     definition: '',
     answersCount: 0,
     correctAnswersCount: 0,
+    tags: [],
     ...(term ?? {}),
   });
 
@@ -78,6 +80,7 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
         value={entry.definition}
         onChange={e => handleChange({ definition: e.target.value })}
       />
+      <Tags style={{ width: '100%' }} value={entry.tags} onChange={tags => handleChange({ tags })} />
       <Button.Group style={{ display: 'flex' }}>
         <Button block type="primary" onClick={handleConfirm}>
           Confirm
