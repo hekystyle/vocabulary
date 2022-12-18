@@ -1,3 +1,4 @@
+// eslint-disable-next-line max-classes-per-file
 import { Sorting } from 'containers/Filter';
 import { AppDb } from 'db';
 import { StrictOmit } from 'types/StrictOmit';
@@ -68,5 +69,50 @@ export class IndexedDbTermsRepository implements ITermsRepository {
     const set = new Set<string>();
     await this.db.terms.each(term => set.add(term.partOfSpeech));
     return Array.from(set);
+  }
+}
+
+export class DelayedTermsRepository implements ITermsRepository {
+  constructor(private repo: ITermsRepository, public readonly delayMs: number) {}
+
+  private async wait() {
+    return await new Promise(resolve => {
+      setTimeout(resolve, this.delayMs);
+    });
+  }
+
+  async get(filter: Pagination & Sorting): Promise<{ terms: Term[]; total: number }> {
+    await this.wait();
+    return await this.repo.get(filter);
+  }
+
+  async getById(id: Exclude<Term['id'], undefined>): Promise<Term | undefined> {
+    await this.wait();
+    return await this.repo.getById(id);
+  }
+
+  async create(term: Omit<Term, 'id'>): Promise<Term | undefined> {
+    await this.wait();
+    return await this.repo.create(term);
+  }
+
+  async update(term: Term): Promise<Term | undefined> {
+    await this.wait();
+    return await this.repo.update(term);
+  }
+
+  async delete(id: Exclude<Term['id'], undefined>): Promise<void> {
+    await this.wait();
+    return await this.repo.delete(id);
+  }
+
+  async getWords(search: string): Promise<string[]> {
+    await this.wait();
+    return await this.repo.getWords(search);
+  }
+
+  async getUniquePartsOfSpeech(): Promise<string[]> {
+    await this.wait();
+    return await this.repo.getUniquePartsOfSpeech();
   }
 }

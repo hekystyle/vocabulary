@@ -27,7 +27,7 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
   });
 
   // const { data: partsOfSpeech } = useQuery(QUERY_KEYS.terms.all(), () => termsRepository.getUniquePartsOfSpeech(), {
-  //   onError: console.error,
+  //   onError: e => console.error(e),
   // });
   // const partOfSpeechOptions = useMemo(() => options(partsOfSpeech ?? []), [partsOfSpeech]);
 
@@ -35,7 +35,7 @@ export const Form: FC<FormProps> = ({ term, onCancel, onSubmit }) => {
   //   QUERY_KEYS.terms.filter({ word: entry.word }),
   //   () => termsRepository.getWords(entry.word),
   //   {
-  //     onError: console.error,
+  //     onError: e => console.error(e),
   //   },
   // );
   // const wordsOptions = useMemo(() => options(words ?? []), [words]);

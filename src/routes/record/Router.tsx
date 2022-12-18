@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { RecordPage } from './Page';
+import { CreateRecordPage, UpdateRecordPage } from './Page';
 
 export const RecordRouter: FC = () => (
   <Routes>
-    <Route element={<RecordPage />} path=":id" />
-    <Route element={<RecordPage />} path="" />
+    <Route element={<UpdateRecordPage />} path=":id" />
+    <Route element={<CreateRecordPage />} path="" />
     <Route element={<Navigate to="." />} path="*" />
   </Routes>
 );

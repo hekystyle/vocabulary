@@ -5,6 +5,7 @@ import { NavBar } from 'components/NavBar';
 import { ListRouter } from 'routes/list';
 import { PracticeRouter } from 'routes/practice';
 import { RecordRouter } from 'routes/record';
+import { SeedPage } from 'routes/seed/Lazy';
 
 const StyledApp = styled.div`
   height: 100vh;
@@ -26,6 +27,7 @@ export const App: FC = () => (
         <Route element={<RecordRouter />} path="record/*" />
         <Route element={<PracticeRouter />} path="practice/*" />
         <Route element={<ListRouter />} path="list/*" />
+        <Route element={<SeedPage />} path="seed" />
         <Route element={<Navigate to="/list" />} path="*" />
       </Routes>
     </StyledContent>

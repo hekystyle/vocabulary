@@ -41,7 +41,7 @@ export const PracticeSession: FC = () => {
     () => (!isNil(actualRecordId) ? termsRepository.getById(actualRecordId) : undefined),
     {
       enabled: !isNil(actualRecordId),
-      onError: console.error,
+      onError: e => console.error(e),
     },
   );
 
