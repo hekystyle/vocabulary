@@ -23,6 +23,7 @@ export const up: Migration = async (db: AppDb) => {
       ...term,
       id: undefined,
       createdAt: new Date(term.id),
+      tags: [],
     });
   }
   localStorage.removeItem(VOCABULARY_KEY);

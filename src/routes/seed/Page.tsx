@@ -1,7 +1,39 @@
+import { faker } from '@faker-js/faker';
 import { Button } from 'antd';
 import { useServices } from 'containers/Services';
 import { FC } from 'react';
 import { useMutation } from 'react-query';
+import { StrictOmit } from 'types/StrictOmit';
+import { Term } from 'types/Term';
+
+function getFakeTerms() {
+  return (
+    [
+      {
+        word: 'car',
+        definition: 'a road vehicle with four wheels; usually propelled by an internal combustion engine',
+        partOfSpeech: 'noun',
+        translation: 'auto',
+      },
+      {
+        word: 'computer',
+        definition:
+          'an electronic device for storing and processing data, typically in binary form, according to instructions given to it in a variable program',
+        partOfSpeech: 'noun',
+        translation: 'počítač',
+      },
+    ] satisfies Array<StrictOmit<Term, 'answersCount' | 'correctAnswersCount' | 'tags'>>
+  ).map<Term>(term => {
+    const total = faker.datatype.number({ min: 1, max: 10 });
+    const correct = faker.datatype.number({ min: 0, max: total });
+    return {
+      ...term,
+      answersCount: total,
+      correctAnswersCount: correct,
+      tags: Array.from({ length: faker.datatype.number({ min: 0, max: 5 }) }, () => faker.random.word()),
+    };
+  });
+}
 
 const SeedPage: FC = () => {
   const { db } = useServices();
@@ -9,25 +41,9 @@ const SeedPage: FC = () => {
     async () => {
       await db.delete();
       await db.open();
-      return await db.terms.bulkAdd([
-        {
-          word: 'car',
-          definition: 'a road vehicle with four wheels; usually propelled by an internal combustion engine',
-          answersCount: 4,
-          correctAnswersCount: 3,
-          partOfSpeech: 'noun',
-          translation: 'auto',
-        },
-        {
-          word: 'computer',
-          definition:
-            'an electronic device for storing and processing data, typically in binary form, according to instructions given to it in a variable program',
-          answersCount: 2,
-          correctAnswersCount: 1,
-          partOfSpeech: 'noun',
-          translation: 'počítač',
-        },
-      ]);
+      for (const term of getFakeTerms()) {
+        await db.terms.add(term);
+      }
     },
     {
       onError: e => console.error(e),

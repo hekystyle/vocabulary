@@ -5,6 +5,7 @@ import { useState, FC } from 'react';
 import { useMutation } from 'react-query';
 import { useServices } from 'containers/Services';
 import { useSetRecoilState } from 'recoil';
+import { Tags } from 'components/Tags';
 import { prepareSessionQueue } from '../api/prepareSessionQueue';
 import { isScoreAlgorithm, ScoreAlgorithm } from '../constants';
 import { Config, sessionState } from '../store';
@@ -17,14 +18,15 @@ export const Configuration: FC = () => {
     scoreAlgorithm: ScoreAlgorithm.Relative,
     playAfterReveal: false,
     ignoreScoreOfNewTerms: false,
+    tags: [],
   });
 
-  const { isLoading: loading, mutateAsync: runPrepareSessionQueue } = useMutation(prepareSessionQueue(db), {
+  const { isLoading: loading, mutateAsync: prepareSessionQueueAsync } = useMutation(prepareSessionQueue(db), {
     onError: e => console.error(e),
   });
 
   const handleStartSessionButtonClick: ButtonProps['onClick'] = () => {
-    runPrepareSessionQueue(config)
+    prepareSessionQueueAsync(config)
       .then(queue => setSession({ config, queue, isActive: true, isRevealed: false }))
       .catch(console.error);
   };
@@ -61,6 +63,7 @@ export const Configuration: FC = () => {
         unCheckedChildren="Don't ignore score for items with less then 11 answers"
         onChange={checked => update({ ignoreScoreOfNewTerms: checked })}
       />
+      <Tags style={{ width: '100%' }} value={config.tags} onChange={value => update({ tags: value })} />
       <Button onClick={handleStartSessionButtonClick}>Start session</Button>
     </>
   );

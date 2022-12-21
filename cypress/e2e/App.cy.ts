@@ -32,30 +32,6 @@ it('test navigation', () => {
   cy.hash().should('eq', '#/list');
 });
 
-it('test terms delete', () => {
-  cy.findByRole('cell', { name: 'car' })
-    .parent('tr')
-    .findByRole('button', { name: /delete/i })
-    .click();
-
-  cy.findByText('OK').click();
-
-  cy.findByRole('status').should('not.exist');
-
-  cy.findAllByRole('cell', { name: 'car' }).should('not.exist');
-
-  cy.findByRole('cell', { name: 'computer' })
-    .parent('tr')
-    .findByRole('button', { name: /delete/i })
-    .click();
-
-  cy.findByText('OK').click();
-
-  cy.findByRole('status').should('not.exist');
-
-  cy.findAllByRole('cell', { name: 'computer' }).should('not.exist');
-});
-
 it('test terms creation page', () => {
   cy.findByRole('status').should('not.exist');
 
@@ -79,6 +55,9 @@ it('test terms creation page', () => {
   cy.findByRole('textbox', { name: /definition/i })
     .type('a round fruit with red or green skin and firm white flesh')
     .should('have.value', 'a round fruit with red or green skin and firm white flesh');
+
+  // TODO: Ant Design Select does not work with Cypress
+  // cy.findByRole('combobox', { name: /tags/i }).focus().type('fruit{enter}basic{enter}').blur();
 
   cy.findByRole('button', { name: /confirm/i }).click();
 
@@ -108,6 +87,10 @@ it('test terms creation page', () => {
       'have.value',
       'a long curved fruit which grows in clusters and has soft pulpy flesh and yellow skin when ripe',
     );
+
+  // TODO: Ant Design Select does not work with Cypress
+  // cy.findByRole('combobox', { name: /tags/i }).type('fruit{enter}basic{enter}').blur();
+
   cy.findByRole('button', { name: /confirm/i }).click();
 
   cy.findByRole('status').should('not.exist');
@@ -129,6 +112,30 @@ it('test term edit page', () => {
   cy.findByRole('status').should('not.exist');
 
   cy.hash().should('eq', '#/list');
+});
+
+it('test terms delete', () => {
+  cy.findByRole('cell', { name: 'car' })
+    .parent('tr')
+    .findByRole('button', { name: /delete/i })
+    .click();
+
+  cy.findByText('OK').click();
+
+  cy.findByRole('status').should('not.exist');
+
+  cy.findAllByRole('cell', { name: 'car' }).should('not.exist');
+
+  cy.findByRole('cell', { name: 'computer' })
+    .parent('tr')
+    .findByRole('button', { name: /delete/i })
+    .click();
+
+  cy.findByText('OK').click();
+
+  cy.findByRole('status').should('not.exist');
+
+  cy.findAllByRole('cell', { name: 'computer' }).should('not.exist');
 });
 
 it('test practice page', () => {

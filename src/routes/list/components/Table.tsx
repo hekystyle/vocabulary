@@ -49,6 +49,7 @@ const getColumns = ({ sortField, sortOrder }: { sortField: string; sortOrder: So
   {
     key: 'actions',
     align: 'right',
+    fixed: 'right',
     width: '0',
     title: () => <AddButton />,
     render: (_, record) => <Actions record={record} />,
@@ -70,7 +71,7 @@ export const ListTable: FC = () => {
     isFetching: loading,
   } = useQuery(
     QUERY_KEYS.terms.filter({ pageSize: PAGE_SIZE, page: currentPage, sortField, sortOrder }),
-    () => termsRepository.get({ pageSize: PAGE_SIZE, page: currentPage ?? 1, sortField, sortOrder }),
+    ({ signal }) => termsRepository.get({ pageSize: PAGE_SIZE, page: currentPage ?? 1, sortField, sortOrder }, signal),
     {
       onError: e => console.error(e),
     },
@@ -93,7 +94,7 @@ export const ListTable: FC = () => {
         defaultCurrent: currentPage,
         onChange: page => updateFilter({ page }),
       }}
-      rowKey="id"
+      rowKey={item => item.id ?? 'undefined'}
       scroll={{ x: true }}
       size="middle"
       onChange={(_, __, sorter) => {

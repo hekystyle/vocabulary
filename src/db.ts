@@ -22,6 +22,19 @@ export class AppDb extends Dexie {
     this.version(4).stores({
       terms: '++id, word, answersCount, correctAnswersCount, createdAt',
     });
+    this.version(5)
+      .stores({
+        terms: '++id, word, answersCount, correctAnswersCount, createdAt, *tags',
+      })
+      .upgrade(transaction =>
+        transaction
+          .table<Term>('terms')
+          .toCollection()
+          .modify(term => {
+            // eslint-disable-next-line no-param-reassign
+            term.tags = [];
+          }),
+      );
     this.terms.hook('creating', (_, term: Writable<Term>) => {
       // eslint-disable-next-line no-param-reassign
       term.createdAt = new Date();

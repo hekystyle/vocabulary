@@ -1,12 +1,12 @@
 import { AppDb } from 'db';
-import { DelayedTermsRepository, IndexedDbTermsRepository, ITermsRepository } from './terms';
+import { DelayedTermsRepository, IndexedDbTermsRepository, TermsRepository } from './terms';
 
-export type Services = Readonly<{
+export interface Services {
   db: AppDb;
-  termsRepository: ITermsRepository;
-}>;
+  termsRepository: TermsRepository;
+}
 
-const DEFAULT_DELAY = 500 as const;
+const DEFAULT_DELAY = 250 as const;
 
 const db = new AppDb('Vocabulary');
 export const SERVICES: Services = {

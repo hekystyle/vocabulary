@@ -9,11 +9,17 @@ import { Config } from '../store';
 
 export const prepareSessionQueue =
   (db: AppDb) =>
-  async ({ ignoreScoreOfNewTerms, scoreAlgorithm }: Config): Promise<Array<Term['id']>> => {
+  async ({ ignoreScoreOfNewTerms, scoreAlgorithm, tags }: Config): Promise<Array<Term['id']>> => {
     const computed: Array<{ id: Term['id']; score: number }> = [];
 
+    const tagsSet = new Set(tags);
+
     await db.terms
-      .filter(p => hasTranslation(p) || hasDefinition(p))
+      .filter(
+        term =>
+          (hasTranslation(term) || hasDefinition(term)) &&
+          (tagsSet.size === 0 || term.tags.some(tag => tagsSet.has(tag))),
+      )
       .each(term => {
         computed.push({
           id: term.id,

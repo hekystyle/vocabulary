@@ -1,7 +1,6 @@
 /* istanbul ignore file */
 
 import 'reflect-metadata';
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
@@ -21,11 +20,12 @@ const container = document.getElementById('root');
 if (container === null) throw new Error('Root element not found');
 const root = createRoot(container);
 root.render(
-  <StrictMode>
-    <Providers>
-      <App />
-    </Providers>
-  </StrictMode>,
+  // TODO: Uncomment StrictMode when Ant Design dropdowns will be compatible with it (https://github.com/hekystyle/vocabulary/issues/319)
+  // <React.StrictMode>
+  <Providers>
+    <App />
+  </Providers>,
+  // </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

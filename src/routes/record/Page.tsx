@@ -57,7 +57,7 @@ export const UpdateRecordPage: FC = () => {
     error,
     data: term,
     status,
-  } = useQuery(QUERY_KEYS.terms.id(id), async () => termsRepository.getById(id), {
+  } = useQuery(QUERY_KEYS.terms.id(id), async ({ signal }) => termsRepository.getById(id, signal), {
     enabled: !Number.isNaN(id),
     onError: e => console.error(e),
   });
@@ -92,7 +92,7 @@ export const UpdateRecordPage: FC = () => {
       return <p>Error: {error instanceof Error ? error.message : 'Unknown'}</p>;
     case 'success':
       if (term === undefined) return <p>Term not found by ID: {serializedId}</p>;
-      return <Form term={term} onCancel={handleCancel} onSubmit={handleSubmit} />;
+      return <Form defaultValue={term} onCancel={handleCancel} onSubmit={handleSubmit} />;
     default:
       return <p>Unknown status: {status}</p>;
   }

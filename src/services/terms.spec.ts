@@ -3,13 +3,13 @@ import { AppDb } from 'db';
 import fakeIndexedDB from 'fake-indexeddb';
 import FDBKeyRange from 'fake-indexeddb/lib/FDBKeyRange';
 import { Term } from 'types/Term';
-import { IndexedDbTermsRepository, ITermsRepository } from './terms';
+import { IndexedDbTermsRepository, TermsRepository } from './terms';
 
 AppDb.dependencies.indexedDB = fakeIndexedDB;
 AppDb.dependencies.IDBKeyRange = FDBKeyRange;
 
 let db: AppDb;
-let repository: ITermsRepository;
+let repository: TermsRepository;
 
 beforeEach(() => {
   db = new AppDb(randomUUID());
@@ -29,7 +29,7 @@ it('should create instance', async () => {
 it('should get terms', async () => {
   await db.terms.bulkAdd([{ word: 'a' } as Term, { word: 'b' } as Term]);
 
-  const result = await repository.get({ page: 1, pageSize: 2, sortField: 'word', sortOrder: 'descend' });
+  const result = await repository.get({ page: 1, pageSize: 2, sortField: 'word', sortOrder: 'descend' }, undefined);
 
   expect(result.terms).toEqual([
     {
@@ -55,7 +55,7 @@ it('should get terms', async () => {
 it('should get term by id', async () => {
   const id = await db.terms.add({} as Term);
 
-  const result = await repository.getById(id);
+  const result = await repository.getById(id, undefined);
 
   expect(result).toBeDefined();
 });
@@ -91,7 +91,7 @@ it('should delete term', async () => {
 it('should get terms words', async () => {
   await db.terms.bulkAdd([{ word: 'foo1' } as Term, { word: 'foo2' } as Term, { word: 'bar' } as Term]);
 
-  const result = await repository.getWords('foo');
+  const result = await repository.getWords('foo', undefined);
 
   expect(result).toEqual(['foo1', 'foo2']);
 });
@@ -104,6 +104,6 @@ it('should get unique parts of speech', async () => {
     { partOfSpeech: 'bar' } as Term,
   ]);
 
-  const result = await repository.getUniquePartsOfSpeech();
+  const result = await repository.getUniquePartsOfSpeech(undefined);
   expect(result).toEqual(['foo', 'bar']);
 });
