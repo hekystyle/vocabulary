@@ -16,8 +16,28 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  install_windows:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+          cache: "yarn"
+
+      - name: Restore dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+
+      - run: yarn install --immutable
+
   install:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
 
@@ -38,7 +58,7 @@ jobs:
 
   build:
     needs: [install]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
 
@@ -65,7 +85,7 @@ jobs:
 
   lint:
     needs: [install]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
 
@@ -86,7 +106,7 @@ jobs:
 
   test:
     needs: [install, build, lint]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
 
@@ -110,7 +130,7 @@ jobs:
 
   cypress:
     needs: [install, build, lint]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
 
@@ -138,7 +158,7 @@ jobs:
 
   deploy:
     needs: [install, build, test, cypress]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     steps:
       - uses: actions/checkout@v3
