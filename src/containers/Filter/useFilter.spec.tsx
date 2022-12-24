@@ -27,12 +27,12 @@ it('should be used without throwing error', async () => {
   });
   expect(result.current.filter).toEqual({ page: 2 });
 
-  await act(() => result.current.update({ page: 1 }));
+  act(() => result.current.update({ page: 1 }));
   expect(result.current.filter).toEqual({ page: 1 });
 
-  await act(() => result.current.setFields([] as const));
+  act(() => result.current.setFields([] as const));
   expect(result.current.filter).toEqual({});
 
-  await act(() => result.current.setFields(undefined));
+  act(() => result.current.setFields(undefined));
   expect(result.current.filter).toEqual({ page: 1 });
 });
