@@ -1,44 +1,107 @@
 /* eslint-disable max-classes-per-file */
 import { plainToInstance, Type } from 'class-transformer';
-import { IsArray, IsDefined, IsString, ValidateNested, validateOrReject } from 'class-validator';
+import { IsArray, IsDefined, IsString, IsUrl, ValidateNested, validateOrReject } from 'class-validator';
 
-export interface IWord {
-  meanings: IMeaning[];
-}
-
-export interface IMeaning {
-  partOfSpeech: string;
-  definitions: IDefinition[];
-}
-
-export interface IDefinition {
-  definition: string;
-}
-
-export class Definition implements IDefinition {
+export class Definition {
   @IsDefined()
   @IsString()
-  definition = '';
+  definition!: string;
+
+  @IsDefined()
+  @IsArray()
+  @IsString({ each: true })
+  synonyms!: string[];
+
+  @IsDefined()
+  @IsArray()
+  @IsString({ each: true })
+  antonyms!: string[];
+
+  @IsString()
+  example = '';
 }
 
-export class Meaning implements IMeaning {
+export class Meaning {
   @IsDefined()
   @IsString()
-  partOfSpeech = '';
+  partOfSpeech!: string;
 
   @IsDefined()
   @IsArray()
   @Type(() => Definition)
   @ValidateNested({ each: true })
-  definitions: Definition[] = [];
+  definitions!: Definition[];
+
+  @IsDefined()
+  @IsArray()
+  @IsString({ each: true })
+  synonyms!: string[];
+
+  @IsDefined()
+  @IsArray()
+  @IsString({ each: true })
+  antonyms!: string[];
 }
 
-export class Word implements IWord {
+class License {
+  @IsDefined()
+  @IsString()
+  name!: string;
+
+  @IsDefined()
+  @IsUrl()
+  url!: string;
+}
+
+class Phonetic {
+  @IsDefined()
+  @IsString()
+  text!: string;
+
+  @IsDefined()
+  @IsUrl()
+  audio!: string;
+
+  @IsDefined()
+  @IsUrl()
+  sourceUrl!: string;
+
+  @IsDefined()
+  @Type(() => License)
+  @ValidateNested()
+  license!: License;
+}
+
+export class Word {
+  @IsDefined()
+  @IsString()
+  word!: string;
+
+  @IsDefined()
+  @IsString()
+  phonetic!: string;
+
+  @IsDefined()
+  @IsArray()
+  @Type(() => Phonetic)
+  @ValidateNested({ each: true })
+  phonetics!: Phonetic[];
+
   @IsDefined()
   @IsArray()
   @Type(() => Meaning)
   @ValidateNested({ each: true })
-  meanings: Meaning[] = [];
+  meanings!: Meaning[];
+
+  @IsDefined()
+  @Type(() => License)
+  @ValidateNested()
+  license!: License;
+
+  @IsDefined()
+  @IsArray()
+  @IsString({ each: true })
+  sourceUrls!: string[];
 }
 
 export const fetchWord = async (word: string, { signal }: Pick<RequestInit, 'signal'> = {}): Promise<Word[]> => {
