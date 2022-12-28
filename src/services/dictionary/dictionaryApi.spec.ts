@@ -1,44 +1,20 @@
 import * as DictionaryApi from 'services/dictionaryApi';
+import fs from 'fs';
+import path from 'path';
 
 afterAll(() => {
   jest.restoreAllMocks();
 });
 
-it('should return words collection', async () => {
+it('should parse real data', async () => {
   jest.spyOn(window, 'fetch').mockResolvedValue({
     json: () =>
-      Promise.resolve([
-        {
-          meanings: [
-            {
-              partOfSpeech: 'noun',
-              definitions: [
-                {
-                  definition: 'definition',
-                },
-              ],
-            },
-          ],
-        },
-      ]),
+      Promise.resolve(JSON.parse(fs.readFileSync(path.resolve(__dirname, '__fixtures__', 'car.json'), 'utf8'))),
   } as Response);
 
-  const words = await DictionaryApi.fetchWord('hello');
+  const promise = DictionaryApi.fetchWord('hello');
 
-  expect(words).toEqual([
-    {
-      meanings: [
-        {
-          partOfSpeech: 'noun',
-          definitions: [
-            {
-              definition: 'definition',
-            },
-          ],
-        },
-      ],
-    },
-  ]);
+  await expect(promise).resolves.toMatchSnapshot();
 });
 
 it('should throw error when response is invalid', async () => {
