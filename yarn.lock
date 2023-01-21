@@ -22,15 +22,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ant-design/colors@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "@ant-design/colors@npm:6.0.0"
-  dependencies:
-    "@ctrl/tinycolor": ^3.4.0
-  checksum: 55110ac8a3353f3ec2d2fdee6ffb841967dd75f3783ef4e68c22731e042606bc5b3c3febb6cd20aed3f14585729ce8eddf75b531c703c06a2e95b8569861bb47
-  languageName: node
-  linkType: hard
-
 "@ant-design/colors@npm:^7.0.0":
   version: 7.0.0
   resolution: "@ant-design/colors@npm:7.0.0"
@@ -65,11 +56,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ant-design/icons@npm:4.8.0":
-  version: 4.8.0
-  resolution: "@ant-design/icons@npm:4.8.0"
+"@ant-design/icons@npm:5.0.1":
+  version: 5.0.1
+  resolution: "@ant-design/icons@npm:5.0.1"
   dependencies:
-    "@ant-design/colors": ^6.0.0
+    "@ant-design/colors": ^7.0.0
     "@ant-design/icons-svg": ^4.2.1
     "@babel/runtime": ^7.11.2
     classnames: ^2.2.6
@@ -77,7 +68,7 @@ __metadata:
   peerDependencies:
     react: ">=16.0.0"
     react-dom: ">=16.0.0"
-  checksum: d569dae9f84245a90fb5152af4c4e6e9f1bce9d638b5831f3e9d126ff654c9477e3c9d9192c6b3f349ade39c9e0bc85605cad5d8c2e401e632dbd6190b638ad3
+  checksum: 426371e3a2d5d571a2df18229512ea5951ea71b97f1fa3a3a4dc2feda58498c70da7025c6e3ffcf0ae2dab0fb496d117f8962222f17d95dc58498850d9a21566
   languageName: node
   linkType: hard
 
@@ -16860,7 +16851,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "vocabulary@workspace:."
   dependencies:
-    "@ant-design/icons": 4.8.0
+    "@ant-design/icons": 5.0.1
     "@faker-js/faker": 7.6.0
     "@testing-library/cypress": 9.0.0
     "@testing-library/jest-dom": 5.16.5
