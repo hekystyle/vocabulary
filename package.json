@@ -11,7 +11,7 @@
     "@faker-js/faker": "7.6.0",
     "@types/node": "18.11.18",
     "@types/qs": "6.9.7",
-    "@types/ramda": "0.28.20",
+    "@types/ramda": "0.28.21",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
     "@types/styled-components": "5.1.26",
