@@ -19,7 +19,7 @@
     "bootstrap": "5.2.3",
     "class-transformer": "0.5.1",
     "class-validator": "0.14.0",
-    "dexie": "3.2.2",
+    "dexie": "3.2.3",
     "qs": "6.11.0",
     "ramda": "0.28.0",
     "react": "18.2.0",
