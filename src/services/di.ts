@@ -1,4 +1,4 @@
-import { AppDb } from 'db';
+import { AppDb } from 'services/db';
 import { DelayedTermsRepository, IndexedDbTermsRepository, TermsRepository } from './terms';
 
 export interface Services {

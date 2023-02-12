@@ -1,4 +1,4 @@
-import { AppDb } from 'db';
+import { AppDb } from 'services/db';
 import { TermV1 } from 'types/Term';
 import { isTermV1 } from 'types/isTerm';
 import type { Migration } from '../migrate';

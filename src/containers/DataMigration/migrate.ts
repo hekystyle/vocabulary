@@ -1,4 +1,4 @@
-import { AppDb } from 'db';
+import { AppDb } from 'services/db';
 import * as v20220319144900 from './migrations/20220319144900';
 
 export type Migration = (db: AppDb) => Promise<void>;

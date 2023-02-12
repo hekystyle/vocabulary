@@ -1,4 +1,4 @@
-import { AppDb } from 'db';
+import { AppDb } from 'services/db';
 import { groupWith } from 'ramda';
 import { Term } from 'types/Term';
 import { hasDefinition } from 'utils/hasDefinition';
