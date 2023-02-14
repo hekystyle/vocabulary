@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { CreateRecordPage, UpdateRecordPage } from './Page';
+import { CreateRecordPage } from './CreatePage';
+import { UpdateRecordPage } from './UpdatePage';
 
 export const RecordRouter: FC = () => (
   <Routes>
