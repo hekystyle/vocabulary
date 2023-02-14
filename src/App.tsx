@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { NavBar } from 'components/NavBar';
 import { LazyListRouter } from 'routes/list';
 import { LazyPracticeRouter } from 'routes/practice';
-import { LazyRecordRouter } from 'routes/record';
+import { LazyRecordRouter } from 'routes/records';
 import { LazySeedPage } from 'routes/seed/Lazy';
 import { SpinnerBox } from 'components/SpinnerBox';
 
@@ -26,7 +26,7 @@ export const App: FC = () => (
     <StyledContent>
       <Suspense fallback={<SpinnerBox label="Loading app..." />}>
         <Routes>
-          <Route element={<LazyRecordRouter />} path="record/*" />
+          <Route element={<LazyRecordRouter />} path="records/*" />
           <Route element={<LazyPracticeRouter />} path="practice/*" />
           <Route element={<LazyListRouter />} path="list/*" />
           <Route element={<LazySeedPage />} path="seed" />

@@ -45,7 +45,7 @@ export const Actions: FC<ActionsProps> = ({ record }) => {
         disabled={isMutating}
         icon={<EditOutlined />}
         loading={isMutating}
-        onClick={() => record.id && navigate(`/record/${record.id}`)}
+        onClick={() => record.id && navigate(`/records/${record.id}`)}
       />
       <Button
         danger
