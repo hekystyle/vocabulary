@@ -21,7 +21,7 @@ export default (() => {
     error,
     data: term,
     status,
-  } = useQuery(QUERY_KEYS.terms.id(id), async ({ signal }) => termsRepository.getById(id, signal), {
+  } = useQuery(QUERY_KEYS.terms.id(id), async ({ signal }) => await termsRepository.getById(id, signal), {
     enabled: !Number.isNaN(id),
     onError: e => console.error(e),
   });

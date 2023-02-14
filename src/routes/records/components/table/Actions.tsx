@@ -19,7 +19,7 @@ export const Actions: FC<ActionsProps> = ({ record }) => {
 
   const { mutate: deleteTerm } = useMutation(
     QUERY_KEYS.terms.id(record.id),
-    async () => (record.id ? termsRepository.delete(record.id) : undefined),
+    async () => (record.id ? await termsRepository.delete(record.id) : undefined),
     {
       onSuccess: () => queryClient.invalidateQueries(QUERY_KEYS.terms.all()),
       onError: e => console.error(e),

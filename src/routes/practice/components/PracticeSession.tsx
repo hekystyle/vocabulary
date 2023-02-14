@@ -47,7 +47,7 @@ export const PracticeSession: FC = () => {
 
   const { mutateAsync: increaseAnswersCount, isLoading: isMutating } = useMutation(
     async ({ id, isCorrect }: { id: Exclude<Term['id'], undefined>; isCorrect: boolean }) =>
-      increaseTermAnswers(db)(id, isCorrect),
+      await increaseTermAnswers(db)(id, isCorrect),
     {
       onSuccess: (_, { id }) => queryClient.invalidateQueries(QUERY_KEYS.terms.id(id)),
     },

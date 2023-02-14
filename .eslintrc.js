@@ -26,7 +26,7 @@ module.exports = {
     'no-await-in-loop': 'off',
     'arrow-body-style': 'error',
     'import/prefer-default-export': 'off',
-    '@typescript-eslint/return-await': ['off', 'in-try-catch'],
+    '@typescript-eslint/return-await': ['error', 'always'],
     '@typescript-eslint/restrict-template-expressions': ['error', { allowNullish: true }],
     '@typescript-eslint/array-type': ['error', { default: 'array-simple', readonly: 'array-simple' }],
     'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
