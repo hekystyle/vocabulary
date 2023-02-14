@@ -1,1 +1,3 @@
-export { RecordRouter } from './Router';
+import { lazy } from 'react';
+
+export const LazyRecordRouter = lazy(() => import('./Router'));

@@ -1,11 +1,12 @@
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import { NavBar } from 'components/NavBar';
-import { ListRouter } from 'routes/list';
-import { PracticeRouter } from 'routes/practice';
-import { RecordRouter } from 'routes/record';
-import { SeedPage } from 'routes/seed/Lazy';
+import { LazyListRouter } from 'routes/list';
+import { LazyPracticeRouter } from 'routes/practice';
+import { LazyRecordRouter } from 'routes/record';
+import { LazySeedPage } from 'routes/seed/Lazy';
+import { SpinnerBox } from 'components/SpinnerBox';
 
 const StyledApp = styled.div`
   height: 100vh;
@@ -23,13 +24,15 @@ export const App: FC = () => (
   <StyledApp className="bg-dark">
     <NavBar />
     <StyledContent>
-      <Routes>
-        <Route element={<RecordRouter />} path="record/*" />
-        <Route element={<PracticeRouter />} path="practice/*" />
-        <Route element={<ListRouter />} path="list/*" />
-        <Route element={<SeedPage />} path="seed" />
-        <Route element={<Navigate to="/list" />} path="*" />
-      </Routes>
+      <Suspense fallback={<SpinnerBox label="Loading app..." />}>
+        <Routes>
+          <Route element={<LazyRecordRouter />} path="record/*" />
+          <Route element={<LazyPracticeRouter />} path="practice/*" />
+          <Route element={<LazyListRouter />} path="list/*" />
+          <Route element={<LazySeedPage />} path="seed" />
+          <Route element={<Navigate to="/list" />} path="*" />
+        </Routes>
+      </Suspense>
     </StyledContent>
   </StyledApp>
 );

@@ -8,3 +8,5 @@ export const PracticeRouter: FC = () => (
     <Route element={<Navigate to="." />} path="*" />
   </Routes>
 );
+
+export default PracticeRouter;

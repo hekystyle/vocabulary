@@ -9,3 +9,5 @@ export const RecordRouter: FC = () => (
     <Route element={<Navigate to="." />} path="*" />
   </Routes>
 );
+
+export default RecordRouter;
