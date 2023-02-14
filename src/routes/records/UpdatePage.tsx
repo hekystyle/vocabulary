@@ -34,7 +34,7 @@ export const UpdateRecordPage: FC = () => {
     if (isObject(location.state) && hasReturnUrlField(location.state)) {
       navigate(location.state.returnUrl);
     } else {
-      navigate('/list');
+      navigate('/records');
     }
   };
 

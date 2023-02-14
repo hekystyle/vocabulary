@@ -19,7 +19,7 @@ beforeEach(() => {
 
   cy.findByRole('status').should('not.exist');
 
-  cy.hash().should('eq', '#/list');
+  cy.hash().should('eq', '#/records');
 });
 
 it('test navigation', () => {
@@ -29,13 +29,13 @@ it('test navigation', () => {
 
   cy.findByRole('button', { name: /list/i }).click();
 
-  cy.hash().should('eq', '#/list');
+  cy.hash().should('eq', '#/records');
 });
 
 it('test terms creation page', () => {
   cy.findByRole('status').should('not.exist');
 
-  cy.hash().should('eq', '#/list');
+  cy.hash().should('eq', '#/records');
 
   // should create 1st record
   cy.findByRole('button', { name: /add/i }).click();
@@ -63,7 +63,7 @@ it('test terms creation page', () => {
 
   cy.findByRole('status').should('not.exist');
 
-  cy.hash().should('eq', '#/list');
+  cy.hash().should('eq', '#/records');
 
   cy.findByRole('cell', { name: 'apple' }).should('exist');
 
@@ -95,7 +95,7 @@ it('test terms creation page', () => {
 
   cy.findByRole('status').should('not.exist');
 
-  cy.hash().should('eq', '#/list');
+  cy.hash().should('eq', '#/records');
 
   cy.findByRole('cell', { name: 'banana' }).should('exist');
 });
@@ -111,7 +111,7 @@ it('test term edit page', () => {
 
   cy.findByRole('status').should('not.exist');
 
-  cy.hash().should('eq', '#/list');
+  cy.hash().should('eq', '#/records');
 });
 
 it('test terms delete', () => {

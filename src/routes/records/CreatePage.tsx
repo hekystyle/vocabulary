@@ -18,7 +18,7 @@ export const CreateRecordPage: FC = () => {
   });
 
   const navigateBack = () => {
-    navigate('/list');
+    navigate('/records');
   };
 
   const handleSubmit: FormProps['onSubmit'] = values => {
