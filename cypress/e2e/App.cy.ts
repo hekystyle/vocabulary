@@ -40,7 +40,7 @@ it('test terms creation page', () => {
   // should create 1st record
   cy.findByRole('button', { name: /add/i }).click();
 
-  cy.hash().should('eq', '#/record');
+  cy.hash().should('eq', '#/record/create');
 
   cy.findByRole('textbox', { name: /word/i }).type('apple').should('have.value', 'apple');
 
@@ -70,7 +70,7 @@ it('test terms creation page', () => {
   // it('should create 2nd record', () => {
   cy.findByRole('button', { name: /add/i }).click();
 
-  cy.hash().should('eq', '#/record');
+  cy.hash().should('eq', '#/record/create');
 
   cy.findByRole('textbox', { name: /word/i }).type('banana');
 

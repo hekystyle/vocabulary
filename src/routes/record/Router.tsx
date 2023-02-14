@@ -6,7 +6,7 @@ import { UpdateRecordPage } from './UpdatePage';
 export const RecordRouter: FC = () => (
   <Routes>
     <Route element={<UpdateRecordPage />} path=":id" />
-    <Route element={<CreateRecordPage />} path="" />
+    <Route element={<CreateRecordPage />} path="create" />
     <Route element={<Navigate to="." />} path="*" />
   </Routes>
 );
