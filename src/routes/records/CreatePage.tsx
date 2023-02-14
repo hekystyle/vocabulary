@@ -5,7 +5,7 @@ import { useServices } from 'containers/Services';
 import { useMutation } from 'react-query';
 import { Form, FormProps } from './components/Form';
 
-export const CreateRecordPage: FC = () => {
+export default (() => {
   const navigate = useNavigate();
   const { termsRepository } = useServices();
 
@@ -39,4 +39,4 @@ export const CreateRecordPage: FC = () => {
     default:
       return <p>Unknown status: {status}</p>;
   }
-};
+}) satisfies FC;

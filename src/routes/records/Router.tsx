@@ -1,16 +1,15 @@
-import { FC } from 'react';
+import { FC, lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { CreateRecordPage } from './CreatePage';
-import { RecordsListPage } from './ListPage';
-import { UpdateRecordPage } from './UpdatePage';
+
+const LazyUpdateRecordPage = lazy(() => import('./UpdatePage'));
+const LazyCreateRecordPage = lazy(() => import('./CreatePage'));
+const LazyRecordsListPage = lazy(() => import('./ListPage'));
 
 export const RecordsRouter: FC = () => (
   <Routes>
-    <Route element={<UpdateRecordPage />} path=":id" />
-    <Route element={<CreateRecordPage />} path="create" />
-    <Route element={<RecordsListPage />} path="" />
+    <Route element={<LazyUpdateRecordPage />} path=":id" />
+    <Route element={<LazyCreateRecordPage />} path="create" />
+    <Route element={<LazyRecordsListPage />} path="" />
     <Route element={<Navigate to="." />} path="*" />
   </Routes>
 );
-
-export default RecordsRouter;

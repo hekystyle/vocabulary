@@ -8,7 +8,7 @@ import { QUERY_KEYS } from 'utils/queryKeys';
 import { hasReturnUrlField } from './utils/hasReturnUrlField';
 import { Form, FormProps } from './components/Form';
 
-export const UpdateRecordPage: FC = () => {
+export default (() => {
   const navigate = useNavigate();
   const location = useLocation();
   const { termsRepository } = useServices();
@@ -60,4 +60,4 @@ export const UpdateRecordPage: FC = () => {
     default:
       return <p>Unknown status: {status}</p>;
   }
-};
+}) satisfies FC;

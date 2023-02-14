@@ -1,3 +1,1 @@
-import { lazy } from 'react';
-
-export const LazyPracticeRouter = lazy(() => import('./Router'));
+export { PracticeRouter } from './Router';

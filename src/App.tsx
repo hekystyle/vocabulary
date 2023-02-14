@@ -2,8 +2,8 @@ import { FC, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import { NavBar } from 'components/NavBar';
-import { LazyPracticeRouter } from 'routes/practice';
-import { LazyRecordRouter } from 'routes/records';
+import { PracticeRouter } from 'routes/practice';
+import { RecordsRouter } from 'routes/records';
 import { LazySeedPage } from 'routes/seed/Lazy';
 import { SpinnerBox } from 'components/SpinnerBox';
 
@@ -25,8 +25,8 @@ export const App: FC = () => (
     <StyledContent>
       <Suspense fallback={<SpinnerBox label="Loading app..." />}>
         <Routes>
-          <Route element={<LazyRecordRouter />} path="records/*" />
-          <Route element={<LazyPracticeRouter />} path="practice/*" />
+          <Route element={<RecordsRouter />} path="records/*" />
+          <Route element={<PracticeRouter />} path="practice/*" />
           <Route element={<LazySeedPage />} path="seed" />
           <Route element={<Navigate to="/records" />} path="*" />
         </Routes>

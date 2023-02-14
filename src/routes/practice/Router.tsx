@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { PracticePage } from './Page';
+
+const LazyPracticePage = lazy(() => import('./Page'));
 
 export const PracticeRouter: FC = () => (
   <Routes>
-    <Route element={<PracticePage />} path="" />
+    <Route element={<LazyPracticePage />} path="" />
     <Route element={<Navigate to="." />} path="*" />
   </Routes>
 );

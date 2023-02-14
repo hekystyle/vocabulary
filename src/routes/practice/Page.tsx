@@ -13,7 +13,7 @@ const Layout = styled.div`
   gap: 1rem;
 `;
 
-export const PracticePage: FC = () => {
+export default (() => {
   const [{ isActive }, setSession] = useRecoilState(sessionState);
 
   const handleEndSessionButtonClick = () => {
@@ -32,4 +32,4 @@ export const PracticePage: FC = () => {
       )}
     </Layout>
   );
-};
+}) satisfies FC;
