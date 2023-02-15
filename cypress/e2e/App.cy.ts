@@ -105,7 +105,7 @@ it('test term edit page', () => {
 
   cy.findByRole('status').should('not.exist');
 
-  cy.hash().should('match', /^#\/record\/\d+$/);
+  cy.hash().should('match', /^#\/records\/\d+$/);
 
   cy.findByRole('button', { name: /cancel/i }).click();
 
@@ -151,7 +151,7 @@ it('test practice page', () => {
 
   cy.findByRole('status').should('not.exist');
 
-  cy.hash().should('match', /^#\/record\/\d+$/);
+  cy.hash().should('match', /^#\/records\/\d+$/);
 
   cy.findByRole('button', { name: /cancel/i }).click();
 
