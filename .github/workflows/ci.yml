@@ -155,6 +155,7 @@ jobs:
           install: false
           start: yarn start:ci
           wait-on: 'http://localhost:3000'
+          browser: chrome
 
   deploy:
     needs: [install, build, test, cypress]
