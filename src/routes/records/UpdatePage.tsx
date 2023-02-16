@@ -8,43 +8,7 @@ import { QUERY_KEYS } from 'utils/queryKeys';
 import { hasReturnUrlField } from './utils/hasReturnUrlField';
 import { Form, FormProps } from './components/Form';
 
-export const CreateRecordPage: FC = () => {
-  const navigate = useNavigate();
-  const { termsRepository } = useServices();
-
-  const {
-    mutateAsync: create,
-    status,
-    error,
-  } = useMutation(termsRepository.create.bind(termsRepository), {
-    onError: e => console.error(e),
-  });
-
-  const navigateBack = () => {
-    navigate('/list');
-  };
-
-  const handleSubmit: FormProps['onSubmit'] = values => {
-    create(values).then(navigateBack).catch(console.error);
-  };
-
-  const handleCancel = () => navigateBack();
-
-  switch (status) {
-    case 'loading':
-      return <SpinnerBox label="Creating ..." />;
-    case 'error':
-      return <p>Error: {error instanceof Error ? error.message : 'Unknown'}</p>;
-    case 'success':
-      return <p>{status}</p>;
-    case 'idle':
-      return <Form onCancel={handleCancel} onSubmit={handleSubmit} />;
-    default:
-      return <p>Unknown status: {status}</p>;
-  }
-};
-
-export const UpdateRecordPage: FC = () => {
+export default (() => {
   const navigate = useNavigate();
   const location = useLocation();
   const { termsRepository } = useServices();
@@ -57,7 +21,7 @@ export const UpdateRecordPage: FC = () => {
     error,
     data: term,
     status,
-  } = useQuery(QUERY_KEYS.terms.id(id), async ({ signal }) => termsRepository.getById(id, signal), {
+  } = useQuery(QUERY_KEYS.terms.id(id), async ({ signal }) => await termsRepository.getById(id, signal), {
     enabled: !Number.isNaN(id),
     onError: e => console.error(e),
   });
@@ -70,7 +34,7 @@ export const UpdateRecordPage: FC = () => {
     if (isObject(location.state) && hasReturnUrlField(location.state)) {
       navigate(location.state.returnUrl);
     } else {
-      navigate('/list');
+      navigate('/records');
     }
   };
 
@@ -96,4 +60,4 @@ export const UpdateRecordPage: FC = () => {
     default:
       return <p>Unknown status: {status}</p>;
   }
-};
+}) satisfies FC;

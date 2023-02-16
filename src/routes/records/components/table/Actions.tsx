@@ -19,7 +19,7 @@ export const Actions: FC<ActionsProps> = ({ record }) => {
 
   const { mutate: deleteTerm } = useMutation(
     QUERY_KEYS.terms.id(record.id),
-    async () => (record.id ? termsRepository.delete(record.id) : undefined),
+    async () => (record.id ? await termsRepository.delete(record.id) : undefined),
     {
       onSuccess: () => queryClient.invalidateQueries(QUERY_KEYS.terms.all()),
       onError: e => console.error(e),
@@ -45,7 +45,7 @@ export const Actions: FC<ActionsProps> = ({ record }) => {
         disabled={isMutating}
         icon={<EditOutlined />}
         loading={isMutating}
-        onClick={() => record.id && navigate(`/record/${record.id}`)}
+        onClick={() => record.id && navigate(`/records/${record.id}`)}
       />
       <Button
         danger

@@ -24,5 +24,5 @@ it('should navigate to the list page', async () => {
 
   await user.click(screen.getByRole('button', { name: 'List' }));
 
-  expect(window.location.hash).toBe('#/list');
+  expect(window.location.hash).toBe('#/records');
 });

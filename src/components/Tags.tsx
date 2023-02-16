@@ -2,7 +2,7 @@ import { Select, SelectProps } from 'antd';
 import { useServices } from 'containers/Services';
 import { FC, useState } from 'react';
 import { useQuery } from 'react-query';
-import { options } from 'routes/record/utils/options';
+import { options } from 'utils/options';
 import { QUERY_KEYS } from 'utils/queryKeys';
 
 export const Tags: FC<Pick<SelectProps<string[]>, 'defaultValue' | 'value' | 'onChange' | 'style'>> = ({

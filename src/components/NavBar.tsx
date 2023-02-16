@@ -10,7 +10,7 @@ interface NavLink {
 const navItems: NavLink[] = [
   {
     title: 'List',
-    path: '/list',
+    path: '/records',
   },
   {
     title: 'Practice',

@@ -118,7 +118,7 @@ export const fetchWord = async (word: string, { signal }: Pick<RequestInit, 'sig
 
   const instances = plainToInstance(Word, result);
 
-  await Promise.all(instances.map(async i => validateOrReject(i)));
+  await Promise.all(instances.map(async i => await validateOrReject(i)));
 
   return instances;
 };

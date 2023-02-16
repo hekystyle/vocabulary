@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Button } from 'components/Button';
 import { Card } from 'components/Card';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { RETURN_URL_FIELD } from 'routes/record/constants';
+import { RETURN_URL_FIELD } from 'routes/records/constants';
 import { useServices } from 'containers/Services';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
@@ -47,7 +47,7 @@ export const PracticeSession: FC = () => {
 
   const { mutateAsync: increaseAnswersCount, isLoading: isMutating } = useMutation(
     async ({ id, isCorrect }: { id: Exclude<Term['id'], undefined>; isCorrect: boolean }) =>
-      increaseTermAnswers(db)(id, isCorrect),
+      await increaseTermAnswers(db)(id, isCorrect),
     {
       onSuccess: (_, { id }) => queryClient.invalidateQueries(QUERY_KEYS.terms.id(id)),
     },
@@ -67,7 +67,7 @@ export const PracticeSession: FC = () => {
 
   const handleEditButtonClick = () => {
     if (actualRecord?.id)
-      navigate(`/record/${actualRecord.id}`, {
+      navigate(`/records/${actualRecord.id}`, {
         state: {
           [RETURN_URL_FIELD]: pathname,
         },

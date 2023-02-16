@@ -6,5 +6,5 @@ import { Button } from 'antd';
 export const AddButton: FC = () => {
   const navigate = useNavigate();
 
-  return <Button aria-label="Add" icon={<PlusOutlined />} type="primary" onClick={() => navigate('/record')} />;
+  return <Button aria-label="Add" icon={<PlusOutlined />} type="primary" onClick={() => navigate('/records/create')} />;
 };
