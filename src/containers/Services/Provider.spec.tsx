@@ -1,7 +1,8 @@
 import { render } from '@testing-library/react';
-import { TEST_SERVICES } from 'services/__tests__/di';
+import { TestContainer } from 'services/__tests__/container';
 import { ServicesProvider } from './Provider';
 
 it('should render without error', () => {
-  expect(() => render(<ServicesProvider services={TEST_SERVICES} />)).not.toThrow();
+  const container = new TestContainer();
+  expect(() => render(<ServicesProvider services={container} />)).not.toThrow();
 });

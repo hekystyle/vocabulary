@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from 'react';
-import { Services } from 'services/di';
+import type { Services } from 'services';
 import { ServicesContext } from './Context';
 
 export const ServicesProvider: FC<PropsWithChildren<{ services: Services }>> = ({ children, services }) => (
