@@ -59,7 +59,7 @@
     "fake-indexeddb": "4.0.1",
     "gh-pages": "5.0.0",
     "jest": "27.5.1",
-    "prettier": "2.8.3",
+    "prettier": "2.8.4",
     "react-app-polyfill": "3.0.0",
     "react-scripts": "5.0.1",
     "serve": "14.2.0",

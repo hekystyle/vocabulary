@@ -12895,16 +12895,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:2.8.3":
-  version: 2.8.3
-  resolution: "prettier@npm:2.8.3"
-  bin:
-    prettier: bin-prettier.js
-  checksum: 92f2ceb522d454370e02082aa74ad27388672f7cee8975028b59517c069fe643bdc73e322675c8faf2ff173d7a626d1a6389f26b474000308e793aa25fff46e5
-  languageName: node
-  linkType: hard
-
-"prettier@npm:^2.3.2":
+"prettier@npm:2.8.4, prettier@npm:^2.3.2":
   version: 2.8.4
   resolution: "prettier@npm:2.8.4"
   bin:
@@ -16403,7 +16394,7 @@ __metadata:
     fake-indexeddb: 4.0.1
     gh-pages: 5.0.0
     jest: 27.5.1
-    prettier: 2.8.3
+    prettier: 2.8.4
     qs: 6.11.0
     ramda: 0.28.0
     react: 18.2.0
