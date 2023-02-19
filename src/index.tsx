@@ -5,24 +5,29 @@ import { createRoot } from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import { migrate } from 'containers/DataMigration';
-import { SERVICES } from 'services/di';
+import { AppContainer } from 'services';
 import { QUERY_CLIENT } from 'services/query';
 import { Providers } from 'Providers';
 import reportWebVitals from './reportWebVitals';
 import { App } from './App';
 
+const container = new AppContainer();
+
 QUERY_CLIENT.executeMutation({
   mutationKey: migrate.queryKey,
-  mutationFn: () => migrate(SERVICES.db),
+  mutationFn: () => migrate(container.db),
 }).catch(console.error);
 
-const container = document.getElementById('root');
-if (container === null) throw new Error('Root element not found');
-const root = createRoot(container);
+const rootElement = document.getElementById('root');
+
+if (rootElement === null) throw new Error('Root element not found');
+
+const root = createRoot(rootElement);
+
 root.render(
   // TODO: Uncomment StrictMode when Ant Design dropdowns will be compatible with it (https://github.com/hekystyle/vocabulary/issues/319)
   // <React.StrictMode>
-  <Providers>
+  <Providers services={container}>
     <App />
   </Providers>,
   // </React.StrictMode>,

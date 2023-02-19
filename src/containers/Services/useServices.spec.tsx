@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import { TEST_SERVICES } from 'services/__tests__/di';
+import { TestContainer } from 'services/__tests__/container';
 import { ServicesProvider } from './Provider';
 import { useServices } from './useServices';
 
@@ -17,9 +17,10 @@ it('should throw error if not used within provider', () => {
 });
 
 it('should be used without throwing error', () => {
+  const container = new TestContainer();
   const run = () =>
     renderHook(useServices, {
-      wrapper: ({ children }) => <ServicesProvider services={TEST_SERVICES}>{children}</ServicesProvider>,
+      wrapper: ({ children }) => <ServicesProvider services={container}>{children}</ServicesProvider>,
     });
   expect(run).not.toThrow();
 });

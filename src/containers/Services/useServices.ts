@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Services } from 'services/di';
+import { Services } from 'services';
 import { ServicesContext } from './Context';
 import { ServicesProvider } from './Provider';
 
