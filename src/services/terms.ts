@@ -8,8 +8,8 @@ import { computeSkip, Pagination } from 'utils/computeSkip';
 export interface TermsRepository {
   get(filter: Pagination & Sorting, signal: AbortSignal | undefined): Promise<{ terms: Term[]; total: number }>;
   getById(id: Exclude<Term['id'], undefined>, signal: AbortSignal | undefined): Promise<Term | undefined>;
-  create: (term: StrictOmit<Term, 'id' | 'createdAt'>) => Promise<Term | undefined>;
-  update: (term: Term) => Promise<Term | undefined>;
+  create(term: StrictOmit<Term, 'id' | 'createdAt'>): Promise<Term | undefined>;
+  update(term: Term): Promise<Term | undefined>;
   delete(id: Exclude<Term['id'], undefined>): Promise<void>;
 
   getWords(search: string, signal: AbortSignal | undefined): Promise<string[]>;
