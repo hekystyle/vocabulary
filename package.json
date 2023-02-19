@@ -9,7 +9,7 @@
   "dependencies": {
     "@ant-design/icons": "5.0.1",
     "@faker-js/faker": "7.6.0",
-    "@types/node": "18.11.18",
+    "@types/node": "18.14.0",
     "@types/qs": "6.9.7",
     "@types/ramda": "0.28.22",
     "@types/react": "18.0.27",
