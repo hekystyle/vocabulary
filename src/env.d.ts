@@ -1,8 +1,10 @@
-declare namespace NodeJS {
-  interface ProcessEnv {
-    /**
-     * The delay in milliseconds to simulate slow network to see loading indicator in UI.
-     */
-    readonly DELAY?: string;
-  }
+interface ImportMetaEnv {
+  /**
+   * The delay in milliseconds to simulate slow network to see loading indicator in UI.
+   */
+  readonly VITE_DELAY?: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
 }

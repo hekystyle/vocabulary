@@ -12,7 +12,7 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   parserOptions: {
-    project: ['./tsconfig.json'],
+    project: ['./tsconfig.json', './cypress/tsconfig.json'],
   },
   settings: {
     jest: {
@@ -50,7 +50,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['setupTests.ts', 'cypress.config.ts', 'cypress/support/commands.ts'],
+      files: ['vite.config.ts', 'jest.config.js', 'setupTests.ts', 'cypress.config.ts', 'cypress/support/commands.ts'],
       rules: {
         'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
       },
@@ -58,9 +58,6 @@ module.exports = {
     {
       files: ['**/*.spec.{ts,tsx}'],
       extends: ['plugin:jest/recommended', 'plugin:jest/style', 'plugin:jest-dom/recommended'],
-      env: {
-        'jest/globals': true,
-      },
       rules: {},
     },
     {
