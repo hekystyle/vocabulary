@@ -123,7 +123,7 @@ jobs:
             ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
-      - run: yarn run test --coverage
+      - run: yarn run test:ci
 
       - name: Codecov
         uses: codecov/codecov-action@v3.1.1
