@@ -7559,18 +7559,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-testing-library@npm:5.10.0":
-  version: 5.10.0
-  resolution: "eslint-plugin-testing-library@npm:5.10.0"
-  dependencies:
-    "@typescript-eslint/utils": ^5.43.0
-  peerDependencies:
-    eslint: ^7.5.0 || ^8.0.0
-  checksum: 3278fc4683a99d24ac2b6d2ed0359db1b0509674350e4b9a958a226f57b4b90e070c02e1f4c2806da885d8025c1e8c952cb9a5e9751e69baac3d12cfe6804000
-  languageName: node
-  linkType: hard
-
-"eslint-plugin-testing-library@npm:^5.0.1":
+"eslint-plugin-testing-library@npm:5.10.2, eslint-plugin-testing-library@npm:^5.0.1":
   version: 5.10.2
   resolution: "eslint-plugin-testing-library@npm:5.10.2"
   dependencies:
@@ -16308,7 +16297,7 @@ __metadata:
     eslint-plugin-prettier: 4.2.1
     eslint-plugin-react: 7.32.2
     eslint-plugin-react-hooks: 4.6.0
-    eslint-plugin-testing-library: 5.10.0
+    eslint-plugin-testing-library: 5.10.2
     fake-indexeddb: 4.0.1
     gh-pages: 5.0.0
     jest: 27.5.1
