@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { NavBar } from 'components/NavBar';
 import { PracticeRouter } from 'routes/practice';
 import { RecordsRouter } from 'routes/records';
-import { LazySeedPage } from 'routes/seed/Lazy';
+import { LazySeedPage } from 'routes/seed';
 import { SpinnerBox } from 'components/SpinnerBox';
 
 const StyledApp = styled.div`
