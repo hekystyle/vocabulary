@@ -20,7 +20,7 @@ it('should be used without throwing error', () => {
   const container = new TestContainer();
   const run = () =>
     renderHook(useServices, {
-      wrapper: ({ children }) => <ServicesProvider services={container}>{children}</ServicesProvider>,
+      wrapper: ({ children }) => <ServicesProvider services={container.services}>{children}</ServicesProvider>,
     });
   expect(run).not.toThrow();
 });

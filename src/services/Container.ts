@@ -6,10 +6,22 @@ type FactoriesMap<TServicesMap> = {
   [K in keyof TServicesMap]: (api: ServiceFactoryApi<TServicesMap>) => TServicesMap[K];
 };
 
-export class Container<TServicesMap> {
-  constructor(private factories: FactoriesMap<TServicesMap>) {}
+type ServicesMap<TServicesMap> = {
+  [K in keyof TServicesMap]: TServicesMap[K];
+};
 
-  private cache: Partial<{ [K in keyof TServicesMap]: TServicesMap[K] }> = {};
+type ServicesGetters<TServicesMap> = Readonly<ServicesMap<TServicesMap>>;
+
+export class Container<TServicesMap> {
+  public readonly services: ServicesGetters<TServicesMap>;
+
+  private cache: Partial<ServicesMap<TServicesMap>> = {};
+
+  constructor(private factories: FactoriesMap<TServicesMap>) {
+    this.services = new Proxy<ServicesGetters<TServicesMap>>({} as ServicesGetters<TServicesMap>, {
+      get: (_, key) => (key in factories ? this.get(key as keyof TServicesMap) : undefined),
+    });
+  }
 
   get<K extends keyof TServicesMap>(key: K): TServicesMap[K] {
     const service = this.cache[key];
