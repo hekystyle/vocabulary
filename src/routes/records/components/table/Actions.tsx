@@ -4,7 +4,7 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, Modal, Space } from 'antd';
 import { Term } from 'types/Term';
 import { useIsMutating, useMutation, useQueryClient } from 'react-query';
-import { useServices } from 'containers/Services';
+import { useServices } from 'services';
 import { QUERY_KEYS } from 'utils/queryKeys';
 
 export interface ActionsProps {

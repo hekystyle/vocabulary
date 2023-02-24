@@ -1,5 +1,5 @@
 import { Select, SelectProps } from 'antd';
-import { useServices } from 'containers/Services';
+import { useServices } from 'services';
 import { FC, useState } from 'react';
 import { useQuery } from 'react-query';
 import { options } from 'utils/options';

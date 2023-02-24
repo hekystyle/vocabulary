@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { Button } from 'antd';
-import { useServices } from 'containers/Services';
+import { useServices } from 'services';
 import { FC } from 'react';
 import { useMutation } from 'react-query';
 import { StrictOmit } from 'types/StrictOmit';
