@@ -1,5 +1,5 @@
 // eslint-disable-next-line max-classes-per-file
-import { Sorting } from 'containers/Filter';
+import { Sorting } from 'filter';
 import { AppDb } from 'services/db';
 import { StrictOmit } from 'types/StrictOmit';
 import { Term } from 'types/Term';
