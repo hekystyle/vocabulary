@@ -1,6 +1,6 @@
 /** @type {import('ts-jest').ProjectConfigTsJest} */
 module.exports = {
-  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/**/*.d.ts'],
+  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/**/*.d.ts', '!src/**/index.ts', '!src/**/__tests__/*.ts'],
   modulePaths: ['<rootDir>/src'],
   preset: 'ts-jest',
   roots: ['<rootDir>/src'],

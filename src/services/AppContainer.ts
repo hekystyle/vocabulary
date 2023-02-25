@@ -1,11 +1,11 @@
 import { AppDb } from 'services/db';
 import { Container } from './Container';
 import { Services } from './Services';
-import { DelayedTermsRepository, IndexedDbTermsRepository, TermsRepository } from './terms';
+import { DelayedTermsRepository, IndexedDbTermsRepository } from './terms';
 
 const DEFAULT_DELAY = 250 as const;
 
-export class AppContainer extends Container<Services> implements Services {
+export class AppContainer extends Container<Services> {
   constructor() {
     super({
       db: () => new AppDb('Vocabulary'),
@@ -21,13 +21,5 @@ export class AppContainer extends Container<Services> implements Services {
           : repo;
       },
     });
-  }
-
-  get db(): AppDb {
-    return this.get('db');
-  }
-
-  get termsRepository(): TermsRepository {
-    return this.get('termsRepository');
   }
 }

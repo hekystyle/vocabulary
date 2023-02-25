@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SpinnerBox } from 'components/SpinnerBox';
-import { useServices } from 'containers/Services';
+import { useServices } from 'services';
 import { useMutation } from 'react-query';
 import { Form, FormProps } from './components/Form';
 

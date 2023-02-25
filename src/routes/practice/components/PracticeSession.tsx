@@ -4,7 +4,7 @@ import { Button } from 'components/Button';
 import { Card } from 'components/Card';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { RETURN_URL_FIELD } from 'routes/records/constants';
-import { useServices } from 'containers/Services';
+import { useServices } from 'services';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
 import { Term } from 'types/Term';

@@ -15,7 +15,7 @@ const container = new AppContainer();
 
 QUERY_CLIENT.executeMutation({
   mutationKey: migrate.queryKey,
-  mutationFn: () => migrate(container.db),
+  mutationFn: () => migrate(container.services.db),
 }).catch(console.error);
 
 const rootElement = document.getElementById('root');
@@ -27,7 +27,7 @@ const root = createRoot(rootElement);
 root.render(
   // TODO: Uncomment StrictMode when Ant Design dropdowns will be compatible with it (https://github.com/hekystyle/vocabulary/issues/319)
   // <React.StrictMode>
-  <Providers services={container}>
+  <Providers services={container.services}>
     <App />
   </Providers>,
   // </React.StrictMode>,

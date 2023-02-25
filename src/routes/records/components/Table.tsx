@@ -3,7 +3,7 @@ import { ColumnsType } from 'antd/es/table';
 import { Table } from 'components/Table';
 import { FC, useMemo } from 'react';
 import { SpinnerBox } from 'components/SpinnerBox';
-import { useServices } from 'containers/Services';
+import { useServices } from 'services';
 import { useQuery } from 'react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
 import { useFilter } from 'containers/Filter';

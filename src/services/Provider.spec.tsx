@@ -4,5 +4,5 @@ import { ServicesProvider } from './Provider';
 
 it('should render without error', () => {
   const container = new TestContainer();
-  expect(() => render(<ServicesProvider services={container} />)).not.toThrow();
+  expect(() => render(<ServicesProvider services={container.services} />)).not.toThrow();
 });
