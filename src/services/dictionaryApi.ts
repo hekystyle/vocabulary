@@ -1,4 +1,4 @@
-/* eslint-disable max-classes-per-file */
+// eslint-disable-next-line max-classes-per-file
 import { plainToInstance, Type } from 'class-transformer';
 import { IsArray, IsDefined, IsString, IsUrl, ValidateNested, validateOrReject } from 'class-validator';
 

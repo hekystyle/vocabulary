@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-
 import 'reflect-metadata';
 import { createRoot } from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';

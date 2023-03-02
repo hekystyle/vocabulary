@@ -9,6 +9,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:@typescript-eslint/strict',
     'airbnb-typescript',
+    'plugin:eslint-comments/recommended',
     'plugin:prettier/recommended',
   ],
   parserOptions: {
@@ -29,6 +30,7 @@ module.exports = {
     '@typescript-eslint/return-await': ['error', 'always'],
     '@typescript-eslint/restrict-template-expressions': ['error', { allowNullish: true }],
     '@typescript-eslint/array-type': ['error', { default: 'array-simple', readonly: 'array-simple' }],
+    'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
     'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
     'react/require-default-props': 'off',
     'react/function-component-definition': [
