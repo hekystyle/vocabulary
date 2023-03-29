@@ -10,7 +10,7 @@
     "@ant-design/icons": "5.0.1",
     "@faker-js/faker": "7.6.0",
     "@popperjs/core": "2.11.6",
-    "@types/node": "18.14.1",
+    "@types/node": "18.15.11",
     "@types/qs": "6.9.7",
     "@types/ramda": "0.28.23",
     "@types/react": "18.0.28",
