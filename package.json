@@ -2,7 +2,7 @@
   "name": "vocabulary",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "yarn@3.4.1",
+  "packageManager": "yarn@3.5.0",
   "engines": {
     "node": "^18.0.0"
   },
