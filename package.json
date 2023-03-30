@@ -28,7 +28,7 @@
     "react-dom": "18.2.0",
     "react-is": "18.2.0",
     "react-query": "3.39.3",
-    "react-router-dom": "6.8.1",
+    "react-router-dom": "6.10.0",
     "recoil": "0.7.6",
     "reflect-metadata": "0.1.13",
     "styled-components": "5.3.6",
