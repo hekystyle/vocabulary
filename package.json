@@ -31,7 +31,7 @@
     "react-router-dom": "6.10.0",
     "recoil": "0.7.7",
     "reflect-metadata": "0.1.13",
-    "styled-components": "5.3.6",
+    "styled-components": "5.3.10",
     "web-vitals": "3.3.0",
     "workbox-precaching": "6.5.4"
   },
