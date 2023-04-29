@@ -2627,7 +2627,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:^4.0.0-beta.1":
+"@tanstack/query-core@npm:4.29.5":
   version: 4.29.5
   resolution: "@tanstack/query-core@npm:4.29.5"
   checksum: 367176beccd78e959c74e69e96497b626dd1c139398501eb7a04cf92215edf262665c3e7bb59df68320779d49893d3153a3b41e750b9046655b45cfe44691b36
@@ -2649,12 +2649,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:4.0.5":
-  version: 4.0.5
-  resolution: "@tanstack/react-query@npm:4.0.5"
+"@tanstack/react-query@npm:4.29.5":
+  version: 4.29.5
+  resolution: "@tanstack/react-query@npm:4.29.5"
   dependencies:
-    "@tanstack/query-core": ^4.0.0-beta.1
-    "@types/use-sync-external-store": ^0.0.3
+    "@tanstack/query-core": 4.29.5
     use-sync-external-store: ^1.2.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -2665,7 +2664,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: c555d2dce19a57ba254855f19a06e4968ae21a08d5cd8890635d9771f77d5aef2e889b23a300b25d1e09b52edeb3fdf7b4579679c43cf9449692463a45a689b8
+  checksum: de45573900810b37216aa8d6599cae5ea43602eaada9fd2224f57ff7ab1de10b3f2e681e7fdb993ee1519ed8ffc7e6e07d6bf3ad1b9da4136b1ae78ca19f31f6
   languageName: node
   linkType: hard
 
@@ -3109,13 +3108,6 @@ __metadata:
   version: 2.0.3
   resolution: "@types/trusted-types@npm:2.0.3"
   checksum: 4794804bc4a4a173d589841b6d26cf455ff5dc4f3e704e847de7d65d215f2e7043d8757e4741ce3a823af3f08260a8d04a1a6e9c5ec9b20b7b04586956a6b005
-  languageName: node
-  linkType: hard
-
-"@types/use-sync-external-store@npm:^0.0.3":
-  version: 0.0.3
-  resolution: "@types/use-sync-external-store@npm:0.0.3"
-  checksum: 161ddb8eec5dbe7279ac971531217e9af6b99f7783213566d2b502e2e2378ea19cf5e5ea4595039d730aa79d3d35c6567d48599f69773a02ffcff1776ec2a44e
   languageName: node
   linkType: hard
 
@@ -12105,7 +12097,7 @@ __metadata:
     "@ant-design/icons": 5.0.1
     "@faker-js/faker": 7.6.0
     "@popperjs/core": 2.11.7
-    "@tanstack/react-query": 4.0.5
+    "@tanstack/react-query": 4.29.5
     "@tanstack/react-query-devtools": 4.29.6
     "@testing-library/cypress": 9.0.0
     "@testing-library/dom": 9.2.0
