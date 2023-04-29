@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 import { SpinnerBox } from 'components/SpinnerBox';
 import styled from 'styled-components';
-import { useIsMutating } from 'react-query';
+import { useIsMutating } from '@tanstack/react-query';
 import { migrate } from './migrate';
 
 const StyledLayout = styled.div`

@@ -2,7 +2,7 @@ import { useState, FC /* useMemo */ } from 'react';
 import { Button, Input /* AutoComplete */ } from 'antd';
 import { Term } from 'types/Term';
 // import { useServices } from 'services';
-// import { useQuery } from 'react-query';
+// import { useQuery } from '@tanstack/react-query';
 // import { QUERY_KEYS } from 'utils/queryKeys';
 import { Tags } from 'components/Tags';
 import { DefinitionsList } from './DefinitionsList';
