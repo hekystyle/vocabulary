@@ -2,7 +2,7 @@ import { ButtonProps, Radio, Switch } from 'antd';
 import { Button } from 'components/Button';
 import { SpinnerBox } from 'components/SpinnerBox';
 import { useState, FC } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useServices } from 'services';
 import { useSetRecoilState } from 'recoil';
 import { Tags } from 'components/Tags';

@@ -5,7 +5,7 @@ import { Card } from 'components/Card';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { RETURN_URL_FIELD } from 'routes/records/constants';
 import { useServices } from 'services';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
 import { Term } from 'types/Term';
 import { isNil, last } from 'ramda';

@@ -11,10 +11,13 @@ import { App } from './App';
 
 const container = new AppContainer();
 
-QUERY_CLIENT.executeMutation({
-  mutationKey: migrate.queryKey,
-  mutationFn: () => migrate(container.services.db),
-}).catch(console.error);
+QUERY_CLIENT.getMutationCache()
+  .build(QUERY_CLIENT, {
+    mutationKey: migrate.queryKey,
+    mutationFn: () => migrate(container.services.db),
+  })
+  .execute()
+  .catch(console.error);
 
 const rootElement = document.getElementById('root');
 

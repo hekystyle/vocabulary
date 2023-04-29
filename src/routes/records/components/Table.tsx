@@ -4,7 +4,7 @@ import { Table } from 'components/Table';
 import { FC, useMemo } from 'react';
 import { SpinnerBox } from 'components/SpinnerBox';
 import { useServices } from 'services';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
 import { useFilter } from 'filter';
 import { SortOrder } from 'antd/es/table/interface';

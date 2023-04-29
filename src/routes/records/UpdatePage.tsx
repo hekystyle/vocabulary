@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { isObject } from 'utils/isObject';
 import { SpinnerBox } from 'components/SpinnerBox';
 import { useServices } from 'services';
-import { useIsMutating, useMutation, useQuery } from 'react-query';
+import { useIsMutating, useMutation, useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
 import { hasReturnUrlField } from './utils/hasReturnUrlField';
 import { Form, FormProps } from './components/Form';
@@ -48,8 +48,6 @@ export default (() => {
   if (isFetching) return <SpinnerBox label="Loading ..." />;
 
   switch (status) {
-    case 'idle':
-      return <p>Idle</p>;
     case 'loading':
       return <SpinnerBox label="Loading ..." />;
     case 'error':
