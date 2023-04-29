@@ -2976,12 +2976,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ramda@npm:0.29.0":
-  version: 0.29.0
-  resolution: "@types/ramda@npm:0.29.0"
+"@types/ramda@npm:0.29.1":
+  version: 0.29.1
+  resolution: "@types/ramda@npm:0.29.1"
   dependencies:
-    types-ramda: ^0.29.1
-  checksum: f133675d7cf0df801de3d9790bc04af76e489179c31f21f6bbd8939dd659cefd878cce77f7abba41b04c6986c25008e3dd55c3250315e5232b5bccac213e5da9
+    types-ramda: ^0.29.2
+  checksum: e8473504d62aeb430345d20ef776209f2cc3a7b19e683f1c59130cb0a876556dd88a380bfde01ea64edc7daeac8dad838b7f6693850181039da83132356d78fb
   languageName: node
   linkType: hard
 
@@ -11729,12 +11729,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"types-ramda@npm:^0.29.1":
-  version: 0.29.1
-  resolution: "types-ramda@npm:0.29.1"
+"types-ramda@npm:^0.29.2":
+  version: 0.29.2
+  resolution: "types-ramda@npm:0.29.2"
   dependencies:
     ts-toolbelt: ^9.6.0
-  checksum: b67391954cbd75528a09ff8433c11c32ae3f3af28e2b0c0fb05807208cdb6d221aa860732d28174adcd3038ec2ad6c3d9c26bbc1b5379dca555de6e9504668e4
+  checksum: 0b394d4be7d7f110eff2b3c13fe1a648dc14ac22da2acb5575f6621230d43e6bb1067d5a61b9793ba122efe46cda85b9e5eff7bb23d82ffa436e1f24140fff79
   languageName: node
   linkType: hard
 
@@ -12116,7 +12116,7 @@ __metadata:
     "@types/jest": 29.5.1
     "@types/node": 18.15.11
     "@types/qs": 6.9.7
-    "@types/ramda": 0.29.0
+    "@types/ramda": 0.29.1
     "@types/react": 18.2.0
     "@types/react-dom": 18.2.1
     "@types/styled-components": 5.1.26
