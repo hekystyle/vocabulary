@@ -1,21 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should parse real data 1`] = `
-Array [
+[
   Word {
     "license": License {
       "name": "CC BY-SA 3.0",
       "url": "https://creativecommons.org/licenses/by-sa/3.0",
     },
-    "meanings": Array [
+    "meanings": [
       Meaning {
-        "antonyms": Array [],
-        "definitions": Array [
+        "antonyms": [],
+        "definitions": [
           Definition {
-            "antonyms": Array [],
+            "antonyms": [],
             "definition": "A wheeled vehicle that moves independently, with at least three wheels, powered mechanically, steered by a driver and mostly for personal transportation.",
             "example": "She drove her car to the mall.",
-            "synonyms": Array [
+            "synonyms": [
               "auto",
               "automobile",
               "carriage",
@@ -25,85 +25,85 @@ Array [
             ],
           },
           Definition {
-            "antonyms": Array [],
+            "antonyms": [],
             "definition": "A wheeled vehicle, drawn by a horse or other animal; a chariot.",
             "example": "",
-            "synonyms": Array [],
+            "synonyms": [],
           },
           Definition {
-            "antonyms": Array [],
+            "antonyms": [],
             "definition": "An unpowered unit in a railroad train.",
             "example": "The conductor coupled the cars to the locomotive.",
-            "synonyms": Array [
+            "synonyms": [
               "railcar",
               "wagon",
             ],
           },
           Definition {
-            "antonyms": Array [],
+            "antonyms": [],
             "definition": "An individual vehicle, powered or unpowered, in a multiple unit.",
             "example": "The 11:10 to London was operated by a 4-car diesel multiple unit.",
-            "synonyms": Array [],
+            "synonyms": [],
           },
           Definition {
-            "antonyms": Array [],
+            "antonyms": [],
             "definition": "A passenger-carrying unit in a subway or elevated train, whether powered or not.",
             "example": "From the frontmost car of the subway, he filmed the progress through the tunnel.",
-            "synonyms": Array [],
+            "synonyms": [],
           },
           Definition {
-            "antonyms": Array [],
+            "antonyms": [],
             "definition": "A rough unit of quantity approximating the amount which would fill a railroad car.",
             "example": "We ordered five hundred cars of gypsum.",
-            "synonyms": Array [
+            "synonyms": [
               "carload",
               "wagonload",
             ],
           },
           Definition {
-            "antonyms": Array [],
+            "antonyms": [],
             "definition": "The moving, load-carrying component of an elevator or other cable-drawn transport mechanism.",
             "example": "Fix the car of the express elevator - the door is sticking.",
-            "synonyms": Array [],
+            "synonyms": [],
           },
           Definition {
-            "antonyms": Array [],
+            "antonyms": [],
             "definition": "The passenger-carrying portion of certain amusement park rides, such as Ferris wheels.",
             "example": "The most exciting part of riding a Ferris wheel is when your car goes over the top.",
-            "synonyms": Array [
+            "synonyms": [
               "carriage",
             ],
           },
           Definition {
-            "antonyms": Array [],
+            "antonyms": [],
             "definition": "The part of an airship, such as a balloon or dirigible, which houses the passengers and control apparatus.",
             "example": "",
-            "synonyms": Array [
+            "synonyms": [
               "basket",
               "gondola",
             ],
           },
           Definition {
-            "antonyms": Array [],
+            "antonyms": [],
             "definition": "A sliding fitting that runs along a track.",
             "example": "",
-            "synonyms": Array [],
+            "synonyms": [],
           },
           Definition {
-            "antonyms": Array [],
+            "antonyms": [],
             "definition": "The aggregate of desirable characteristics of a car.",
             "example": "Buy now! You can get more car for your money.",
-            "synonyms": Array [],
+            "synonyms": [],
           },
           Definition {
-            "antonyms": Array [],
+            "antonyms": [],
             "definition": "A floating perforated box for living fish.",
             "example": "",
-            "synonyms": Array [],
+            "synonyms": [],
           },
         ],
         "partOfSpeech": "noun",
-        "synonyms": Array [
+        "synonyms": [
           "auto",
           "automobile",
           "carriage",
@@ -121,7 +121,7 @@ Array [
       },
     ],
     "phonetic": "/kɑː/",
-    "phonetics": Array [
+    "phonetics": [
       Phonetic {
         "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/car-uk.mp3",
         "license": License {
@@ -141,7 +141,7 @@ Array [
         "text": "/kɑɹ/",
       },
     ],
-    "sourceUrls": Array [
+    "sourceUrls": [
       "https://en.wiktionary.org/wiki/car",
     ],
     "word": "car",
@@ -151,23 +151,23 @@ Array [
       "name": "CC BY-SA 3.0",
       "url": "https://creativecommons.org/licenses/by-sa/3.0",
     },
-    "meanings": Array [
+    "meanings": [
       Meaning {
-        "antonyms": Array [],
-        "definitions": Array [
+        "antonyms": [],
+        "definitions": [
           Definition {
-            "antonyms": Array [],
+            "antonyms": [],
             "definition": "A turn.",
             "example": "",
-            "synonyms": Array [],
+            "synonyms": [],
           },
         ],
         "partOfSpeech": "noun",
-        "synonyms": Array [],
+        "synonyms": [],
       },
     ],
     "phonetic": "/kɑː/",
-    "phonetics": Array [
+    "phonetics": [
       Phonetic {
         "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/car-uk.mp3",
         "license": License {
@@ -187,7 +187,7 @@ Array [
         "text": "/kɑɹ/",
       },
     ],
-    "sourceUrls": Array [
+    "sourceUrls": [
       "https://en.wiktionary.org/wiki/car",
     ],
     "word": "car",
@@ -197,25 +197,25 @@ Array [
       "name": "CC BY-SA 3.0",
       "url": "https://creativecommons.org/licenses/by-sa/3.0",
     },
-    "meanings": Array [
+    "meanings": [
       Meaning {
-        "antonyms": Array [
+        "antonyms": [
           "cdr",
         ],
-        "definitions": Array [
+        "definitions": [
           Definition {
-            "antonyms": Array [],
+            "antonyms": [],
             "definition": "The first part of a cons in LISP. The first element of a list",
             "example": "",
-            "synonyms": Array [],
+            "synonyms": [],
           },
         ],
         "partOfSpeech": "noun",
-        "synonyms": Array [],
+        "synonyms": [],
       },
     ],
     "phonetic": "/kɑː/",
-    "phonetics": Array [
+    "phonetics": [
       Phonetic {
         "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/car-uk.mp3",
         "license": License {
@@ -235,7 +235,7 @@ Array [
         "text": "/kɑɹ/",
       },
     ],
-    "sourceUrls": Array [
+    "sourceUrls": [
       "https://en.wiktionary.org/wiki/car",
     ],
     "word": "car",
