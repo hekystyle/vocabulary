@@ -30,6 +30,6 @@
     "emitDecoratorMetadata": true,
   },
   "include": [
-    "src", ".eslintrc.js", "cypress.config.ts", "jest.config.js", "vite.config.ts"
+    "src", ".eslintrc.js", "cypress.config.ts", "jest.config.mjs", "vite.config.ts"
   ]
 }
