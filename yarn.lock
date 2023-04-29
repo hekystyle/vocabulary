@@ -11801,23 +11801,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-styled-plugin@npm:0.18.2":
-  version: 0.18.2
-  resolution: "typescript-styled-plugin@npm:0.18.2"
+"typescript-styled-plugin@npm:0.18.3":
+  version: 0.18.3
+  resolution: "typescript-styled-plugin@npm:0.18.3"
   dependencies:
-    typescript-template-language-service-decorator: ^2.2.0
+    typescript-template-language-service-decorator: ^2.3.2
     vscode-css-languageservice: ^5.1.4
     vscode-emmet-helper: ^2.6.4
     vscode-languageserver-textdocument: ^1.0.1
     vscode-languageserver-types: ^3.16.0
-  checksum: a410974ba8c604ae1826962b602f9ed0e7e2f134227e7418a9495c798886859664ed20cd1774978ab017645936d896143091a30980c7b09f06650ca97b344ffe
+  checksum: 0a0c3bada23f523fe8cf6c06f8b698582a0a3a8f686a10e3b946640fbba34e921585d4963e4c9a42a077ec77ea3ad60d8675a5f2ebc3f3f4e6ae29338f438615
   languageName: node
   linkType: hard
 
-"typescript-template-language-service-decorator@npm:^2.2.0":
-  version: 2.3.1
-  resolution: "typescript-template-language-service-decorator@npm:2.3.1"
-  checksum: 059214299099ecfe1b0372e22430fe262959c700cf65270ce74bbff04f2dc497fe986ade409c53db907805d70fedfbd1989c410f94697bf981082135a2cc6f20
+"typescript-template-language-service-decorator@npm:^2.3.2":
+  version: 2.3.2
+  resolution: "typescript-template-language-service-decorator@npm:2.3.2"
+  checksum: 55bf21e7bdca8f284c988753a51a5bd23890c0cdf9a9577c87dd17412c2589593f34eb7270cbb230a5b9160c53a5c34f4a91a542b079ca882290bb27ac9c701a
   languageName: node
   linkType: hard
 
@@ -12225,7 +12225,7 @@ __metadata:
     styled-components: 5.3.10
     ts-jest: 29.1.0
     typescript: 5.0.4
-    typescript-styled-plugin: 0.18.2
+    typescript-styled-plugin: 0.18.3
     vite: 4.2.1
     vite-plugin-pwa: 0.14.7
     vite-tsconfig-paths: 4.0.8
