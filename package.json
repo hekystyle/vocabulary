@@ -73,7 +73,7 @@
     "typescript-styled-plugin": "0.18.3",
     "vite": "4.3.5",
     "vite-plugin-pwa": "0.14.7",
-    "vite-tsconfig-paths": "4.0.8"
+    "vite-tsconfig-paths": "4.2.0"
   },
   "resolutions": {
     "@babel/core": "^7.20.0"
