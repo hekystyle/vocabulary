@@ -1,4 +1,11 @@
 {
+  "extends": [
+    "@tsconfig/strictest/tsconfig.json",
+    "@tsconfig/vite-react/tsconfig.json",
+  ],
+  "include": [
+    "src", ".eslintrc.js", "cypress.config.ts", "jest.config.js", "vite.config.ts"
+  ],
   "compilerOptions": {
     "baseUrl": "src",
     "plugins": [
@@ -6,30 +13,9 @@
         "name": "typescript-styled-plugin"
       }
     ],
-    "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "webworker",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
+    "checkJs": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-  },
-  "include": [
-    "src", ".eslintrc.js", "cypress.config.ts", "jest.config.mjs", "vite.config.ts"
-  ]
+    "exactOptionalPropertyTypes": false
+  }
 }
