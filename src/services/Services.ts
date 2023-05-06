@@ -1,5 +1,5 @@
 import { AppDb } from './db';
-import { TermsRepository } from './terms';
+import type { TermsRepository } from './terms';
 
 export interface Services {
   db: AppDb;

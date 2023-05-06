@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { FilterShape } from './types';
+import type { FilterShape } from './types';
 
 /**
  * @private

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import styled from 'styled-components';
 import { Button } from 'components/Button';
 import { Card } from 'components/Card';
@@ -7,7 +7,7 @@ import { RETURN_URL_FIELD } from 'routes/records/constants';
 import { useServices } from 'services';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
-import { Term } from 'types/Term';
+import type { Term } from 'types/Term';
 import { isNil, last } from 'ramda';
 import { useRecoilState } from 'recoil';
 import { SpinnerBox } from 'components/SpinnerBox';

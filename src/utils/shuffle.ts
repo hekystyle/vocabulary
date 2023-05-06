@@ -15,7 +15,9 @@ export function shuffle<T>(source: readonly T[]): T[] {
 
     // And swap it with the current element.
     const temp = copy[total];
+    // @ts-expect-error - TS doesn't know that `total` is always less than `copy` length
     copy[total] = copy[index];
+    // @ts-expect-error - TS doesn't know that `index` is always less than `copy` length
     copy[index] = temp;
   }
 

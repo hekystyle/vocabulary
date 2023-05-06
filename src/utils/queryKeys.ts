@@ -1,4 +1,4 @@
-import { Term } from 'types/Term';
+import type { Term } from 'types/Term';
 
 export const QUERY_KEYS = {
   terms: {

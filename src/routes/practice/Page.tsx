@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FC } from 'react';
+import type { FC } from 'react';
 import { useRecoilState } from 'recoil';
 import { Button } from 'react-bootstrap';
 import { PracticeSession } from './components/PracticeSession';

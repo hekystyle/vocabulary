@@ -1,8 +1,8 @@
-import { FC, useCallback } from 'react';
+import { type FC, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, Modal, Space } from 'antd';
-import { Term } from 'types/Term';
+import type { Term } from 'types/Term';
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useServices } from 'services';
 import { QUERY_KEYS } from 'utils/queryKeys';

@@ -1,14 +1,14 @@
-import { ButtonProps, Radio, Switch } from 'antd';
+import { type ButtonProps, Radio, Switch } from 'antd';
 import { Button } from 'components/Button';
 import { SpinnerBox } from 'components/SpinnerBox';
-import { useState, FC } from 'react';
+import { useState, type FC } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useServices } from 'services';
 import { useSetRecoilState } from 'recoil';
 import { Tags } from 'components/Tags';
 import { prepareSessionQueue } from '../api/prepareSessionQueue';
 import { isScoreAlgorithm, ScoreAlgorithm } from '../constants';
-import { Config, sessionState } from '../store';
+import { type Config, sessionState } from '../store';
 
 export const Configuration: FC = () => {
   const { db } = useServices();
@@ -49,7 +49,7 @@ export const Configuration: FC = () => {
         }))}
         style={{ display: 'flex' }}
         value={scoreAlgorithm}
-        onChange={({ target: { value } }) => update({ scoreAlgorithm: isScoreAlgorithm(value) ? value : undefined })}
+        onChange={({ target: { value } }) => update(isScoreAlgorithm(value) ? { scoreAlgorithm: value } : {})}
       />
       <Switch
         checked={playAfterReveal}

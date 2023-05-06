@@ -1,4 +1,4 @@
-import { FC, Suspense } from 'react';
+import { type FC, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import { NavBar } from 'components/NavBar';

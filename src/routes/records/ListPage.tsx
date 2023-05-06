@@ -1,5 +1,5 @@
 import { Col, Row } from 'antd';
-import { FC } from 'react';
+import type { FC } from 'react';
 import { ListTable } from './components/Table';
 
 export default (() => (

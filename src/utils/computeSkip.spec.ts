@@ -1,4 +1,4 @@
-import { Pagination, computeSkip } from './computeSkip';
+import { type Pagination, computeSkip } from './computeSkip';
 
 test.each([
   [0, { page: 1, pageSize: 20 }],

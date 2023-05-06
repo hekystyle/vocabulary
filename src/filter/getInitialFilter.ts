@@ -1,7 +1,7 @@
-import { SortOrder } from 'antd/es/table/interface';
+import type { SortOrder } from 'antd/es/table/interface';
 import { parse } from 'qs';
 import { evolve, pick } from 'ramda';
-import { FilterValues } from './types';
+import type { FilterValues } from './types';
 
 const isSortOrder = (value: unknown): value is SortOrder => value === 'ascend' || value === 'descend' || value === null;
 

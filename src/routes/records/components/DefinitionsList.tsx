@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import type { Word } from 'services/dictionaryApi';
 import * as DictionaryApi from 'services/dictionaryApi';

@@ -1,5 +1,5 @@
-import Dexie, { Table } from 'dexie';
-import { Term } from 'types/Term';
+import Dexie, { type Table } from 'dexie';
+import type { Term } from 'types/Term';
 
 type Writable<T> = { -readonly [P in keyof T]: T[P] };
 

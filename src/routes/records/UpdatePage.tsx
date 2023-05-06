@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { isObject } from 'utils/isObject';
 import { SpinnerBox } from 'components/SpinnerBox';
@@ -6,7 +6,7 @@ import { useServices } from 'services';
 import { useIsMutating, useMutation, useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
 import { hasReturnUrlField } from './utils/hasReturnUrlField';
-import { Form, FormProps } from './components/Form';
+import { Form, type FormProps } from './components/Form';
 
 export default (() => {
   const navigate = useNavigate();

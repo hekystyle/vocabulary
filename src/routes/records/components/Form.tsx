@@ -1,6 +1,6 @@
-import { useState, FC /* useMemo */ } from 'react';
+import { useState, type FC /* useMemo */ } from 'react';
 import { Button, Input /* AutoComplete */ } from 'antd';
-import { Term } from 'types/Term';
+import type { Term } from 'types/Term';
 // import { useServices } from 'services';
 // import { useQuery } from '@tanstack/react-query';
 // import { QUERY_KEYS } from 'utils/queryKeys';

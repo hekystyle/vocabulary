@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
-import { Term } from 'types/Term';
-import { TermsRepository } from '../terms';
+import type { Term } from 'types/Term';
+import type { TermsRepository } from '../terms';
 
 export class TestTermsRepository implements TermsRepository {
   get(): Promise<{ terms: Term[]; total: number }> {

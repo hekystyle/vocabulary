@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 import { SpinnerBox } from 'components/SpinnerBox';
 import styled from 'styled-components';
 import { useIsMutating } from '@tanstack/react-query';

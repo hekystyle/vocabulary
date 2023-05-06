@@ -1,4 +1,4 @@
-import { AnswersCountable } from 'utils/types';
+import type { AnswersCountable } from 'utils/types';
 
 export interface TermV1 extends AnswersCountable {
   id: number;

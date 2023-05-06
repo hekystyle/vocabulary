@@ -1,4 +1,4 @@
-import { Definable, hasDefinition } from './hasDefinition';
+import { type Definable, hasDefinition } from './hasDefinition';
 
 test.each([
   ['', false],

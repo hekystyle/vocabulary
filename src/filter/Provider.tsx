@@ -1,10 +1,10 @@
 import { stringify } from 'qs';
 import { mergeDeepRight, pick } from 'ramda';
-import { FC, PropsWithChildren, useCallback, useEffect, useMemo, useState } from 'react';
+import { type FC, type PropsWithChildren, useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FilterContext } from './Context';
 import { getInitialFilter } from './getInitialFilter';
-import { FilterShape, FilterUpdater, FilterValues } from './types';
+import type { FilterShape, FilterUpdater, FilterValues } from './types';
 
 export const FilterProvider: FC<PropsWithChildren> = ({ children }) => {
   const location = useLocation();

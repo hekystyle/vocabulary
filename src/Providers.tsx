@@ -1,9 +1,9 @@
-import { FC, PropsWithChildren } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 import { ConfigProvider, theme } from 'antd';
 import { RecoilRoot } from 'recoil';
 import { HashRouter } from 'react-router-dom';
 import { DataMigration } from 'containers/DataMigration';
-import { Services, ServicesProvider } from 'services';
+import { type Services, ServicesProvider } from 'services';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QUERY_CLIENT } from 'services/query';

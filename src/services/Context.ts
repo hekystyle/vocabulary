@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { Services } from 'services';
+import type { Services } from 'services';
 
 /**
  * @private

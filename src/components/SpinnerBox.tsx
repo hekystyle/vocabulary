@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 import { Spinner } from 'react-bootstrap';
 
 export const SpinnerBox: FC<PropsWithChildren<{ label: string }>> = ({ children, label }) => (

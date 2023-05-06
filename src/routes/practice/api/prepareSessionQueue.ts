@@ -1,11 +1,11 @@
 import { AppDb } from 'services/db';
 import { groupWith } from 'ramda';
-import { Term } from 'types/Term';
+import type { Term } from 'types/Term';
 import { hasDefinition } from 'utils/hasDefinition';
 import { hasTranslation } from 'utils/hasTranslation';
 import { shuffle } from 'utils/shuffle';
 import { SCORE_ALGO_MAP } from '../constants';
-import { Config } from '../store';
+import type { Config } from '../store';
 
 export const prepareSessionQueue =
   (db: AppDb) =>

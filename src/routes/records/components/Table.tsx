@@ -1,15 +1,15 @@
 import { Tooltip } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import type { ColumnsType } from 'antd/es/table';
 import { Table } from 'components/Table';
-import { FC, useMemo } from 'react';
+import { type FC, useMemo } from 'react';
 import { SpinnerBox } from 'components/SpinnerBox';
 import { useServices } from 'services';
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from 'utils/queryKeys';
 import { useFilter } from 'filter';
-import { SortOrder } from 'antd/es/table/interface';
+import type { SortOrder } from 'antd/es/table/interface';
 import { toArray } from 'utils/toArray';
-import { Term } from '../../../types/Term';
+import type { Term } from '../../../types/Term';
 import { AddButton } from './table/AddButton';
 import { Actions } from './table/Actions';
 
@@ -98,7 +98,7 @@ export const ListTable: FC = () => {
       scroll={{ x: true }}
       size="middle"
       onChange={(_, __, sorter) => {
-        const { field, order } = toArray(sorter)[0];
+        const { field, order } = toArray(sorter)[0] ?? {};
 
         updateFilter({
           sortField: field?.toString(),

@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 
-import { ReportCallback } from 'web-vitals';
+import type { ReportCallback } from 'web-vitals';
 
 const reportWebVitals = (onReport?: ReportCallback): void => {
   if (onReport && onReport instanceof Function) {

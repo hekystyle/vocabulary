@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { FilterContext } from './Context';
 import { FilterProvider } from './Provider';
-import { FilterShape } from './types';
+import type { FilterShape } from './types';
 
 export const useFilter = (): FilterShape => {
   const context = useContext(FilterContext);

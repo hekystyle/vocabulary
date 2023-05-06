@@ -1,5 +1,5 @@
 import { isTermV1 } from './isTerm';
-import { TermV1 } from './Term';
+import type { TermV1 } from './Term';
 
 test.each([
   [false, undefined],

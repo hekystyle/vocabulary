@@ -2,8 +2,8 @@ import { randomUUID } from 'crypto';
 import { AppDb } from 'services/db';
 import fakeIndexedDB from 'fake-indexeddb';
 import FDBKeyRange from 'fake-indexeddb/lib/FDBKeyRange';
-import { Term } from 'types/Term';
-import { IndexedDbTermsRepository, TermsRepository } from './terms';
+import type { Term } from 'types/Term';
+import { IndexedDbTermsRepository, type TermsRepository } from './terms';
 
 AppDb.dependencies.indexedDB = fakeIndexedDB;
 AppDb.dependencies.IDBKeyRange = FDBKeyRange;
