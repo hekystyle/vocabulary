@@ -6,6 +6,7 @@ import { migrate } from 'containers/DataMigration';
 import { AppContainer } from 'services';
 import { QUERY_CLIENT } from 'services/query';
 import { Providers } from 'Providers';
+import React from 'react';
 import reportWebVitals from './reportWebVitals';
 import { App } from './App';
 
@@ -26,12 +27,12 @@ if (rootElement === null) throw new Error('Root element not found');
 const root = createRoot(rootElement);
 
 root.render(
-  // TODO: Uncomment StrictMode when Ant Design dropdowns will be compatible with it (https://github.com/hekystyle/vocabulary/issues/319)
-  // <React.StrictMode>
-  <Providers services={container.services}>
-    <App />
-  </Providers>,
-  // </React.StrictMode>,
+  <React.StrictMode>
+    <Providers services={container.services}>
+      <App />
+    </Providers>
+    ,
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
