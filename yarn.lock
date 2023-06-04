@@ -56,23 +56,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ant-design/icons@npm:5.0.1":
-  version: 5.0.1
-  resolution: "@ant-design/icons@npm:5.0.1"
-  dependencies:
-    "@ant-design/colors": ^7.0.0
-    "@ant-design/icons-svg": ^4.2.1
-    "@babel/runtime": ^7.11.2
-    classnames: ^2.2.6
-    rc-util: ^5.9.4
-  peerDependencies:
-    react: ">=16.0.0"
-    react-dom: ">=16.0.0"
-  checksum: 426371e3a2d5d571a2df18229512ea5951ea71b97f1fa3a3a4dc2feda58498c70da7025c6e3ffcf0ae2dab0fb496d117f8962222f17d95dc58498850d9a21566
-  languageName: node
-  linkType: hard
-
-"@ant-design/icons@npm:^5.1.0":
+"@ant-design/icons@npm:5.1.4, @ant-design/icons@npm:^5.1.0":
   version: 5.1.4
   resolution: "@ant-design/icons@npm:5.1.4"
   dependencies:
@@ -10398,7 +10382,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-util@npm:^5.0.1, rc-util@npm:^5.0.6, rc-util@npm:^5.15.0, rc-util@npm:^5.16.0, rc-util@npm:^5.16.1, rc-util@npm:^5.17.0, rc-util@npm:^5.18.1, rc-util@npm:^5.19.2, rc-util@npm:^5.2.0, rc-util@npm:^5.20.1, rc-util@npm:^5.21.0, rc-util@npm:^5.21.2, rc-util@npm:^5.22.5, rc-util@npm:^5.23.0, rc-util@npm:^5.24.4, rc-util@npm:^5.26.0, rc-util@npm:^5.27.0, rc-util@npm:^5.27.1, rc-util@npm:^5.6.1, rc-util@npm:^5.9.4":
+"rc-util@npm:^5.0.1, rc-util@npm:^5.0.6, rc-util@npm:^5.15.0, rc-util@npm:^5.16.0, rc-util@npm:^5.16.1, rc-util@npm:^5.17.0, rc-util@npm:^5.18.1, rc-util@npm:^5.19.2, rc-util@npm:^5.2.0, rc-util@npm:^5.20.1, rc-util@npm:^5.21.0, rc-util@npm:^5.21.2, rc-util@npm:^5.22.5, rc-util@npm:^5.23.0, rc-util@npm:^5.24.4, rc-util@npm:^5.26.0, rc-util@npm:^5.27.0, rc-util@npm:^5.27.1, rc-util@npm:^5.6.1":
   version: 5.27.2
   resolution: "rc-util@npm:5.27.2"
   dependencies:
@@ -12377,7 +12361,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "vocabulary@workspace:."
   dependencies:
-    "@ant-design/icons": 5.0.1
+    "@ant-design/icons": 5.1.4
     "@faker-js/faker": 8.0.2
     "@popperjs/core": 2.11.7
     "@tanstack/react-query": 4.29.5
