@@ -24,8 +24,3 @@ code {
 p {
   color: white;
 }
-
-/* Temporary fix to make input text visible for AntDesign dark theme. (https://github.com/hekystyle/vocabulary/issues/290) */
-.ant-select input {
-  color: white;
-}
