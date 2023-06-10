@@ -31,7 +31,6 @@ root.render(
     <Providers services={container.services}>
       <App />
     </Providers>
-    ,
   </React.StrictMode>,
 );
 
