@@ -75,9 +75,6 @@
     "vite-plugin-pwa": "0.14.7",
     "vite-tsconfig-paths": "4.2.0"
   },
-  "resolutions": {
-    "@babel/core": "^7.20.0"
-  },
   "scripts": {
     "start": "vite",
     "start:ci": "serve -n -C -s build",
