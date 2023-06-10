@@ -1,10 +1,10 @@
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query';
+import { Button, Modal, Space } from 'antd';
 import { FC, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, Modal, Space } from 'antd';
-import { Term } from 'types/Term';
-import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useServices } from 'services';
+import { Term } from 'types/Term';
 import { QUERY_KEYS } from 'utils/queryKeys';
 
 export interface ActionsProps {

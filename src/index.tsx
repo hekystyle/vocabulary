@@ -1,14 +1,14 @@
 import 'reflect-metadata';
-import { createRoot } from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-import { migrate } from 'containers/DataMigration';
-import { AppContainer } from 'services';
-import { QUERY_CLIENT } from 'services/query';
-import { Providers } from 'Providers';
 import React from 'react';
-import reportWebVitals from './reportWebVitals';
+import { createRoot } from 'react-dom/client';
+import { AppContainer } from 'services';
+import { migrate } from 'containers/DataMigration';
+import { QUERY_CLIENT } from 'services/query';
 import { App } from './App';
+import { Providers } from './Providers';
+import reportWebVitals from './reportWebVitals';
 
 const container = new AppContainer();
 

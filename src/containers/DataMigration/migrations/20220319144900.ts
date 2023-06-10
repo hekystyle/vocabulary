@@ -1,6 +1,6 @@
 import { AppDb } from 'services/db';
-import { TermV1 } from 'types/Term';
 import { isTermV1 } from 'types/isTerm';
+import { TermV1 } from 'types/Term';
 import type { Migration } from '../migrate';
 
 const VOCABULARY_KEY = 'vocabulary';

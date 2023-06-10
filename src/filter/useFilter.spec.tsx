@@ -1,7 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
 import { HashRouter } from 'react-router-dom';
-import { useFilter } from './useFilter';
 import { FilterProvider } from './Provider';
+import { useFilter } from './useFilter';
 
 beforeAll(() => {
   jest.spyOn(console, 'error').mockImplementation(() => {});

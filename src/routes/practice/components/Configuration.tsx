@@ -1,10 +1,10 @@
+import { useMutation } from '@tanstack/react-query';
 import { ButtonProps, Radio, Switch } from 'antd';
+import { useState, FC } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { useServices } from 'services';
 import { Button } from 'components/Button';
 import { SpinnerBox } from 'components/SpinnerBox';
-import { useState, FC } from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { useServices } from 'services';
-import { useSetRecoilState } from 'recoil';
 import { Tags } from 'components/Tags';
 import { prepareSessionQueue } from '../api/prepareSessionQueue';
 import { isScoreAlgorithm, ScoreAlgorithm } from '../constants';

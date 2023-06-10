@@ -1,9 +1,9 @@
-import styled from 'styled-components';
 import { FC } from 'react';
-import { useRecoilState } from 'recoil';
 import { Button } from 'react-bootstrap';
-import { PracticeSession } from './components/PracticeSession';
+import { useRecoilState } from 'recoil';
+import styled from 'styled-components';
 import { Configuration } from './components/Configuration';
+import { PracticeSession } from './components/PracticeSession';
 import { sessionState } from './store';
 
 const Layout = styled.div`

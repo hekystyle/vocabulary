@@ -1,5 +1,5 @@
-import { AppDb } from 'services/db';
 import { groupWith } from 'ramda';
+import { AppDb } from 'services/db';
 import { Term } from 'types/Term';
 import { hasDefinition } from 'utils/hasDefinition';
 import { hasTranslation } from 'utils/hasTranslation';

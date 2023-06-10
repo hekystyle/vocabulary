@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker';
-import { Button } from 'antd';
-import { useServices } from 'services';
-import { FC } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { Button } from 'antd';
+import { FC } from 'react';
+import { useServices } from 'services';
 import { StrictOmit } from 'types/StrictOmit';
 import { Term } from 'types/Term';
 

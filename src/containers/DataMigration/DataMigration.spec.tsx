@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react';
 import { QueryClientProvider } from '@tanstack/react-query';
+import { render } from '@testing-library/react';
 import { QUERY_CLIENT } from 'services/query';
 import { DataMigration } from './DataMigration';
 

@@ -1,12 +1,12 @@
+import { useIsMutating, useMutation, useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { isObject } from 'utils/isObject';
-import { SpinnerBox } from 'components/SpinnerBox';
 import { useServices } from 'services';
-import { useIsMutating, useMutation, useQuery } from '@tanstack/react-query';
+import { SpinnerBox } from 'components/SpinnerBox';
+import { isObject } from 'utils/isObject';
 import { QUERY_KEYS } from 'utils/queryKeys';
-import { hasReturnUrlField } from './utils/hasReturnUrlField';
 import { Form, FormProps } from './components/Form';
+import { hasReturnUrlField } from './utils/hasReturnUrlField';
 
 export default (() => {
   const navigate = useNavigate();
