@@ -2,10 +2,10 @@ import { FC, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import { NavBar } from 'components/NavBar';
+import { SpinnerBox } from 'components/SpinnerBox';
 import { PracticeRouter } from 'routes/practice';
 import { RecordsRouter } from 'routes/records';
 import { LazySeedPage } from 'routes/seed';
-import { SpinnerBox } from 'components/SpinnerBox';
 
 const StyledApp = styled.div`
   height: 100vh;

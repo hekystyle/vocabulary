@@ -1,17 +1,17 @@
+import { useQuery } from '@tanstack/react-query';
 import { Tooltip } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import { Table } from 'components/Table';
-import { FC, useMemo } from 'react';
-import { SpinnerBox } from 'components/SpinnerBox';
-import { useServices } from 'services';
-import { useQuery } from '@tanstack/react-query';
-import { QUERY_KEYS } from 'utils/queryKeys';
-import { useFilter } from 'filter';
 import { SortOrder } from 'antd/es/table/interface';
+import { useFilter } from 'filter';
+import { FC, useMemo } from 'react';
+import { useServices } from 'services';
+import { SpinnerBox } from 'components/SpinnerBox';
+import { Table } from 'components/Table';
+import { QUERY_KEYS } from 'utils/queryKeys';
 import { toArray } from 'utils/toArray';
 import { Term } from '../../../types/Term';
-import { AddButton } from './table/AddButton';
 import { Actions } from './table/Actions';
+import { AddButton } from './table/AddButton';
 
 const getColumns = ({ sortField, sortOrder }: { sortField: string; sortOrder: SortOrder }): ColumnsType<Term> => [
   {

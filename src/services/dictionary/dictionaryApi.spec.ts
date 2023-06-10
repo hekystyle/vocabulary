@@ -1,6 +1,6 @@
-import * as DictionaryApi from 'services/dictionaryApi';
 import fs from 'fs';
 import path from 'path';
+import * as DictionaryApi from 'services/dictionaryApi';
 
 afterAll(() => {
   jest.restoreAllMocks();

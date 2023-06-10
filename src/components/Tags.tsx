@@ -1,7 +1,7 @@
-import { Select, SelectProps } from 'antd';
-import { useServices } from 'services';
-import { FC, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { Select, SelectProps } from 'antd';
+import { FC, useState } from 'react';
+import { useServices } from 'services';
 import { options } from 'utils/options';
 import { QUERY_KEYS } from 'utils/queryKeys';
 

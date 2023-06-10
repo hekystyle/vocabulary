@@ -1,19 +1,19 @@
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { isNil, last } from 'ramda';
 import { FC } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { useServices } from 'services';
 import styled from 'styled-components';
 import { Button } from 'components/Button';
 import { Card } from 'components/Card';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { RETURN_URL_FIELD } from 'routes/records/constants';
-import { useServices } from 'services';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { QUERY_KEYS } from 'utils/queryKeys';
-import { Term } from 'types/Term';
-import { isNil, last } from 'ramda';
-import { useRecoilState } from 'recoil';
 import { SpinnerBox } from 'components/SpinnerBox';
-import { useSpeech } from '../useSpeech';
+import { RETURN_URL_FIELD } from 'routes/records/constants';
+import { Term } from 'types/Term';
+import { QUERY_KEYS } from 'utils/queryKeys';
 import { increaseTermAnswers } from '../api/increaseTermAnswers';
 import { sessionState } from '../store';
+import { useSpeech } from '../useSpeech';
 
 const OverflowableCardBody = styled(Card.Body)`
   overflow: auto;

@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
+import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const AddButton: FC = () => {
   const navigate = useNavigate();
