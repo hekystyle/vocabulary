@@ -27,6 +27,24 @@ module.exports = {
     'no-await-in-loop': 'off',
     'arrow-body-style': 'error',
     'import/prefer-default-export': 'off',
+    'import/order': [
+      'error',
+      {
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+        'newlines-between': 'never',
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
+        pathGroups: [
+          {
+            pattern: '{components,containers,filter,routes,services,types,utils}/**',
+            group: 'internal',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['builtin', 'object'],
+      },
+    ],
     '@typescript-eslint/return-await': ['error', 'always'],
     '@typescript-eslint/restrict-template-expressions': ['error', { allowNullish: true }],
     '@typescript-eslint/array-type': ['error', { default: 'array-simple', readonly: 'array-simple' }],
