@@ -23,10 +23,14 @@ export class Container<TServicesMap> {
     });
   }
 
+  overrideFactory<K extends keyof TServicesMap>(key: K, factory: FactoriesMap<TServicesMap>[K]): this {
+    this.factories[key] = factory;
+    return this;
+  }
+
   get<K extends keyof TServicesMap>(key: K): TServicesMap[K] {
     const service = this.cache[key];
 
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- false positive
     if (service) return service;
 
     const factory = this.factories[key];

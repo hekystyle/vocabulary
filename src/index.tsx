@@ -3,14 +3,14 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { AppContainer } from 'services';
 import { migrate } from 'containers/DataMigration';
+import { appContainer } from 'services/AppContainer';
 import { QUERY_CLIENT } from 'services/query';
 import { App } from './App';
 import { Providers } from './Providers';
 import reportWebVitals from './reportWebVitals';
 
-const container = new AppContainer();
+const container = appContainer();
 
 QUERY_CLIENT.getMutationCache()
   .build(QUERY_CLIENT, {
