@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import { TestContainer } from 'services/__tests__/container';
+import { testContainer } from 'services/__tests__/container';
 import { ServicesProvider } from './Provider';
 import { useServices } from './useServices';
 
@@ -17,7 +17,7 @@ it('should throw error if not used within provider', () => {
 });
 
 it('should be used without throwing error', () => {
-  const container = new TestContainer();
+  const container = testContainer();
   const run = () =>
     renderHook(useServices, {
       wrapper: ({ children }) => <ServicesProvider services={container.services}>{children}</ServicesProvider>,
