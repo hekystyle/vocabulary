@@ -21,13 +21,15 @@ export default (() => {
     error,
     data: term,
     status,
-  } = useQuery(QUERY_KEYS.terms.id(id), async ({ signal }) => await termsRepository.getById(id, signal), {
+  } = useQuery({
+    queryKey: QUERY_KEYS.terms.id(id),
+    queryFn: async ({ signal }) => await termsRepository.getById(id, signal),
     enabled: !Number.isNaN(id),
-    onError: e => console.error(e),
   });
 
-  const { mutateAsync: update } = useMutation(QUERY_KEYS.terms.id(id), termsRepository.update.bind(termsRepository), {
-    onError: e => console.error(e),
+  const { mutateAsync: update } = useMutation({
+    mutationKey: QUERY_KEYS.terms.id(id),
+    mutationFn: termsRepository.update.bind(termsRepository),
   });
 
   const navigateBack = () => {

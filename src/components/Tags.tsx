@@ -14,13 +14,11 @@ export const Tags: FC<Pick<SelectProps<string[]>, 'defaultValue' | 'value' | 'on
   const [search, setSearch] = useState<string>('');
   const { termsRepository } = useServices();
 
-  const { data: uniqueTagsOptions, isFetching: loadingUniqueTags } = useQuery(
-    QUERY_KEYS.terms.tags.all(),
-    ({ signal }) => termsRepository.getUniqueTags(search, signal),
-    {
-      select: options,
-    },
-  );
+  const { data: uniqueTagsOptions, isFetching: loadingUniqueTags } = useQuery({
+    queryKey: QUERY_KEYS.terms.tags.all(),
+    queryFn: ({ signal }) => termsRepository.getUniqueTags(search, signal),
+    select: options,
+  });
 
   return (
     <Select

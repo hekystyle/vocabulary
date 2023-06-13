@@ -5,7 +5,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { migrate } from 'containers/DataMigration';
 import { appContainer } from 'services/AppContainer';
-import { QUERY_CLIENT } from 'services/query';
+import { QUERY_CLIENT } from 'services/queryClient';
 import { App } from './App';
 import { Providers } from './Providers';
 import reportWebVitals from './reportWebVitals';

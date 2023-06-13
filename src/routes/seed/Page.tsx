@@ -37,18 +37,15 @@ function getFakeTerms() {
 
 const SeedPage: FC = () => {
   const { db } = useServices();
-  const { error, mutate, status } = useMutation(
-    async () => {
+  const { error, mutate, status } = useMutation({
+    mutationFn: async () => {
       await db.delete();
       await db.open();
       for (const term of getFakeTerms()) {
         await db.terms.add(term);
       }
     },
-    {
-      onError: e => console.error(e),
-    },
-  );
+  });
 
   switch (status) {
     case 'idle':

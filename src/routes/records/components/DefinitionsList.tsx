@@ -18,17 +18,14 @@ export interface DefinitionsListProps {
 export const DefinitionsList: FC<DefinitionsListProps> = props => {
   const { word, onPartOfSpeechClick, onDefinitionClick } = props;
 
-  const { data: entry } = useQuery(
-    QUERY_KEYS.dictionary.word(word),
-    async ({ signal }): Promise<Word | undefined> => {
+  const { data: entry } = useQuery({
+    queryKey: QUERY_KEYS.dictionary.word(word),
+    queryFn: async ({ signal }): Promise<Word | undefined> => {
       const result = await DictionaryApi.fetchWord(word, { signal });
       return result[0];
     },
-    {
-      onError: e => console.error(e),
-      enabled: word !== '',
-    },
-  );
+    enabled: word !== '',
+  });
 
   return (
     <StyledUl key={word}>

@@ -13,8 +13,8 @@ export default (() => {
     mutateAsync: create,
     status,
     error,
-  } = useMutation(termsRepository.create.bind(termsRepository), {
-    onError: e => console.error(e),
+  } = useMutation({
+    mutationFn: termsRepository.create.bind(termsRepository),
   });
 
   const navigateBack = () => {
