@@ -7,7 +7,7 @@ import { HashRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import { Services, ServicesProvider } from 'services';
 import { DataMigration } from 'containers/DataMigration';
-import { QUERY_CLIENT } from 'services/query';
+import { QUERY_CLIENT } from 'services/queryClient';
 
 export const Providers: FC<PropsWithChildren<{ services: Services }>> = ({ children, services }) => (
   <ConfigProvider theme={{ algorithm: [theme.darkAlgorithm] }}>

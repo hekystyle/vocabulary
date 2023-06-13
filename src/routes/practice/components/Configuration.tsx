@@ -21,8 +21,8 @@ export const Configuration: FC = () => {
     tags: [],
   });
 
-  const { isLoading: loading, mutateAsync: prepareSessionQueueAsync } = useMutation(prepareSessionQueue(db), {
-    onError: e => console.error(e),
+  const { isLoading: loading, mutateAsync: prepareSessionQueueAsync } = useMutation({
+    mutationFn: prepareSessionQueue(db),
   });
 
   const handleStartSessionButtonClick: ButtonProps['onClick'] = () => {

@@ -69,13 +69,11 @@ export const ListTable: FC = () => {
     error,
     data,
     isFetching: loading,
-  } = useQuery(
-    QUERY_KEYS.terms.filter({ pageSize: PAGE_SIZE, page: currentPage, sortField, sortOrder }),
-    ({ signal }) => termsRepository.get({ pageSize: PAGE_SIZE, page: currentPage ?? 1, sortField, sortOrder }, signal),
-    {
-      onError: e => console.error(e),
-    },
-  );
+  } = useQuery({
+    queryKey: QUERY_KEYS.terms.filter({ pageSize: PAGE_SIZE, page: currentPage, sortField, sortOrder }),
+    queryFn: ({ signal }) =>
+      termsRepository.get({ pageSize: PAGE_SIZE, page: currentPage ?? 1, sortField, sortOrder }, signal),
+  });
 
   const columns = useMemo(() => getColumns({ sortOrder, sortField }), [sortField, sortOrder]);
 

@@ -17,14 +17,11 @@ export const Actions: FC<ActionsProps> = ({ record }) => {
   const queryClient = useQueryClient();
   const isMutating = useIsMutating(['terms']) > 0;
 
-  const { mutate: deleteTerm } = useMutation(
-    QUERY_KEYS.terms.id(record.id),
-    async () => (record.id ? await termsRepository.delete(record.id) : undefined),
-    {
-      onSuccess: () => queryClient.invalidateQueries(QUERY_KEYS.terms.all()),
-      onError: e => console.error(e),
-    },
-  );
+  const { mutate: deleteTerm } = useMutation({
+    mutationKey: QUERY_KEYS.terms.id(record.id),
+    mutationFn: async () => (record.id ? await termsRepository.delete(record.id) : undefined),
+    onSuccess: () => queryClient.invalidateQueries(QUERY_KEYS.terms.all()),
+  });
 
   const handleDeleteButtonClick = useCallback(() => {
     Modal.confirm({

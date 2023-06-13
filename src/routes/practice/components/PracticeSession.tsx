@@ -36,22 +36,17 @@ export const PracticeSession: FC = () => {
   const actualRecordId = last(queue);
   const playAfterReveal = config?.playAfterReveal ?? false;
 
-  const { data: actualRecord, isFetching } = useQuery(
-    QUERY_KEYS.terms.id(actualRecordId),
-    ({ signal }) => (!isNil(actualRecordId) ? termsRepository.getById(actualRecordId, signal) : undefined),
-    {
-      enabled: !isNil(actualRecordId),
-      onError: e => console.error(e),
-    },
-  );
+  const { data: actualRecord, isFetching } = useQuery({
+    queryKey: QUERY_KEYS.terms.id(actualRecordId),
+    queryFn: ({ signal }) => (!isNil(actualRecordId) ? termsRepository.getById(actualRecordId, signal) : undefined),
+    enabled: !isNil(actualRecordId),
+  });
 
-  const { mutateAsync: increaseAnswersCount, isLoading: isMutating } = useMutation(
-    async ({ id, isCorrect }: { id: Exclude<Term['id'], undefined>; isCorrect: boolean }) =>
+  const { mutateAsync: increaseAnswersCount, isLoading: isMutating } = useMutation({
+    mutationFn: async ({ id, isCorrect }: { id: Exclude<Term['id'], undefined>; isCorrect: boolean }) =>
       await increaseTermAnswers(db)(id, isCorrect),
-    {
-      onSuccess: (_, { id }) => queryClient.invalidateQueries(QUERY_KEYS.terms.id(id)),
-    },
-  );
+    onSuccess: (_, { id }) => queryClient.invalidateQueries(QUERY_KEYS.terms.id(id)),
+  });
 
   const handleRevealAnswer = () => {
     setSession(prevState => ({ ...prevState, isRevealed: true }));
