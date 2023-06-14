@@ -10,6 +10,7 @@ module.exports = {
     'plugin:@typescript-eslint/strict',
     'airbnb-typescript',
     'plugin:eslint-comments/recommended',
+    'plugin:@tanstack/eslint-plugin-query/recommended',
     'plugin:prettier/recommended',
   ],
   parserOptions: {

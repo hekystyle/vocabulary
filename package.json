@@ -23,6 +23,7 @@
     "class-transformer": "0.5.1",
     "class-validator": "0.14.0",
     "dexie": "3.2.4",
+    "firebase": "9.22.1",
     "qs": "6.11.2",
     "ramda": "0.29.0",
     "react": "18.2.0",
@@ -37,6 +38,7 @@
     "workbox-precaching": "6.5.4"
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "4.29.9",
     "@testing-library/cypress": "9.0.0",
     "@testing-library/dom": "9.2.0",
     "@testing-library/jest-dom": "5.16.5",

@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import { NavBar } from 'components/NavBar';
 import { SpinnerBox } from 'components/SpinnerBox';
+import { AuthRouter } from 'routes/auth/Router';
 import { PracticeRouter } from 'routes/practice';
 import { RecordsRouter } from 'routes/records';
 import { LazySeedPage } from 'routes/seed';
@@ -25,6 +26,7 @@ export const App: FC = () => (
     <StyledContent>
       <Suspense fallback={<SpinnerBox label="Loading app..." />}>
         <Routes>
+          <Route element={<AuthRouter />} path="auth/*" />
           <Route element={<RecordsRouter />} path="records/*" />
           <Route element={<PracticeRouter />} path="practice/*" />
           <Route element={<LazySeedPage />} path="seed" />
