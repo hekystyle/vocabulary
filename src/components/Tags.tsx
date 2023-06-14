@@ -15,7 +15,7 @@ export const Tags: FC<Pick<SelectProps<string[]>, 'defaultValue' | 'value' | 'on
   const { termsRepository } = useServices();
 
   const { data: uniqueTagsOptions, isFetching: loadingUniqueTags } = useQuery({
-    queryKey: QUERY_KEYS.terms.tags.all(),
+    queryKey: QUERY_KEYS.terms.tags.filter({ search }),
     queryFn: ({ signal }) => termsRepository.getUniqueTags(search, signal),
     select: options,
   });

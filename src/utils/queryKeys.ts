@@ -7,6 +7,7 @@ export const QUERY_KEYS = {
     id: (id: Term['id']) => [...QUERY_KEYS.terms.all(), id] as const,
     tags: {
       all: () => [...QUERY_KEYS.terms.all(), 'tags'] as const,
+      filter: (filter: { search: string }) => [...QUERY_KEYS.terms.tags.all(), filter] as const,
     },
   },
   dictionary: {
