@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { User } from './User';
 
 interface NavLink {
   title: React.ReactNode;
@@ -24,7 +25,7 @@ export const NavBar: FC = () => {
   const { pathname } = useLocation();
   return (
     <Navbar collapseOnSelect expand="lg" variant="dark">
-      <Container>
+      <Container style={{ gap: 8 }}>
         <Navbar.Toggle style={{ flexGrow: 1 }} />
         <Navbar.Collapse>
           <Nav>
@@ -35,6 +36,7 @@ export const NavBar: FC = () => {
             ))}
           </Nav>
         </Navbar.Collapse>
+        <User />
       </Container>
     </Navbar>
   );
