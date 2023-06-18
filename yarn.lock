@@ -13157,7 +13157,6 @@ __metadata:
     vite-plugin-pwa: 0.16.4
     vite-tsconfig-paths: 4.2.0
     web-vitals: 3.3.2
-    workbox-precaching: 6.5.4
   languageName: unknown
   linkType: soft
 
@@ -13515,13 +13514,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"workbox-core@npm:6.5.4":
-  version: 6.5.4
-  resolution: "workbox-core@npm:6.5.4"
-  checksum: d973cc6c1c5fdbde7f6642632384c2e0de48f08228eb234db2c97a18a7e5422b483005767e7b447ea774abc0772dfc1edef2ef2b5df174df4d40ae61d4c49719
-  languageName: node
-  linkType: hard
-
 "workbox-core@npm:7.0.0":
   version: 7.0.0
   resolution: "workbox-core@npm:7.0.0"
@@ -13560,17 +13552,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"workbox-precaching@npm:6.5.4":
-  version: 6.5.4
-  resolution: "workbox-precaching@npm:6.5.4"
-  dependencies:
-    workbox-core: 6.5.4
-    workbox-routing: 6.5.4
-    workbox-strategies: 6.5.4
-  checksum: 15ef24ffb04edd13bcdfa6c4e7f64002551badce2d507031c343019b3bcdc569591fdff8f8e30cf1262d641d3eff611115bdda7b2ad0deb9d4ccef8f4be8bd20
-  languageName: node
-  linkType: hard
-
 "workbox-precaching@npm:7.0.0":
   version: 7.0.0
   resolution: "workbox-precaching@npm:7.0.0"
@@ -13605,30 +13586,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"workbox-routing@npm:6.5.4":
-  version: 6.5.4
-  resolution: "workbox-routing@npm:6.5.4"
-  dependencies:
-    workbox-core: 6.5.4
-  checksum: 7198c50b9016d3cea0e5b51512d66f5813d6e6ad5e99c201435d6c0ab3baee1c90aa2bbdd72dd954f439267b6e6196fb04ec96e62347e6c89385db6c1a4dec79
-  languageName: node
-  linkType: hard
-
 "workbox-routing@npm:7.0.0":
   version: 7.0.0
   resolution: "workbox-routing@npm:7.0.0"
   dependencies:
     workbox-core: 7.0.0
   checksum: 9ea5b00fde5d90819e29ebf6d4aec3b84abec97854eb333c71b83548f1ba12b7f92d764a159f23cfa9e8164940e7b7136536fc0477784560cf2108d8dfe7f83b
-  languageName: node
-  linkType: hard
-
-"workbox-strategies@npm:6.5.4":
-  version: 6.5.4
-  resolution: "workbox-strategies@npm:6.5.4"
-  dependencies:
-    workbox-core: 6.5.4
-  checksum: 52134ecd6c05f4edd31e7b022b33a91b7b59c215bfdfb987bc0f10be02fea4d4e6385a9638a2303ba336190c5d28f9721182cd78a6779b9c817a66ec12cb1c6b
   languageName: node
   linkType: hard
 
