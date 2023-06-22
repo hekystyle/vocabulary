@@ -23,7 +23,7 @@
     "class-transformer": "0.5.1",
     "class-validator": "0.14.0",
     "dexie": "3.2.4",
-    "firebase": "9.22.2",
+    "firebase": "9.23.0",
     "qs": "6.11.2",
     "ramda": "0.29.0",
     "react": "18.2.0",
