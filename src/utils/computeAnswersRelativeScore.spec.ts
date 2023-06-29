@@ -1,6 +1,7 @@
+import { expect, it } from '@jest/globals';
 import { computeAnswersRelativeScore } from './computeAnswersRelativeScore';
 
-test.each([
+it.each([
   [100, 2, 2],
   [66, 3, 2],
   [50, 4, 2],

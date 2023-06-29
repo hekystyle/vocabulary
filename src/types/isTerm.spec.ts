@@ -1,7 +1,8 @@
+import { expect, it } from '@jest/globals';
 import { isTermV1 } from './isTerm';
 import { TermV1 } from './Term';
 
-test.each([
+it.each([
   [false, undefined],
   [false, null],
   [false, function a() {}],

@@ -11,6 +11,7 @@ const config = {
   testEnvironment: 'jsdom',
   testMatch: ['<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}'],
   transformIgnorePatterns: ['/node_modules/(?!(dexie)/)'],
+  injectGlobals: false,
 };
 
 export default config;

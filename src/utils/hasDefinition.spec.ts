@@ -1,6 +1,7 @@
+import { expect, it } from '@jest/globals';
 import { Definable, hasDefinition } from './hasDefinition';
 
-test.each([
+it.each([
   ['', false],
   ['some def ...', true],
   [' ', true],

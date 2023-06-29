@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { afterAll, expect, it, jest } from '@jest/globals';
 import * as DictionaryApi from 'services/dictionaryApi';
 
 afterAll(() => {
