@@ -1,3 +1,4 @@
+import { expect, it } from '@jest/globals';
 import { options } from './options';
 
 it('should create options', () => {

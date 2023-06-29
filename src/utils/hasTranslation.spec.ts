@@ -1,6 +1,7 @@
+import { expect, it } from '@jest/globals';
 import { hasTranslation } from './hasTranslation';
 
-test.each([
+it.each([
   ['', false],
   ['foo', true],
   [' ', true],

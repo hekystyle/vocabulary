@@ -79,7 +79,47 @@ module.exports = {
     {
       files: ['**/*.spec.{ts,tsx}'],
       extends: ['plugin:jest/recommended', 'plugin:jest/style', 'plugin:jest-dom/recommended'],
-      rules: {},
+      rules: {
+        'no-restricted-globals': [
+          'error',
+          {
+            name: 'jest',
+            message: 'Import it instead.',
+          },
+          {
+            name: 'beforeEach',
+            message: 'Import it instead.',
+          },
+          {
+            name: 'beforeAll',
+            message: 'Import it instead.',
+          },
+          {
+            name: 'afterEach',
+            message: 'Import it instead.',
+          },
+          {
+            name: 'afterAll',
+            message: 'Import it instead.',
+          },
+          {
+            name: 'it',
+            message: 'Import it instead.',
+          },
+          {
+            name: 'test',
+            message: 'Import it instead.',
+          },
+          {
+            name: 'describe',
+            message: 'Import it instead.',
+          },
+          {
+            name: 'expect',
+            message: 'Import it instead.',
+          },
+        ],
+      },
     },
     {
       files: ['**/*.spec.tsx'],

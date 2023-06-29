@@ -2,9 +2,15 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom';
 import 'reflect-metadata';
 import 'fake-indexeddb/auto';
+import { expect, jest } from '@jest/globals';
+import * as matchers from '@testing-library/jest-dom/matchers';
+
+expect.extend(
+  // @ts-expect-error - types are wrong
+  matchers,
+);
 
 window.matchMedia = query => ({
   matches: false,
@@ -14,7 +20,7 @@ window.matchMedia = query => ({
   removeListener: jest.fn(), // deprecated
   addEventListener: jest.fn(),
   removeEventListener: jest.fn(),
-  dispatchEvent: jest.fn(),
+  dispatchEvent: jest.fn(() => true),
 });
 
 window.speechSynthesis = {
@@ -23,11 +29,11 @@ window.speechSynthesis = {
   pending: false,
   speaking: false,
   cancel: jest.fn(),
-  getVoices: jest.fn(),
+  getVoices: jest.fn(() => []),
   pause: jest.fn(),
   resume: jest.fn(),
   speak: jest.fn(),
   addEventListener: jest.fn(),
   removeEventListener: jest.fn(),
-  dispatchEvent: jest.fn(),
+  dispatchEvent: jest.fn(() => true),
 };

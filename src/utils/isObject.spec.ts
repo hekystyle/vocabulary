@@ -1,6 +1,7 @@
+import { expect, it } from '@jest/globals';
 import { isObject } from './isObject';
 
-test.each([
+it.each([
   [false, undefined],
   [false, null],
   [false, function a() {}],

@@ -37,6 +37,7 @@
     "web-vitals": "3.3.2"
   },
   "devDependencies": {
+    "@jest/globals": "29.5.0",
     "@tanstack/eslint-plugin-query": "4.29.9",
     "@testing-library/cypress": "9.0.0",
     "@testing-library/dom": "9.3.1",

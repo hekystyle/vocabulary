@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto';
+import { expect, it } from '@jest/globals';
 import { AppDb } from 'services/db';
 import { migrate } from './migrate';
 

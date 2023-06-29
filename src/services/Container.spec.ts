@@ -1,3 +1,4 @@
+import { expect, it } from '@jest/globals';
 import { Container } from './Container';
 
 it('should be able to create instance and resolve a dependency', () => {

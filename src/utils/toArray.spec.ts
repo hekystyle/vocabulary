@@ -1,3 +1,4 @@
+import { expect, it } from '@jest/globals';
 import { toArray } from './toArray';
 
 it('should return same array', () => {

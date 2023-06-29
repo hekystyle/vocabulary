@@ -1,3 +1,4 @@
+import { expect, it, jest } from '@jest/globals';
 import { QUERY_KEYS } from './queryKeys';
 
 it.each([
@@ -7,7 +8,7 @@ it.each([
   [() => QUERY_KEYS.terms.id(-1)],
   [() => QUERY_KEYS.terms.filter({})],
   [() => QUERY_KEYS.terms.tags.all()],
-] as const)('should not throw error %#', (run: () => readonly unknown[]) => {
+])('should not throw error %#', (run: () => readonly unknown[]) => {
   const runMock = jest.fn(run);
   expect(runMock).not.toThrow();
   expect(runMock).toHaveBeenCalledTimes(1);
