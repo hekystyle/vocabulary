@@ -4,6 +4,7 @@ import { Button, Modal, Space } from 'antd';
 import { FC, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useServices } from 'services';
+import { useAppNotification } from 'services/Notifications';
 import { Term } from 'types/Term';
 import { QUERY_KEYS } from 'utils/queryKeys';
 
@@ -16,11 +17,18 @@ export const Actions: FC<ActionsProps> = ({ record }) => {
   const { termsRepository } = useServices();
   const queryClient = useQueryClient();
   const isMutating = useIsMutating(['terms']) > 0;
+  const notification = useAppNotification();
 
   const { mutate: deleteTerm } = useMutation({
     mutationKey: QUERY_KEYS.terms.id(record.id),
-    mutationFn: async () => (record.id ? await termsRepository.delete(record.id) : undefined),
-    onSuccess: () => queryClient.invalidateQueries(QUERY_KEYS.terms.all()),
+    mutationFn: async () => await termsRepository.delete(record.id),
+    onSuccess: () => {
+      queryClient.invalidateQueries(QUERY_KEYS.terms.all());
+      notification.success({ message: 'Term deleted' });
+    },
+    onError: () => {
+      notification.error({ message: 'Failed to delete term' });
+    },
   });
 
   const handleDeleteButtonClick = useCallback(() => {

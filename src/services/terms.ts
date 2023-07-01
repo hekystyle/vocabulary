@@ -1,5 +1,17 @@
 // eslint-disable-next-line max-classes-per-file
 import { Sorting } from 'filter';
+import {
+  addDoc,
+  collection,
+  CollectionReference,
+  deleteDoc,
+  doc,
+  Firestore,
+  FirestoreDataConverter,
+  getDoc,
+  serverTimestamp,
+  updateDoc,
+} from 'firebase/firestore';
 import { AppDb } from 'services/db';
 import { StrictOmit } from 'types/StrictOmit';
 import { Term } from 'types/Term';
@@ -7,10 +19,11 @@ import { computeSkip, Pagination } from 'utils/computeSkip';
 
 export interface TermsRepository {
   get(filter: Pagination & Sorting, signal: AbortSignal | undefined): Promise<{ terms: Term[]; total: number }>;
+  getUnsynced(): Promise<Term[]>;
   getById(id: Exclude<Term['id'], undefined>, signal: AbortSignal | undefined): Promise<Term | undefined>;
   create(term: StrictOmit<Term, 'id' | 'createdAt'>): Promise<Term | undefined>;
   update(term: Term): Promise<Term | undefined>;
-  delete(id: Exclude<Term['id'], undefined>): Promise<void>;
+  delete(id: NonNullable<Term['id']>): Promise<void>;
 
   getWords(search: string, signal: AbortSignal | undefined): Promise<string[]>;
   getUniquePartsOfSpeech(signal: AbortSignal | undefined): Promise<string[]>;
@@ -35,6 +48,10 @@ export class IndexedDbTermsRepository implements TermsRepository {
     ]);
 
     return { terms, total };
+  }
+
+  public async getUnsynced() {
+    return await this.db.terms.where({ firebaseId: undefined }).each();
   }
 
   public async getById(id: Exclude<Term['id'], undefined>): Promise<Term | undefined> {
@@ -133,5 +150,50 @@ export class DelayedTermsRepository implements TermsRepository {
   async getUniqueTags(search: string, signal: AbortSignal | undefined): Promise<string[]> {
     await this.wait();
     return await this.repo.getUniqueTags(search, signal);
+  }
+}
+
+const termConverter: FirestoreDataConverter<Term> = {
+  toFirestore: (term: Term) => term,
+  fromFirestore: snapshot => {
+    const data = snapshot.data();
+    return {
+      id: snapshot.id,
+      ...(data as Term),
+      createdAt: new Date(data.createdAt.seconds * 1000),
+    } as Term;
+  },
+};
+
+export class FirestoreTermsRepository {
+  private termsRef: CollectionReference<Term>;
+
+  constructor(db: Firestore) {
+    this.termsRef = collection(db, 'terms').withConverter<Term>(termConverter);
+  }
+
+  async create(term: StrictOmit<Term, 'id' | 'createdAt'>): Promise<Term | undefined> {
+    const docRef = await addDoc(this.termsRef, {
+      ...term,
+      createdAt: serverTimestamp(),
+    });
+
+    const docSnapshot = await getDoc(docRef);
+
+    return docSnapshot.data();
+  }
+
+  async update(term: Term): Promise<Term | undefined> {
+    const docRef = doc(this.termsRef, term.firebaseId);
+
+    await updateDoc(docRef, term);
+
+    const snap = await getDoc(docRef);
+
+    return snap.data();
+  }
+
+  async delete(id: string): Promise<void> {
+    await deleteDoc(doc(this.termsRef, id));
   }
 }

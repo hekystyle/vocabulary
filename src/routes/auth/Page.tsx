@@ -5,6 +5,7 @@ import { useUser } from 'auth';
 import { signInWithPopup, GithubAuthProvider, AuthProvider, ProviderId } from 'firebase/auth';
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSync } from 'sync/useSync';
 import { useFirebaseAuth } from 'services/firebase';
 import { useAppNotification } from 'services/Notifications';
 
@@ -13,6 +14,7 @@ export const AuthPage: FC = () => {
   const user = useUser();
   const notification = useAppNotification();
   const navigate = useNavigate();
+  const { syncWithRemote } = useSync();
 
   const { mutate: signIn, isLoading: isSigningIn } = useMutation({
     mutationFn: (provider: AuthProvider) => signInWithPopup(auth, provider),
@@ -21,6 +23,7 @@ export const AuthPage: FC = () => {
         message: 'Login successful',
       });
       navigate('/');
+      syncWithRemote();
     },
     onError: error => {
       notification.error({
