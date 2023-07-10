@@ -4565,9 +4565,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:5.6.3":
-  version: 5.6.3
-  resolution: "antd@npm:5.6.3"
+"antd@npm:5.6.4":
+  version: 5.6.4
+  resolution: "antd@npm:5.6.4"
   dependencies:
     "@ant-design/colors": ^7.0.0
     "@ant-design/cssinjs": ^1.10.1
@@ -4589,7 +4589,7 @@ __metadata:
     rc-dialog: ~9.1.0
     rc-drawer: ~6.2.0
     rc-dropdown: ~4.1.0
-    rc-field-form: ~1.32.0
+    rc-field-form: ~1.34.0
     rc-image: ~5.17.1
     rc-input: ~1.0.4
     rc-input-number: ~7.4.0
@@ -4620,7 +4620,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: 7ffe43b053383ee53c76213409ef8f6ef42b735ede79c7a0764579bc87ec44cc85dcdae03e82cc53ea3039fc23c0aecf1f6b6a75c6096e42d3c391627ca05a78
+  checksum: 1ff556ec0cf23a1fb2ee937126dd193b695bc2df3a9ee162c08a6ed1409f2df3d22f3749a42a92a6073cc2f5c8166c679c89cc831d59964739445efd39451f9d
   languageName: node
   linkType: hard
 
@@ -10720,9 +10720,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-field-form@npm:~1.32.0":
-  version: 1.32.0
-  resolution: "rc-field-form@npm:1.32.0"
+"rc-field-form@npm:~1.34.0":
+  version: 1.34.1
+  resolution: "rc-field-form@npm:1.34.1"
   dependencies:
     "@babel/runtime": ^7.18.0
     async-validator: ^4.1.0
@@ -10730,7 +10730,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: 39f8b58d10637f6fc70d15842cb1f072bf3088eeee7328de30cd36cd445e082312cd9fbc3e96b4e7fe35210c959c24e80305103939d5ef99cb98e73aee7f8e6f
+  checksum: 30b8bbbcd99907062d93ab683a37c74c3b3dfa35bbc64425836aa8f9db35b5cf81a4f337a0c7b94469d01e3ed4bfa4f91ec2b729803ece62942f5632ba6161f1
   languageName: node
   linkType: hard
 
@@ -13162,7 +13162,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 5.60.1
     "@typescript-eslint/parser": 5.60.1
     "@vitejs/plugin-react": 4.0.1
-    antd: 5.6.3
+    antd: 5.6.4
     bootstrap: 5.3.0
     class-transformer: 0.5.1
     class-validator: 0.14.0
