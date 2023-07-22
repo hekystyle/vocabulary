@@ -87,7 +87,10 @@ export class IndexedDbTermsRepository implements TermsRepository {
 }
 
 export class DelayedTermsRepository implements TermsRepository {
-  constructor(private repo: TermsRepository, public readonly delayMs: number) {}
+  constructor(
+    private repo: TermsRepository,
+    public readonly delayMs: number,
+  ) {}
 
   private async wait() {
     return await new Promise(resolve => {
