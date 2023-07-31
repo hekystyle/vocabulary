@@ -15,7 +15,7 @@
     "@types/node": "18.16.19",
     "@types/qs": "6.9.7",
     "@types/ramda": "0.29.3",
-    "@types/react": "18.2.15",
+    "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
     "@types/styled-components": "5.1.26",
     "antd": "5.6.4",
