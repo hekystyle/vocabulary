@@ -33,7 +33,7 @@
     "react-router-dom": "6.10.0",
     "recoil": "0.7.7",
     "reflect-metadata": "0.1.13",
-    "styled-components": "5.3.11",
+    "styled-components": "6.0.6",
     "web-vitals": "3.3.2"
   },
   "devDependencies": {
