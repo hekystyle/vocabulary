@@ -1,14 +1,14 @@
 import fs from 'fs';
 import path from 'path';
-import { afterAll, expect, it, jest } from '@jest/globals';
+import { afterAll, expect, it, vi } from 'vitest';
 import * as DictionaryApi from 'services/dictionaryApi';
 
 afterAll(() => {
-  jest.restoreAllMocks();
+  vi.restoreAllMocks();
 });
 
 it('should parse real data', async () => {
-  jest.spyOn(window, 'fetch').mockResolvedValue({
+  vi.spyOn(window, 'fetch').mockResolvedValue({
     json: () =>
       Promise.resolve(JSON.parse(fs.readFileSync(path.resolve(__dirname, '__fixtures__', 'car.json'), 'utf8'))),
   } as Response);
@@ -19,7 +19,7 @@ it('should parse real data', async () => {
 });
 
 it('should throw error when response is invalid', async () => {
-  jest.spyOn(window, 'fetch').mockResolvedValue({
+  vi.spyOn(window, 'fetch').mockResolvedValue({
     json: () => Promise.resolve({ message: 'Word not found' }),
   } as Response);
 

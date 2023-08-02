@@ -1,4 +1,4 @@
-import { expect, it } from '@jest/globals';
+import { expect, it } from 'vitest';
 import { shuffle } from './shuffle';
 
 it('should be immutable', () => {
