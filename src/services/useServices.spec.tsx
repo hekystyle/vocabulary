@@ -1,15 +1,14 @@
-import { afterAll, beforeAll, expect, it, jest } from '@jest/globals';
 import { renderHook } from '@testing-library/react';
+import { beforeAll, expect, it, vi } from 'vitest';
 import { testContainer } from 'services/__tests__/container';
 import { ServicesProvider } from './Provider';
 import { useServices } from './useServices';
 
 beforeAll(() => {
-  jest.spyOn(console, 'error').mockImplementation(() => {});
-});
-
-afterAll(() => {
-  jest.restoreAllMocks();
+  vi.spyOn(console, 'error').mockImplementation(() => {});
+  return () => {
+    vi.restoreAllMocks();
+  };
 });
 
 it('should throw error if not used within provider', () => {

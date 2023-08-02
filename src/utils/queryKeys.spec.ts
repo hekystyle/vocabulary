@@ -1,4 +1,4 @@
-import { expect, it, jest } from '@jest/globals';
+import { expect, it, vi } from 'vitest';
 import { QUERY_KEYS } from './queryKeys';
 
 it.each([
@@ -9,7 +9,7 @@ it.each([
   [() => QUERY_KEYS.terms.filter({})],
   [() => QUERY_KEYS.terms.tags.all()],
 ])('should not throw error %#', (run: () => readonly unknown[]) => {
-  const runMock = jest.fn(run);
+  const runMock = vi.fn(run);
   expect(runMock).not.toThrow();
   expect(runMock).toHaveBeenCalledTimes(1);
   expect(runMock.mock.results[0]?.value).toBeInstanceOf(Array);

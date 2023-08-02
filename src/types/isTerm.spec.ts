@@ -1,4 +1,4 @@
-import { expect, it } from '@jest/globals';
+import { expect, it } from 'vitest';
 import { isTermV1 } from './isTerm';
 import { TermV1 } from './Term';
 

@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto';
-import { afterEach, beforeEach, expect, it } from '@jest/globals';
 import fakeIndexedDB from 'fake-indexeddb';
 import FDBKeyRange from 'fake-indexeddb/lib/FDBKeyRange';
+import { beforeEach, expect, it } from 'vitest';
 import { AppDb } from 'services/db';
 import { Term } from 'types/Term';
 import { IndexedDbTermsRepository, TermsRepository } from './terms';
@@ -15,11 +15,10 @@ let repository: TermsRepository;
 beforeEach(() => {
   db = new AppDb(randomUUID());
   repository = new IndexedDbTermsRepository(db);
-});
-
-afterEach(async () => {
-  await db.delete();
-  db.close();
+  return async () => {
+    await db.delete();
+    db.close();
+  };
 });
 
 it('should create instance', async () => {

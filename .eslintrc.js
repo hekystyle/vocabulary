@@ -16,12 +16,6 @@ module.exports = {
   parserOptions: {
     project: ['./tsconfig.json', './cypress/tsconfig.json'],
   },
-  settings: {
-    jest: {
-      // eslint-disable-next-line import/no-extraneous-dependencies, global-require, @typescript-eslint/no-var-requires
-      version: require('jest/package.json').version,
-    },
-  },
   rules: {
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-restricted-syntax': 'off',
@@ -71,14 +65,14 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['vite.config.ts', 'jest.config.js', 'setupTests.ts', 'cypress.config.ts', 'cypress/support/commands.ts'],
+      files: ['vite.config.ts', 'setupTests.ts', 'cypress.config.ts', 'cypress/support/commands.ts'],
       rules: {
         'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
       },
     },
     {
       files: ['**/*.spec.{ts,tsx}'],
-      extends: ['plugin:jest/recommended', 'plugin:jest/style', 'plugin:jest-dom/recommended'],
+      extends: ['plugin:vitest/recommended', 'plugin:jest-dom/recommended'],
       rules: {
         'no-restricted-globals': [
           'error',

@@ -1,15 +1,15 @@
-import { afterAll, beforeAll, expect, it, jest } from '@jest/globals';
 import { act, renderHook } from '@testing-library/react';
 import { HashRouter } from 'react-router-dom';
+import { beforeAll, expect, it, vi } from 'vitest';
 import { FilterProvider } from './Provider';
 import { useFilter } from './useFilter';
 
 beforeAll(() => {
-  jest.spyOn(console, 'error').mockImplementation(() => {});
-});
+  vi.spyOn(console, 'error').mockImplementation(() => {});
 
-afterAll(() => {
-  jest.restoreAllMocks();
+  return () => {
+    vi.restoreAllMocks();
+  };
 });
 
 it('should throw error if not used within provider', () => {
