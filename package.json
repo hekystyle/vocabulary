@@ -18,7 +18,7 @@
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
     "@types/styled-components": "5.1.26",
-    "antd": "5.6.4",
+    "antd": "5.8.1",
     "bootstrap": "5.3.0",
     "class-transformer": "0.5.1",
     "class-validator": "0.14.0",
