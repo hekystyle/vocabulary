@@ -13825,9 +13825,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:4.4.6":
-  version: 4.4.6
-  resolution: "vite@npm:4.4.6"
+"vite@npm:4.4.8":
+  version: 4.4.8
+  resolution: "vite@npm:4.4.8"
   dependencies:
     esbuild: ^0.18.10
     fsevents: ~2.3.2
@@ -13861,7 +13861,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 5a821897f1e03f9786f827acb89e3117a79b8901d184bbc3a2e48d6404b37975a5cdeb6b6969ec24ed1e81d96f1959ed6f9426cbb64501d1e4770bdb20f9c02f
+  checksum: e8ffe688f8a7396b1357778f00cb06d1f3dadad200823c47a1955cf52774a0cbff5ac4d6a8f8d09e26c1d4e588e5815956f9eba02ae301e77a36c3d181a1bc86
   languageName: node
   linkType: hard
 
@@ -13989,7 +13989,7 @@ __metadata:
     styled-components: 6.0.6
     typescript: 5.1.6
     typescript-styled-plugin: 0.18.3
-    vite: 4.4.6
+    vite: 4.4.8
     vite-plugin-pwa: 0.16.4
     vite-tsconfig-paths: 4.2.0
     vitest: 0.34.1
