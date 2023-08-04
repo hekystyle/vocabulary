@@ -5529,9 +5529,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:5.8.1":
-  version: 5.8.1
-  resolution: "antd@npm:5.8.1"
+"antd@npm:5.8.2":
+  version: 5.8.2
+  resolution: "antd@npm:5.8.2"
   dependencies:
     "@ant-design/colors": ^7.0.0
     "@ant-design/cssinjs": ^1.16.0
@@ -5584,7 +5584,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: ad6dc5de8474550e75fba9f7f7b58fdb00f6f4fd1b3c5044a20b2fc24571b5b44a0e2c4e099dd87d90cecedb436c2428114f14b914793fcc898bad2f6a288736
+  checksum: 3b6ba5199883cfce264494191edc847b1ad4c9b831fe68a3093013a20a808e508fa1df3353763e206778eb2aaf5b552b7e60a1481cfd0c7e883b4ba96f254a54
   languageName: node
   linkType: hard
 
@@ -13950,7 +13950,7 @@ __metadata:
     "@typescript-eslint/parser": 5.62.0
     "@vitejs/plugin-react": 4.0.4
     "@vitest/coverage-v8": 0.34.1
-    antd: 5.8.1
+    antd: 5.8.2
     bootstrap: 5.3.1
     class-transformer: 0.5.1
     class-validator: 0.14.0
