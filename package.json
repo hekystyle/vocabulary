@@ -60,7 +60,7 @@
     "eslint-plugin-prettier": "5.0.0",
     "eslint-plugin-react": "7.33.1",
     "eslint-plugin-react-hooks": "4.6.0",
-    "eslint-plugin-testing-library": "5.11.0",
+    "eslint-plugin-testing-library": "5.11.1",
     "eslint-plugin-vitest": "0.2.8",
     "fake-indexeddb": "4.0.2",
     "gh-pages": "5.0.0",
