@@ -70,13 +70,13 @@
     "serve": "14.2.0",
     "typescript": "5.1.6",
     "typescript-styled-plugin": "0.18.3",
-    "vite": "4.4.8",
+    "vite": "4.4.9",
     "vite-plugin-pwa": "0.16.4",
     "vite-tsconfig-paths": "4.2.0",
     "vitest": "0.34.1"
   },
   "resolutions": {
-    "vite": "4.4.8"
+    "vite": "4.4.9"
   },
   "scripts": {
     "start": "vite",
