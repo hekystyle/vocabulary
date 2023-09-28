@@ -63,7 +63,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ant-design/icons@npm:5.2.4, @ant-design/icons@npm:^5.2.2":
+"@ant-design/icons@npm:5.2.6":
+  version: 5.2.6
+  resolution: "@ant-design/icons@npm:5.2.6"
+  dependencies:
+    "@ant-design/colors": ^7.0.0
+    "@ant-design/icons-svg": ^4.3.0
+    "@babel/runtime": ^7.11.2
+    classnames: ^2.2.6
+    rc-util: ^5.31.1
+  peerDependencies:
+    react: ">=16.0.0"
+    react-dom: ">=16.0.0"
+  checksum: 2f571699b1903383cd09faa78e4cce34973debb0e7ec6223b9d9a0a6ab2b2f0c876072db62bbd4e6a45e864df5447343315e066abeffaf58aa5b97df3acc89f1
+  languageName: node
+  linkType: hard
+
+"@ant-design/icons@npm:^5.2.2":
   version: 5.2.4
   resolution: "@ant-design/icons@npm:5.2.4"
   dependencies:
@@ -14146,7 +14162,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "vocabulary@workspace:."
   dependencies:
-    "@ant-design/icons": 5.2.4
+    "@ant-design/icons": 5.2.6
     "@faker-js/faker": 8.0.2
     "@popperjs/core": 2.11.8
     "@tanstack/eslint-plugin-query": 4.32.5
