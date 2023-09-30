@@ -8306,7 +8306,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.2.12, fast-glob@npm:^3.2.9":
+"fast-glob@npm:^3.2.9":
   version: 3.2.12
   resolution: "fast-glob@npm:3.2.12"
   dependencies:
@@ -8319,7 +8319,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.3.0":
+"fast-glob@npm:^3.3.0, fast-glob@npm:^3.3.1":
   version: 3.3.1
   resolution: "fast-glob@npm:3.3.1"
   dependencies:
@@ -11102,10 +11102,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pretty-bytes@npm:^6.0.0":
-  version: 6.1.0
-  resolution: "pretty-bytes@npm:6.1.0"
-  checksum: cca3be45a299a28d1d3d95056ac709b8aeb01540aae7d906ed674c076b5f4b48cb6bf118f172d486c17e47b092a00e827b7f69608bc731ca35ca6f8d93e130f1
+"pretty-bytes@npm:^6.1.1":
+  version: 6.1.1
+  resolution: "pretty-bytes@npm:6.1.1"
+  checksum: 43d29d909d2d88072da2c3d72f8fd0f2d2523c516bfa640aff6e31f596ea1004b6601f4cabc50d14b2cf10e82635ebe5b7d9378f3d5bae1c0067131829421b8a
   languageName: node
   linkType: hard
 
@@ -14028,20 +14028,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-pwa@npm:0.16.4":
-  version: 0.16.4
-  resolution: "vite-plugin-pwa@npm:0.16.4"
+"vite-plugin-pwa@npm:0.16.5":
+  version: 0.16.5
+  resolution: "vite-plugin-pwa@npm:0.16.5"
   dependencies:
     debug: ^4.3.4
-    fast-glob: ^3.2.12
-    pretty-bytes: ^6.0.0
+    fast-glob: ^3.3.1
+    pretty-bytes: ^6.1.1
     workbox-build: ^7.0.0
     workbox-window: ^7.0.0
   peerDependencies:
     vite: ^3.1.0 || ^4.0.0
     workbox-build: ^7.0.0
     workbox-window: ^7.0.0
-  checksum: 16810da98ca3d347f2c760024ac2f2ab5d1e61cb7f0157c5f4b75a7e1c8f91442ac304463f1b3e3a5088b4aab4ca464ff8a67f6c996ffdd23e78a2a75c4fc03e
+  checksum: 7e31aa46ad61470871c7644f8369f83bb479fdfbbd7026b8d556cc3eea5f31ec23f6a6b99b2399c11eb952129c4b3d26a30e27c029c381721ba0fcef27159171
   languageName: node
   linkType: hard
 
@@ -14226,7 +14226,7 @@ __metadata:
     typescript: 5.1.6
     typescript-styled-plugin: 0.18.3
     vite: 4.4.9
-    vite-plugin-pwa: 0.16.4
+    vite-plugin-pwa: 0.16.5
     vite-tsconfig-paths: 4.2.1
     vitest: 0.34.1
     web-vitals: 3.4.0
