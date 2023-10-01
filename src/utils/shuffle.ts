@@ -15,8 +15,10 @@ export function shuffle<T>(source: readonly T[]): T[] {
 
     // And swap it with the current element.
     const temp = copy[total];
-    copy[total] = copy[index];
-    copy[index] = temp;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    copy[total] = copy[index]!;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    copy[index] = temp!;
   }
 
   return copy;

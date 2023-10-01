@@ -1,4 +1,8 @@
 {
+  "extends": [
+    "@tsconfig/vite-react/tsconfig.json",
+    "@tsconfig/strictest/tsconfig.json",
+  ],
   "compilerOptions": {
     "baseUrl": "src",
     "plugins": [
@@ -6,33 +10,16 @@
         "name": "typescript-styled-plugin"
       }
     ],
-    "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "webworker",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
+    "allowJs": false,
+    "checkJs": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "exactOptionalPropertyTypes": false, // Ant Design has optional props that are not exactly optional
   },
   "include": [
     "src",
     ".eslintrc.js",
-    "cypress.config.ts",
+    "cypress.config.mjs",
     "jest.config.mjs",
     "vite.config.ts",
   ]
