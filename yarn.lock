@@ -4711,6 +4711,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tsconfig/strictest@npm:2.0.2":
+  version: 2.0.2
+  resolution: "@tsconfig/strictest@npm:2.0.2"
+  checksum: 5409233288d872a2d79aca5eb65d3da681c6e0baa9ee58744adceda834fececdaa8265869793cfd5a80f4c887e3296b4d13309ef5bffbf7c8272071f00b60ba7
+  languageName: node
+  linkType: hard
+
+"@tsconfig/vite-react@npm:2.0.1":
+  version: 2.0.1
+  resolution: "@tsconfig/vite-react@npm:2.0.1"
+  checksum: 5715563bf293484c8b5ad36a0328159b11de9bde507b96dcde1d72243d02dcd8eb0383c1676e319cfb03e8f79d96891103d480c7157177f4d7a0b368ede4a46d
+  languageName: node
+  linkType: hard
+
 "@types/aria-query@npm:^5.0.1":
   version: 5.0.1
   resolution: "@types/aria-query@npm:5.0.1"
@@ -14575,6 +14589,8 @@ __metadata:
     "@testing-library/jest-dom": 5.17.0
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.5.1
+    "@tsconfig/strictest": 2.0.2
+    "@tsconfig/vite-react": 2.0.1
     "@types/node": 18.18.1
     "@types/qs": 6.9.8
     "@types/ramda": 0.29.5

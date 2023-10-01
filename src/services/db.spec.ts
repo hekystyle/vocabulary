@@ -1,12 +1,11 @@
 import { randomUUID } from 'crypto';
-import fakeIndexedDB from 'fake-indexeddb';
-import FDBKeyRange from 'fake-indexeddb/lib/FDBKeyRange';
+import fakeIndexedDB, { IDBKeyRange } from 'fake-indexeddb';
 import { expect, it } from 'vitest';
 import { AppDb } from 'services/db';
 import { Term } from 'types/Term';
 
 AppDb.dependencies.indexedDB = fakeIndexedDB;
-AppDb.dependencies.IDBKeyRange = FDBKeyRange;
+AppDb.dependencies.IDBKeyRange = IDBKeyRange;
 
 it('should create instance', () => {
   expect(new AppDb(randomUUID())).toBeInstanceOf(AppDb);
