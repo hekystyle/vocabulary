@@ -1,13 +1,12 @@
 import { randomUUID } from 'crypto';
-import fakeIndexedDB from 'fake-indexeddb';
-import FDBKeyRange from 'fake-indexeddb/lib/FDBKeyRange';
+import fakeIndexedDB, { IDBKeyRange } from 'fake-indexeddb';
 import { beforeEach, expect, it } from 'vitest';
 import { AppDb } from 'services/db';
 import { Term } from 'types/Term';
 import { IndexedDbTermsRepository, TermsRepository } from './terms';
 
 AppDb.dependencies.indexedDB = fakeIndexedDB;
-AppDb.dependencies.IDBKeyRange = FDBKeyRange;
+AppDb.dependencies.IDBKeyRange = IDBKeyRange;
 
 let db: AppDb;
 let repository: TermsRepository;
