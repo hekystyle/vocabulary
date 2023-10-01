@@ -8,7 +8,6 @@ import { useServices } from 'services';
 import { SpinnerBox } from 'components/SpinnerBox';
 import { Table } from 'components/Table';
 import { QUERY_KEYS } from 'utils/queryKeys';
-import { toArray } from 'utils/toArray';
 import { Term } from '../../../types/Term';
 import { Actions } from './table/Actions';
 import { AddButton } from './table/AddButton';
@@ -95,8 +94,8 @@ export const ListTable: FC = () => {
       rowKey={item => item.id ?? 'undefined'}
       scroll={{ x: true }}
       size="middle"
-      onChange={(_, __, sorter) => {
-        const { field, order } = toArray(sorter)[0];
+      onChange={(_, __, sorters) => {
+        const { field, order } = [sorters].flat().at(0) ?? {};
 
         updateFilter({
           sortField: field?.toString(),
