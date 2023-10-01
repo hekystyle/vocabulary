@@ -4679,12 +4679,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ramda@npm:0.29.3":
-  version: 0.29.3
-  resolution: "@types/ramda@npm:0.29.3"
+"@types/ramda@npm:0.29.5":
+  version: 0.29.5
+  resolution: "@types/ramda@npm:0.29.5"
   dependencies:
     types-ramda: ^0.29.4
-  checksum: 172b18d62473d4bffb1e4e92fa293e56fa4f85fcf91b1b2c9178955f775e34065cc408e93f1171436b52e240599ecb1be51955dab07ca389bf2da98f85f820a9
+  checksum: 01aa02655f712b5a1411a2399f94a77d8651da0cea95f753a3482ba00af558f54928b692cbb5629cd231aca461b5b9eeddeaeb46f25f4f224d1bba5e4334a7e7
   languageName: node
   linkType: hard
 
@@ -14405,7 +14405,7 @@ __metadata:
     "@testing-library/user-event": 14.4.3
     "@types/node": 18.18.1
     "@types/qs": 6.9.7
-    "@types/ramda": 0.29.3
+    "@types/ramda": 0.29.5
     "@types/react": 18.2.23
     "@types/react-dom": 18.2.8
     "@types/styled-components": 5.1.26

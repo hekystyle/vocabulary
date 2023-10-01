@@ -14,7 +14,7 @@
     "@tanstack/react-query-devtools": "4.32.6",
     "@types/node": "18.18.1",
     "@types/qs": "6.9.7",
-    "@types/ramda": "0.29.3",
+    "@types/ramda": "0.29.5",
     "@types/react": "18.2.23",
     "@types/react-dom": "18.2.8",
     "@types/styled-components": "5.1.26",
