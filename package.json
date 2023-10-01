@@ -27,7 +27,7 @@
     "qs": "6.11.2",
     "ramda": "0.29.0",
     "react": "18.2.0",
-    "react-bootstrap": "2.8.0",
+    "react-bootstrap": "2.9.0",
     "react-dom": "18.2.0",
     "react-is": "18.2.0",
     "react-router-dom": "6.10.0",
