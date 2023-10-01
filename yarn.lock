@@ -6010,12 +6010,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap@npm:5.3.1":
-  version: 5.3.1
-  resolution: "bootstrap@npm:5.3.1"
+"bootstrap@npm:5.3.2":
+  version: 5.3.2
+  resolution: "bootstrap@npm:5.3.2"
   peerDependencies:
     "@popperjs/core": ^2.11.8
-  checksum: f8176376aa6c6d8947d58a67f0c57fa0b6b7dcd087ff83454e0d727c07cf33e8107e56aa298045d652f84b53b24ac72457af73e41c5631c9ebdc1909039c5dac
+  checksum: d5580b253d121ffc137388d41da58dce8d15f1ccd574e12f28d4a08e7649ca15e95db645b2b677cb8025bccd446bff04138fc0fe64f8cba0ccc5dc004a8644cf
   languageName: node
   linkType: hard
 
@@ -14414,7 +14414,7 @@ __metadata:
     "@vitejs/plugin-react": 4.0.4
     "@vitest/coverage-v8": 0.34.6
     antd: 5.8.2
-    bootstrap: 5.3.1
+    bootstrap: 5.3.2
     class-transformer: 0.5.1
     class-validator: 0.14.0
     cypress: 12.17.4
