@@ -19,7 +19,7 @@
   "include": [
     "src",
     ".eslintrc.js",
-    "cypress.config.ts",
+    "cypress.config.mjs",
     "jest.config.mjs",
     "vite.config.ts",
   ]
