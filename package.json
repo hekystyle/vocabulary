@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "5.2.6",
-    "@faker-js/faker": "8.0.2",
+    "@faker-js/faker": "8.1.0",
     "@popperjs/core": "2.11.8",
     "@tanstack/react-query": "4.35.3",
     "@tanstack/react-query-devtools": "4.35.3",
