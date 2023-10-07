@@ -1,10 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base"],
-  "rebaseWhen": "conflicted",
   "labels": ["dependencies"],
-  "assigneesFromCodeOwners": true,
-  "reviewersFromCodeOwners": true,
   "major": {
     "dependencyDashboardApproval": false
   }
