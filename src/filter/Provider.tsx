@@ -16,7 +16,17 @@ export const FilterProvider: FC<PropsWithChildren> = ({ children }) => {
     setFilter(prevFilter => mergeDeepRight(prevFilter, update));
   }, []);
 
-  const pickedFilter = useMemo(() => (fields ? pick(fields, filter) : filter), [fields, filter]);
+  const pickedFilter = useMemo(
+    () =>
+      fields
+        ? pick(
+            // NOTE: ramda typing seems incorrect as pick accepts empty array in runtime
+            fields as [keyof FilterValues, ...Array<keyof FilterValues>],
+            filter,
+          )
+        : filter,
+    [fields, filter],
+  );
 
   const shape = useMemo<FilterShape>(
     () => ({ filter: pickedFilter, update: updateFilter, setFields }),
