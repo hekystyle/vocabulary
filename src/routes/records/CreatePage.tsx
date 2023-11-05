@@ -28,7 +28,7 @@ export default (() => {
   const handleCancel = () => navigateBack();
 
   switch (status) {
-    case 'loading':
+    case 'pending':
       return <SpinnerBox label="Creating ..." />;
     case 'error':
       return <p>Error: {error instanceof Error ? error.message : 'Unknown'}</p>;

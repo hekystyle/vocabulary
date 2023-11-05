@@ -15,9 +15,9 @@ const container = appContainer();
 QUERY_CLIENT.getMutationCache()
   .build(QUERY_CLIENT, {
     mutationKey: migrate.queryKey,
-    mutationFn: () => migrate(container.services.db),
+    mutationFn: migrate,
   })
-  .execute()
+  .execute(container.services.db)
   .catch(console.error);
 
 const rootElement = document.getElementById('root');

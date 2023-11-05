@@ -15,12 +15,12 @@ export const Actions: FC<ActionsProps> = ({ record }) => {
   const navigate = useNavigate();
   const { termsRepository } = useServices();
   const queryClient = useQueryClient();
-  const isMutating = useIsMutating(['terms']) > 0;
+  const isMutating = useIsMutating({ mutationKey: ['terms'] }) > 0;
 
   const { mutate: deleteTerm } = useMutation({
     mutationKey: QUERY_KEYS.terms.id(record.id),
     mutationFn: async () => (record.id ? await termsRepository.delete(record.id) : undefined),
-    onSuccess: () => queryClient.invalidateQueries(QUERY_KEYS.terms.all()),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: QUERY_KEYS.terms.all() }),
   });
 
   const handleDeleteButtonClick = useCallback(() => {

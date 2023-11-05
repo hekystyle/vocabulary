@@ -14,7 +14,7 @@ export const AuthPage: FC = () => {
   const notification = useAppNotification();
   const navigate = useNavigate();
 
-  const { mutate: signIn, isLoading: isSigningIn } = useMutation({
+  const { mutate: signIn, isPending: isSigningIn } = useMutation({
     mutationFn: (provider: AuthProvider) => signInWithPopup(auth, provider),
     onSuccess: () => {
       notification.success({

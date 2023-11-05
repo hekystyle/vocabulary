@@ -14,7 +14,7 @@ export default (() => {
   const { termsRepository } = useServices();
   const { id: serializedId } = useParams<{ id?: string }>();
   const id = serializedId ? parseInt(serializedId, 10) : NaN;
-  const isUpdating = useIsMutating(QUERY_KEYS.terms.id(id));
+  const isUpdating = useIsMutating({ mutationKey: QUERY_KEYS.terms.id(id) });
 
   const {
     isFetching,
@@ -50,7 +50,7 @@ export default (() => {
   if (isFetching) return <SpinnerBox label="Loading ..." />;
 
   switch (status) {
-    case 'loading':
+    case 'pending':
       return <SpinnerBox label="Loading ..." />;
     case 'error':
       return <p>Error: {error instanceof Error ? error.message : 'Unknown'}</p>;

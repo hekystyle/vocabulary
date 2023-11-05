@@ -42,10 +42,10 @@ export const PracticeSession: FC = () => {
     enabled: !isNil(actualRecordId),
   });
 
-  const { mutateAsync: increaseAnswersCount, isLoading: isMutating } = useMutation({
+  const { mutateAsync: increaseAnswersCount, isPending: isMutating } = useMutation({
     mutationFn: async ({ id, isCorrect }: { id: Exclude<Term['id'], undefined>; isCorrect: boolean }) =>
       await increaseTermAnswers(db)(id, isCorrect),
-    onSuccess: (_, { id }) => queryClient.invalidateQueries(QUERY_KEYS.terms.id(id)),
+    onSuccess: (_, { id }) => queryClient.invalidateQueries({ queryKey: QUERY_KEYS.terms.id(id) }),
   });
 
   const handleRevealAnswer = () => {

@@ -21,7 +21,7 @@ export const Configuration: FC = () => {
     tags: [],
   });
 
-  const { isLoading: loading, mutateAsync: prepareSessionQueueAsync } = useMutation({
+  const { isPending: loading, mutateAsync: prepareSessionQueueAsync } = useMutation({
     mutationFn: prepareSessionQueue(db),
   });
 
