@@ -12,5 +12,12 @@ export const getInitialFilter = (search: string): Partial<FilterValues> => {
     sortField: value => value,
     sortOrder: value => (isSortOrder(value) ? value : null),
   } as const;
-  return evolve(evolver, pick(Object.keys(evolver), parsedQueryString));
+  return evolve(
+    evolver,
+    pick(
+      // NOTE: ramda typings seems incorrect as pick accepts empty array in runtime
+      Object.keys(evolver) as [string, ...string[]],
+      parsedQueryString,
+    ),
+  );
 };
