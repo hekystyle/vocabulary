@@ -54,7 +54,7 @@ const SeedPage: FC = () => {
           Seed
         </Button>
       );
-    case 'loading':
+    case 'pending':
       return <p>seeding...</p>;
     case 'error':
       return <p>{JSON.stringify(error)}</p>;

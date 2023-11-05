@@ -13,7 +13,7 @@ export const User: FC = () => {
   const notification = useAppNotification();
   const navigate = useNavigate();
 
-  const { mutateAsync: logout, isLoading: isSigningOut } = useMutation({
+  const { mutateAsync: logout, isPending: isSigningOut } = useMutation({
     mutationFn: () => auth.signOut(),
   });
 

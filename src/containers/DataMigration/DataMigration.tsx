@@ -12,7 +12,7 @@ const StyledLayout = styled.div`
 `;
 
 export const DataMigration: FC<PropsWithChildren> = ({ children }) => {
-  const loading = useIsMutating(migrate.queryKey);
+  const loading = useIsMutating({ mutationKey: migrate.queryKey });
 
   return loading ? (
     <StyledLayout>
