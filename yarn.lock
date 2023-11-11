@@ -3589,12 +3589,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ramda@npm:0.29.7":
-  version: 0.29.7
-  resolution: "@types/ramda@npm:0.29.7"
+"@types/ramda@npm:0.29.8":
+  version: 0.29.8
+  resolution: "@types/ramda@npm:0.29.8"
   dependencies:
     types-ramda: ^0.29.5
-  checksum: 0f714c9ecedf53a67eb41d7a206aa2db0e696e612be19f9723e8f83f33ab8a0457ec3d1da83db02bdbbed1f00df1e0fc49adc088abf4b2f677ccf43c13a03afb
+  checksum: 9883baa6b19290822753332af90aaa8c0f612c87c740b1a64067524b2afee1871200d85b5ae4ae3b10627435fa045c314a615fec3e53d222c99f0aa6193cd271
   languageName: node
   linkType: hard
 
@@ -12433,7 +12433,7 @@ __metadata:
     "@tsconfig/vite-react": 2.0.1
     "@types/node": 18.18.9
     "@types/qs": 6.9.10
-    "@types/ramda": 0.29.7
+    "@types/ramda": 0.29.8
     "@types/react": 18.2.35
     "@types/react-dom": 18.2.14
     "@types/styled-components": 5.1.28
