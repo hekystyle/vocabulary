@@ -3076,9 +3076,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rc-component/trigger@npm:^1.18.1":
-  version: 1.18.1
-  resolution: "@rc-component/trigger@npm:1.18.1"
+"@rc-component/trigger@npm:^1.18.2":
+  version: 1.18.2
+  resolution: "@rc-component/trigger@npm:1.18.2"
   dependencies:
     "@babel/runtime": ^7.23.2
     "@rc-component/portal": ^1.1.0
@@ -3089,7 +3089,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: 55379982ecdf752f39799ea5bdd6364f8c8126be42e05b1fd45a81e9aeb7a9a6a277a8d0f43c8230241efc7f97062801d1d6d0db93ec3eb8338ea659feb7be46
+  checksum: a1ecc787919c614d4cdd0ec140caf1685de4570da159248701edf1cb379f5cebf2e66f0a9ed7d6542b522c2a92fcdb72ec5dfb9a34a00599278381f598a6f7fb
   languageName: node
   linkType: hard
 
@@ -4376,9 +4376,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:5.11.1":
-  version: 5.11.1
-  resolution: "antd@npm:5.11.1"
+"antd@npm:5.11.2":
+  version: 5.11.2
+  resolution: "antd@npm:5.11.2"
   dependencies:
     "@ant-design/colors": ^7.0.0
     "@ant-design/cssinjs": ^1.17.2
@@ -4389,7 +4389,7 @@ __metadata:
     "@rc-component/color-picker": ~1.4.1
     "@rc-component/mutate-observer": ^1.1.0
     "@rc-component/tour": ~1.10.0
-    "@rc-component/trigger": ^1.18.1
+    "@rc-component/trigger": ^1.18.2
     classnames: ^2.3.2
     copy-to-clipboard: ^3.3.3
     dayjs: ^1.11.1
@@ -4402,7 +4402,7 @@ __metadata:
     rc-dropdown: ~4.1.0
     rc-field-form: ~1.40.0
     rc-image: ~7.3.2
-    rc-input: ~1.3.5
+    rc-input: ~1.3.6
     rc-input-number: ~8.4.0
     rc-mentions: ~2.9.1
     rc-menu: ~9.12.2
@@ -4418,9 +4418,9 @@ __metadata:
     rc-slider: ~10.4.0
     rc-steps: ~6.0.1
     rc-switch: ~4.1.0
-    rc-table: ~7.35.2
+    rc-table: ~7.36.0
     rc-tabs: ~12.13.1
-    rc-textarea: ~1.5.2
+    rc-textarea: ~1.5.3
     rc-tooltip: ~6.1.2
     rc-tree: ~5.8.2
     rc-tree-select: ~5.15.0
@@ -4431,7 +4431,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: b929c48f715ce0ad95954d11656c526f87800c0ffa3aac7d066a136701f4bd7edfadfb19253a14a39d8efddd108433de83f3edccfd150342fd77e4634d18f8d8
+  checksum: e8cbe18392fe833fb968f27d9911aff232f7224b883231ec8d2bc9b211309801db03e7a3c4532d9d550c48d9c7e5baae736383b2699424c27d5394c9b0891b4a
   languageName: node
   linkType: hard
 
@@ -9932,6 +9932,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rc-input@npm:~1.3.6":
+  version: 1.3.6
+  resolution: "rc-input@npm:1.3.6"
+  dependencies:
+    "@babel/runtime": ^7.11.1
+    classnames: ^2.2.1
+    rc-util: ^5.18.1
+  peerDependencies:
+    react: ">=16.0.0"
+    react-dom: ">=16.0.0"
+  checksum: 4e9e7adedc16319980220df4ef802077781e1224c4510a02c78d67c6a834bf58d9508170ab8d375efe9dd186f9497ae07f7c1a997d84aa1bc978985fdf56aeda
+  languageName: node
+  linkType: hard
+
 "rc-mentions@npm:~2.9.1":
   version: 2.9.1
   resolution: "rc-mentions@npm:2.9.1"
@@ -10217,9 +10231,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-table@npm:~7.35.2":
-  version: 7.35.2
-  resolution: "rc-table@npm:7.35.2"
+"rc-table@npm:~7.36.0":
+  version: 7.36.0
+  resolution: "rc-table@npm:7.36.0"
   dependencies:
     "@babel/runtime": ^7.10.1
     "@rc-component/context": ^1.4.0
@@ -10230,7 +10244,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: eb9c7dc7844354f53a907f626493a89443e6b33e9a87875315b66fdd1cee8089f1725b67b55dee89031a898b486fab66a8df88025327cd4fa7ff7477379b874e
+  checksum: 4db1fbd348bd2ebde767f87e047abd07c60a2ddd054f74bf3193a6bf789714512c5aca36e946ee7491d08b202b625a652c7ac9f48d213f034816a6ad6d8dcffe
   languageName: node
   linkType: hard
 
@@ -10268,7 +10282,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-textarea@npm:~1.5.2":
+"rc-textarea@npm:~1.5.3":
   version: 1.5.3
   resolution: "rc-textarea@npm:1.5.3"
   dependencies:
@@ -12568,7 +12582,7 @@ __metadata:
     "@typescript-eslint/parser": 6.11.0
     "@vitejs/plugin-react": 4.2.0
     "@vitest/coverage-v8": 0.34.6
-    antd: 5.11.1
+    antd: 5.11.2
     bootstrap: 5.3.2
     class-transformer: 0.5.1
     class-validator: 0.14.0
