@@ -64,7 +64,7 @@
     "eslint-plugin-testing-library": "6.1.2",
     "eslint-plugin-vitest": "0.3.9",
     "fake-indexeddb": "5.0.1",
-    "gh-pages": "6.0.0",
+    "gh-pages": "6.1.0",
     "jsdom": "22.1.0",
     "prettier": "3.1.0",
     "react-app-polyfill": "3.0.0",
