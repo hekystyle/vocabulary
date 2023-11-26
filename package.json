@@ -65,7 +65,7 @@
     "eslint-plugin-vitest": "0.3.10",
     "fake-indexeddb": "5.0.1",
     "gh-pages": "6.1.0",
-    "jsdom": "22.1.0",
+    "jsdom": "23.0.0",
     "prettier": "3.1.0",
     "react-app-polyfill": "3.0.0",
     "serve": "14.2.1",
