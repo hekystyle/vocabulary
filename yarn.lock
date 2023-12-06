@@ -12701,9 +12701,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-pwa@npm:0.17.3":
-  version: 0.17.3
-  resolution: "vite-plugin-pwa@npm:0.17.3"
+"vite-plugin-pwa@npm:0.17.4":
+  version: 0.17.4
+  resolution: "vite-plugin-pwa@npm:0.17.4"
   dependencies:
     debug: ^4.3.4
     fast-glob: ^3.3.2
@@ -12714,7 +12714,7 @@ __metadata:
     vite: ^3.1.0 || ^4.0.0 || ^5.0.0
     workbox-build: ^7.0.0
     workbox-window: ^7.0.0
-  checksum: 726a51ac35cfaf752b263b046923c741a8b4b26da16c0fb671b7aa6dcb6e4aed14dd54777867353990e3f5111619a720c860aa8083d96d59b083f9ca2c31729f
+  checksum: aaa0247a435d0621b0c3078938156fde1a1abbd2cb0608968d79beec85f5348e50a2cc8e1bd75bee85f7b5385e20eaf388d4a710466252050f1d660b64245bec
   languageName: node
   linkType: hard
 
@@ -12891,7 +12891,7 @@ __metadata:
     typescript: 5.3.2
     typescript-styled-plugin: 0.18.3
     vite: 5.0.4
-    vite-plugin-pwa: 0.17.3
+    vite-plugin-pwa: 0.17.4
     vite-tsconfig-paths: 4.2.1
     vitest: 1.0.1
     web-vitals: 3.5.0
