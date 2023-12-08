@@ -22,5 +22,6 @@
     "cypress.config.mjs",
     "jest.config.mjs",
     "vite.config.ts",
+    "tests/setupTests.ts",
   ]
 }
