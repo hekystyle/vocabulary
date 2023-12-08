@@ -2,9 +2,9 @@ import { faker } from '@faker-js/faker';
 import { useMutation } from '@tanstack/react-query';
 import { Button } from 'antd';
 import { FC } from 'react';
-import { useServices } from 'services';
-import { StrictOmit } from 'types/StrictOmit';
-import { Term } from 'types/Term';
+import { useServices } from '@/services';
+import { StrictOmit } from '@/types/StrictOmit';
+import { Term } from '@/types/Term';
 
 function getFakeTerms() {
   return (

@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import styled from 'styled-components';
-import * as DictionaryApi from 'services/dictionaryApi';
-import type { Word } from 'services/dictionaryApi';
-import { QUERY_KEYS } from 'utils/queryKeys';
+import * as DictionaryApi from '@/services/dictionaryApi';
+import type { Word } from '@/services/dictionaryApi';
+import { QUERY_KEYS } from '@/utils/queryKeys';
 
 const StyledUl = styled.ul`
   color: white;

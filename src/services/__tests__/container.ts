@@ -1,4 +1,4 @@
-import { baseContainer } from 'services/baseContainer';
+import { baseContainer } from '@/services/baseContainer';
 import { TestTermsRepository } from './termsRepository';
 
 export const testContainer = () =>

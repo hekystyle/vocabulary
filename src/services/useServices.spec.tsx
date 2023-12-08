@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import { beforeAll, expect, it, vi } from 'vitest';
-import { testContainer } from 'services/__tests__/container';
+import { testContainer } from '@/services/__tests__/container';
 import { ServicesProvider } from './Provider';
 import { useServices } from './useServices';
 

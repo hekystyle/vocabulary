@@ -3,9 +3,9 @@ import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-quer
 import { Button, Modal, Space } from 'antd';
 import { FC, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useServices } from 'services';
-import { Term } from 'types/Term';
-import { QUERY_KEYS } from 'utils/queryKeys';
+import { useServices } from '@/services';
+import { Term } from '@/types/Term';
+import { QUERY_KEYS } from '@/utils/queryKeys';
 
 export interface ActionsProps {
   record: Term;

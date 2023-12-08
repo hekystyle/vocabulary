@@ -1,8 +1,8 @@
 import { randomUUID } from 'crypto';
 import fakeIndexedDB, { IDBKeyRange } from 'fake-indexeddb';
 import { beforeEach, expect, it } from 'vitest';
-import { AppDb } from 'services/db';
-import { Term } from 'types/Term';
+import { AppDb } from '@/services/db';
+import { Term } from '@/types/Term';
 import { IndexedDbTermsRepository, TermsRepository } from './terms';
 
 AppDb.dependencies.indexedDB = fakeIndexedDB;

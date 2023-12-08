@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import { Term } from 'types/Term';
+import { Term } from '@/types/Term';
 import { TermsRepository } from '../terms';
 
 export class TestTermsRepository implements TermsRepository {

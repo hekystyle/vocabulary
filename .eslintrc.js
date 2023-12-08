@@ -21,6 +21,7 @@ module.exports = {
     'no-restricted-syntax': 'off',
     'no-await-in-loop': 'off',
     'arrow-body-style': 'error',
+    'import/extensions': 'off', // handled by TS
     'import/prefer-default-export': 'off',
     'import/order': [
       'error',
@@ -34,6 +35,10 @@ module.exports = {
         pathGroups: [
           {
             pattern: '{components,containers,filter,routes,services,types,utils}/**',
+            group: 'internal',
+          },
+          {
+            pattern: '@/**',
             group: 'internal',
           },
         ],

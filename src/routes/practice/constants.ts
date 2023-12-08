@@ -1,6 +1,6 @@
 import { equals } from 'ramda';
-import { computeAnswersAbsoluteScore } from 'utils/computeAnswersAbsoluteScore';
-import { computeAnswersRelativeScore } from 'utils/computeAnswersRelativeScore';
+import { computeAnswersAbsoluteScore } from '@/utils/computeAnswersAbsoluteScore';
+import { computeAnswersRelativeScore } from '@/utils/computeAnswersRelativeScore';
 
 export enum ScoreAlgorithm {
   Relative = 'relative',

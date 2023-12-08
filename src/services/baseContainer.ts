@@ -1,4 +1,4 @@
-import { AppDb } from 'services/db';
+import { AppDb } from '@/services/db';
 import { Container } from './Container';
 import { Services } from './Services';
 import { DelayedTermsRepository, IndexedDbTermsRepository } from './terms';
