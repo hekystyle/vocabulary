@@ -17,7 +17,6 @@ export default (() => {
   const isUpdating = useIsMutating({ mutationKey: QUERY_KEYS.terms.id(id) });
 
   const {
-    isFetching,
     error,
     data: term,
     status,
@@ -36,7 +35,7 @@ export default (() => {
     if (isObject(location.state) && hasReturnUrlField(location.state)) {
       navigate(location.state.returnUrl);
     } else {
-      navigate('/records');
+      navigate('..');
     }
   };
 
@@ -46,12 +45,13 @@ export default (() => {
 
   const handleCancel = () => navigateBack();
 
+  if (Number.isNaN(id)) return <p>ID must be number, received: {serializedId}</p>;
+
   if (isUpdating) return <SpinnerBox label="Updating ..." />;
-  if (isFetching) return <SpinnerBox label="Loading ..." />;
 
   switch (status) {
     case 'pending':
-      return <SpinnerBox label="Loading ..." />;
+      return <SpinnerBox label="Loading term ..." />;
     case 'error':
       return <p>Error: {error instanceof Error ? error.message : 'Unknown'}</p>;
     case 'success':

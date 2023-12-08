@@ -6,5 +6,5 @@ import { useNavigate } from 'react-router-dom';
 export const AddButton: FC = () => {
   const navigate = useNavigate();
 
-  return <Button aria-label="Add" icon={<PlusOutlined />} type="primary" onClick={() => navigate('/records/create')} />;
+  return <Button aria-label="Add" icon={<PlusOutlined />} type="primary" onClick={() => navigate('./create')} />;
 };

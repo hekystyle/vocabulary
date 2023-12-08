@@ -19,7 +19,7 @@ beforeEach(() => {
 
   cy.findByRole('status').should('not.exist');
 
-  cy.hash().should('eq', '#/records');
+  cy.hash().should('eq', '#/');
 });
 
 it('test navigation', () => {
@@ -29,18 +29,18 @@ it('test navigation', () => {
 
   cy.findByRole('button', { name: /list/i }).click();
 
-  cy.hash().should('eq', '#/records');
+  cy.hash().should('eq', '#/');
 });
 
 it('test terms creation page', () => {
   cy.findByRole('status').should('not.exist');
 
-  cy.hash().should('eq', '#/records');
+  cy.hash().should('eq', '#/');
 
   // should create 1st record
   cy.findByRole('button', { name: /add/i }).click();
 
-  cy.hash().should('eq', '#/records/create');
+  cy.hash().should('eq', '#/create');
 
   cy.findByRole('textbox', { name: /word/i }).type('apple').should('have.value', 'apple');
 
@@ -63,14 +63,14 @@ it('test terms creation page', () => {
 
   cy.findByRole('status').should('not.exist');
 
-  cy.hash().should('eq', '#/records');
+  cy.hash().should('eq', '#/');
 
   cy.findByRole('cell', { name: 'apple' }).should('exist');
 
   // it('should create 2nd record', () => {
   cy.findByRole('button', { name: /add/i }).click();
 
-  cy.hash().should('eq', '#/records/create');
+  cy.hash().should('eq', '#/create');
 
   cy.findByRole('textbox', { name: /word/i }).type('banana');
 
@@ -95,7 +95,7 @@ it('test terms creation page', () => {
 
   cy.findByRole('status').should('not.exist');
 
-  cy.hash().should('eq', '#/records');
+  cy.hash().should('eq', '#/');
 
   cy.findByRole('cell', { name: 'banana' }).should('exist');
 });
@@ -105,13 +105,13 @@ it('test term edit page', () => {
 
   cy.findByRole('status').should('not.exist');
 
-  cy.hash().should('match', /^#\/records\/\d+$/);
+  cy.hash().should('match', /^#\/\d+$/);
 
   cy.findByRole('button', { name: /cancel/i }).click();
 
   cy.findByRole('status').should('not.exist');
 
-  cy.hash().should('eq', '#/records');
+  cy.hash().should('eq', '#/');
 });
 
 it('test terms delete', () => {
@@ -151,7 +151,7 @@ it('test practice page', () => {
 
   cy.findByRole('status').should('not.exist');
 
-  cy.hash().should('match', /^#\/records\/\d+$/);
+  cy.hash().should('match', /^#\/\d+$/);
 
   cy.findByRole('button', { name: /cancel/i }).click();
 
