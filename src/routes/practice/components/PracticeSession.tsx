@@ -62,7 +62,7 @@ export const PracticeSession: FC = () => {
 
   const handleEditButtonClick = () => {
     if (actualRecord?.id)
-      navigate(`/records/${actualRecord.id}`, {
+      navigate(`/${actualRecord.id}`, {
         state: {
           [RETURN_URL_FIELD]: pathname,
         },

@@ -18,7 +18,7 @@ export default (() => {
   });
 
   const navigateBack = () => {
-    navigate('/records');
+    navigate('..');
   };
 
   const handleSubmit: FormProps['onSubmit'] = values => {

@@ -1,5 +1,5 @@
 import { FC, Suspense } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import { NavBar } from 'components/NavBar';
 import { SpinnerBox } from 'components/SpinnerBox';
@@ -27,10 +27,9 @@ export const App: FC = () => (
       <Suspense fallback={<SpinnerBox label="Loading app..." />}>
         <Routes>
           <Route element={<AuthRouter />} path="auth/*" />
-          <Route element={<RecordsRouter />} path="records/*" />
           <Route element={<PracticeRouter />} path="practice/*" />
           <Route element={<LazySeedPage />} path="seed" />
-          <Route element={<Navigate to="/records" />} path="*" />
+          <Route element={<RecordsRouter />} path="*" />
         </Routes>
       </Suspense>
     </StyledContent>
