@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { afterAll, expect, it, vi } from 'vitest';
-import * as DictionaryApi from 'services/dictionaryApi';
+import * as DictionaryApi from '@/services/dictionaryApi';
 
 afterAll(() => {
   vi.restoreAllMocks();

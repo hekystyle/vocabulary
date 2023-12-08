@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { Term } from 'types/Term';
+import { Term } from '@/types/Term';
 import { ScoreAlgorithm } from './constants';
 
 export interface Config {

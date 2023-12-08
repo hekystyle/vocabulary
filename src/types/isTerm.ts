@@ -1,4 +1,4 @@
-import { isObject } from 'utils/isObject';
+import { isObject } from '@/utils/isObject';
 import { TermV1 } from './Term';
 
 export function isTermV1(val: unknown): val is TermV1 {

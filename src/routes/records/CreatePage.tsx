@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useServices } from 'services';
-import { SpinnerBox } from 'components/SpinnerBox';
+import { SpinnerBox } from '@/components/SpinnerBox';
+import { useServices } from '@/services';
 import { Form, FormProps } from './components/Form';
 
 export default (() => {

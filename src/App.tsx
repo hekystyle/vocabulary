@@ -1,12 +1,12 @@
 import { FC, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
-import { NavBar } from 'components/NavBar';
-import { SpinnerBox } from 'components/SpinnerBox';
-import { AuthRouter } from 'routes/auth/Router';
-import { PracticeRouter } from 'routes/practice';
-import { RecordsRouter } from 'routes/records';
-import { LazySeedPage } from 'routes/seed';
+import { NavBar } from '@/components/NavBar';
+import { SpinnerBox } from '@/components/SpinnerBox';
+import { AuthRouter } from '@/routes/auth/Router';
+import { PracticeRouter } from '@/routes/practice';
+import { RecordsRouter } from '@/routes/records';
+import { LazySeedPage } from '@/routes/seed';
 
 const StyledApp = styled.div`
   height: 100vh;

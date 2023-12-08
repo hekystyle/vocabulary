@@ -1,5 +1,5 @@
 import Dexie, { Table } from 'dexie';
-import { Term } from 'types/Term';
+import { Term } from '@/types/Term';
 
 type Writable<T> = { -readonly [P in keyof T]: T[P] };
 

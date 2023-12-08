@@ -1,9 +1,9 @@
 import { groupWith } from 'ramda';
-import { AppDb } from 'services/db';
-import { Term } from 'types/Term';
-import { hasDefinition } from 'utils/hasDefinition';
-import { hasTranslation } from 'utils/hasTranslation';
-import { shuffle } from 'utils/shuffle';
+import { AppDb } from '@/services/db';
+import { Term } from '@/types/Term';
+import { hasDefinition } from '@/utils/hasDefinition';
+import { hasTranslation } from '@/utils/hasTranslation';
+import { shuffle } from '@/utils/shuffle';
 import { SCORE_ALGO_MAP } from '../constants';
 import { Config } from '../store';
 

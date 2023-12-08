@@ -1,11 +1,11 @@
 import { LoadingOutlined, LoginOutlined } from '@ant-design/icons';
 import { useMutation } from '@tanstack/react-query';
 import { Avatar, Button, Dropdown } from 'antd';
-import { useUser } from 'auth';
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useFirebaseAuth } from 'services/firebase';
-import { useAppNotification } from 'services/Notifications';
+import { useUser } from '@/auth';
+import { useFirebaseAuth } from '@/services/firebase';
+import { useAppNotification } from '@/services/Notifications';
 
 export const User: FC = () => {
   const user = useUser();

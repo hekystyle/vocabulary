@@ -1,9 +1,9 @@
 // eslint-disable-next-line max-classes-per-file
-import { Sorting } from 'filter';
-import { AppDb } from 'services/db';
-import { StrictOmit } from 'types/StrictOmit';
-import { Term } from 'types/Term';
-import { computeSkip, Pagination } from 'utils/computeSkip';
+import { Sorting } from '@/filter';
+import { AppDb } from '@/services/db';
+import { StrictOmit } from '@/types/StrictOmit';
+import { Term } from '@/types/Term';
+import { computeSkip, Pagination } from '@/utils/computeSkip';
 
 export interface TermsRepository {
   get(filter: Pagination & Sorting, signal: AbortSignal | undefined): Promise<{ terms: Term[]; total: number }>;

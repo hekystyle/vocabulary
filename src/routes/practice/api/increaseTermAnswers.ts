@@ -1,4 +1,4 @@
-import { AppDb } from 'services/db';
+import { AppDb } from '@/services/db';
 
 export const increaseTermAnswers =
   (db: AppDb) =>

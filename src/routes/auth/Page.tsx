@@ -1,12 +1,12 @@
 import { GithubFilled } from '@ant-design/icons';
 import { useMutation } from '@tanstack/react-query';
 import { Button, Col, Row } from 'antd';
-import { useUser } from 'auth';
 import { signInWithPopup, GithubAuthProvider, AuthProvider, ProviderId } from 'firebase/auth';
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useFirebaseAuth } from 'services/firebase';
-import { useAppNotification } from 'services/Notifications';
+import { useUser } from '@/auth';
+import { useFirebaseAuth } from '@/services/firebase';
+import { useAppNotification } from '@/services/Notifications';
 
 export const AuthPage: FC = () => {
   const auth = useFirebaseAuth();
