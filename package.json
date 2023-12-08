@@ -67,7 +67,6 @@
     "gh-pages": "6.1.0",
     "jsdom": "23.0.1",
     "prettier": "3.1.0",
-    "react-app-polyfill": "3.0.0",
     "serve": "14.2.1",
     "typescript": "5.3.3",
     "typescript-styled-plugin": "0.18.3",
