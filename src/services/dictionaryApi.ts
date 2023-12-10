@@ -1,108 +1,49 @@
-// eslint-disable-next-line max-classes-per-file
-import { plainToInstance, Type } from 'class-transformer';
-import { IsArray, IsDefined, IsString, IsUrl, ValidateNested, validateOrReject } from 'class-validator';
+import { z } from 'zod';
 
-export class Definition {
-  @IsDefined()
-  @IsString()
-  definition!: string;
+export const definitionSchema = z.object({
+  definition: z.string(),
+  synonyms: z.array(z.string()),
+  antonyms: z.array(z.string()),
+  example: z.string().optional().default(''),
+});
 
-  @IsDefined()
-  @IsArray()
-  @IsString({ each: true })
-  synonyms!: string[];
+export type Definition = z.infer<typeof definitionSchema>;
 
-  @IsDefined()
-  @IsArray()
-  @IsString({ each: true })
-  antonyms!: string[];
+export const meaningSchema = z.object({
+  partOfSpeech: z.string(),
+  definitions: z.array(definitionSchema),
+  synonyms: z.array(z.string()),
+  antonyms: z.array(z.string()),
+});
 
-  @IsString()
-  example = '';
-}
+export type Meaning = z.infer<typeof meaningSchema>;
 
-export class Meaning {
-  @IsDefined()
-  @IsString()
-  partOfSpeech!: string;
+export const licenseSchema = z.object({
+  name: z.string(),
+  url: z.string().url(),
+});
 
-  @IsDefined()
-  @IsArray()
-  @Type(() => Definition)
-  @ValidateNested({ each: true })
-  definitions!: Definition[];
+export type License = z.infer<typeof licenseSchema>;
 
-  @IsDefined()
-  @IsArray()
-  @IsString({ each: true })
-  synonyms!: string[];
+export const phoneticSchema = z.object({
+  text: z.string(),
+  audio: z.string().url(),
+  sourceUrl: z.string().url(),
+  license: licenseSchema,
+});
 
-  @IsDefined()
-  @IsArray()
-  @IsString({ each: true })
-  antonyms!: string[];
-}
+export type Phonetic = z.infer<typeof phoneticSchema>;
 
-class License {
-  @IsDefined()
-  @IsString()
-  name!: string;
+export const wordSchema = z.object({
+  word: z.string(),
+  phonetic: z.string(),
+  phonetics: z.array(phoneticSchema),
+  meanings: z.array(meaningSchema),
+  license: licenseSchema,
+  sourceUrls: z.array(z.string().url()),
+});
 
-  @IsDefined()
-  @IsUrl()
-  url!: string;
-}
-
-class Phonetic {
-  @IsDefined()
-  @IsString()
-  text!: string;
-
-  @IsDefined()
-  @IsUrl()
-  audio!: string;
-
-  @IsDefined()
-  @IsUrl()
-  sourceUrl!: string;
-
-  @IsDefined()
-  @Type(() => License)
-  @ValidateNested()
-  license!: License;
-}
-
-export class Word {
-  @IsDefined()
-  @IsString()
-  word!: string;
-
-  @IsDefined()
-  @IsString()
-  phonetic!: string;
-
-  @IsDefined()
-  @IsArray()
-  @Type(() => Phonetic)
-  @ValidateNested({ each: true })
-  phonetics!: Phonetic[];
-
-  @IsDefined()
-  @IsArray()
-  @Type(() => Meaning)
-  @ValidateNested({ each: true })
-  meanings!: Meaning[];
-
-  @IsDefined()
-  @Type(() => License)
-  @ValidateNested()
-  license!: License;
-
-  @IsDefined()
-  @IsArray()
-  @IsString({ each: true })
-  sourceUrls!: string[];
-}
+export type Word = z.infer<typeof wordSchema>;
 
 export const fetchWord = async (word: string, { signal }: Pick<RequestInit, 'signal'> = {}): Promise<Word[]> => {
   const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_US/${encodeURIComponent(word)}`, {
@@ -112,13 +53,7 @@ export const fetchWord = async (word: string, { signal }: Pick<RequestInit, 'sig
     signal,
   });
 
-  const result: unknown = await response.json();
+  const data: unknown = await response.json();
 
-  if (!Array.isArray(result)) throw new Error(`Invalid response, expected array, got ${typeof result}`);
-
-  const instances = plainToInstance(Word, result);
-
-  await Promise.all(instances.map(async i => await validateOrReject(i)));
-
-  return instances;
+  return z.array(wordSchema).parse(data);
 };
