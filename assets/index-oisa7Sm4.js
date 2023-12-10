@@ -1,4 +1,4 @@
-import{b8 as ee,r as a,Y as T,aD as oe,g as _,aH as F,_ as te,a6 as W,i as ne,m as re,l as N,k as M,aE as X,p as V,b9 as ae,aj as Y,D as ie,W as le,aF as de,o as se,q as ce}from"./index-3q3Rv4J0.js";import{F as ue}from"./queryKeys-ILG9WHuU.js";var be=`accept acceptCharset accessKey action allowFullScreen allowTransparency
+import{b8 as ee,r as a,Y as T,aD as oe,g as _,aH as F,_ as te,a6 as W,i as ne,m as re,l as N,k as M,aE as X,p as V,b9 as ae,aj as Y,D as ie,W as le,aF as de,o as se,q as ce}from"./index-FmUbktac.js";import{F as ue}from"./queryKeys-XFU-v8bk.js";var be=`accept acceptCharset accessKey action allowFullScreen allowTransparency
     alt async autoComplete autoFocus autoPlay capture cellPadding cellSpacing challenge
     charSet checked classID className colSpan cols content contentEditable contextMenu
     controls coords crossOrigin data dateTime default defer dir disabled download draggable
