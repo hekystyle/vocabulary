@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import 'fake-indexeddb/auto';
 import * as matchers from '@testing-library/jest-dom/matchers';
 import { expect, vi } from 'vitest';

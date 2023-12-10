@@ -23,5 +23,15 @@ it('should throw error when response is invalid', async () => {
     json: () => Promise.resolve({ message: 'Word not found' }),
   } as Response);
 
-  await expect(DictionaryApi.fetchWord('hasaki')).rejects.toThrow('Invalid response, expected array, got object');
+  await expect(DictionaryApi.fetchWord('hasaki')).rejects.toMatchInlineSnapshot(`
+    [ZodError: [
+      {
+        "code": "invalid_type",
+        "expected": "array",
+        "received": "object",
+        "path": [],
+        "message": "Expected array, received object"
+      }
+    ]]
+  `);
 });

@@ -14,8 +14,6 @@
     "@tanstack/react-query-devtools": "5.13.4",
     "antd": "5.12.1",
     "bootstrap": "5.3.2",
-    "class-transformer": "0.5.1",
-    "class-validator": "0.14.0",
     "dexie": "3.2.4",
     "firebase": "9.23.0",
     "qs": "6.11.2",
@@ -26,9 +24,9 @@
     "react-is": "18.2.0",
     "react-router-dom": "6.20.1",
     "recoil": "0.7.7",
-    "reflect-metadata": "0.1.13",
     "styled-components": "6.1.1",
-    "web-vitals": "3.5.0"
+    "web-vitals": "3.5.0",
+    "zod": "3.22.4"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "5.12.1",
