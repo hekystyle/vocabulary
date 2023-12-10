@@ -6482,9 +6482,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-vitest@npm:0.3.12":
-  version: 0.3.12
-  resolution: "eslint-plugin-vitest@npm:0.3.12"
+"eslint-plugin-vitest@npm:0.3.13":
+  version: 0.3.13
+  resolution: "eslint-plugin-vitest@npm:0.3.13"
   dependencies:
     "@typescript-eslint/utils": ^6.13.2
   peerDependencies:
@@ -6495,7 +6495,7 @@ __metadata:
       optional: true
     vitest:
       optional: true
-  checksum: 00867da0bcfde68b37178ef0be0b04c8e9bc3f1095181999fbbf011cf96f789e5c96603660d329e17b47f1dde281cca341075308fadb86eb528ddc842bc06803
+  checksum: c44c54239b94d376672fed3bcaca23ed949ad639dd9e810802bf6d8a0480bdb091e1bd7cae6d95ccf75e0e235f995696b98e380f06d42a8eda140ccee379f79c
   languageName: node
   linkType: hard
 
@@ -12734,7 +12734,7 @@ __metadata:
     eslint-plugin-react: 7.33.2
     eslint-plugin-react-hooks: 4.6.0
     eslint-plugin-testing-library: 6.2.0
-    eslint-plugin-vitest: 0.3.12
+    eslint-plugin-vitest: 0.3.13
     fake-indexeddb: 5.0.1
     firebase: 9.23.0
     gh-pages: 6.1.0
