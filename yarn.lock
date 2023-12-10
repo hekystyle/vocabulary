@@ -3434,10 +3434,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.12.1":
-  version: 5.12.1
-  resolution: "@tanstack/query-core@npm:5.12.1"
-  checksum: dde1707981861b672bfeb481ef6f9142b838afeae90f83999bc98ed0b06c80e9468c7bd7574f5980aebd7baea3f2b95f4899d49aaf9af2d0324d499823215f1d
+"@tanstack/query-core@npm:5.13.4":
+  version: 5.13.4
+  resolution: "@tanstack/query-core@npm:5.13.4"
+  checksum: 9ebda1325d2774d766d0c07d3ded3f231fa785147bdf59372240d09c992b2636e5c6aa3660c1de348de395c0de5b1f8aadf28397e1134dbe2d56c38e37b7af1c
   languageName: node
   linkType: hard
 
@@ -3448,26 +3448,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query-devtools@npm:5.13.3":
-  version: 5.13.3
-  resolution: "@tanstack/react-query-devtools@npm:5.13.3"
+"@tanstack/react-query-devtools@npm:5.13.4":
+  version: 5.13.4
+  resolution: "@tanstack/react-query-devtools@npm:5.13.4"
   dependencies:
     "@tanstack/query-devtools": 5.13.3
   peerDependencies:
-    "@tanstack/react-query": ^5.12.2
+    "@tanstack/react-query": ^5.13.4
     react: ^18.0.0
-  checksum: 754f3de8153604e7c78d8199912662380bafe3baee46a7428a3bda7deafa116923fb2cf8108b865b7e1cb96ca6151cf78055562bc952326447ab0cfca165b8a5
+  checksum: 894689a2d01307707387b182230727b4e18e5313825aecbb37201633601715465eeba832d71dbe4454b34a37a0635edc240b5d795d735403a2dcbf3b11ddd774
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:5.12.2":
-  version: 5.12.2
-  resolution: "@tanstack/react-query@npm:5.12.2"
+"@tanstack/react-query@npm:5.13.4":
+  version: 5.13.4
+  resolution: "@tanstack/react-query@npm:5.13.4"
   dependencies:
-    "@tanstack/query-core": 5.12.1
+    "@tanstack/query-core": 5.13.4
   peerDependencies:
     react: ^18.0.0
-  checksum: b492b6c470356f8e6b4d6eda626e42432e54465843f7485ed5c4d8399d98239f0bb9885f4a7fbb71f61cfd3d38f7f059cd7a387bb96a1a289a00bca8bd3f85b5
+  checksum: 5a9afef4d59eb5ac00acdc9d3c5f25c76f2a4d69609a354ff8d81d0260b571d192c3a382b1027d37b1ae8b1e1a63d3d8fba0cec00338ec53bda01721dad8f279
   languageName: node
   linkType: hard
 
@@ -12745,8 +12745,8 @@ __metadata:
     "@faker-js/faker": 8.3.1
     "@popperjs/core": 2.11.8
     "@tanstack/eslint-plugin-query": 5.12.1
-    "@tanstack/react-query": 5.12.2
-    "@tanstack/react-query-devtools": 5.13.3
+    "@tanstack/react-query": 5.13.4
+    "@tanstack/react-query-devtools": 5.13.4
     "@testing-library/cypress": 10.0.1
     "@testing-library/dom": 9.3.3
     "@testing-library/jest-dom": 6.1.5
