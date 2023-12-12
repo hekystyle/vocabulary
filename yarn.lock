@@ -3582,10 +3582,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/vite-react@npm:2.0.1":
-  version: 2.0.1
-  resolution: "@tsconfig/vite-react@npm:2.0.1"
-  checksum: 5715563bf293484c8b5ad36a0328159b11de9bde507b96dcde1d72243d02dcd8eb0383c1676e319cfb03e8f79d96891103d480c7157177f4d7a0b368ede4a46d
+"@tsconfig/vite-react@npm:3.0.0":
+  version: 3.0.0
+  resolution: "@tsconfig/vite-react@npm:3.0.0"
+  checksum: 69bad7d6829dd286107607d0c47ef4d9e245dec12741335ba3df6cd6f3693d80275c45e4d64ba4dd8338a086dbc76120dc1cc7b3b4dcaf970948a709d7a9f77c
   languageName: node
   linkType: hard
 
@@ -12769,7 +12769,7 @@ __metadata:
     "@testing-library/react": 14.1.2
     "@testing-library/user-event": 14.5.1
     "@tsconfig/strictest": 2.0.2
-    "@tsconfig/vite-react": 2.0.1
+    "@tsconfig/vite-react": 3.0.0
     "@types/node": 18.19.3
     "@types/qs": 6.9.10
     "@types/ramda": 0.29.9
