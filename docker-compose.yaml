@@ -1,0 +1,7 @@
+name: "vocabulary"
+
+services:
+  db:
+    image: mongo:7-jammy
+    ports:
+      - "27017:27017"
