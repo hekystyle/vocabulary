@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "packages", "packages", "{DAD63113-50D2-4E0A-9ED2-C7B31CF52526}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vocabulary", "packages\server\Vocabulary.csproj", "{1650331F-3142-4870-B043-6909DE417EF5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1650331F-3142-4870-B043-6909DE417EF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1650331F-3142-4870-B043-6909DE417EF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1650331F-3142-4870-B043-6909DE417EF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1650331F-3142-4870-B043-6909DE417EF5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1650331F-3142-4870-B043-6909DE417EF5} = {DAD63113-50D2-4E0A-9ED2-C7B31CF52526}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B9CAA083-B883-4E4D-85C4-0E5913B1980E}
+	EndGlobalSection
+EndGlobal
