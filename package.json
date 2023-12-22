@@ -12,7 +12,7 @@
     "@popperjs/core": "2.11.8",
     "@tanstack/react-query": "5.14.2",
     "@tanstack/react-query-devtools": "5.14.5",
-    "antd": "5.12.1",
+    "antd": "5.12.5",
     "bootstrap": "5.3.2",
     "dexie": "3.2.4",
     "firebase": "9.23.0",
