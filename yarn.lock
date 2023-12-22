@@ -10706,9 +10706,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-bootstrap@npm:2.9.1":
-  version: 2.9.1
-  resolution: "react-bootstrap@npm:2.9.1"
+"react-bootstrap@npm:2.9.2":
+  version: 2.9.2
+  resolution: "react-bootstrap@npm:2.9.2"
   dependencies:
     "@babel/runtime": ^7.22.5
     "@restart/hooks": ^0.4.9
@@ -10729,7 +10729,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 889de157ab782257a6496d37aebb578b13850caec41bdc068e68a2e1ff2af18740f0a388974850f59115a57fa34a2949a2803aaa79000498fef7d0b63b413706
+  checksum: ffa8e0d9e4a6414cbcbefb657f0f427302ab0c059ec618a86fffeccfe669dd3b3d9003f9e9803dc4499d4831aba44aaafd29e9c70bf850138ce5a3e4091b8fb3
   languageName: node
   linkType: hard
 
@@ -12806,7 +12806,7 @@ __metadata:
     qs: 6.11.2
     ramda: 0.29.1
     react: 18.2.0
-    react-bootstrap: 2.9.1
+    react-bootstrap: 2.9.2
     react-dom: 18.2.0
     react-is: 18.2.0
     react-router-dom: 6.20.1
