@@ -22,7 +22,7 @@
   "include": [
     "src",
     ".eslintrc.js",
-    "cypress.config.mjs",
+    "apps/frontend-e2e/cypress.config.mjs",
     "jest.config.mjs",
     "vite.config.mts",
     "tests/setupTests.ts",

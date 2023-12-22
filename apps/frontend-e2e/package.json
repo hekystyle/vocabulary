@@ -1,0 +1,22 @@
+{
+  "name": "frontend-e2e",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "yarn@3.7.0",
+  "engines": {
+    "node": "^18.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/cypress": "10.0.1",
+    "@tsconfig/cypress": "1.0.1",
+    "@tsconfig/node18": "18.2.2",
+    "@types/node": "18.19.3",
+    "cypress": "13.6.1",
+    "typescript": "5.3.3"
+  },
+  "scripts": {
+    "start": "cypress open",
+    "cypress:run": "cypress run",
+    "check-types": "tsc --noEmit"
+  }
+}

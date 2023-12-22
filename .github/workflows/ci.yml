@@ -123,7 +123,7 @@ jobs:
             ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
-      - run: yarn run test:ci
+      - run: yarn run test
 
       - name: Codecov
         uses: codecov/codecov-action@v3.1.4
@@ -152,8 +152,9 @@ jobs:
         timeout-minutes: 2
         uses: cypress-io/github-action@v4 # use the explicit version number
         with:
+          working-directory: ./apps/frontend-e2e
           install: false
-          start: yarn start:ci
+          start: yarn run serve:frontend
           wait-on: 'http://localhost:3000'
           browser: chrome
 

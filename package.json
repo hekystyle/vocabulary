@@ -6,6 +6,10 @@
   "engines": {
     "node": "^18.0.0"
   },
+  "workspaces": [
+    ".",
+    "apps/*"
+  ],
   "dependencies": {
     "@ant-design/icons": "5.2.6",
     "@faker-js/faker": "8.3.1",
@@ -30,8 +34,6 @@
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "5.12.1",
-    "@testing-library/cypress": "10.0.1",
-    "@testing-library/dom": "9.3.3",
     "@testing-library/jest-dom": "6.1.5",
     "@testing-library/react": "14.1.2",
     "@testing-library/user-event": "14.5.1",
@@ -47,7 +49,6 @@
     "@typescript-eslint/parser": "6.15.0",
     "@vitejs/plugin-react": "4.2.1",
     "@vitest/coverage-v8": "1.1.0",
-    "cypress": "13.6.1",
     "eslint": "8.56.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-airbnb-typescript": "17.1.0",
@@ -64,6 +65,7 @@
     "fake-indexeddb": "5.0.1",
     "gh-pages": "6.1.0",
     "jsdom": "23.0.1",
+    "nx": "17.2.7",
     "prettier": "3.1.1",
     "serve": "14.2.1",
     "typescript": "5.3.3",
@@ -74,18 +76,14 @@
     "vitest": "1.1.0"
   },
   "resolutions": {
-    "tsconfig-paths": "^4.0.0",
-    "vite": "5.0.10"
+    "tsconfig-paths": "^4.0.0"
   },
   "scripts": {
     "start": "vite",
-    "start:ci": "serve -n -C -s build",
+    "serve:frontend": "serve -n -C -s build",
     "build": "tsc && vite build",
     "check-types": "tsc --noEmit",
-    "test": "vitest",
-    "test:ci": "vitest --coverage",
-    "test:e2e": "cypress run",
-    "test:e2e:dev": "cypress open",
+    "test": "vitest --coverage",
     "deploy": "gh-pages -d build",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
