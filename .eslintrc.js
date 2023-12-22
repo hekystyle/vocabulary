@@ -70,7 +70,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['tests', 'vite.config.ts', 'cypress.config.{ts,mjs}', 'cypress/support/commands.ts'],
+      files: ['tests', 'vite.config.?(c|m)ts', 'cypress.config.{ts,mjs}', 'cypress/support/commands.ts'],
       rules: {
         'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
       },

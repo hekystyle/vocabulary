@@ -24,7 +24,7 @@
     ".eslintrc.js",
     "cypress.config.mjs",
     "jest.config.mjs",
-    "vite.config.ts",
+    "vite.config.mts",
     "tests/setupTests.ts",
   ]
 }
