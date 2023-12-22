@@ -4,6 +4,7 @@
     "lib": ["es5", "dom"],
     "types": ["cypress", "node", "@testing-library/cypress"],
     "strict": true,
+    "noEmit": true,
   },
   "include": ["**/*.ts"]
 }
