@@ -4,13 +4,13 @@
   "private": true,
   "packageManager": "yarn@4.0.2",
   "engines": {
-    "node": "^18.0.0"
+    "node": "^20.0.0"
   },
   "devDependencies": {
     "@testing-library/cypress": "10.0.1",
     "@tsconfig/cypress": "1.0.1",
     "@tsconfig/node18": "18.2.2",
-    "@types/node": "18.19.3",
+    "@types/node": "20.10.5",
     "cypress": "13.6.1",
     "typescript": "5.3.3"
   },
