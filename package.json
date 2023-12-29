@@ -36,7 +36,7 @@
     "@tanstack/eslint-plugin-query": "5.12.1",
     "@testing-library/jest-dom": "6.1.6",
     "@testing-library/react": "14.1.2",
-    "@testing-library/user-event": "14.5.1",
+    "@testing-library/user-event": "14.5.2",
     "@tsconfig/strictest": "2.0.2",
     "@tsconfig/vite-react": "3.0.0",
     "@types/node": "20.10.5",
