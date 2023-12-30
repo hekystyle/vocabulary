@@ -7026,10 +7026,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fake-indexeddb@npm:5.0.1":
-  version: 5.0.1
-  resolution: "fake-indexeddb@npm:5.0.1"
-  checksum: 32ec80c53f7027b4b8b6823279b77f5d4ae631f3c517fbd315094b4360a6dd3544809af6601f37fe6e6106ea04d7bb107960c349d9e424b8df2c5de1d1735090
+"fake-indexeddb@npm:5.0.2":
+  version: 5.0.2
+  resolution: "fake-indexeddb@npm:5.0.2"
+  checksum: 9255cc8ee40ad8440450b248e416c49254b97e6256e12fa93a6169055e8f02358c47ab5f2aca261b66455d34e1483b4f92ddead449c0c285279f9be4807b10fb
   languageName: node
   linkType: hard
 
@@ -13258,7 +13258,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:4.6.0"
     eslint-plugin-testing-library: "npm:6.2.0"
     eslint-plugin-vitest: "npm:0.3.20"
-    fake-indexeddb: "npm:5.0.1"
+    fake-indexeddb: "npm:5.0.2"
     firebase: "npm:9.23.0"
     gh-pages: "npm:6.1.1"
     jsdom: "npm:23.0.1"
