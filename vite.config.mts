@@ -13,6 +13,7 @@ export default defineConfig({
     port: 3000,
   },
   test: {
+    include: ['{src,tests}/**/*.{test,spec}.?(c|m)[jt]s?(x)'],
     setupFiles: ['./tests/setupTests.ts'],
     environment: 'jsdom',
   },

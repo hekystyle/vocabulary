@@ -30,7 +30,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            node_modules
+            **/node_modules
             ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
@@ -50,7 +50,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            node_modules
+            **/node_modules
             ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
@@ -71,11 +71,11 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            node_modules
+            **/node_modules
             ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
-      - run: yarn run build
+      - run: yarn nx run-many -t=build
 
       - name: Cache build
         uses: actions/cache@v3
@@ -98,7 +98,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            node_modules
+            **/node_modules
             ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
@@ -119,11 +119,11 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            node_modules
+            **/node_modules
             ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
-      - run: yarn run test
+      - run: yarn nx run-many -t=test
 
       - name: Codecov
         uses: codecov/codecov-action@v3.1.4
@@ -138,7 +138,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            node_modules
+            **/node_modules
             ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
@@ -173,7 +173,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            node_modules
+            **/node_modules
             ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 

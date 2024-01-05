@@ -1,5 +1,6 @@
 .github
 build
+dist
 coverage
 node_modules
 public

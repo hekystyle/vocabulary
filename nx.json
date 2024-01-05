@@ -1,5 +1,23 @@
 {
-  "targetDefaults": {},
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "targetDefaults": {
+    "build": {
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "{projectRoot}/dist",
+        "{projectRoot}/build"
+      ]
+    },
+    "test": {
+      "cache": true,
+      "outputs": [
+        "{projectRoot}/coverage"
+      ]
+    }
+  },
   "affected": {
     "defaultBase": "master"
   }
