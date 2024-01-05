@@ -14,13 +14,14 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   parserOptions: {
-    project: ['./tsconfig.json', './apps/frontend-e2e/tsconfig.json'],
+    project: ['./tsconfig.json', './apps/frontend-e2e/tsconfig.json', './apps/backend/tsconfig.json'],
   },
   rules: {
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-restricted-syntax': 'off',
     'no-await-in-loop': 'off',
     'arrow-body-style': 'error',
+    'no-underscore-dangle': ['error', { allow: ['_id'] }],
     'import/extensions': 'off', // handled by TS
     'import/prefer-default-export': 'off',
     'import/order': [
@@ -48,6 +49,7 @@ module.exports = {
     '@typescript-eslint/return-await': ['error', 'always'],
     '@typescript-eslint/restrict-template-expressions': ['error', { allowNullish: true }],
     '@typescript-eslint/array-type': ['error', { default: 'array-simple', readonly: 'array-simple' }],
+    '@typescript-eslint/no-extraneous-class': ['error', { allowWithDecorator: true }],
     'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
     'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
     'react/require-default-props': 'off',
@@ -70,7 +72,14 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['tests', 'vite.config.?(c|m)ts', 'apps/*/cypress.config.{ts,mjs}', 'apps/*/cypress/support/commands.ts'],
+      files: [
+        'tests',
+        'vite.config.?(c|m)ts',
+        'apps/*/cypress.config.{ts,mjs}',
+        'apps/*/cypress/support/commands.ts',
+        'apps/*/tests/**',
+        'apps/*/vitest.config.ts',
+      ],
       rules: {
         'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
       },
