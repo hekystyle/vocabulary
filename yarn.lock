@@ -3179,7 +3179,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/schematics@npm:10.0.3, @nestjs/schematics@npm:^10.0.1":
+"@nestjs/schematics@npm:10.1.0":
+  version: 10.1.0
+  resolution: "@nestjs/schematics@npm:10.1.0"
+  dependencies:
+    "@angular-devkit/core": "npm:17.0.9"
+    "@angular-devkit/schematics": "npm:17.0.9"
+    comment-json: "npm:4.2.3"
+    jsonc-parser: "npm:3.2.0"
+    pluralize: "npm:8.0.0"
+  peerDependencies:
+    typescript: ">=4.8.2"
+  checksum: 249f27529be95f674c2dc41ba3ce10e86255b9940032067da8a339dbc8ba42ff466a6fb6bc26c38f0d72ddfed6471947a9e6578d392319de9eba1e428a76a413
+  languageName: node
+  linkType: hard
+
+"@nestjs/schematics@npm:^10.0.1":
   version: 10.0.3
   resolution: "@nestjs/schematics@npm:10.0.3"
   dependencies:
@@ -6329,7 +6344,7 @@ __metadata:
     "@nestjs/jwt": "npm:10.2.0"
     "@nestjs/passport": "npm:10.0.3"
     "@nestjs/platform-express": "npm:10.3.0"
-    "@nestjs/schematics": "npm:10.0.3"
+    "@nestjs/schematics": "npm:10.1.0"
     "@nestjs/testing": "npm:10.3.0"
     "@nestjs/typeorm": "npm:10.0.1"
     "@swc/cli": "npm:0.1.63"
