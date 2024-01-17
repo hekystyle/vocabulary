@@ -6292,7 +6292,7 @@ __metadata:
     cookie-parser: "npm:1.4.6"
     express-session: "npm:1.17.3"
     mongodb: "npm:5.9.2"
-    mongodb-memory-server: "npm:9.1.4"
+    mongodb-memory-server: "npm:9.1.5"
     nestjs-session: "npm:3.0.1"
     passport: "npm:0.7.0"
     passport-github2: "npm:0.1.12"
@@ -12183,9 +12183,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-memory-server-core@npm:9.1.4":
-  version: 9.1.4
-  resolution: "mongodb-memory-server-core@npm:9.1.4"
+"mongodb-memory-server-core@npm:9.1.5":
+  version: 9.1.5
+  resolution: "mongodb-memory-server-core@npm:9.1.5"
   dependencies:
     async-mutex: "npm:^0.4.0"
     camelcase: "npm:^6.3.0"
@@ -12199,17 +12199,17 @@ __metadata:
     tar-stream: "npm:^3.0.0"
     tslib: "npm:^2.6.2"
     yauzl: "npm:^2.10.0"
-  checksum: 4358d14029ed46783d1e1af7de3a65a91c698b208094f1eefae2a1f6b85ff085019f193022bbccdca825a57669085dfa9eb0ec03c598acad5989f5356c13c2f9
+  checksum: b00684dfb8cb2380cb2dd2d693c4ce338d619d68b4df4f47c9ad5d9eaf891ea04c284b9dc8c6104ff371ee632a0a26c7b5f66e12cfbd67e1375bfd57aa5d3933
   languageName: node
   linkType: hard
 
-"mongodb-memory-server@npm:9.1.4":
-  version: 9.1.4
-  resolution: "mongodb-memory-server@npm:9.1.4"
+"mongodb-memory-server@npm:9.1.5":
+  version: 9.1.5
+  resolution: "mongodb-memory-server@npm:9.1.5"
   dependencies:
-    mongodb-memory-server-core: "npm:9.1.4"
+    mongodb-memory-server-core: "npm:9.1.5"
     tslib: "npm:^2.6.2"
-  checksum: b5ad0b0efae6e15fc19b0943976176e4b91b26b3047a6c8ea9373e5653258d0ecfbdfa328ac5cc63c5f38ee158789318a7e04ff2b0e3205c718866f86d1b30f3
+  checksum: dfffb91a894ec439a95438272545ad5f101e29c21ab0fd10400458b416498447fd0265d17eed6a22c7b7edfb04ed833a9392a89b7ab48cc897fba57cab6654a7
   languageName: node
   linkType: hard
 
