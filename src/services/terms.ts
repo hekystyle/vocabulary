@@ -1,4 +1,5 @@
 // eslint-disable-next-line max-classes-per-file
+import { isNil, isNotNil } from 'ramda';
 import { Sorting } from '@/filter';
 import { AppDb } from '@/services/db';
 import { StrictOmit } from '@/types/StrictOmit';
@@ -83,6 +84,18 @@ export class IndexedDbTermsRepository implements TermsRepository {
       }),
     );
     return Array.from(set);
+  }
+
+  public async getByServerId(serverId: string): Promise<Term | undefined> {
+    return await this.db.terms.where({ serverId }).first();
+  }
+
+  public getWithoutServerIdCursor() {
+    return this.db.terms.filter(term => isNil(term.serverId));
+  }
+
+  public getUpdatedLocally({ from, to }: { from: Date; to: Date }) {
+    return this.db.terms.filter(term => isNotNil(term.serverId) && term.updatedAt >= from && term.updatedAt <= to);
   }
 }
 

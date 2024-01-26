@@ -20,7 +20,7 @@ module.exports = {
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-restricted-syntax': 'off',
     'no-await-in-loop': 'off',
-    'arrow-body-style': 'error',
+    'arrow-body-style': ['error'],
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
     'import/extensions': 'off', // handled by TS
     'import/prefer-default-export': 'off',

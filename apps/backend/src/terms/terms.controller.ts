@@ -12,12 +12,15 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ObjectId } from 'mongodb';
-import { Repository } from 'typeorm';
+import { DEFAULT_LIMIT, DEFAULT_MAX_LIMIT, Paginate, paginate, Paginated, type PaginateQuery } from 'nestjs-paginate';
+import { SortBy } from 'nestjs-paginate/lib/helper.js';
+import { Equal, Repository } from 'typeorm';
 import { ParseObjectIdPipe } from '@/common/parse-objectid.pipe.js';
 import { TimeService } from '@/common/time.service.js';
 import { ZodPipe } from '@/common/zod.pipe.js';
-import { Pagination, type PaginationShape } from '@/pagination.js';
+import { MAX_PAGE_SIZE } from '@/pagination.js';
 import { ActiveUser } from '@/users/active-user.decorator.js';
+import { StrictOmit } from '@/utils/StrictOmit.js';
 import { User } from '../users/user.entity.js';
 import { Term } from './term.entity.js';
 import { type TermDto, termDtoSchema } from './terms.dto.js';
@@ -36,27 +39,62 @@ export class TermsController {
   async find(
     @ActiveUser()
     user: User,
-    @Pagination()
-    pagination: PaginationShape,
-  ) {
-    const [terms, total] = await this.termsRepository.findAndCount({
+    @Paginate() query: PaginateQuery,
+  ): Promise<StrictOmit<Paginated<Term>, 'links'>> {
+    console.log('🚀 ~ TermsController ~ query:', query);
+
+    const page = Math.max(query.page ?? 1, 1);
+    const limit = Math.min(query.limit ?? DEFAULT_LIMIT, MAX_PAGE_SIZE);
+
+    const [items, count] = await this.termsRepository.findAndCount({
+      skip: (page - 1) * limit,
+      take: limit,
       where: {
         owner: user._id,
+        ...Object.entries(query.filter ?? {}).reduce((acc, [column, filter]) => {
+          const [operator, value] = filter.toString().split(':');
+          if (operator === 'eq') {
+            return {
+              ...acc,
+              [column]: Equal(value),
+            };
+          }
+          return acc;
+        }, {}),
       },
-      skip: pagination.skip,
-      take: pagination.pageSize,
+      order:
+        query.sortBy?.reduce(
+          (acc, [column, order]) => ({
+            ...acc,
+            [column]: order,
+          }),
+          {},
+        ) ?? {},
     });
 
     return {
-      data: terms,
+      data: items,
       meta: {
-        pagination: {
-          ...pagination,
-          total,
-          pageCount: Math.ceil(total / pagination.pageSize),
-        },
+        currentPage: page,
+        filter: query.filter ?? {},
+        itemsPerPage: limit,
+        search: '',
+        searchBy: [],
+        select: [],
+        sortBy: (query.sortBy as SortBy<Term>) ?? [],
+        totalItems: count,
+        totalPages: Math.ceil(count / limit),
       },
     };
+
+    return await paginate(query, this.termsRepository, {
+      maxLimit: DEFAULT_MAX_LIMIT,
+      defaultLimit: DEFAULT_LIMIT,
+      sortableColumns: ['updatedAt'],
+      where: {
+        owner: user._id,
+      },
+    });
   }
 
   @Post()

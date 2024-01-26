@@ -9,6 +9,15 @@ import { App } from './App';
 import { Providers } from './Providers';
 import reportWebVitals from './reportWebVitals';
 
+declare module '@tanstack/react-query' {
+  interface Register {
+    queryMeta: {
+      successMessage?: string;
+      errorMessage?: string;
+    };
+  }
+}
+
 const container = appContainer();
 
 QUERY_CLIENT.getMutationCache()

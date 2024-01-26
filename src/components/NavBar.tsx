@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Sync } from './Sync';
 import { User } from './User';
 
 interface NavLink {
@@ -36,6 +37,7 @@ export const NavBar: FC = () => {
             ))}
           </Nav>
         </Navbar.Collapse>
+        <Sync />
         <User />
       </Container>
     </Navbar>

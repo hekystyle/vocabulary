@@ -1,4 +1,5 @@
 import { AnswersCountable } from '@/utils/types';
+import { StrictOmit } from './StrictOmit';
 
 export interface TermV1 extends AnswersCountable {
   id: number;
@@ -13,6 +14,12 @@ export interface TermV2 extends Omit<TermV1, 'id'> {
   readonly createdAt?: Date;
 }
 
-export interface Term extends TermV2 {
+export interface TermV3 extends TermV2 {
   tags: string[];
+}
+
+export interface Term extends StrictOmit<TermV3, 'createdAt'> {
+  serverId?: string | null;
+  updatedAt: Date;
+  createdAt: Date;
 }

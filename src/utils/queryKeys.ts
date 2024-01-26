@@ -14,4 +14,8 @@ export const QUERY_KEYS = {
     all: () => ['dictionary'] as const,
     word: (word: string) => [...QUERY_KEYS.dictionary.all(), word] as const,
   },
+  auth: {
+    all: () => ['auth'] as const,
+    profile: () => [...QUERY_KEYS.auth.all(), 'profile'] as const,
+  },
 };

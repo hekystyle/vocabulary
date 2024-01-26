@@ -1,4 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
+import { CloudServerOutlined, CloudUploadOutlined, LoadingOutlined } from '@ant-design/icons';
+import { useIsMutating, useQuery } from '@tanstack/react-query';
 import { Tooltip } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { SortOrder } from 'antd/es/table/interface';
@@ -12,6 +13,19 @@ import { Term } from '../../../types/Term';
 import { Actions } from './table/Actions';
 import { AddButton } from './table/AddButton';
 
+export const ICON_SIZE = 20 as const;
+
+export const SyncStatusCell: FC<{ record: Term }> = ({ record }) => {
+  const isSyncing = useIsMutating({ mutationKey: ['sync'] });
+
+  if (record.serverId) return <CloudServerOutlined style={{ fontSize: ICON_SIZE }} />;
+
+  if (isSyncing) return <LoadingOutlined style={{ fontSize: ICON_SIZE }} />;
+
+  return <CloudUploadOutlined style={{ fontSize: ICON_SIZE }} />;
+};
+
+// TODO: support multiple columns sorting
 const getColumns = ({ sortField, sortOrder }: { sortField: string; sortOrder: SortOrder }): ColumnsType<Term> => [
   {
     key: 'word',
@@ -44,6 +58,11 @@ const getColumns = ({ sortField, sortOrder }: { sortField: string; sortOrder: So
     sorter: true,
     sortOrder: sortField === 'createdAt' ? sortOrder : null,
     render: (_, record) => record.createdAt?.toLocaleDateString(),
+  },
+  {
+    key: 'syncStatus',
+    title: <CloudServerOutlined style={{ fontSize: ICON_SIZE }} />,
+    render: (_, record) => <SyncStatusCell record={record} />,
   },
   {
     key: 'actions',
