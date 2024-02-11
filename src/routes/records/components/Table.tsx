@@ -1,32 +1,31 @@
 import { useQuery } from '@tanstack/react-query';
 import { Tooltip } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import { SortOrder } from 'antd/es/table/interface';
 import { FC, useMemo } from 'react';
 import { SpinnerBox } from '@/components/SpinnerBox';
 import { Table } from '@/components/Table';
-import { useFilter } from '@/filter';
+import { Sortable, Sorter, useFilter } from '@/filter';
 import { useServices } from '@/services';
 import { QUERY_KEYS } from '@/utils/queryKeys';
 import { Term } from '../../../types/Term';
 import { Actions } from './table/Actions';
 import { AddButton } from './table/AddButton';
 
-const getColumns = ({ sortField, sortOrder }: { sortField: string; sortOrder: SortOrder }): ColumnsType<Term> => [
+const getColumns = ({ sortBy }: Sortable): ColumnsType<Term> => [
   {
     key: 'word',
     title: 'Word',
     dataIndex: 'word',
     ellipsis: { showTitle: true },
     sorter: true,
-    sortOrder: sortField === 'word' ? sortOrder : null,
+    sortOrder: sortBy.find(({ field }) => field === 'word')?.order ?? null,
   },
   {
     key: 'answersCount',
     dataIndex: 'answersCount',
     title: <Tooltip title="Total answers count">Total</Tooltip>,
     sorter: true,
-    sortOrder: sortField === 'answersCount' ? sortOrder : null,
+    sortOrder: sortBy.find(({ field }) => field === 'answersCount')?.order ?? null,
     render: (_, record) => record.answersCount,
   },
   {
@@ -34,7 +33,7 @@ const getColumns = ({ sortField, sortOrder }: { sortField: string; sortOrder: So
     dataIndex: 'correctAnswersCount',
     title: <Tooltip title="Correct answers count">Correct</Tooltip>,
     sorter: true,
-    sortOrder: sortField === 'correctAnswersCount' ? sortOrder : null,
+    sortOrder: sortBy.find(({ field }) => field === 'correctAnswersCount')?.order ?? null,
     render: (_, record) => record.correctAnswersCount,
   },
   {
@@ -42,7 +41,7 @@ const getColumns = ({ sortField, sortOrder }: { sortField: string; sortOrder: So
     dataIndex: 'createdAt',
     title: 'Created at',
     sorter: true,
-    sortOrder: sortField === 'createdAt' ? sortOrder : null,
+    sortOrder: sortBy.find(({ field }) => field === 'createdAt')?.order ?? null,
     render: (_, record) => record.createdAt?.toLocaleDateString(),
   },
   {
@@ -59,7 +58,7 @@ const PAGE_SIZE = 20 as const;
 
 export const ListTable: FC = () => {
   const {
-    filter: { page: currentPage, sortField = 'createdAt', sortOrder = 'descend' },
+    filter: { page: currentPage, sortBy = [{ field: 'createdAt', order: 'descend' }] },
     update: updateFilter,
   } = useFilter();
   const { termsRepository } = useServices();
@@ -69,12 +68,11 @@ export const ListTable: FC = () => {
     data,
     isFetching: loading,
   } = useQuery({
-    queryKey: QUERY_KEYS.terms.filter({ pageSize: PAGE_SIZE, page: currentPage, sortField, sortOrder }),
-    queryFn: ({ signal }) =>
-      termsRepository.get({ pageSize: PAGE_SIZE, page: currentPage ?? 1, sortField, sortOrder }, signal),
+    queryKey: QUERY_KEYS.terms.filter({ pageSize: PAGE_SIZE, page: currentPage, sortBy }),
+    queryFn: ({ signal }) => termsRepository.get({ pageSize: PAGE_SIZE, page: currentPage ?? 1, sortBy }, signal),
   });
 
-  const columns = useMemo(() => getColumns({ sortOrder, sortField }), [sortField, sortOrder]);
+  const columns = useMemo(() => getColumns({ sortBy }), [sortBy]);
 
   if (loading) return <SpinnerBox label="Loading terms ..." />;
 
@@ -95,11 +93,15 @@ export const ListTable: FC = () => {
       scroll={{ x: true }}
       size="middle"
       onChange={(_, __, sorters) => {
-        const { field, order } = [sorters].flat().at(0) ?? {};
-
         updateFilter({
-          sortField: field?.toString(),
-          sortOrder: order ?? 'ascend',
+          sortBy: [sorters].flat().reduce<Sorter[]>((acc, { field, order }) => {
+            if (field && order)
+              acc.push({
+                field: field.toString(),
+                order,
+              });
+            return acc;
+          }, []),
         });
       }}
     />

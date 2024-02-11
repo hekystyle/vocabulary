@@ -1,23 +1,20 @@
-import { SortOrder } from 'antd/es/table/interface';
-import { parse } from 'qs';
-import { evolve, pick } from 'ramda';
-import { FilterValues } from './types';
-
-const isSortOrder = (value: unknown): value is SortOrder => value === 'ascend' || value === 'descend' || value === null;
+import qs from 'qs';
+import { z } from 'zod';
+import { FilterValues, sorterSchema } from './types';
 
 export const getInitialFilter = (search: string): Partial<FilterValues> => {
-  const parsedQueryString = parse(search.replace(/^\?/, ''));
-  const evolver: { [K in keyof FilterValues]: (value: string) => FilterValues[K] } = {
-    page: value => parseInt(value, 10),
-    sortField: value => value,
-    sortOrder: value => (isSortOrder(value) ? value : null),
-  } as const;
-  return evolve(
-    evolver,
-    pick(
-      // NOTE: ramda typings seems incorrect as pick accepts empty array in runtime
-      Object.keys(evolver) as [string, ...string[]],
-      parsedQueryString,
-    ),
-  );
+  const parsedSearch = qs.parse(search, {
+    ignoreQueryPrefix: true,
+    allowDots: true,
+  });
+
+  const result = z
+    .object({
+      page: z.coerce.number().int().positive().safe(),
+      sortBy: z.array(sorterSchema),
+    })
+    .partial()
+    .safeParse(parsedSearch);
+
+  return result.success ? result.data : {};
 };

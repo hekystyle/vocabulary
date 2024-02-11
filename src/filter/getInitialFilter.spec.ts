@@ -2,10 +2,10 @@ import { expect, it } from 'vitest';
 import { getInitialFilter } from './getInitialFilter';
 
 it.each([
-  [`?page=2&sortField=foo&sortOrder=ascend`, { page: 2, sortField: 'foo', sortOrder: 'ascend' }],
-  [`?page=2&sortField=bar&sortOrder=descend`, { page: 2, sortField: 'bar', sortOrder: 'descend' }],
-  ['?page=NaN', { page: NaN }],
-])('should parse known field %p', (search, expected) => {
+  [`?page=2&sortBy[0][field]=foo&sortBy[0][order]=ascend`, { page: 2, sortBy: [{ field: 'foo', order: 'ascend' }] }],
+  [`?page=2&sortBy[0][field]=bar&sortBy[0][order]=descend`, { page: 2, sortBy: [{ field: 'bar', order: 'descend' }] }],
+  ['?page=NaN', {}],
+])('should parse known field %s', (search, expected) => {
   const actual = getInitialFilter(search);
   expect(actual).toEqual(expected);
 });
