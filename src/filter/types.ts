@@ -1,11 +1,18 @@
 import { SortOrder } from 'antd/es/table/interface';
+import { z } from 'zod';
 
-export interface Sorting {
-  sortField: string;
-  sortOrder: SortOrder;
+export const sorterSchema = z.object({
+  field: z.string(),
+  order: z.enum(['ascend', 'descend'] as const satisfies SortOrder[]),
+});
+
+export type Sorter = z.infer<typeof sorterSchema>;
+
+export interface Sortable {
+  sortBy: Sorter[];
 }
 
-export interface FilterValues extends Sorting {
+export interface FilterValues extends Sortable {
   page: number;
 }
 

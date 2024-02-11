@@ -1,4 +1,4 @@
-import { stringify } from 'qs';
+import qs from 'qs';
 import { mergeDeepRight, pick } from 'ramda';
 import { FC, PropsWithChildren, useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -35,7 +35,15 @@ export const FilterProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    navigate({ search: stringify(pickedFilter) }, { replace: true, state: location.state as unknown });
+    navigate(
+      {
+        search: qs.stringify(pickedFilter, {
+          allowDots: true,
+          encode: false,
+        }),
+      },
+      { replace: true, state: location.state as unknown },
+    );
   }, [pickedFilter, navigate, location.state]);
 
   return <FilterContext.Provider value={shape}>{children}</FilterContext.Provider>;

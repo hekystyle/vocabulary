@@ -1,12 +1,12 @@
 // eslint-disable-next-line max-classes-per-file
-import { Sorting } from '@/filter';
+import { Sortable } from '@/filter';
 import { AppDb } from '@/services/db';
 import { StrictOmit } from '@/types/StrictOmit';
 import { Term } from '@/types/Term';
 import { computeSkip, Pagination } from '@/utils/computeSkip';
 
 export interface TermsRepository {
-  get(filter: Pagination & Sorting, signal: AbortSignal | undefined): Promise<{ terms: Term[]; total: number }>;
+  get(filter: Pagination & Sortable, signal: AbortSignal | undefined): Promise<{ terms: Term[]; total: number }>;
   getById(id: Exclude<Term['id'], undefined>, signal: AbortSignal | undefined): Promise<Term | undefined>;
   create(term: StrictOmit<Term, 'id' | 'createdAt'>): Promise<Term | undefined>;
   update(term: Term): Promise<Term | undefined>;
@@ -20,12 +20,14 @@ export interface TermsRepository {
 export class IndexedDbTermsRepository implements TermsRepository {
   constructor(private db: AppDb) {}
 
-  public async get(filter: Pagination & Sorting): Promise<{ terms: Term[]; total: number }> {
+  public async get(filter: Pagination & Sortable): Promise<{ terms: Term[]; total: number }> {
     const skip = computeSkip(filter);
 
-    const query = this.db.terms.orderBy(filter.sortField);
+    const sorter = filter.sortBy[0];
 
-    if (filter.sortOrder === 'descend') {
+    const query = this.db.terms.orderBy(sorter?.field ?? ('createdAt' satisfies keyof Term));
+
+    if (sorter?.order === 'descend') {
       query.reverse();
     }
 
@@ -98,7 +100,7 @@ export class DelayedTermsRepository implements TermsRepository {
     });
   }
 
-  async get(filter: Pagination & Sorting, signal: AbortSignal | undefined): Promise<{ terms: Term[]; total: number }> {
+  async get(filter: Pagination & Sortable, signal: AbortSignal | undefined): Promise<{ terms: Term[]; total: number }> {
     await this.wait();
     return await this.repo.get(filter, signal);
   }
