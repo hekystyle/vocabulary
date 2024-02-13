@@ -1,4 +1,12 @@
-import { Entity, ObjectId, ObjectIdColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  ObjectId,
+  ObjectIdColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+} from 'typeorm';
 import { StrictOmit } from '../utils/StrictOmit.js';
 
 @Entity()
@@ -19,6 +27,12 @@ export class Term {
   definition!: string;
 
   @Column()
+  answersCount!: number;
+
+  @Column()
+  correctAnswersCount!: number;
+
+  @Column()
   tags!: string[];
 
   @CreateDateColumn()
@@ -27,7 +41,7 @@ export class Term {
   @UpdateDateColumn()
   updatedAt!: Date;
 
-  @Column({ nullable: true })
+  @DeleteDateColumn()
   deletedAt!: Date | null;
 
   @Column()

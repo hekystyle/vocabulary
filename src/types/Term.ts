@@ -9,7 +9,7 @@ export interface TermV1 extends AnswersCountable {
 }
 
 export interface TermV2 extends Omit<TermV1, 'id'> {
-  id?: number;
+  id: number | string;
   readonly createdAt?: Date;
 }
 

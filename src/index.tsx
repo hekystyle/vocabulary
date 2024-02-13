@@ -3,20 +3,27 @@ import './index.css';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { migrate } from '@/containers/DataMigration';
-import { appContainer } from '@/services/AppContainer';
 import { QUERY_CLIENT } from '@/services/queryClient';
 import { App } from './App';
 import { Providers } from './Providers';
 import reportWebVitals from './reportWebVitals';
+import { APP_DB } from './services/db';
 
-const container = appContainer();
+declare module '@tanstack/react-query' {
+  interface Register {
+    queryMeta: {
+      successMessage?: string;
+      errorMessage?: string;
+    };
+  }
+}
 
 QUERY_CLIENT.getMutationCache()
   .build(QUERY_CLIENT, {
     mutationKey: migrate.queryKey,
     mutationFn: migrate,
   })
-  .execute(container.services.db)
+  .execute(APP_DB)
   .catch(console.error);
 
 const rootElement = document.getElementById('root');
@@ -27,7 +34,7 @@ const root = createRoot(rootElement);
 
 root.render(
   <React.StrictMode>
-    <Providers services={container.services}>
+    <Providers>
       <App />
     </Providers>
   </React.StrictMode>,

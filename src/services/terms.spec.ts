@@ -33,7 +33,7 @@ it('should get terms', async () => {
     undefined,
   );
 
-  expect(result.terms).toEqual([
+  expect(result.data).toEqual([
     {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       id: expect.any(Number),
@@ -51,7 +51,7 @@ it('should get terms', async () => {
       createdAt: expect.any(Date),
     },
   ]);
-  expect(result.total).toBe(2);
+  expect(result.meta.totalItems).toBe(2);
 });
 
 it('should get term by id', async () => {

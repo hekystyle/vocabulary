@@ -78,7 +78,8 @@ export const ListTable: FC = () => {
 
   if (error) return <p>Error: {error instanceof Error ? error.message : 'Unknown'}</p>;
 
-  const { terms, total } = data ?? {};
+  const { data: terms, meta } = data ?? {};
+  const total = meta?.totalItems ?? 0;
   return (
     <Table
       columns={columns}

@@ -1,8 +1,6 @@
 import Dexie, { Table } from 'dexie';
 import { Term } from '@/types/Term';
 
-type Writable<T> = { -readonly [P in keyof T]: T[P] };
-
 export class AppDb extends Dexie {
   // 'friends' is added by dexie when declaring the stores()
   // We just tell the typing system this is the case
@@ -35,9 +33,7 @@ export class AppDb extends Dexie {
             term.tags = [];
           }),
       );
-    this.terms.hook('creating', (_, term: Writable<Term>) => {
-      // eslint-disable-next-line no-param-reassign
-      term.createdAt = new Date();
-    });
   }
 }
+
+export const APP_DB = new AppDb('Vocabulary');
