@@ -11,7 +11,7 @@
     "@tsconfig/cypress": "1.0.1",
     "@tsconfig/node18": "18.2.2",
     "@types/node": "20.11.24",
-    "cypress": "13.6.3",
+    "cypress": "13.6.6",
     "typescript": "5.3.3"
   },
   "scripts": {
