@@ -17481,7 +17481,7 @@ __metadata:
     vite-plugin-pwa: "npm:0.17.4"
     vite-tsconfig-paths: "npm:4.3.1"
     vitest: "npm:1.2.1"
-    web-vitals: "npm:3.5.0"
+    web-vitals: "npm:3.5.2"
     zod: "npm:3.22.4"
   languageName: unknown
   linkType: soft
@@ -17584,10 +17584,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web-vitals@npm:3.5.0":
-  version: 3.5.0
-  resolution: "web-vitals@npm:3.5.0"
-  checksum: 10c0/9409011cf6cf405796aba919cd0f6957eb59f1170481f948e4f70e34a0cc461103accc8ce80fa0ceaf3c68d4c8d2b92788454323cfda08722eaa1ec9c36159d5
+"web-vitals@npm:3.5.2":
+  version: 3.5.2
+  resolution: "web-vitals@npm:3.5.2"
+  checksum: 10c0/662b385d6e96a18677cf8726454b65f3aecfdca330df72a82f73f293a5708ba9d191964649f8d363a1e64062a826a99805ade8c573a6492b91e02275b6860308
   languageName: node
   linkType: hard
 
