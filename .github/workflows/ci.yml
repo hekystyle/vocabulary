@@ -126,7 +126,7 @@ jobs:
       - run: yarn nx run-many -t=test
 
       - name: Codecov
-        uses: codecov/codecov-action@v3.1.4
+        uses: codecov/codecov-action@v3.1.6
 
   cypress:
     needs: [install, build]
