@@ -43,7 +43,7 @@
     "@tsconfig/vite-react": "3.0.0",
     "@types/node": "20.11.24",
     "@types/qs": "6.9.11",
-    "@types/ramda": "0.29.9",
+    "@types/ramda": "0.29.11",
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
     "@types/styled-components": "5.1.34",
