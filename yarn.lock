@@ -4745,10 +4745,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/qs@npm:*, @types/qs@npm:6.9.11":
+"@types/qs@npm:*":
   version: 6.9.11
   resolution: "@types/qs@npm:6.9.11"
   checksum: 10c0/657a50f05b694d6fd3916d24177cfa0f3b8b87d9deff4ffa4dddcb0b03583ebf7c47b424b8de400270fb9a5cc1e9cf790dd82c833c6935305851e7da8ede3ff5
+  languageName: node
+  linkType: hard
+
+"@types/qs@npm:6.9.12":
+  version: 6.9.12
+  resolution: "@types/qs@npm:6.9.12"
+  checksum: 10c0/21a74f2b78d0839cee37f1a632f3361352f7dceac9edffd117227a695a13e58e18c138aac1f29403f2408221e678f538ca0b37d55012f8bba96d55905edbfe82
   languageName: node
   linkType: hard
 
@@ -17427,7 +17434,7 @@ __metadata:
     "@tsconfig/strictest": "npm:2.0.3"
     "@tsconfig/vite-react": "npm:3.0.0"
     "@types/node": "npm:20.11.24"
-    "@types/qs": "npm:6.9.11"
+    "@types/qs": "npm:6.9.12"
     "@types/ramda": "npm:0.29.11"
     "@types/react": "npm:18.2.48"
     "@types/react-dom": "npm:18.2.18"
