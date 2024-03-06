@@ -44,7 +44,7 @@
     "@nestjs/schematics": "10.1.0",
     "@nestjs/testing": "10.3.0",
     "@swc/cli": "0.3.10",
-    "@swc/core": "1.4.4",
+    "@swc/core": "1.4.5",
     "@tsconfig/node20": "20.1.2",
     "@types/bcrypt": "5.0.2",
     "@types/cookie-parser": "1.4.7",
