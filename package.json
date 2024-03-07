@@ -67,7 +67,7 @@
     "fake-indexeddb": "5.0.2",
     "gh-pages": "6.1.1",
     "jsdom": "23.2.0",
-    "nx": "17.2.8",
+    "nx": "17.3.2",
     "prettier": "3.2.5",
     "serve": "14.2.1",
     "typescript": "5.3.3",
