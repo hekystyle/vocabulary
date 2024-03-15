@@ -17554,9 +17554,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-pwa@npm:0.19.3":
-  version: 0.19.3
-  resolution: "vite-plugin-pwa@npm:0.19.3"
+"vite-plugin-pwa@npm:0.19.4":
+  version: 0.19.4
+  resolution: "vite-plugin-pwa@npm:0.19.4"
   dependencies:
     debug: "npm:^4.3.4"
     fast-glob: "npm:^3.3.2"
@@ -17571,7 +17571,7 @@ __metadata:
   peerDependenciesMeta:
     "@vite-pwa/assets-generator":
       optional: true
-  checksum: 10c0/685dc6f72188789b28872a0c2baedc08a102e5d9de8348b03e7c5b8b340c25240b8a07aff8a8c9910a2ce4080845cbf8c2eeb39448cecd91e78caf764fbd9ea2
+  checksum: 10c0/1f833c6c6a5136f646840e3d9e8e45bb7b258d6565f8086bd83359085daae61fd7a1eb2fa1a203848bc667c1ff9d7d2cbf58d19a116b0b4d095385998701b2ca
   languageName: node
   linkType: hard
 
@@ -17743,7 +17743,7 @@ __metadata:
     typescript: "npm:5.4.2"
     typescript-styled-plugin: "npm:0.18.3"
     vite: "npm:5.0.12"
-    vite-plugin-pwa: "npm:0.19.3"
+    vite-plugin-pwa: "npm:0.19.4"
     vite-tsconfig-paths: "npm:4.3.2"
     vitest: "npm:1.2.1"
     web-vitals: "npm:3.5.2"
