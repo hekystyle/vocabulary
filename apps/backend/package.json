@@ -55,7 +55,7 @@
     "@types/passport-local": "1.0.38",
     "@types/supertest": "2.0.16",
     "@vitest/coverage-v8": "1.2.1",
-    "mongodb-memory-server": "9.1.6",
+    "mongodb-memory-server": "9.1.7",
     "supertest": "6.3.3",
     "typescript": "5.4.2",
     "unplugin-swc": "1.4.4",
