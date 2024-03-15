@@ -54,12 +54,12 @@
     "@types/passport-jwt": "3.0.13",
     "@types/passport-local": "1.0.38",
     "@types/supertest": "2.0.16",
-    "@vitest/coverage-v8": "1.2.1",
+    "@vitest/coverage-v8": "1.4.0",
     "mongodb-memory-server": "9.1.7",
     "supertest": "6.3.3",
     "typescript": "5.4.2",
     "unplugin-swc": "1.4.4",
     "vite-tsconfig-paths": "4.3.2",
-    "vitest": "1.2.1"
+    "vitest": "1.4.0"
   }
 }
