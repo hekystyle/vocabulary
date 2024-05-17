@@ -15,8 +15,8 @@
     "@ant-design/icons": "5.2.6",
     "@faker-js/faker": "8.3.1",
     "@popperjs/core": "2.11.8",
-    "@tanstack/react-query": "5.24.8",
-    "@tanstack/react-query-devtools": "5.24.8",
+    "@tanstack/react-query": "5.36.2",
+    "@tanstack/react-query-devtools": "5.36.2",
     "antd": "5.15.2",
     "bootstrap": "5.3.3",
     "dexie": "3.2.6",
@@ -34,7 +34,7 @@
     "zod": "3.22.4"
   },
   "devDependencies": {
-    "@tanstack/eslint-plugin-query": "5.20.1",
+    "@tanstack/eslint-plugin-query": "5.35.6",
     "@testing-library/dom": "9.3.4",
     "@testing-library/jest-dom": "6.4.2",
     "@testing-library/react": "14.2.1",
