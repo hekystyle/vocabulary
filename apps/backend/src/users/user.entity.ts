@@ -1,23 +1,18 @@
-import { ObjectId } from 'mongodb';
-import { Entity, ObjectIdColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { buildSchema, prop } from '@typegoose/typegoose';
+import { TimeStamps } from '@typegoose/typegoose/lib/defaultClasses.js';
+import { Types } from 'mongoose';
 
-@Entity()
-export class User {
-  @ObjectIdColumn()
-  _id!: ObjectId;
+export class User extends TimeStamps {
+  declare _id: Types.ObjectId;
 
-  @Column()
+  @prop({ required: true })
   email!: string;
 
-  @Column({ nullable: true })
+  @prop({ required: false, default: null, type: () => String })
   passwordHash!: string | null;
 
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
-
-  @Column({ nullable: true })
+  @prop({ required: false, default: null, type: () => Date })
   lastDataMutationAt?: Date | null;
 }
+
+export const userSchema = buildSchema(User);

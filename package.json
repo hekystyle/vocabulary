@@ -79,10 +79,12 @@
   },
   "resolutions": {
     "tsconfig-paths": "^4.0.0",
-    "vite": "5.0.13"
+    "vite": "5.0.13",
+    "bson": "6.5.0"
   },
   "scripts": {
     "start": "vite",
+    "start:be": "nx run backend:start",
     "serve:frontend": "serve -n -C -s build",
     "build": "tsc && vite build",
     "check-types": "tsc --noEmit",

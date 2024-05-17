@@ -1,9 +1,10 @@
 import { faker } from '@faker-js/faker';
 import { INestApplication } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { getConnectionToken } from '@nestjs/mongoose';
 import { Test } from '@nestjs/testing';
+import { Connection } from 'mongoose';
 import request from 'supertest';
-import { EntityManager } from 'typeorm';
 import { beforeAll, afterAll, it, expect, beforeEach } from 'vitest';
 import { AppModule } from '@/app.module.js';
 import { AuthService } from '@/auth/auth.service.js';
@@ -25,11 +26,11 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
-  await app.get(EntityManager).connection.dropDatabase();
+  await app.get<Connection>(getConnectionToken()).dropDatabase();
 });
 
 afterAll(async () => {
-  await app.get(EntityManager).connection.dropDatabase();
+  await app.get<Connection>(getConnectionToken()).dropDatabase();
   await app.close();
 });
 
@@ -65,10 +66,10 @@ it('should allow user to authenticate with JWT', async () => {
   const response = await request(app.getHttpServer()).get('/auth/profile').set('authorization', `Bearer ${jwt}`).send();
 
   expect(response.body).toStrictEqual({
-    ...user,
+    ...user.toObject(),
     _id: user._id.toString(),
-    createdAt: user.createdAt.toISOString(),
-    updatedAt: user.updatedAt.toISOString(),
+    createdAt: user.createdAt?.toISOString(),
+    updatedAt: user.updatedAt?.toISOString(),
   });
   expect(response.statusCode).toStrictEqual(200);
 });

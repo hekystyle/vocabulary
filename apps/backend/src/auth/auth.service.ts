@@ -1,8 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { InjectRepository } from '@nestjs/typeorm';
+import { InjectModel } from '@nestjs/mongoose';
 import bcrypt from 'bcrypt';
-import { Repository } from 'typeorm';
+import { Model } from 'mongoose';
 import { User } from '../users/user.entity.js';
 import { JwtPayload } from './jwt.payload.js';
 
@@ -11,13 +11,13 @@ export class AuthService {
   private logger = new Logger(AuthService.name);
 
   constructor(
-    @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    @InjectModel(User.name)
+    private usersRepository: Model<User>,
     private jwtService: JwtService,
   ) {}
 
   async validateUser(username: string, password: string): Promise<User | undefined> {
-    const user = await this.usersRepository.findOneBy({ email: username });
+    const user = await this.usersRepository.findOne({ email: username });
 
     if (!user) {
       this.logger.log(`User not found by username: ${username}`);

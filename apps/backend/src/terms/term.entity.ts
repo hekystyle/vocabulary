@@ -1,38 +1,41 @@
-import { Entity, ObjectId, ObjectIdColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+/* eslint-disable @typescript-eslint/no-unsafe-declaration-merging -- using typegoose */
+import { buildSchema, modelOptions, prop } from '@typegoose/typegoose';
+import { TimeStamps } from '@typegoose/typegoose/lib/defaultClasses.js';
+import { Types } from 'mongoose';
 import { StrictOmit } from '../utils/StrictOmit.js';
 
-@Entity()
-export class Term {
-  @ObjectIdColumn()
-  _id!: ObjectId;
+@modelOptions({
+  schemaOptions: {
+    timestamps: true,
+    versionKey: false,
+  },
+})
+export class Term extends TimeStamps {
+  declare _id: Types.ObjectId;
 
-  @Column()
+  @prop({ required: true })
   word!: string;
 
-  @Column()
+  @prop({ required: true })
   partOfSpeech!: string;
 
-  @Column()
+  @prop({ required: true })
   translation!: string;
 
-  @Column()
+  @prop({ required: true })
   definition!: string;
 
-  @Column()
+  @prop({ required: true, type: () => [String] })
   tags!: string[];
 
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
-
-  @Column({ nullable: true })
+  @prop({ required: false, default: null, type: () => Date })
   deletedAt!: Date | null;
 
-  @Column()
-  owner!: ObjectId;
+  @prop({ required: true })
+  owner!: Types.ObjectId;
 }
+
+export const termSchema = buildSchema(Term);
 
 export interface SerializedTerm extends StrictOmit<Term, '_id' | 'owner' | 'createdAt' | 'updatedAt' | 'deletedAt'> {
   _id: string;
