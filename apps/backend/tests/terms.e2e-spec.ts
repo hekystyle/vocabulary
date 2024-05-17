@@ -1,10 +1,10 @@
 import { faker } from '@faker-js/faker';
 import { INestApplication } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { getConnectionToken, getModelToken } from '@nestjs/mongoose';
 import { Test } from '@nestjs/testing';
-import { ObjectId } from 'mongodb';
+import { Connection, Model, Types } from 'mongoose';
 import request from 'supertest';
-import { EntityManager, Repository } from 'typeorm';
 import { describe, beforeAll, afterAll, it, expect, beforeEach } from 'vitest';
 import { AppModule } from '@/app.module.js';
 import { AuthService } from '@/auth/auth.service.js';
@@ -18,7 +18,7 @@ import testConfiguration from './testConfiguration.js';
 let app: INestApplication;
 let user: User;
 let jwt: string;
-let termsRepository: Repository<Term>;
+let termsRepository: Model<Term>;
 
 beforeAll(async () => {
   const testingModule = await Test.createTestingModule({
@@ -38,11 +38,11 @@ beforeAll(async () => {
   app = testingModule.createNestApplication();
   await app.init();
 
-  termsRepository = app.get(EntityManager).getRepository(Term);
+  termsRepository = app.get(getModelToken(Term.name));
 });
 
 beforeEach(async () => {
-  await app.get(EntityManager).connection.dropDatabase();
+  await app.get<Connection>(getConnectionToken()).dropDatabase();
 
   user = await app.get(UsersService).create({
     email: faker.internet.email(),
@@ -53,7 +53,7 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-  await app.get(EntityManager).connection.dropDatabase();
+  await app.get<Connection>(getConnectionToken()).dropDatabase();
   await app.close();
 });
 
@@ -82,16 +82,16 @@ describe('POST /terms', () => {
     });
     expect(response.statusCode).toStrictEqual(201);
 
-    const createdTerm = await termsRepository.findOneByOrFail({ _id: new ObjectId((response.body as Term)._id) });
+    const createdTerm = await termsRepository.findById((response.body as Term)._id);
 
-    const updatedUser = await app.get(EntityManager).getRepository(User).findOneByOrFail({ _id: user._id });
-    expect(updatedUser?.lastDataMutationAt).toStrictEqual(createdTerm.updatedAt);
+    const updatedUser = await app.get<Model<User>>(getModelToken(User.name)).findById(user._id);
+    expect(updatedUser?.lastDataMutationAt).toStrictEqual(createdTerm?.updatedAt);
   });
 });
 
 describe('GET /terms', () => {
   it('should allow user to find only own terms', async () => {
-    const terms = termsRepository.create([
+    const terms = await termsRepository.create([
       {
         word: faker.lorem.word(),
         definition: faker.lorem.sentence(),
@@ -106,11 +106,9 @@ describe('GET /terms', () => {
         partOfSpeech: faker.lorem.word(),
         tags: [faker.lorem.word()],
         translation: faker.lorem.word(),
-        owner: new ObjectId(),
+        owner: new Types.ObjectId(),
       },
     ]);
-
-    await termsRepository.save(terms);
 
     const response = await request(app.getHttpServer()).get('/terms').set('authorization', `Bearer ${jwt}`).send();
 
@@ -119,11 +117,11 @@ describe('GET /terms', () => {
     expect(response.body).toStrictEqual({
       data: [
         {
-          ...ownTerm,
+          ...ownTerm?.toObject(),
           _id: ownTerm?._id.toString(),
           owner: ownTerm?.owner.toString(),
-          createdAt: ownTerm?.createdAt.toISOString(),
-          updatedAt: ownTerm?.updatedAt.toISOString(),
+          createdAt: ownTerm?.createdAt?.toISOString(),
+          updatedAt: ownTerm?.updatedAt?.toISOString(),
           deletedAt: null,
         },
       ],
@@ -143,9 +141,9 @@ describe('GET /terms', () => {
 
 describe('PATCH /terms/:id', () => {
   it('should allow user to update own term', async () => {
-    const repository = app.get(EntityManager).getRepository(Term);
+    const repository = app.get<Model<Term>>(getModelToken(Term.name));
 
-    const term = repository.create({
+    const term = await repository.create({
       word: faker.lorem.word(),
       definition: faker.lorem.sentence(),
       partOfSpeech: faker.lorem.word(),
@@ -153,8 +151,6 @@ describe('PATCH /terms/:id', () => {
       translation: faker.lorem.word(),
       owner: user._id,
     });
-
-    await repository.save(term);
 
     const dto = {
       word: faker.lorem.word(),
@@ -173,30 +169,28 @@ describe('PATCH /terms/:id', () => {
       ...dto,
       _id: term._id.toString(),
       owner: user._id.toString(),
-      createdAt: term.createdAt.toISOString(),
+      createdAt: term.createdAt?.toISOString() ?? '',
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       updatedAt: expect.any(String),
       deletedAt: null,
     });
     expect(response.statusCode).toStrictEqual(200);
 
-    const updatedTerm = await repository.findOneByOrFail({ _id: term._id });
+    const updatedTerm = await repository.findById(term._id);
 
-    const updatedUser = await app.get(EntityManager).getRepository(User).findOneByOrFail({ _id: user._id });
-    expect(updatedUser?.lastDataMutationAt).toStrictEqual(updatedTerm.updatedAt);
+    const updatedUser = await app.get<Model<User>>(getModelToken(User.name)).findById(user._id);
+    expect(updatedUser?.lastDataMutationAt).toStrictEqual(updatedTerm?.updatedAt);
   });
 
   it('should not allow user to update term of other user', async () => {
-    const term = termsRepository.create({
+    const term = await termsRepository.create({
       word: faker.lorem.word(),
       definition: faker.lorem.sentence(),
       partOfSpeech: faker.lorem.word(),
       tags: [faker.lorem.word()],
       translation: faker.lorem.word(),
-      owner: new ObjectId(),
+      owner: new Types.ObjectId(),
     });
-
-    await termsRepository.save(term);
 
     const dto = {
       word: faker.lorem.word(),
@@ -218,14 +212,14 @@ describe('PATCH /terms/:id', () => {
     });
     expect(response.statusCode).toStrictEqual(403);
 
-    const updatedTerm = await termsRepository.findOneByOrFail({ _id: term._id });
-    expect(updatedTerm).toStrictEqual(term);
+    const updatedTerm = await termsRepository.findById(term._id).lean();
+    expect(updatedTerm).toStrictEqual(term.toObject());
   });
 });
 
 describe('DELETE /terms/:id', () => {
-  it('should allow user to delete own term', async () => {
-    const termToUpdate = termsRepository.create({
+  it('should allow user to soft delete own term', async () => {
+    const termToUpdate = await termsRepository.create({
       word: faker.lorem.word(),
       definition: faker.lorem.sentence(),
       partOfSpeech: faker.lorem.word(),
@@ -233,8 +227,6 @@ describe('DELETE /terms/:id', () => {
       translation: faker.lorem.word(),
       owner: user._id,
     });
-
-    await termsRepository.save(termToUpdate);
 
     const response = await request(app.getHttpServer())
       .delete(`/terms/${termToUpdate._id.toString()}`)
@@ -244,24 +236,23 @@ describe('DELETE /terms/:id', () => {
     expect(response.body).toStrictEqual({});
     expect(response.statusCode).toStrictEqual(200);
 
-    const updatedTerm = await termsRepository.findOneBy({ _id: termToUpdate._id });
+    const updatedTerm = await termsRepository.findById(termToUpdate._id);
+    expect(updatedTerm).not.toStrictEqual(null);
     expect(updatedTerm?.deletedAt).toStrictEqual(new Date('2021-01-01T00:00:00.000Z'));
 
-    const updatedUser = await app.get(EntityManager).getRepository(User).findOneBy({ _id: user._id });
-    expect(updatedUser?.lastDataMutationAt).toStrictEqual(updatedTerm?.updatedAt);
+    const updatedUser = await app.get<Model<User>>(getModelToken(User.name)).findById(user._id);
+    expect(updatedUser?.lastDataMutationAt).toStrictEqual(updatedTerm?.deletedAt);
   });
 
   it('should not allow user to delete term of other user', async () => {
-    const termToUpdate = termsRepository.create({
+    const termToUpdate = await termsRepository.create({
       word: faker.lorem.word(),
       definition: faker.lorem.sentence(),
       partOfSpeech: faker.lorem.word(),
       tags: [faker.lorem.word()],
       translation: faker.lorem.word(),
-      owner: new ObjectId(),
+      owner: new Types.ObjectId(),
     });
-
-    await termsRepository.save(termToUpdate);
 
     const response = await request(app.getHttpServer())
       .delete(`/terms/${termToUpdate._id.toString()}`)
@@ -275,7 +266,7 @@ describe('DELETE /terms/:id', () => {
     });
     expect(response.statusCode).toStrictEqual(403);
 
-    const [updatedTerm] = await termsRepository.findByIds([termToUpdate._id]);
+    const updatedTerm = await termsRepository.findById(termToUpdate._id);
     expect(updatedTerm?.deletedAt).toStrictEqual(null);
   });
 });

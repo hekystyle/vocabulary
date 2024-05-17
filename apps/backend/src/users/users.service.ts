@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { InjectModel } from '@nestjs/mongoose';
 import bcrypt from 'bcrypt';
-import { Repository } from 'typeorm';
+import { HydratedDocument, Model } from 'mongoose';
 import { StrictOmit } from '../utils/StrictOmit.js';
 import { User } from './user.entity.js';
 
@@ -12,18 +12,16 @@ export interface CreateUserDto extends StrictOmit<User, '_id' | 'passwordHash' |
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    @InjectModel(User.name)
+    private usersRepository: Model<User>,
   ) {}
 
-  async create(user: CreateUserDto): Promise<User> {
+  async create(user: CreateUserDto): Promise<HydratedDocument<User>> {
     const passwordHash = await bcrypt.hash(user.password, 10);
 
-    return await this.usersRepository.save(
-      this.usersRepository.create({
-        ...user,
-        passwordHash,
-      }),
-    );
+    return await this.usersRepository.create({
+      ...user,
+      passwordHash,
+    });
   }
 }

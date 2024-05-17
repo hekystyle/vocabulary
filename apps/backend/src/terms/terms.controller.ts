@@ -2,17 +2,16 @@ import assert from 'assert';
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Param,
   Patch,
   Post,
   NotFoundException,
   ForbiddenException,
+  Delete,
 } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { ObjectId } from 'mongodb';
-import { Repository } from 'typeorm';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model, Types } from 'mongoose';
 import { ParseObjectIdPipe } from '@/common/parse-objectid.pipe.js';
 import { TimeService } from '@/common/time.service.js';
 import { ZodPipe } from '@/common/zod.pipe.js';
@@ -25,10 +24,10 @@ import { type TermDto, termDtoSchema } from './terms.dto.js';
 @Controller('terms')
 export class TermsController {
   constructor(
-    @InjectRepository(Term)
-    private termsRepository: Repository<Term>,
-    @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    @InjectModel(Term.name)
+    private termsRepository: Model<Term>,
+    @InjectModel(User.name)
+    private usersRepository: Model<User>,
     private timeService: TimeService,
   ) {}
 
@@ -39,16 +38,17 @@ export class TermsController {
     @Pagination()
     pagination: PaginationShape,
   ) {
-    const [terms, total] = await this.termsRepository.findAndCount({
-      where: {
-        owner: user._id,
-      },
-      skip: pagination.skip,
-      take: pagination.pageSize,
-    });
+    const [items, total] = await Promise.all([
+      this.termsRepository
+        .find({ owner: user._id, deletedAt: null })
+        .skip(pagination.skip)
+        .limit(pagination.pageSize)
+        .exec(),
+      this.termsRepository.countDocuments({ owner: user._id }),
+    ]);
 
     return {
-      data: terms,
+      data: items,
       meta: {
         pagination: {
           ...pagination,
@@ -66,15 +66,13 @@ export class TermsController {
     @Body(new ZodPipe(termDtoSchema))
     dto: TermDto,
   ) {
-    const term = this.termsRepository.create({
+    const term = await this.termsRepository.create({
       ...dto,
       owner: user._id,
     });
 
-    await this.termsRepository.save(term);
-
-    await this.usersRepository.update(user._id, {
-      lastDataMutationAt: term.updatedAt,
+    await this.usersRepository.findByIdAndUpdate(user._id, {
+      lastDataMutationAt: term.updatedAt ?? null,
     });
 
     return term;
@@ -89,18 +87,16 @@ export class TermsController {
     @Body(new ZodPipe(termDtoSchema.partial()))
     dto: Partial<TermDto>,
   ) {
-    const termToUpdate = await this.termsRepository.findOneBy({ _id: id });
+    const termToUpdate = await this.termsRepository.findById(id);
 
     assert(termToUpdate, new NotFoundException('Term not found'));
 
     assert(termToUpdate.owner.equals(user._id), new ForbiddenException('You are not the owner of this term'));
 
-    await this.termsRepository.update(termToUpdate._id, dto);
+    const updatedTerm = await this.termsRepository.findByIdAndUpdate(termToUpdate._id, dto, { new: true });
 
-    const updatedTerm = await this.termsRepository.findOneByOrFail({ _id: id });
-
-    await this.usersRepository.update(user._id, {
-      lastDataMutationAt: updatedTerm.updatedAt,
+    await this.usersRepository.findByIdAndUpdate(user._id, {
+      lastDataMutationAt: updatedTerm?.updatedAt,
     });
 
     return updatedTerm;
@@ -109,24 +105,28 @@ export class TermsController {
   @Delete(':id')
   async delete(
     @Param('id', ParseObjectIdPipe)
-    id: ObjectId,
+    id: Types.ObjectId,
     @ActiveUser()
     user: User,
   ) {
-    const termToUpdate = await this.termsRepository.findOneBy({ _id: id });
+    const termToUpdate = await this.termsRepository.findById(id).where({ deletedAt: null });
 
-    assert(termToUpdate, new NotFoundException('Term not found'));
+    if (!termToUpdate) return;
 
     assert(termToUpdate.owner.equals(user._id), new ForbiddenException('You are not the owner of this term'));
 
-    await this.termsRepository.update(termToUpdate._id, {
-      deletedAt: this.timeService.now(),
-    });
+    const deletedTerm = await this.termsRepository.findByIdAndUpdate(
+      termToUpdate._id,
+      {
+        deletedAt: this.timeService.now(),
+      },
+      { new: true },
+    );
 
-    const deletedTerm = await this.termsRepository.findOneByOrFail({ _id: id });
+    assert(deletedTerm?.deletedAt, 'Term was not deleted');
 
-    await this.usersRepository.update(user._id, {
-      lastDataMutationAt: deletedTerm.updatedAt,
+    await this.usersRepository.findOneAndUpdate(user._id, {
+      lastDataMutationAt: deletedTerm.deletedAt,
     });
   }
 }

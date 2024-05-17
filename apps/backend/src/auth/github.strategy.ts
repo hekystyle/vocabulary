@@ -1,10 +1,10 @@
 import assert from 'assert';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { InjectModel } from '@nestjs/mongoose';
 import { PassportStrategy } from '@nestjs/passport';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Model } from 'mongoose';
 import github from 'passport-github2';
-import { MongoRepository } from 'typeorm';
 import type { AppConfigService } from '@/config/app-config.service.js';
 import { IdentityProvider, IdentityProviderType } from '@/users/identity-provider.entity.js';
 import { User } from '@/users/user.entity.js';
@@ -16,10 +16,10 @@ export class GitHubStrategy extends PassportStrategy(github.Strategy, 'github') 
   constructor(
     @Inject(ConfigService)
     configService: AppConfigService,
-    @InjectRepository(User)
-    private readonly userRepository: MongoRepository<User>,
-    @InjectRepository(IdentityProvider)
-    private readonly identityProviderRepository: MongoRepository<IdentityProvider>,
+    @InjectModel(User.name)
+    private readonly userRepository: Model<User>,
+    @InjectModel(IdentityProvider.name)
+    private readonly identityProviderRepository: Model<IdentityProvider>,
   ) {
     super({
       clientID: configService.get('github.clientId', { infer: true }),
@@ -33,7 +33,7 @@ export class GitHubStrategy extends PassportStrategy(github.Strategy, 'github') 
   async validate(_accessToken: string, _refreshToken: string, profile: github.Profile): Promise<User> {
     this.logger.debug({ msg: 'Searching for user with linked GitHub account ...', githubId: profile.id });
 
-    const identity = await this.identityProviderRepository.findOneBy({
+    const identity = await this.identityProviderRepository.findOne({
       type: IdentityProviderType.GitHub,
       id: profile.id,
     });
@@ -44,14 +44,18 @@ export class GitHubStrategy extends PassportStrategy(github.Strategy, 'github') 
         userId: identity.user.toString(),
         githubId: profile.id,
       });
-      return await this.userRepository.findOneByOrFail({ _id: identity.user });
+      const user = await this.userRepository.findById(identity.user);
+
+      assert(user, 'User not found by linked GitHub account');
+
+      return user;
     }
 
     assert(profile.emails, 'Emails are required');
 
     const emails = profile.emails.map(email => email.value);
 
-    let user = await this.userRepository.findOneBy({
+    let user = await this.userRepository.findOne({
       email: { $in: emails },
     });
 
@@ -62,13 +66,11 @@ export class GitHubStrategy extends PassportStrategy(github.Strategy, 'github') 
         github: { id: profile.id, emails },
       });
 
-      await this.identityProviderRepository.save(
-        this.identityProviderRepository.create({
-          id: profile.id,
-          type: IdentityProviderType.GitHub,
-          user: user._id,
-        }),
-      );
+      await this.identityProviderRepository.create({
+        id: profile.id,
+        type: IdentityProviderType.GitHub,
+        user: user._id,
+      });
 
       return user;
     }
@@ -83,20 +85,16 @@ export class GitHubStrategy extends PassportStrategy(github.Strategy, 'github') 
       githubId: profile.id,
     });
 
-    user = this.userRepository.create({
+    user = await this.userRepository.create({
       email,
       passwordHash: null,
     });
 
-    await this.userRepository.save(user);
-
-    await this.identityProviderRepository.save(
-      this.identityProviderRepository.create({
-        id: profile.id,
-        type: IdentityProviderType.GitHub,
-        user: user._id,
-      }),
-    );
+    await this.identityProviderRepository.create({
+      id: profile.id,
+      type: IdentityProviderType.GitHub,
+      user: user._id,
+    });
 
     return user;
   }

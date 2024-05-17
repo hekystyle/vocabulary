@@ -2,10 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppConfig } from '@/config/configuration.js';
-import { IdentityProvider } from '@/users/identity-provider.entity.js';
-import { User } from '../users/user.entity.js';
+import { UsersModule } from '@/users/users.module.js';
 import { AuthController } from './auth.controller.js';
 import { AuthService } from './auth.service.js';
 import { GitHubStrategy } from './github.strategy.js';
@@ -17,7 +15,6 @@ import { PasswordStrategy } from './password.strategy.js';
   exports: [],
   imports: [
     PassportModule,
-    TypeOrmModule.forFeature([User, IdentityProvider]),
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService<AppConfig, true>) => ({
@@ -25,6 +22,7 @@ import { PasswordStrategy } from './password.strategy.js';
         signOptions: {},
       }),
     }),
+    UsersModule,
   ],
   providers: [AuthService, PasswordStrategy, JwtStrategy, GitHubStrategy],
 })

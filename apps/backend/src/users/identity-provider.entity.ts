@@ -1,25 +1,25 @@
-import { ObjectId } from 'mongodb';
-import { Column, Entity, ObjectIdColumn } from 'typeorm';
+import { buildSchema, prop } from '@typegoose/typegoose';
+import mongoose, { Types } from 'mongoose';
 import { User } from './user.entity.js';
 
 export enum IdentityProviderType {
   GitHub = 'github',
 }
 
-@Entity()
 export class IdentityProvider {
-  @ObjectIdColumn()
-  _id!: ObjectId;
+  declare _id: Types.ObjectId;
 
-  @Column()
+  @prop({ required: true, type: mongoose.Types.ObjectId })
   user!: User['_id'];
 
-  @Column({ type: 'enum', enum: IdentityProviderType })
+  @prop({ required: true, enum: IdentityProviderType })
   type!: IdentityProviderType;
 
   /**
    * Identity provider ID.
    */
-  @Column()
+  @prop({ required: true })
   id!: string;
 }
+
+export const identityProviderSchema = buildSchema(IdentityProvider);
