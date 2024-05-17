@@ -4653,10 +4653,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/qs@npm:6.9.12":
-  version: 6.9.12
-  resolution: "@types/qs@npm:6.9.12"
-  checksum: 10c0/21a74f2b78d0839cee37f1a632f3361352f7dceac9edffd117227a695a13e58e18c138aac1f29403f2408221e678f538ca0b37d55012f8bba96d55905edbfe82
+"@types/qs@npm:6.9.15":
+  version: 6.9.15
+  resolution: "@types/qs@npm:6.9.15"
+  checksum: 10c0/49c5ff75ca3adb18a1939310042d273c9fc55920861bd8e5100c8a923b3cda90d759e1a95e18334092da1c8f7b820084687770c83a1ccef04fb2c6908117c823
   languageName: node
   linkType: hard
 
@@ -13976,7 +13976,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:6.11.2, qs@npm:^6.11.0":
+"qs@npm:6.12.1":
+  version: 6.12.1
+  resolution: "qs@npm:6.12.1"
+  dependencies:
+    side-channel: "npm:^1.0.6"
+  checksum: 10c0/439e6d7c6583e7c69f2cab2c39c55b97db7ce576e4c7c469082b938b7fc8746e8d547baacb69b4cd2b6666484776c3f4840ad7163a4c5326300b0afa0acdd84b
+  languageName: node
+  linkType: hard
+
+"qs@npm:^6.11.0":
   version: 6.11.2
   resolution: "qs@npm:6.11.2"
   dependencies:
@@ -15864,6 +15873,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"side-channel@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "side-channel@npm:1.0.6"
+  dependencies:
+    call-bind: "npm:^1.0.7"
+    es-errors: "npm:^1.3.0"
+    get-intrinsic: "npm:^1.2.4"
+    object-inspect: "npm:^1.13.1"
+  checksum: 10c0/d2afd163dc733cc0a39aa6f7e39bf0c436293510dbccbff446733daeaf295857dbccf94297092ec8c53e2503acac30f0b78830876f0485991d62a90e9cad305f
+  languageName: node
+  linkType: hard
+
 "sift@npm:16.0.1":
   version: 16.0.1
   resolution: "sift@npm:16.0.1"
@@ -17644,7 +17665,7 @@ __metadata:
     "@tsconfig/strictest": "npm:2.0.3"
     "@tsconfig/vite-react": "npm:3.0.1"
     "@types/node": "npm:20.11.28"
-    "@types/qs": "npm:6.9.12"
+    "@types/qs": "npm:6.9.15"
     "@types/ramda": "npm:0.29.11"
     "@types/react": "npm:18.2.64"
     "@types/react-dom": "npm:18.2.21"
@@ -17675,7 +17696,7 @@ __metadata:
     jsdom: "npm:23.2.0"
     nx: "npm:17.3.2"
     prettier: "npm:3.2.5"
-    qs: "npm:6.11.2"
+    qs: "npm:6.12.1"
     ramda: "npm:0.29.1"
     react: "npm:18.2.0"
     react-bootstrap: "npm:2.10.1"
