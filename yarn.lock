@@ -4242,10 +4242,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/cypress@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@tsconfig/cypress@npm:1.0.1"
-  checksum: 10c0/28e034beab562abf15ce1623ce8dc5d7561b456f59812baa0712aa031456d5ed50a259f31d90997efbb110bd82c8c5dd7d1f69688d12157d0ad7de54440304e1
+"@tsconfig/cypress@npm:1.0.2":
+  version: 1.0.2
+  resolution: "@tsconfig/cypress@npm:1.0.2"
+  checksum: 10c0/5624bbbd70f3c052f4638ca2378b3f6c319e382da29b79cac8fd6f362a915805f7877a578ce3b688bdca3baeda9bcb34077009e5b5d004598a92b7d51a768e3d
   languageName: node
   linkType: hard
 
@@ -9698,7 +9698,7 @@ __metadata:
   resolution: "frontend-e2e@workspace:apps/frontend-e2e"
   dependencies:
     "@testing-library/cypress": "npm:10.0.1"
-    "@tsconfig/cypress": "npm:1.0.1"
+    "@tsconfig/cypress": "npm:1.0.2"
     "@tsconfig/node18": "npm:18.2.2"
     "@types/node": "npm:20.11.28"
     cypress: "npm:13.7.0"
