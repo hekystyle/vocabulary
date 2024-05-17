@@ -3151,18 +3151,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/config@npm:3.1.1":
-  version: 3.1.1
-  resolution: "@nestjs/config@npm:3.1.1"
+"@nestjs/config@npm:3.2.2":
+  version: 3.2.2
+  resolution: "@nestjs/config@npm:3.2.2"
   dependencies:
-    dotenv: "npm:16.3.1"
+    dotenv: "npm:16.4.5"
     dotenv-expand: "npm:10.0.0"
     lodash: "npm:4.17.21"
-    uuid: "npm:9.0.0"
+    uuid: "npm:9.0.1"
   peerDependencies:
     "@nestjs/common": ^8.0.0 || ^9.0.0 || ^10.0.0
-    reflect-metadata: ^0.1.13
-  checksum: 10c0/d8e463c3000e2a412f2a69f57dc49706df1c7653d14e70e9261df4b3e99d69acb844cc417609354d07731a6b2bbada73db1e5263ba29d573f60deb9a173476eb
+    rxjs: ^7.1.0
+  checksum: 10c0/17340bd5bd40078b050a73d2e86bb3b644589cf00dab7964ccf5204df11f1c42d77a58c9fd63d0ba8532ed5d66607ffd34a2419e2e37d195dbcf6e8894c23d96
   languageName: node
   linkType: hard
 
@@ -6238,7 +6238,7 @@ __metadata:
     "@faker-js/faker": "npm:8.3.1"
     "@nestjs/cli": "npm:10.3.2"
     "@nestjs/common": "npm:10.3.3"
-    "@nestjs/config": "npm:3.1.1"
+    "@nestjs/config": "npm:3.2.2"
     "@nestjs/core": "npm:10.3.3"
     "@nestjs/jwt": "npm:10.2.0"
     "@nestjs/mongoose": "npm:10.0.4"
@@ -7973,7 +7973,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:16.3.1, dotenv@npm:~16.3.1":
+"dotenv@npm:16.4.5":
+  version: 16.4.5
+  resolution: "dotenv@npm:16.4.5"
+  checksum: 10c0/48d92870076832af0418b13acd6e5a5a3e83bb00df690d9812e94b24aff62b88ade955ac99a05501305b8dc8f1b0ee7638b18493deb6fe93d680e5220936292f
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:~16.3.1":
   version: 16.3.1
   resolution: "dotenv@npm:16.3.1"
   checksum: 10c0/b95ff1bbe624ead85a3cd70dbd827e8e06d5f05f716f2d0cbc476532d54c7c9469c3bc4dd93ea519f6ad711cb522c00ac9a62b6eb340d5affae8008facc3fbd7
@@ -17424,12 +17431,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:9.0.0":
-  version: 9.0.0
-  resolution: "uuid@npm:9.0.0"
+"uuid@npm:9.0.1":
+  version: 9.0.1
+  resolution: "uuid@npm:9.0.1"
   bin:
     uuid: dist/bin/uuid
-  checksum: 10c0/8867e438990d1d33ac61093e2e4e3477a2148b844e4fa9e3c2360fa4399292429c4b6ec64537eb1659c97b2d10db349c673ad58b50e2824a11e0d3630de3c056
+  checksum: 10c0/1607dd32ac7fc22f2d8f77051e6a64845c9bce5cd3dd8aa0070c074ec73e666a1f63c7b4e0f4bf2bc8b9d59dc85a15e17807446d9d2b17c8485fbc2147b27f9b
   languageName: node
   linkType: hard
 
