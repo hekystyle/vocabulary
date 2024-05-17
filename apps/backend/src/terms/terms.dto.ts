@@ -5,6 +5,8 @@ export const termDtoSchema = z.object({
   partOfSpeech: z.string(),
   translation: z.string(),
   definition: z.string(),
+  answersCount: z.number(),
+  correctAnswersCount: z.number(),
   tags: z.array(z.string()),
 });
 

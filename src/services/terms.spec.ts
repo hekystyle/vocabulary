@@ -33,7 +33,7 @@ it('should get terms', async () => {
     undefined,
   );
 
-  expect(result.terms).toEqual([
+  expect(result.data).toEqual([
     {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       id: expect.any(Number),
@@ -51,7 +51,7 @@ it('should get terms', async () => {
       createdAt: expect.any(Date),
     },
   ]);
-  expect(result.total).toBe(2);
+  expect(result.meta.totalItems).toBe(2);
 });
 
 it('should get term by id', async () => {
@@ -76,7 +76,7 @@ it('should create term', async () => {
 it('should update term', async () => {
   const id = await db.terms.add({ word: 'word1' } as Term);
 
-  const result = await repository.update({ id, word: 'word2' } as Term);
+  const result = await repository.update({ id, dto: { word: 'word2' } as Term });
 
   expect(result).toEqual({ id, word: 'word2' });
 });

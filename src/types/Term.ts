@@ -1,3 +1,4 @@
+import { Key } from 'react';
 import { AnswersCountable } from '@/utils/types';
 
 export interface TermV1 extends AnswersCountable {
@@ -9,7 +10,7 @@ export interface TermV1 extends AnswersCountable {
 }
 
 export interface TermV2 extends Omit<TermV1, 'id'> {
-  id?: number;
+  id: Key;
   readonly createdAt?: Date;
 }
 

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Tooltip } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import { FC, useMemo } from 'react';
+import { useMemo } from 'react';
 import { SpinnerBox } from '@/components/SpinnerBox';
 import { Table } from '@/components/Table';
 import { Sortable, Sorter, useFilter } from '@/filter';
@@ -49,14 +49,14 @@ const getColumns = ({ sortBy }: Sortable): ColumnsType<Term> => [
     align: 'right',
     fixed: 'right',
     width: '0',
-    title: () => <AddButton />,
+    title: <AddButton />,
     render: (_, record) => <Actions record={record} />,
   },
 ];
 
 const PAGE_SIZE = 20 as const;
 
-export const ListTable: FC = () => {
+export const ListTable = () => {
   const {
     filter: { page: currentPage, sortBy = [{ field: 'createdAt', order: 'descend' }] },
     update: updateFilter,
@@ -78,7 +78,8 @@ export const ListTable: FC = () => {
 
   if (error) return <p>Error: {error instanceof Error ? error.message : 'Unknown'}</p>;
 
-  const { terms, total } = data ?? {};
+  const { data: terms, meta } = data ?? {};
+  const total = meta?.totalItems ?? 0;
   return (
     <Table
       columns={columns}

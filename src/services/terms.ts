@@ -1,15 +1,29 @@
 // eslint-disable-next-line max-classes-per-file
+import { Key } from 'react';
 import { Sortable } from '@/filter';
 import { AppDb } from '@/services/db';
 import { StrictOmit } from '@/types/StrictOmit';
 import { Term } from '@/types/Term';
 import { computeSkip, Pagination } from '@/utils/computeSkip';
 
+export interface FindManyResult<T> {
+  data: T[];
+  meta: {
+    totalItems: number;
+  };
+}
+
+export type UpdateTermDto = StrictOmit<Term, 'id' | 'createdAt'>;
+export interface UpdateTermArgs {
+  id: Key;
+  dto: UpdateTermDto;
+}
+
 export interface TermsRepository {
-  get(filter: Pagination & Sortable, signal: AbortSignal | undefined): Promise<{ terms: Term[]; total: number }>;
-  getById(id: Exclude<Term['id'], undefined>, signal: AbortSignal | undefined): Promise<Term | undefined>;
+  get(filter: Pagination & Sortable, signal: AbortSignal | undefined): Promise<FindManyResult<Term>>;
+  getById(id: Key, signal: AbortSignal | undefined): Promise<Term | undefined>;
   create(term: StrictOmit<Term, 'id' | 'createdAt'>): Promise<Term | undefined>;
-  update(term: Term): Promise<Term | undefined>;
+  update(args: UpdateTermArgs): Promise<Term | undefined>;
   delete(id: Exclude<Term['id'], undefined>): Promise<void>;
 
   getWords(search: string, signal: AbortSignal | undefined): Promise<string[]>;
@@ -20,7 +34,7 @@ export interface TermsRepository {
 export class IndexedDbTermsRepository implements TermsRepository {
   constructor(private db: AppDb) {}
 
-  public async get(filter: Pagination & Sortable): Promise<{ terms: Term[]; total: number }> {
+  public async get(filter: Pagination & Sortable): Promise<FindManyResult<Term>> {
     const skip = computeSkip(filter);
 
     const sorter = filter.sortBy[0];
@@ -31,12 +45,12 @@ export class IndexedDbTermsRepository implements TermsRepository {
       query.reverse();
     }
 
-    const [terms, total] = await Promise.all([
+    const [data, totalItems] = await Promise.all([
       query.offset(skip).limit(filter.pageSize).toArray(),
       this.db.terms.count(),
     ]);
 
-    return { terms, total };
+    return { data, meta: { totalItems } };
   }
 
   public async getById(id: Exclude<Term['id'], undefined>): Promise<Term | undefined> {
@@ -44,12 +58,15 @@ export class IndexedDbTermsRepository implements TermsRepository {
   }
 
   public async create(term: Omit<Term, 'id'>): Promise<Term | undefined> {
-    const key = await this.db.terms.add(term);
+    const key = await this.db.terms.add(
+      // @ts-expect-error fixed by Dexie v4
+      term,
+    );
     return await this.db.terms.get(key);
   }
 
-  public async update(term: Term): Promise<Term | undefined> {
-    const key = await this.db.terms.put(term);
+  public async update({ id, dto }: UpdateTermArgs): Promise<Term | undefined> {
+    const key = await this.db.terms.put({ id, ...dto });
     return await this.db.terms.get(key);
   }
 
@@ -100,7 +117,7 @@ export class DelayedTermsRepository implements TermsRepository {
     });
   }
 
-  async get(filter: Pagination & Sortable, signal: AbortSignal | undefined): Promise<{ terms: Term[]; total: number }> {
+  async get(filter: Pagination & Sortable, signal: AbortSignal | undefined): Promise<FindManyResult<Term>> {
     await this.wait();
     return await this.repo.get(filter, signal);
   }
@@ -115,9 +132,9 @@ export class DelayedTermsRepository implements TermsRepository {
     return await this.repo.create(term);
   }
 
-  async update(term: Term): Promise<Term | undefined> {
+  async update(args: UpdateTermArgs): Promise<Term | undefined> {
     await this.wait();
-    return await this.repo.update(term);
+    return await this.repo.update(args);
   }
 
   async delete(id: Exclude<Term['id'], undefined>): Promise<void> {

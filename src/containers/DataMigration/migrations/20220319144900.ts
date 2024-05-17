@@ -21,6 +21,7 @@ export const up: Migration = async (db: AppDb) => {
   for (const term of terms) {
     await db.terms.add({
       ...term,
+      // @ts-expect-error fixed by Dexie v4
       id: undefined,
       createdAt: new Date(term.id),
       tags: [],

@@ -10,12 +10,14 @@ function getFakeTerms() {
   return (
     [
       {
+        id: 0,
         word: 'car',
         definition: 'a road vehicle with four wheels; usually propelled by an internal combustion engine',
         partOfSpeech: 'noun',
         translation: 'auto',
       },
       {
+        id: 0,
         word: 'computer',
         definition:
           'an electronic device for storing and processing data, typically in binary form, according to instructions given to it in a variable program',

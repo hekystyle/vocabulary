@@ -31,5 +31,5 @@ export const prepareSessionQueue =
 
     return groupWith((a, b) => a.score === b.score, computed)
       .map(list => shuffle(list))
-      .reduce<Array<undefined | number>>((queue, newTerms) => [...queue, ...newTerms.map(p => p.id)], []);
+      .reduce<Array<Term['id']>>((queue, newTerms) => [...queue, ...newTerms.map(p => p.id)], []);
   };

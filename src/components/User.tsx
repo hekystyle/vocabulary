@@ -1,20 +1,37 @@
 import { LoadingOutlined, LoginOutlined } from '@ant-design/icons';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { Avatar, Button, Dropdown } from 'antd';
-import { FC } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '@/auth';
-import { useFirebaseAuth } from '@/services/firebase';
+import { useSetRecoilState } from 'recoil';
+import { userState } from '@/auth/userState';
+import { useServices } from '@/services';
 import { useAppNotification } from '@/services/Notifications';
+import { QUERY_KEYS } from '@/utils/queryKeys';
 
-export const User: FC = () => {
-  const user = useUser();
-  const auth = useFirebaseAuth();
+export const User = () => {
   const notification = useAppNotification();
   const navigate = useNavigate();
+  const { authApiClient } = useServices();
+
+  const profileQuery = useQuery({
+    queryKey: QUERY_KEYS.auth.profile(),
+    queryFn: async ({ signal }) => await authApiClient.getUserProfile(signal),
+    staleTime: 0,
+    gcTime: 0,
+    meta: {
+      errorMessage: 'Failed to fetch user profile',
+    },
+  });
+
+  const setUser = useSetRecoilState(userState);
+
+  useEffect(() => {
+    setUser(profileQuery.data);
+  }, [profileQuery.data, setUser]);
 
   const { mutateAsync: logout, isPending: isSigningOut } = useMutation({
-    mutationFn: () => auth.signOut(),
+    mutationFn: () => authApiClient.signOut(),
   });
 
   const handleLogoutButtonClick = () => {
@@ -32,11 +49,11 @@ export const User: FC = () => {
       });
   };
 
-  if (isSigningOut || user === 'loading') {
+  if (isSigningOut || profileQuery.isLoading) {
     return <LoadingOutlined spin style={{ color: 'white' }} />;
   }
 
-  return !user ? (
+  return !profileQuery.data ? (
     <Button icon={<LoginOutlined />} size="large" type="primary" onClick={() => navigate('/auth')}>
       Login
     </Button>
@@ -46,7 +63,7 @@ export const User: FC = () => {
         items: [{ key: 'logout', label: 'Logout', onClick: handleLogoutButtonClick }],
       }}
     >
-      <Avatar alt={user.displayName ?? user.uid} src={user.photoURL} />
+      <Avatar alt={profileQuery.data.email} src={profileQuery.data.photoURL} />
     </Dropdown>
   );
 };

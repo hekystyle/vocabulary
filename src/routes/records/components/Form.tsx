@@ -1,6 +1,7 @@
 import { Button, Input /* AutoComplete */ } from 'antd';
-import { useState, FC /* useMemo */ } from 'react';
+import { useState, FC /* useMemo */, Key } from 'react';
 import { Tags } from '@/components/Tags';
+import { StrictOmit } from '@/types/StrictOmit';
 import { Term } from '@/types/Term';
 // import { useServices } from '@/services';
 // import { useQuery } from '@tanstack/react-query';
@@ -8,16 +9,18 @@ import { Term } from '@/types/Term';
 import { DefinitionsList } from './DefinitionsList';
 // import { options } from '../utils/options';
 
+export type FormTerm = StrictOmit<Term, 'id'> & { id?: Key };
+
 export interface FormProps {
   defaultValue?: Term;
-  onSubmit: (values: Term) => void;
+  onSubmit: (values: FormTerm) => void;
   onCancel: () => void;
 }
 
 export const Form: FC<FormProps> = ({ defaultValue: term, onCancel, onSubmit }) => {
   // const { termsRepository } = useServices();
 
-  const [entry, setEntry] = useState<Term>({
+  const [entry, setEntry] = useState<FormTerm>({
     word: '',
     partOfSpeech: '',
     translation: '',

@@ -1,8 +1,9 @@
+import { Key } from 'react';
 import { AppDb } from '@/services/db';
 
 export const increaseTermAnswers =
   (db: AppDb) =>
-  async (id: number, increaseCorrect: boolean): Promise<void> => {
+  async (id: Key, increaseCorrect: boolean): Promise<void> => {
     const term = await db.terms.get(id);
     if (term) {
       term.answersCount += 1;

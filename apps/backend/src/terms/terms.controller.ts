@@ -3,6 +3,7 @@ import {
   Body,
   Controller,
   Get,
+  Query,
   Param,
   Patch,
   Post,
@@ -12,11 +13,14 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
+import { DEFAULT_LIMIT, DEFAULT_MAX_LIMIT, Paginate, Paginated, type PaginateQuery } from 'nestjs-paginate';
+import { SortBy } from 'nestjs-paginate/lib/helper.js';
+import { z } from 'zod';
 import { ParseObjectIdPipe } from '@/common/parse-objectid.pipe.js';
 import { TimeService } from '@/common/time.service.js';
 import { ZodPipe } from '@/common/zod.pipe.js';
-import { Pagination, type PaginationShape } from '@/pagination.js';
 import { ActiveUser } from '@/users/active-user.decorator.js';
+import { StrictOmit } from '@/utils/StrictOmit.js';
 import { User } from '../users/user.entity.js';
 import { Term } from './term.entity.js';
 import { type TermDto, termDtoSchema } from './terms.dto.js';
@@ -35,28 +39,92 @@ export class TermsController {
   async find(
     @ActiveUser()
     user: User,
-    @Pagination()
-    pagination: PaginationShape,
-  ) {
-    const [items, total] = await Promise.all([
-      this.termsRepository
-        .find({ owner: user._id, deletedAt: null })
-        .skip(pagination.skip)
-        .limit(pagination.pageSize)
-        .exec(),
-      this.termsRepository.countDocuments({ owner: user._id }),
-    ]);
+    @Paginate() query: PaginateQuery,
+  ): Promise<StrictOmit<Paginated<Term>, 'links'>> {
+    // prevent negative page
+    const page = Math.max(query.page ?? 1, 1);
+    // limit the number of items per page
+    const limit = Math.min(query.limit ?? DEFAULT_LIMIT, DEFAULT_MAX_LIMIT);
+
+    const dbQuery = this.termsRepository
+      .find({
+        owner: user._id,
+        ...Object.entries(query.filter ?? {}).reduce((acc, [column, filter]) => {
+          const [operator, value] = ([filter].flat().at(0) ?? '').split(':');
+
+          return {
+            ...acc,
+            [column]: operator ? { [operator]: value } : {},
+          };
+        }, {}),
+      })
+      .sort(
+        query.sortBy?.reduce(
+          (acc, [column, order]) => ({
+            ...acc,
+            [column]: order,
+          }),
+          {},
+        ),
+      )
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    const [items, count] = await Promise.all([dbQuery.exec(), dbQuery.countDocuments()]);
 
     return {
       data: items,
       meta: {
-        pagination: {
-          ...pagination,
-          total,
-          pageCount: Math.ceil(total / pagination.pageSize),
-        },
+        currentPage: page,
+        filter: query.filter ?? {},
+        itemsPerPage: limit,
+        search: '',
+        searchBy: [],
+        select: [],
+        sortBy: (query.sortBy as SortBy<Term>) ?? [],
+        totalItems: count,
+        totalPages: Math.ceil(count / limit),
       },
     };
+  }
+
+  @Get('distinct')
+  async distinct(
+    @Query('field', new ZodPipe(z.enum(['partOfSpeech', 'tags'])))
+    field: 'partOfSpeech' | 'tags',
+    @Query('search')
+    search: string | undefined,
+    @ActiveUser()
+    user: User,
+  ): Promise<string[]> {
+    const terms = await this.termsRepository.find({
+      where: {
+        owner: user._id,
+        [field]: {
+          $regex: search,
+          $options: 'i',
+        },
+      },
+      select: [field],
+    });
+
+    return Array.from(new Set(...terms.flatMap(term => term[field])));
+  }
+
+  @Get(':id')
+  async findOne(
+    @Param('id', ParseObjectIdPipe)
+    id: Types.ObjectId,
+    @ActiveUser()
+    user: User,
+  ) {
+    const term = await this.termsRepository.findById(id);
+
+    assert(term, new NotFoundException('Term not found'));
+
+    assert(term.owner.equals(user._id), new ForbiddenException('You are not the owner of this term'));
+
+    return term;
   }
 
   @Post()
@@ -81,7 +149,7 @@ export class TermsController {
   @Patch(':id')
   async patch(
     @Param('id', ParseObjectIdPipe)
-    id: ObjectId,
+    id: Types.ObjectId,
     @ActiveUser()
     user: User,
     @Body(new ZodPipe(termDtoSchema.partial()))
@@ -109,14 +177,14 @@ export class TermsController {
     @ActiveUser()
     user: User,
   ) {
-    const termToUpdate = await this.termsRepository.findById(id).where({ deletedAt: null });
+    const termToDelete = await this.termsRepository.findById(id).where({ deletedAt: null });
 
-    if (!termToUpdate) return;
+    if (!termToDelete) return;
 
-    assert(termToUpdate.owner.equals(user._id), new ForbiddenException('You are not the owner of this term'));
+    assert(termToDelete.owner.equals(user._id), new ForbiddenException('You are not the owner of this term'));
 
     const deletedTerm = await this.termsRepository.findByIdAndUpdate(
-      termToUpdate._id,
+      termToDelete._id,
       {
         deletedAt: this.timeService.now(),
       },

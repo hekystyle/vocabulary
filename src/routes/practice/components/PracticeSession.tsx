@@ -37,7 +37,7 @@ export const PracticeSession: FC = () => {
   const playAfterReveal = config?.playAfterReveal ?? false;
 
   const { data: actualRecord, isFetching } = useQuery({
-    queryKey: QUERY_KEYS.terms.id(actualRecordId),
+    queryKey: QUERY_KEYS.terms.id(actualRecordId ?? ''),
     queryFn: ({ signal }) => (!isNil(actualRecordId) ? termsRepository.getById(actualRecordId, signal) : undefined),
     enabled: !isNil(actualRecordId),
   });

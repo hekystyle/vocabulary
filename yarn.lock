@@ -6265,6 +6265,7 @@ __metadata:
     express-session: "npm:1.18.0"
     mongodb-memory-server: "npm:9.2.0"
     mongoose: "npm:8.2.4"
+    nestjs-paginate: "npm:8.6.2"
     nestjs-session: "npm:3.0.1"
     passport: "npm:0.7.0"
     passport-github2: "npm:0.1.12"
@@ -6743,9 +6744,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001449":
-  version: 1.0.30001456
-  resolution: "caniuse-lite@npm:1.0.30001456"
-  checksum: 10c0/a40dbc996af9683eac5e4e74c1b713e6b4744a9a8780b0ee9d47a866fb8628565e5faaf3497064438f1e92a661a8f9570cc2ec722d7693339def7ea9f31dc84d
+  version: 1.0.30001579
+  resolution: "caniuse-lite@npm:1.0.30001579"
+  checksum: 10c0/4003970f8d01a5fa314e39f4a21751dc750a530f3d19aed225e18e8e02892b590b8b0debfa0961eae9bc0e49b77bfb17cf30d2469540e428a8305e3cc9164fb8
   languageName: node
   linkType: hard
 
@@ -12693,6 +12694,21 @@ __metadata:
   version: 2.6.2
   resolution: "neo-async@npm:2.6.2"
   checksum: 10c0/c2f5a604a54a8ec5438a342e1f356dff4bc33ccccdb6dc668d94fe8e5eccfc9d2c2eea6064b0967a767ba63b33763f51ccf2cd2441b461a7322656c1f06b3f5d
+  languageName: node
+  linkType: hard
+
+"nestjs-paginate@npm:8.6.2":
+  version: 8.6.2
+  resolution: "nestjs-paginate@npm:8.6.2"
+  dependencies:
+    lodash: "npm:^4.17.21"
+  peerDependencies:
+    "@nestjs/common": ^10.3.3
+    "@nestjs/swagger": ^7.3.0
+    express: ^4.18.2
+    fastify: ^4.26.1
+    typeorm: ^0.3.17
+  checksum: 10c0/5661bb5485064cfaf188902dfdade5095ea7489cfffa2a0d4d24ec267a1ce70071397350527f31e449cf9b27d292772a3d287eab9fffae28f4596e2a427e101a
   languageName: node
   linkType: hard
 
