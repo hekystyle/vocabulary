@@ -19,7 +19,7 @@
     "@tanstack/react-query-devtools": "5.36.2",
     "antd": "5.15.2",
     "bootstrap": "5.3.3",
-    "dexie": "3.2.6",
+    "dexie": "3.2.7",
     "firebase": "9.23.0",
     "qs": "6.12.1",
     "ramda": "0.29.1",

@@ -7894,12 +7894,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dexie@npm:3.2.6":
-  version: 3.2.6
-  resolution: "dexie@npm:3.2.6"
-  dependencies:
-    karma-safari-launcher: "npm:^1.0.0"
-  checksum: 10c0/9d2ffd14552845dddcbbdf94d7cbdf12ab9890d25a9f1d6dac7f16de1fd7ba109860b4b35a1862e13b3478aeef8cdf3f5dd901213ee2dffbc28e669e8b4615d8
+"dexie@npm:3.2.7":
+  version: 3.2.7
+  resolution: "dexie@npm:3.2.7"
+  checksum: 10c0/5d7dad9deb3a24b676f8c630a2517ec0e243906fbcbd3cc7946798ee4ff05766eae7b6dd29deb0f090151552f136ac70a2c0bf0a8a8dbd840e643710efb80347
   languageName: node
   linkType: hard
 
@@ -11670,15 +11668,6 @@ __metadata:
   version: 2.5.1
   resolution: "kareem@npm:2.5.1"
   checksum: 10c0/30c6b9a39556d69108cac7cf7f87ca8c9f79d37ac58f2224e18d5e5b21191bbfbacee2070064f3c887bc00229d88b8bc728bcc98b07306edeaba85880f100b24
-  languageName: node
-  linkType: hard
-
-"karma-safari-launcher@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "karma-safari-launcher@npm:1.0.0"
-  peerDependencies:
-    karma: ">=0.9"
-  checksum: 10c0/7e8a005b01b19db6c1bc6019dc724a335c1bd47df9d63a2ae18caa200149409f210f85b67b3efec3894994d6506bcd186280dbc470c96d7d61e4afa18036d50c
   languageName: node
   linkType: hard
 
@@ -17681,7 +17670,7 @@ __metadata:
     "@vitest/coverage-v8": "npm:1.4.0"
     antd: "npm:5.15.2"
     bootstrap: "npm:5.3.3"
-    dexie: "npm:3.2.6"
+    dexie: "npm:3.2.7"
     eslint: "npm:8.57.0"
     eslint-config-airbnb: "npm:19.0.4"
     eslint-config-airbnb-typescript: "npm:17.1.0"
