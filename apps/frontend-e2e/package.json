@@ -10,7 +10,7 @@
     "@testing-library/cypress": "10.0.1",
     "@tsconfig/cypress": "1.0.2",
     "@tsconfig/node18": "18.2.4",
-    "@types/node": "20.11.28",
+    "@types/node": "20.12.12",
     "cypress": "13.7.0",
     "typescript": "5.4.5"
   },
