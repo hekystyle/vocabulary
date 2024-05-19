@@ -80,7 +80,7 @@
   "resolutions": {
     "tsconfig-paths": "^4.0.0",
     "vite": "5.0.13",
-    "bson": "6.5.0"
+    "bson": "6.7.0"
   },
   "scripts": {
     "start": "vite",
