@@ -2,15 +2,10 @@
   "name": "vocabulary",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "yarn@4.1.1",
+  "packageManager": "pnpm@9.9.0",
   "engines": {
     "node": "^20.0.0"
   },
-  "workspaces": [
-    ".",
-    "apps/*",
-    "packages/*"
-  ],
   "dependencies": {
     "@ant-design/icons": "5.3.7",
     "@faker-js/faker": "8.4.1",
