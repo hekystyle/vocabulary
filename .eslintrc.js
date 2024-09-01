@@ -14,7 +14,12 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   parserOptions: {
-    project: ['./tsconfig.json', './apps/frontend-e2e/tsconfig.json', './apps/backend/tsconfig.json'],
+    project: [
+      './tsconfig.json',
+      './apps/frontend/tsconfig.json',
+      './apps/frontend-e2e/tsconfig.json',
+      './apps/backend/tsconfig.json',
+    ],
   },
   rules: {
     'no-console': ['error', { allow: ['warn', 'error'] }],

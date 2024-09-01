@@ -163,7 +163,7 @@ jobs:
         with:
           working-directory: ./apps/frontend-e2e
           install: false
-          start: pnpm -w run serve:frontend
+          start: pnpm -w run serve
           wait-on: 'http://localhost:3000'
           browser: chrome
 
