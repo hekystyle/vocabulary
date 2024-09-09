@@ -77,7 +77,7 @@ importers:
         specifier: 3.2.5
         version: 3.2.5
 
-  apps/backend:
+  packages/backend:
     dependencies:
       '@nestjs/common':
         specifier: 10.3.3
@@ -219,7 +219,7 @@ importers:
         specifier: 1.6.0
         version: 1.6.0(@types/node@20.12.12)(jsdom@23.2.0)(terser@5.31.6)
 
-  apps/frontend:
+  packages/frontend:
     dependencies:
       '@ant-design/icons':
         specifier: 5.3.7
@@ -355,7 +355,7 @@ importers:
         specifier: 1.6.0
         version: 1.6.0(@types/node@20.12.12)(jsdom@23.2.0)(terser@5.31.6)
 
-  apps/frontend-e2e:
+  packages/frontend-e2e:
     devDependencies:
       '@testing-library/cypress':
         specifier: 10.0.1
