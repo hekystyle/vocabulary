@@ -59,7 +59,7 @@
     "build": "tsc && vite build",
     "check-types": "tsc --noEmit",
     "test": "vitest --coverage",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build -u \"github-actions-bot <support+actions@github.com>\""
   },
   "homepage": ".",
   "browserslist": {
