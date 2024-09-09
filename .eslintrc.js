@@ -14,7 +14,12 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   parserOptions: {
-    project: ['./tsconfig.json', './apps/frontend-e2e/tsconfig.json', './apps/backend/tsconfig.json'],
+    project: [
+      './tsconfig.json',
+      './packages/frontend/tsconfig.json',
+      './packages/frontend-e2e/tsconfig.json',
+      './packages/backend/tsconfig.json',
+    ],
   },
   rules: {
     'no-console': ['error', { allow: ['warn', 'error'] }],
@@ -75,10 +80,10 @@ module.exports = {
       files: [
         'tests',
         'vite.config.?(c|m)ts',
-        'apps/*/cypress.config.{ts,mjs}',
-        'apps/*/cypress/support/commands.ts',
-        'apps/*/tests/**',
-        'apps/*/vitest.config.ts',
+        'packages/*/cypress.config.{ts,mjs}',
+        'packages/*/cypress/support/commands.ts',
+        'packages/*/tests/**',
+        'packages/*/vitest.config.ts',
       ],
       rules: {
         'import/no-extraneous-dependencies': ['error', { devDependencies: true }],

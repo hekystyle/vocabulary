@@ -78,12 +78,20 @@ jobs:
             ~/.cache/Cypress
           key: pnpm-v1-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
 
+      - name: Restore nx cache
+        uses: actions/cache@v4
+        with:
+          path: .nx/cache
+          key: nx-v1-${{ runner.os }}
+
       - run: pnpm nx run-many -t=build
 
       - name: Cache build
         uses: actions/cache@v4
         with:
-          path: build
+          path: |
+            **/build
+            **/dist
           key: build-${{ github.sha }}
 
   lint:
@@ -154,16 +162,18 @@ jobs:
       - name: Restore build
         uses: actions/cache@v4
         with:
-          path: build
+          path: |
+            **/build
+            **/dist
           key: build-${{ github.sha }}
 
       - name: Cypress run
         timeout-minutes: 2
         uses: cypress-io/github-action@v4 # use the explicit version number
         with:
-          working-directory: ./apps/frontend-e2e
+          working-directory: ./packages/frontend-e2e
           install: false
-          start: pnpm -w run serve:frontend
+          start: pnpm -w run serve
           wait-on: 'http://localhost:3000'
           browser: chrome
 
@@ -192,12 +202,14 @@ jobs:
       - name: Restore build
         uses: actions/cache@v4
         with:
-          path: build
+          path: |
+            **/build
+            **/dist
           key: build-${{ github.sha }}
 
       - name: Deploy with gh-pages
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
+          npm run deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

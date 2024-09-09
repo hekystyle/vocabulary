@@ -1,0 +1,29 @@
+{
+  "extends": [
+    "@tsconfig/vite-react/tsconfig.json",
+    "@tsconfig/strictest/tsconfig.json",
+  ],
+  "compilerOptions": {
+    "baseUrl": "src",
+    "plugins": [
+      {
+        "name": "typescript-styled-plugin"
+      }
+    ],
+    "allowJs": false,
+    "checkJs": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "exactOptionalPropertyTypes": false, // Ant Design has optional props that are not exactly optional
+    "paths": {
+      "@/*": ["./*"],
+    },
+  },
+  "include": [
+    "src",
+    ".eslintrc.js",
+    "jest.config.mjs",
+    "vite.config.mts",
+    "tests/setupTests.ts",
+  ]
+}
