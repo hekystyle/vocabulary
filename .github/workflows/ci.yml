@@ -83,7 +83,9 @@ jobs:
       - name: Cache build
         uses: actions/cache@v4
         with:
-          path: build
+          path: |
+            **/build
+            **/dist
           key: build-${{ github.sha }}
 
   lint:
@@ -154,7 +156,9 @@ jobs:
       - name: Restore build
         uses: actions/cache@v4
         with:
-          path: build
+          path: |
+            **/build
+            **/dist
           key: build-${{ github.sha }}
 
       - name: Cypress run
@@ -192,7 +196,9 @@ jobs:
       - name: Restore build
         uses: actions/cache@v4
         with:
-          path: build
+          path: |
+            **/build
+            **/dist
           key: build-${{ github.sha }}
 
       - name: Deploy with gh-pages
